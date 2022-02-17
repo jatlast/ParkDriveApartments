@@ -1,0 +1,178 @@
+# JTB 20220213 8:30 AM
+
+# --- FYI ---
+# * by itself ensures that everything will be ignored (seems redundant)
+# ! prefix whitelists files/folders (i.e., they will not be ignored)
+# -----------
+
+# -------------------------------
+# Park Drive Apartments (PkDr)
+# -------------------------------
+# ignore local Visual Studio Code configuraton
+.vscode/
+# shell scripts created on Pi boxes using emacs to execute on Pi boxes
+#   Note: remove PkDr info before allowing them to be stored by git
+#       #kiosk*.sh could be used
+bash/
+# ignore "test" scripts
+*_test*
+# -------------------------------
+# Home Assistant
+# -------------------------------
+
+# Home Assistant's file for sensitive information
+secrets.yaml
+
+# comment to include the system log
+home-assistant.log
+
+# ignore until propritary information has been moved to secrets.yaml
+configuration.yaml
+# ignore the entire yaml dir until HA has been properly readied for public backup
+yaml/
+
+# comment to include SSH information
+.ssh/
+.id_rsa*
+
+# comment to include Node-Red flows
+node-red/
+
+# comment to include any of the following
+.storage
+.cloud
+.google.token
+
+# -------------------------------
+# Python stuff created by GitHub
+# -------------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
