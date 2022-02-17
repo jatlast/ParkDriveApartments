@@ -26,6 +26,8 @@
 #   sudo pip3 install adafruit-circuitpython-sht31d
 #       https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout/python-circuitpython
 
+from cgitb import reset
+from cmath import log
 import socket
 import datetime
 # from mysql.connector import errorcode
@@ -36,116 +38,140 @@ import board
 import busio
 import adafruit_htu21d  # htu21d - Temperature & Humidity
 import adafruit_sht31d  # sht31d - Temperature & Humidity
+from adafruit_bus_device.i2c_device import I2CDevice # for specifying specific address for i2c device initialization
 import argparse
 import pkdr_utils
 
 # allow command line options
-parser = argparse.ArgumentParser(description="Reads the I2C connected sensor (HTU21D or SHT31D) and log the temperature & humidity to the mySQL DB PkDr.Thermostats table")
+parser = argparse.ArgumentParser(description="Reads the I2C connected sensor (HTU21D or SHT31D) and logs the temperature & humidity to the mySQL DB PkDr.Thermostats table")
 parser.add_argument(
-    "-v",
-    "--verbosity",
+    '-v',
+    '--verbosity',
     type=int,
-    choices=[0, 1, 2, 3],
+    choices=[0, 1, 2, 3, 4],
     default=0,
-    help="increase output verbosity",
+    help='increase output verbosity',
+)
+parser.add_argument(
+    '-st',
+    '--sensor_type',
+    type=str,
+    choices=['HTU21D', 'SHT31D'],
+    default='HTU21D',
+    help='I2C sensor name: HTU21D or SHT31D',
+)
+parser.add_argument(
+    '-sta',
+    '--sensor_type_address',
+    type=lambda x: int(x,16), # on the fly hex type
+    choices=[0x40, 0x44],
+    default=0x40,
+    help="I2C sensor address: for sensor type HTU21D use 0x40 or 64, for sensor type SHT31D use 0x44 or 68. FYI: CLI: 'i2cdetect -y 1' checks if any sensors are connected",
 )
 args = parser.parse_args()
 
 # variables that are useful to pass around
 variables_dict = {
-    "program_name": parser.prog,
-    "verbosity": args.verbosity,
-    "sensor_detected": "",
-    "htu21d_exception_flag": False,
-    "htu21d_exception_msg": "",
-    "sht31d_exception_flag": False,
-    "sht31d_exception_msg": "",
+    'program_name': parser.prog,
+    'program_description': parser.description,
+    'program_usage': parser.format_usage(),
+    'program_help': parser.format_help(),
+    'verbosity': args.verbosity,
+    'sensor_type': args.sensor_type,
+    'sensor_type_address': args.sensor_type_address,
 }
 
 if not pkdr_utils.initialize_config_dict(variables_dict):
-    print("{}: Configuration Failure {}".format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
+    print('{}: Configuration Failure {}'.format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
 else:
-    # Create library object using our Bus I2C port
-    i2c = busio.I2C(board.SCL, board.SDA)
+    # Create library object using Adafruit's Bus I2C port
+    i2c = busio.I2C(board.SCL, board.SDA) # (SCL, SDA) default | returns <busio.I2C object at 0x763d6e50>
     temperature = 0
     humidity = 0
+    log_text = ''
 
-    # https://docs.python.org/3/tutorial/errors.html
-    # ----- Try Accessing HTU21D -----
+    # Default sensor to arg defaults...
+    sensor_type = variables_dict['sensor_type']
+    # set the appropriate address regardless of the cli options
+    if sensor_type == 'HTU21D':
+        sensor_address = 0x40
+    elif sensor_type == 'SHT31D':
+        sensor_address = 0x44
+    # use the cli option if the sensor type is not recognized
+    else:
+        sensor_address = variables_dict['sensor_type_address']
+    
+    sensor_error_flag = False
+
+    # Get sensor settings from config file parameters...
+    if not pkdr_utils.config_dict['sensor_type_error_flag']:
+        if not pkdr_utils.config_dict['sensor_type_error_flag']:
+            if pkdr_utils.config_dict['sensor_type'] == 'HTU21D':
+                sensor_type = pkdr_utils.config_dict['sensor_type']
+                sensor_address = pkdr_utils.config_dict['sensor_type_address']
+            elif pkdr_utils.config_dict['sensor_type'] == 'SHT31D':
+                sensor_type = pkdr_utils.config_dict['sensor_type']
+                sensor_address = pkdr_utils.config_dict['sensor_type_address']
+            else:
+                sensor_error_flag = True
+                sensor_error_msg = 'Config Error: sensor_type ({}) not recognized'.format(pkdr_utils.config_dict['sensor_type'])
+
+    # Try instantiating an i2c object using a the spcific address determined above...
+    exception_msg = ''
+    exception_flag = False
     try:
-        sensor = adafruit_htu21d.HTU21D(i2c)
-        variables_dict["sensor_detected"] = "HTU21D"
-        temperature = sensor.temperature
-        humidity = sensor.relative_humidity
+        # the exception handling is now done with a specific address
+        sensor = I2CDevice(i2c, sensor_address) # returns object <adafruit_bus_device.i2c_device.I2CDevice object at 0x760d8f40>
     except ValueError as err:
-        variables_dict["htu21d_exception_msg"] = "ValueError ({})".format(err)
-        variables_dict["htu21d_exception_flag"] = True
+        exception_msg = '({}) I2CDevice({}, {}) raised: ValueError {}'.format(sensor_type, str(i2c), sensor_address, err)
+        exception_flag = True
     except Exception as err:
-        variables_dict["htu21d_exception_msg"] = "Unexptected ({})|({}) - This should never happen".format(type(err), err)
-        pkdr_utils.config_dict['db_table_dict']['msgtxt'] = "CODE: {} requires updating".format(pkdr_utils.config_dict['program_path'])
-        variables_dict["htu21d_exception_flag"] = True
-
-    if temperature == 0:
-        # ----- Try Accessing SHT31D -----
-        try:
-            sensor = adafruit_sht31d.SHT31D(i2c)
-            variables_dict["sensor_detected"] = "SHT31D"
-            temperature = sensor.temperature
-            humidity = sensor.relative_humidity
-        except ValueError as err:
-            variables_dict["sht31d_exception_msg"] = "ValueError ({})".format(err)
-            variables_dict["sht31d_exception_flag"] = True
-        except Exception as err:
-            variables_dict["sht31d_exception_msg"] = "Unexptected ({})|({}) - This should never happen".format(type(err), err)
-            pkdr_utils.config_dict['db_table_dict']['msgtxt'] = "CODE: {} requires updating".format(pkdr_utils.config_dict['program_path'])
-            variables_dict["sht31d_exception_flag"] = True
+        exception_msg = '({}) I2CDevice({}, {}) raised: Unexptected ({})|({}) - This should never happen'.format(sensor_type, str(i2c), sensor_address, type(err), err)
+        pkdr_utils.config_dict['db_table_dict']['msgtxt'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
+        exception_flag = True
 
     # ----- Log Any Coniguration Errors to DB -----
-    if (variables_dict["htu21d_exception_flag"]
-        or variables_dict["sht31d_exception_flag"]
-        ):
-            # ----- Did both sensors fail? -----
-            if (variables_dict["htu21d_exception_flag"] and variables_dict["sht31d_exception_flag"]):
-                pkdr_utils.config_dict['db_table_dict']['errtyp'] = pkdr_utils.config_dict['lookup_error_num_to_name_dict'][4] # 4 = CRITICAL
-                pkdr_utils.config_dict['db_table_dict']['exceptxt'] = variables_dict["htu21d_exception_msg"] + ' & ' + variables_dict["sht31d_exception_msg"]
-                pkdr_utils.config_dict['db_table_dict']['key5'] = 'HTU21D'
-                pkdr_utils.config_dict['db_table_dict']['val5'] = 'Detection Failure'
-                pkdr_utils.config_dict['db_table_dict']['key6'] = 'SHT31D'
-                pkdr_utils.config_dict['db_table_dict']['val6'] = 'Detection Failure'
-            # ----- Did either sensor fail? -----
-            elif (variables_dict["htu21d_exception_flag"] or variables_dict["sht31d_exception_flag"]):
-                pkdr_utils.config_dict['db_table_dict']['errtyp'] = pkdr_utils.config_dict['lookup_error_num_to_name_dict'][2] # 2 = WARNING
-
-                if variables_dict["htu21d_exception_flag"]:
-                    pkdr_utils.config_dict['db_table_dict']['exceptxt'] = variables_dict["htu21d_exception_msg"]
-                    pkdr_utils.config_dict['db_table_dict']['key5'] = 'HTU21D'
-                    pkdr_utils.config_dict['db_table_dict']['val5'] = 'Detection Failure'
-                elif variables_dict["sht31d_exception_flag"]:
-                    pkdr_utils.config_dict['db_table_dict']['exceptxt'] = variables_dict["sht31d_exception_msg"]
-                    pkdr_utils.config_dict['db_table_dict']['key5'] = 'SHT31D'
-                    pkdr_utils.config_dict['db_table_dict']['val5'] = 'Detection Failure'
-
-            # call utility function to insert into the DB
+    if exception_flag or sensor_error_flag:
+        pkdr_utils.config_dict['db_table_dict']['errtyp'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
+        pkdr_utils.config_dict['db_table_dict']['key5'] = 'sensor_type'
+        pkdr_utils.config_dict['db_table_dict']['val5'] = sensor_type
+        pkdr_utils.config_dict['db_table_dict']['key6'] = 'sensor_address'
+        pkdr_utils.config_dict['db_table_dict']['val6'] = sensor_address
+        if exception_flag:
+            pkdr_utils.config_dict['db_table_dict']['exceptxt'] = exception_msg
+        elif sensor_error_flag:
+            pkdr_utils.config_dict['db_table_dict']['msgtxt'] = sensor_error_msg
+        pkdr_utils.db_generic_insert('ErrorLog')
+    else:
+        if sensor_type == 'HTU21D' and sensor_address == 0x40:
+            sensor = adafruit_htu21d.HTU21D(i2c)
+        elif sensor_type == 'SHT31D' and sensor_address == 0x44:
+            sensor = adafruit_sht31d.SHT31D(i2c)
+        else:
+            sensor_error_flag = True
+            sensor_error_msg = 'Config Error: sensor_type({}) has incorrect address({}) aka({})'.format(sensor_type, sensor_address, hex(sensor_address))
+            pkdr_utils.config_dict['db_table_dict']['msgtxt'] = sensor_error_msg
             pkdr_utils.db_generic_insert('ErrorLog')
 
-    if temperature != 0:
-        temperature = sensor.temperature
-        humidity = sensor.relative_humidity
+        if not sensor_error_flag:
+            temperature = sensor.temperature
+            humidity = sensor.relative_humidity
 
-        if variables_dict["verbosity"] > 1:
-            print("Using sensor type ({})".format(variables_dict["sensor_detected"]),)
-            print("Befor DB call: {} F | {} %".format(round(((temperature * 9 / 5) + 32), 2),round(humidity, 2),))
+            log_text += 'Using sensor sensor_type({}) @ int({}) hex({})'.format(sensor_type, sensor_address, hex(sensor_address))
+            log_text += '\n'
+            log_text += 'Befor DB call: {} F | {} %'.format(round(((temperature * 9 / 5) + 32), 2),round(humidity, 2),)
 
-        # Initialize DB Insert variables...
-        pkdr_utils.config_dict['db_insert_dict']['apt'] = pkdr_utils.config_dict['num_int']
-        pkdr_utils.config_dict['db_insert_dict']['temperature'] = temperature
-        pkdr_utils.config_dict['db_insert_dict']['humidity'] = humidity
-        pkdr_utils.config_dict['db_insert_dict']['taken'] = str(datetime.datetime.now())
+            if variables_dict['verbosity'] > 1:
+                print(log_text)
 
-        # call utility function to insert into the DB
-        pkdr_utils.db_generic_insert('Thermostats')
+            # Initialize DB Insert variables...
+            pkdr_utils.config_dict['db_insert_dict']['apt'] = pkdr_utils.config_dict['num_int']
+            pkdr_utils.config_dict['db_insert_dict']['temperature'] = temperature
+            pkdr_utils.config_dict['db_insert_dict']['humidity'] = humidity
+            pkdr_utils.config_dict['db_insert_dict']['taken'] = str(datetime.datetime.now())
+
+            # call utility function to insert into the DB
+            pkdr_utils.db_generic_insert('Thermostats')
 
     # SQL for checking Thermostats table...
     # MariaDB [PkDr]> select apt, temperature as C, (temperature * 9/5) + 32 as F, taken from Thermostats order by uid desc limit 20;
-
-

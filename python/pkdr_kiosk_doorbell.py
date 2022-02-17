@@ -29,7 +29,7 @@ parser.add_argument(
     "-v",
     "--verbosity",
     type=int,
-    choices=[0, 1, 2, 3],
+    choices=[0, 1, 2, 3, 4],
     default=0,
     help="increase output verbosity",
 )
@@ -53,17 +53,21 @@ variables_dict = {
 if not pkdr_utils.initialize_config_dict(variables_dict):
     print("{}: Configuration Failure ({})".format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
 # ---------------------------------------
+elif pkdr_utils.config_dict['sound_config_error_flag']:
+    pkdr_utils.config_dict['db_table_dict']['msgtxt'] = 'Caller Config Error: '
+    pkdr_utils.config_dict['db_table_dict']['msgtxt'] += pkdr_utils.config_dict['caller_error_msg']
+    pkdr_utils.db_generic_insert('ErrorLog')
 else:
     variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['mqtt_broker_ip']
     variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['mqtt_broker_port']
     variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['mqtt_username']
     variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['mqtt_password']
     variables_dict['pkdr_mqtt_client'] = pkdr_utils.config_dict['mqtt_client_id_kiosk_doorbell']
-    variables_dict['sound_1'] = pkdr_utils.config_dict['sound_nas_path'] + pkdr_utils.config_dict['sound_files_dict']['doorbell_main']
-    variables_dict['sound_2'] = pkdr_utils.config_dict['sound_nas_path'] + pkdr_utils.config_dict['sound_files_dict']['doorbell_alt_1']
-    variables_dict['sound_3'] = pkdr_utils.config_dict['sound_nas_path'] + pkdr_utils.config_dict['sound_files_dict']['doorbell_alt_2']
-    variables_dict['sound_4'] = pkdr_utils.config_dict['sound_nas_path'] + pkdr_utils.config_dict['sound_files_dict']['doorbell_alt_1']
-    variables_dict['sound_patience'] = pkdr_utils.config_dict['sound_nas_path'] + pkdr_utils.config_dict['sound_files_dict']['system_start']
+    variables_dict['sound_1'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['doorbell_main']
+    variables_dict['sound_2'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['doorbell_alt_1']
+    variables_dict['sound_3'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['doorbell_alt_2']
+    variables_dict['sound_4'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['doorbell_alt_1']
+    variables_dict['sound_patience'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['system_start']
 
     if pkdr_utils.config_dict['mqtt_valid']:
         variables_dict["mqtt_subscribe_topic"] = ("PkDr/" + pkdr_utils.config_dict['mqtt'] + "/Entrance/cmnd/Doorbell/POWER")

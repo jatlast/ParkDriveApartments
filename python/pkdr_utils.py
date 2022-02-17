@@ -1,24 +1,16 @@
 #!/usr/bin/python
 
-#import logging
+#import sys # argv & python version
+from sys import argv as my_argv, version_info as my_version_info
+import os # program name from full path
 import socket # needed for gethostname() & getsockname()
 import re # for regular expressions
 import yaml # 20220213 Breaking out and consolidating config information to pkdr.yaml
 import datetime # datestamps of program execution
+import mysql.connector # for DB PkDr.ErrorLog inserts
 
-# use to print the python version
-import sys
-
-import os # used to get program name from full path
-
-# for DB PkDr.ErrorLog inserts
-import mysql.connector
-
-# Global Variables - used by all pkdr_*.py scripts...
-#   set the loaded flag to zero.  If the file loads successfully it will change the value to 1
 config_dict = {
-    'config_file_loaded_successfully': 0, 
-    'error_msg' : "",
+    'error_msg' : '',
 }
 
 def initialize_config_dict(caller_dict):
@@ -43,22 +35,15 @@ def initialize_config_dict(caller_dict):
         config_dict = yaml.load(f, Loader=yaml.FullLoader)
         f.close()
 
-    config_dict['ip'] = get_ip_address()
-    config_dict['hostname'] = socket.gethostname()
-    config_dict['utils_path'] = __file__
-    config_dict['program_path'] = sys.argv[0]
-    config_dict['program_name'] = os.path.basename(sys.argv[0])
-    # sys.version_info - tuple containing the five components of the version number: major, minor, micro, releaselevel, and serial.
-    # access syntax: config_dict['python_version_tuple'].major
-    config_dict['python_version_tuple'] = sys.version_info
-    config_dict['datestamp'] = datetime.datetime.now()
+    get_calling_program_info(caller_dict)
+    
     config_dict['config_file'] = config_file
     config_dict['error_flag'] = error_flag
+    config_dict['error_msg'] = ''
 
     config_dict['verbosity'] = caller_dict['verbosity']
-    # -------------------------------------------
 
-    if not error_flag:
+    if not config_dict['error_flag']:
         # add caller defaluts
         config_dict['apt_or_bld'] = ''
         config_dict['num_int'] = 0
@@ -68,12 +53,36 @@ def initialize_config_dict(caller_dict):
         config_dict['caller_error_flag'] = False
         config_dict['caller_error_msg'] = ""
         config_dict['program_valid'] = False
+        config_dict['sensor_type_error_flag'] = False
 
         db_table_dict_init('ErrorLog')
 
         add_pkdr_caller_info_to_config_dict()
 
-    return not error_flag
+    return not config_dict['error_flag']
+
+def get_calling_program_info(caller_dict):
+    cli_options = ''
+    for arg in my_argv[1:]:
+        if ' ' in arg:
+            cli_options += '"{}" '.format(arg) # spaces in options inplies option was quoted text
+        else:
+            cli_options += "{} ".format(arg)
+
+    for key, value in caller_dict.items():
+        config_dict['caller_{}'.format(key)] = value
+
+    config_dict['ip'] = get_ip_address()
+    config_dict['hostname'] = socket.gethostname()
+    config_dict['utils_path'] = __file__
+    config_dict['program_path'] = my_argv[0]
+    config_dict['program_name'] = os.path.basename(my_argv[0])
+    config_dict['program_options'] = cli_options
+    # my_version_info - tuple containing the five components of the version number: major, minor, micro, releaselevel, and serial.
+    # access syntax: config_dict['python_version_tuple'].major
+    config_dict['python_version_tuple'] = my_version_info
+    config_dict['python_version'] =  '{}.{}.{}'.format(config_dict['python_version_tuple'].major, config_dict['python_version_tuple'].minor, config_dict['python_version_tuple'].micro)
+    config_dict['datestamp'] = datetime.datetime.now()
 
 def get_ip_address():
     ip_address = ''
@@ -88,6 +97,17 @@ def get_hostname_apt_num():
     x = re.findall('apt(\d\d)', hostname)
     apt_num = int(x[0])
     return apt_num
+
+# Use .get() to avoid KeyError runtime errors
+#def check_config_for_key_errors():
+# def check_config_for_expected_keys():
+#     error_flag = False
+#     error_msg = ""
+
+#     if config_dict.get('ip_to_apt_dict', -1) == -1:
+#         caller_error_flag = True
+#         caller_error_msg += "Configuration Error: ip_to_apt_dict not in config file"
+
 
 # 20220214 - PkDr naming/numbering convension is currently: Apt## or B#
 #   However, within Home Assistant's config files (apt## & Apt## & ##_) do get used.
@@ -206,12 +226,89 @@ def add_pkdr_caller_info_to_config_dict():
         #     config_dict['error_msg'] += code_in_production_list
         # --------------
 
+    config_dict['sensor_type_error_flag'] = False
+    # Check for temperature sensor dict...
+    if config_dict.get('sensor_config', -1) == -1:
+        config_dict['sensor_type_error_flag'] = True
+        caller_error_flag = True
+        caller_error_msg += "Configuration Error: sensor_config not in config file"
+    else:
+        # Check for sound files dict...
+        if config_dict['sensor_config'].get('i2c_temperature_config', -1) == -1:
+            config_dict['sensor_type_error_flag'] = True
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: i2c_temperature_config not in config file"
+        else:
+            # Check for temperature sensor dict...
+            if config_dict['sensor_config']['i2c_temperature_config'].get('ip_to_temperature_sensor_dict', -1) == -1:
+                config_dict['sensor_type_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: ip_to_temperature_sensor_dict not in config file"
+            else:
+                # (HTU21D or SHT31D)
+                sensor_type = config_dict['sensor_config']['i2c_temperature_config']['ip_to_temperature_sensor_dict'].get(config_dict['ip'], -1)
+                if sensor_type == -1:
+                    config_dict['sensor_type_error_flag'] = True
+                else:
+                    config_dict['sensor_type'] = sensor_type
+                    # (HTU21D:0x40 or SHT31D:0x44)
+                    sensor_type_address = config_dict['sensor_config']['i2c_temperature_config']['i2c_sensor_type_to_address'].get(config_dict['sensor_type'], -1)
+                    if sensor_type_address == -1:
+                        config_dict['sensor_type_error_flag'] = True
+                    else:
+                        config_dict['sensor_type_address'] = sensor_type_address
+
+    # Check for sound files dict...
+    config_dict['sound_config_error_flag'] = False
+    # Check for temperature sensor dict...
+    if config_dict.get('sound_config', -1) == -1:
+        config_dict['sound_config_error_flag'] = True
+        caller_error_flag = True
+        caller_error_msg += "Configuration Error: sensor_config not in config file"
+    else:
+        # Check for sound files dict...
+        if config_dict['sound_config'].get('sound_path', -1) == -1:
+            config_dict['sound_config_error_flag'] = True
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: sound_path not in config file"
+
+        if config_dict['sound_config'].get('sound_files_dict', -1) == -1:
+            config_dict['sound_config_error_flag'] = True
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: sound_files_dict not in config file"
+        else:
+            if config_dict['sound_config']['sound_files_dict'].get('system_start', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: system_start not in config file"
+            if config_dict['sound_config']['sound_files_dict'].get('doorbell_main', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: doorbell_main not in config file"
+            if config_dict['sound_config']['sound_files_dict'].get('doorbell_alt_1', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: doorbell_alt_1 not in config file"
+            if config_dict['sound_config']['sound_files_dict'].get('doorbell_alt_2', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: doorbell_alt_2 not in config file"
+            if config_dict['sound_config']['sound_files_dict'].get('doorbell_alt_3', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: doorbell_alt_3 not in config file"
+            if config_dict['sound_config']['sound_files_dict'].get('doorbell_alt_4', -1) == -1:
+                config_dict['sound_config_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: doorbell_alt_4 not in config file"
+
+
     config_dict['caller_error_flag'] = caller_error_flag
     config_dict['caller_error_msg'] = caller_error_msg
 
     # Log problems encountered in this function to DB...
     if caller_error_flag:
-        config_dict['db_table_dict']['errtyp'] = config_dict['lookup_error_num_to_name_dict'][4] # 4 = CRITICAL
+        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
         config_dict['db_table_dict']['msgtxt'] = caller_error_msg
         db_generic_insert('ErrorLog')
 
@@ -222,13 +319,13 @@ def add_pkdr_caller_info_to_config_dict():
             # calling scripts should kill themselves when encountering the config_dict['error_flag']...
             config_dict['error_flag'] = True
             config_dict['error_msg'] += code_in_production_list
-        config_dict['db_table_dict']['errtyp'] = config_dict['lookup_error_num_to_name_dict'][2] # 2 = WARNING
+        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
         config_dict['db_table_dict']['msgtxt'] = code_in_production_list
         db_generic_insert('ErrorLog')
 
     # Log MQTT Config issues to DB...
     if not config_dict['mqtt_valid']:
-        config_dict['db_table_dict']['errtyp'] = config_dict['lookup_error_num_to_name_dict'][2] # 2 = WARNING
+        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
         config_dict['db_table_dict']['msgtxt'] = mqtt_topic_list
         db_generic_insert('ErrorLog')
 
@@ -242,7 +339,8 @@ def db_table_dict_init(table_name):
             'executed' : str(config_dict['datestamp']),
             'errtyp' : 'DEBUG', # DEBUG (default), INFO, WARNING, ERROR, CRITICAL
             'key0' : 'script',
-            'val0' : '{} v({}.{}.{})'.format(config_dict['program_path'], config_dict['python_version_tuple'].major, config_dict['python_version_tuple'].minor, config_dict['python_version_tuple'].micro),
+            'val0' : '{} v({})'.format(config_dict['program_path'], config_dict['python_version']),
+            # add cli options after updating ErrorLog to RuntimeLog
         }
 
 def db_generic_insert(table_name):
@@ -285,20 +383,20 @@ def db_generic_insert(table_name):
     if config_dict['verbosity'] > 2:
         print("SQL {}".format(query_insert))
 
-    # if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_dict']['db_insert_attempts_max']:
+    # if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
         # Check if dynamic table is being called
         # if config_dict['db_dynamic_table_dict']['db_call_count'] > 0:
 
-    if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_dict']['db_insert_attempts_max']:
-        config_dict['db_error_msg'] = "DB Call Recursion Error: attempts ({}) > max ({})".format(config_dict['db_table_dict']['db_call_count'], config_dict['pkdr_remote_db_dict']['db_insert_attempts_max'])
+    if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
+        config_dict['db_error_msg'] = "DB Call Recursion Error: attempts ({}) > max ({})".format(config_dict['db_table_dict']['db_call_count'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'])
         print(config_dict['db_error_msg'])
         print("Recursion Error: {}".format(query_insert))
     else:
         try:
             connection = mysql.connector.connect(
-                host = config_dict["pkdr_remote_db_dict"]["db_host_ip"],
-                database = config_dict["pkdr_remote_db_dict"]["db_name"],
-                user = config_dict["pkdr_remote_db_dict"]["db_user"],
+                host = config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_host_ip"],
+                database = config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_name"],
+                user = config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_user"],
             )
 
             cursor = connection.cursor()
@@ -310,7 +408,7 @@ def db_generic_insert(table_name):
                     print("DB Success: {} insert into {} table".format(cursor.rowcount, table_name))
             # Failure
             else:
-                config_dict['db_table_dict']['errtyp'] = config_dict['lookup_error_num_to_name_dict'][3] # 3 = ERROR
+                config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][3] # 3 = ERROR
                 config_dict['db_error_msg'] += "DB Fail: Unable to insert into {} table".format(table_name)
                 if config_dict['verbosity'] > 0:
                     print(config_dict['db_error_msg'])
@@ -324,7 +422,7 @@ def db_generic_insert(table_name):
         except mysql.connector.Error as error:
             config_dict['db_error_msg'] = "DB Error: Failed to insert into table {} | mysql.connector.Error ({})".format(table_name, error)
             config_dict['db_error_flag'] = True
-            config_dict['db_table_dict']['errtyp'] = config_dict['lookup_error_num_to_name_dict'][4] # 4 = CRITICAL
+            config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
 
             if config_dict['verbosity'] > 2:
                 print(config_dict['db_error_msg'])
