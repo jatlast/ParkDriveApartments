@@ -118,30 +118,36 @@ else:
 
     # Try instantiating an i2c object using a the spcific address determined above...
     exception_msg = ''
+    exception_type = ''
     exception_flag = False
     try:
         # the exception handling is now done with a specific address
         sensor = I2CDevice(i2c, sensor_address) # returns object <adafruit_bus_device.i2c_device.I2CDevice object at 0x760d8f40>
     except ValueError as err:
+        exception_type = '{}'.format(type(err))
         exception_msg = '({}) I2CDevice({}, {}) raised: ValueError {}'.format(sensor_type, str(i2c), sensor_address, err)
         exception_flag = True
     except Exception as err:
+        exception_type = '{}'.format(type(err))
         exception_msg = '({}) I2CDevice({}, {}) raised: Unexptected ({})|({}) - This should never happen'.format(sensor_type, str(i2c), sensor_address, type(err), err)
-        pkdr_utils.config_dict['db_table_dict']['msgtxt'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
+        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
         exception_flag = True
 
     # ----- Log Any Coniguration Errors to DB -----
     if exception_flag or sensor_error_flag:
-        pkdr_utils.config_dict['db_table_dict']['errtyp'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
+        log_level = 4 # 4 = CRITICAL
+        pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
         pkdr_utils.config_dict['db_table_dict']['key5'] = 'sensor_type'
         pkdr_utils.config_dict['db_table_dict']['val5'] = sensor_type
         pkdr_utils.config_dict['db_table_dict']['key6'] = 'sensor_address'
         pkdr_utils.config_dict['db_table_dict']['val6'] = sensor_address
         if exception_flag:
-            pkdr_utils.config_dict['db_table_dict']['exceptxt'] = exception_msg
+            pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
+            pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
         elif sensor_error_flag:
-            pkdr_utils.config_dict['db_table_dict']['msgtxt'] = sensor_error_msg
-        pkdr_utils.db_generic_insert('ErrorLog')
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = sensor_error_msg
+        pkdr_utils.db_generic_insert()
     else:
         if sensor_type == 'HTU21D' and sensor_address == 0x40:
             sensor = adafruit_htu21d.HTU21D(i2c)
@@ -150,8 +156,8 @@ else:
         else:
             sensor_error_flag = True
             sensor_error_msg = 'Config Error: sensor_type({}) has incorrect address({}) aka({})'.format(sensor_type, sensor_address, hex(sensor_address))
-            pkdr_utils.config_dict['db_table_dict']['msgtxt'] = sensor_error_msg
-            pkdr_utils.db_generic_insert('ErrorLog')
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = sensor_error_msg
+            pkdr_utils.db_generic_insert()
 
         if not sensor_error_flag:
             temperature = sensor.temperature

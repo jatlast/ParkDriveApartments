@@ -7,7 +7,7 @@ import socket # needed for gethostname() & getsockname()
 import re # for regular expressions
 import yaml # 20220213 Breaking out and consolidating config information to pkdr.yaml
 import datetime # datestamps of program execution
-import mysql.connector # for DB PkDr.ErrorLog inserts
+import mysql.connector # for DB PkDr.RuntimeLog inserts
 
 config_dict = {
     'error_msg' : '',
@@ -54,8 +54,11 @@ def initialize_config_dict(caller_dict):
         config_dict['caller_error_msg'] = ""
         config_dict['program_valid'] = False
         config_dict['sensor_type_error_flag'] = False
+        config_dict['db_log_name'] = 'RuntimeLog'
+        config_dict['log_level_name'] = 'INFO'
+        config_dict['log_level'] = 1
 
-        db_table_dict_init('ErrorLog')
+        db_table_dict_init(config_dict['db_log_name'])
 
         add_pkdr_caller_info_to_config_dict()
 
@@ -78,8 +81,6 @@ def get_calling_program_info(caller_dict):
     config_dict['program_path'] = my_argv[0]
     config_dict['program_name'] = os.path.basename(my_argv[0])
     config_dict['program_options'] = cli_options
-    # my_version_info - tuple containing the five components of the version number: major, minor, micro, releaselevel, and serial.
-    # access syntax: config_dict['python_version_tuple'].major
     config_dict['python_version_tuple'] = my_version_info
     config_dict['python_version'] =  '{}.{}.{}'.format(config_dict['python_version_tuple'].major, config_dict['python_version_tuple'].minor, config_dict['python_version_tuple'].micro)
     config_dict['datestamp'] = datetime.datetime.now()
@@ -97,17 +98,6 @@ def get_hostname_apt_num():
     x = re.findall('apt(\d\d)', hostname)
     apt_num = int(x[0])
     return apt_num
-
-# Use .get() to avoid KeyError runtime errors
-#def check_config_for_key_errors():
-# def check_config_for_expected_keys():
-#     error_flag = False
-#     error_msg = ""
-
-#     if config_dict.get('ip_to_apt_dict', -1) == -1:
-#         caller_error_flag = True
-#         caller_error_msg += "Configuration Error: ip_to_apt_dict not in config file"
-
 
 # 20220214 - PkDr naming/numbering convension is currently: Apt## or B#
 #   However, within Home Assistant's config files (apt## & Apt## & ##_) do get used.
@@ -177,6 +167,29 @@ def add_pkdr_caller_info_to_config_dict():
         caller_error_flag = True
         caller_error_msg += "Configuration Error: production_code_config not in config file"
     else:
+        # Logging defaults and overrides
+        if config_dict['production_code_config'].get('runtime_logging_config', -1) == -1:
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: runtime_logging_config"
+        elif config_dict['production_code_config']['runtime_logging_config'].get('log_level_default', -1) == -1 or config_dict['production_code_config']['runtime_logging_config'].get('log_level_override', -1) == -1:
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: log_level_default | log_level_override not in config file"
+        elif config_dict['production_code_config']['runtime_logging_config']['log_level_default'].get('name', -1) == -1 or config_dict['production_code_config']['runtime_logging_config']['log_level_default'].get('number', -1) == -1:
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: log_level_default.name | log_level_default.number not in config file"
+        elif config_dict['production_code_config']['runtime_logging_config']['log_level_default'].get('name', -1) == -1 or config_dict['production_code_config']['runtime_logging_config']['log_level_override'].get('number', -1) == -1:
+            caller_error_flag = True
+            caller_error_msg += "Configuration Error: log_level_override.name | log_level_override.number not in config file"
+        else:
+            # Set the overrides...
+            config_dict['log_level_name'] = config_dict['production_code_config']['runtime_logging_config']['log_level_default']['name']
+            config_dict['log_level'] = config_dict['production_code_config']['runtime_logging_config']['log_level_default']['number']
+
+            if config_dict['production_code_config']['runtime_logging_config']['log_level_override']['enable']:
+                # Set the defaults...
+                config_dict['log_level_name'] = config_dict['production_code_config']['runtime_logging_config']['log_level_override']['name']
+                config_dict['log_level'] = config_dict['production_code_config']['runtime_logging_config']['log_level_override']['number']
+
         # Debug Verbosity Check
         if config_dict['production_code_config'].get('verbosity_override_flag', -1) == -1 or config_dict['production_code_config'].get('verbosity_override_value', -1) == -1:
             caller_error_flag = True
@@ -302,15 +315,14 @@ def add_pkdr_caller_info_to_config_dict():
                 caller_error_flag = True
                 caller_error_msg += "Configuration Error: doorbell_alt_4 not in config file"
 
-
     config_dict['caller_error_flag'] = caller_error_flag
     config_dict['caller_error_msg'] = caller_error_msg
 
     # Log problems encountered in this function to DB...
     if caller_error_flag:
-        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
-        config_dict['db_table_dict']['msgtxt'] = caller_error_msg
-        db_generic_insert('ErrorLog')
+        config_dict['log_level'] = 4 # 4 = CRITICAL
+        config_dict['db_table_dict']['log_message'] = caller_error_msg
+        db_generic_insert(config_dict['db_log_name'])
 
     # Log Production Code Names issues to DB...
     if not config_dict['program_valid']:
@@ -319,31 +331,52 @@ def add_pkdr_caller_info_to_config_dict():
             # calling scripts should kill themselves when encountering the config_dict['error_flag']...
             config_dict['error_flag'] = True
             config_dict['error_msg'] += code_in_production_list
-        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
-        config_dict['db_table_dict']['msgtxt'] = code_in_production_list
-        db_generic_insert('ErrorLog')
+        config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
+        config_dict['db_table_dict']['log_message'] = code_in_production_list
+        db_generic_insert(config_dict['db_log_name'])
 
     # Log MQTT Config issues to DB...
     if not config_dict['mqtt_valid']:
-        config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
-        config_dict['db_table_dict']['msgtxt'] = mqtt_topic_list
-        db_generic_insert('ErrorLog')
+        config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][2] # 2 = WARNING
+        config_dict['db_table_dict']['log_message'] = mqtt_topic_list
+        db_generic_insert(config_dict['db_log_name'])
 
 def db_table_dict_init(table_name):
-    # Thermostats | ErrorLog (default) as of 20220215
+    # Thermostats | RuntimeLog (default) as of 20220215
     config_dict['db_insert_dict'] = {}
 
-    if table_name == 'ErrorLog':
+# - author_date # datetime DEFAULT NULL,
+# - author_name # varchar(64) DEFAULT NULL,
+# - author_path # varchar(64) DEFAULT NULL,
+# - author_address # varchar(64) DEFAULT NULL,
+# - author_version # varchar(64) DEFAULT NULL,
+# - log_level # TINYINT DEFAULT NULL,
+# - log_level_name # varchar(8) DEFAULT NULL,
+# - log_message text DEFAULT NULL,
+# - exception_type # varchar(32) DEFAULT NULL,
+# - exception_text # varchar(255) DEFAULT NULL,
+# - query_text # varchar(255) DEFAULT NULL,
+# - query_attempts # TINYINT DEFAULT NULL,
+
+    if table_name == config_dict['db_log_name']:
         config_dict['db_table_dict'] = {
-            'author' : '{}@{}'.format(config_dict['hostname'], config_dict['ip']),
-            'executed' : str(config_dict['datestamp']),
-            'errtyp' : 'DEBUG', # DEBUG (default), INFO, WARNING, ERROR, CRITICAL
-            'key0' : 'script',
-            'val0' : '{} v({})'.format(config_dict['program_path'], config_dict['python_version']),
-            # add cli options after updating ErrorLog to RuntimeLog
+            'author_date' : str(config_dict['datestamp']),
+            'author_name' : '{}'.format(config_dict['hostname']),
+            # ToDo: Remove the name from the path
+            'author_path' : '{}'.format(config_dict['program_path']),
+            'author_options' : '{}'.format(config_dict['program_options']),
+            'author_address' : '{}'.format(config_dict['ip']),
+            'author_version' : '{}'.format(config_dict['python_version']),
+            'log_level' : config_dict['log_level'],
+            'log_level_name' : config_dict['log_level_name'],
+            'log_message' : '',
+            'exception_type' : '',
+            'exception_text' : '',
+            'query_text' : '',
+            'query_attempts' : 0,
         }
 
-def db_generic_insert(table_name):
+def db_generic_insert(table_name = 'RuntimeLog'):
     config_dict['db_error_msg'] = ""
     config_dict['db_error_flag'] = False
 
@@ -353,10 +386,14 @@ def db_generic_insert(table_name):
     else:
         config_dict['db_table_dict']['db_call_count'] += 1
 
+    # The log level might be changed before this function calls the database
+    # config_dict['db_table_dict']['log_level'] = config_dict['log_level']
+    # config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
+
     column_count = 0
     query_column_list = []
     query_values_list = []
-    if table_name == 'ErrorLog':
+    if table_name == config_dict['db_log_name']:
         for key, value in config_dict['db_table_dict'].items():
             if key != 'db_call_count':
                 query_column_list.append(key)
@@ -408,7 +445,9 @@ def db_generic_insert(table_name):
                     print("DB Success: {} insert into {} table".format(cursor.rowcount, table_name))
             # Failure
             else:
-                config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][3] # 3 = ERROR
+                config_dict['log_level'] = 3 # 3 = ERROR
+                config_dict['db_table_dict']['log_level'] = config_dict['log_level']
+                config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
                 config_dict['db_error_msg'] += "DB Fail: Unable to insert into {} table".format(table_name)
                 if config_dict['verbosity'] > 0:
                     print(config_dict['db_error_msg'])
@@ -422,41 +461,38 @@ def db_generic_insert(table_name):
         except mysql.connector.Error as error:
             config_dict['db_error_msg'] = "DB Error: Failed to insert into table {} | mysql.connector.Error ({})".format(table_name, error)
             config_dict['db_error_flag'] = True
-            config_dict['db_table_dict']['errtyp'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][4] # 4 = CRITICAL
+            config_dict['log_level'] = 4 # 4 = CRITICAL
+            config_dict['db_table_dict']['log_level'] = config_dict['log_level']
+            config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
 
             if config_dict['verbosity'] > 2:
                 print(config_dict['db_error_msg'])
 
-    # Catch DB Error and log the error to ErrorLog table
+    # Catch DB Error and log the error to RuntimeLog table
     if config_dict['db_error_flag']:
-        # Always try adding the current query to the ErrorLog column querytxt
-        if config_dict['db_table_dict'].get('querytxt', -1) == -1:
-            config_dict['db_table_dict']['querytxt'] = query_insert
+        config_dict['db_table_dict']['query_attempts'] = config_dict['db_table_dict']['db_call_count']
+
+        # Always try adding the current query to the RuntimeLog column query_text
+        if config_dict['db_table_dict'].get('query_text', -1) == -1:
+            config_dict['db_table_dict']['query_text'] = query_insert
         # Check if the previous querytext is the same as the current querytext
-        elif config_dict['db_table_dict']['querytxt'] == query_insert:
+        elif config_dict['db_table_dict']['query_text'] == query_insert:
             print("Current Insert was already attempted: {}".format(query_insert))
 
-        if config_dict['db_table_dict'].get('msgtxt', -1) == -1:
-            config_dict['db_table_dict']['msgtxt'] = config_dict['db_error_msg']
+        if config_dict['db_table_dict'].get('log_message', -1) == -1:
+            config_dict['db_table_dict']['log_message'] = config_dict['db_error_msg']
         else:
-            config_dict['db_table_dict']['msgtxt'] += ' <append> ' + config_dict['db_error_msg']
+            config_dict['db_table_dict']['log_message'] += ' <append> ' + config_dict['db_error_msg']
 
-        config_dict['db_table_dict']['key1'] = 'db_call_count'
-        config_dict['db_table_dict']['val1'] = config_dict['db_table_dict']['db_call_count']
-        config_dict['db_table_dict']['key2'] = 'db_table'
-        config_dict['db_table_dict']['val2'] = config_dict['db_table_dict']['db_insert_table']
-        config_dict['db_table_dict']['key3'] = 'dynamic'
-        config_dict['db_table_dict']['val3'] = config_dict['utils_path']
-        config_dict['db_table_dict']['key4'] = 'program_path'
-        config_dict['db_table_dict']['val4'] = config_dict['program_path']
+        if config_dict['db_table_dict'].get('db_insert_table', -1) != -1:
+            config_dict['db_table_dict']['key0'] = 'db_table'
+            config_dict['db_table_dict']['val0'] = config_dict['db_table_dict']['db_insert_table']
 
         # Use recursion to log any errors that happened within this function...
-        db_generic_insert('ErrorLog')
+        db_generic_insert(config_dict['db_log_name'])
     else:
         # clear db_table_dict
-        db_table_dict_init('ErrorLog')
-
-
+        db_table_dict_init(config_dict['db_log_name'])
 
 
 # INFO: sys.version vs sys.version_info...

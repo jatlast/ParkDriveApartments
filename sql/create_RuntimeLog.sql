@@ -1,10 +1,12 @@
 -- 20220215 10:50 PM
 -- Get the ALTER TABLE syntax correct before jumping straight to DROP/CREATE in case this is needed in the future.
 
+-- FYI: MariaDB SQL statements can be ended with ;, \g, or \G
+
 -- Full path when created...
 --  /home/PkDr/HA/code/DEV/sql/create_ErrorLog.sql
 -- To execute this file from the SQL command line...
---  source /home/PkDr/HA/code/DEV/sql/create_ErrorLog.sql;
+--  source /home/PkDr/HA/code/DEV/sql/create_RuntimeLog.sql;
 
 -- Drop / Create table...
 -- I am going to take this opportunity to change the errtyp column name to errlevel
@@ -14,6 +16,12 @@
 
 -- Show before...
 SHOW CREATE TABLE PkDr.ErrorLog\G
+
+------------
+-- uid --
+------------
+-- mediumint(8) unsigned (maximum length 16,777,215)
+------------
 
 ------------
 -- errtyp --
@@ -38,19 +46,22 @@ SHOW CREATE TABLE PkDr.ErrorLog\G
 -- TINYINT (-127 - 127 signed | 255 unsigned?)
 -------------------- 
 
-DROP TABLE IF EXISTS ErrorLog
+-- DROP TABLE IF EXISTS ErrorLog\G
 
 CREATE OR REPLACE TABLE RuntimeLog (
-  uid mediumint(9) NOT NULL AUTO_INCREMENT,
+  uid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   inserted datetime NOT NULL DEFAULT current_timestamp(),
   author_date datetime DEFAULT NULL,
   author_name varchar(64) DEFAULT NULL,
-  author_path varchar(64) DEFAULT NULL,
-  author_address varchar(64) DEFAULT NULL,
-  author_version varchar(64) DEFAULT NULL,
+  author_path varchar(128) DEFAULT NULL,
+  author_options varchar(64) DEFAULT NULL,
+  author_version varchar(16) DEFAULT NULL,
+  author_address varchar(16) DEFAULT NULL,
   log_level TINYINT DEFAULT NULL,
   log_level_name varchar(8) DEFAULT NULL,
   log_message text DEFAULT NULL,
+  exception_type varchar(64) DEFAULT NULL,
+  exception_text varchar(255) DEFAULT NULL,
   query_text varchar(255) DEFAULT NULL,
   query_attempts TINYINT DEFAULT NULL,
   key0 varchar(64) DEFAULT NULL,
@@ -74,14 +85,12 @@ CREATE OR REPLACE TABLE RuntimeLog (
   key9 varchar(64) DEFAULT NULL,
   val9 varchar(255) DEFAULT NULL,
   PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-SHOW CREATE TABLE ErrorLog\G
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4\G
 
 SHOW CREATE TABLE RuntimeLog\G
 
 /*
-CREATE OR REPLACE TABLE RuntimeLog (
+CREATE OR REPLACE TABLE ErrorLog (
   uid mediumint(9) NOT NULL AUTO_INCREMENT,
   inserted datetime NOT NULL DEFAULT current_timestamp(),
   author varchar(64) DEFAULT NULL,

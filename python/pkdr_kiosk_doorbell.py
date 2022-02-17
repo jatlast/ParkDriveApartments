@@ -49,14 +49,20 @@ variables_dict = {
     "sound_played": "",
     "action_previous_datetime": datetime.datetime.now(),
 }
+
+log_level = 10 # Dummy Number
+
 # ----- Initialize using PkDr Utils -----
 if not pkdr_utils.initialize_config_dict(variables_dict):
     print("{}: Configuration Failure ({})".format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
 # ---------------------------------------
 elif pkdr_utils.config_dict['sound_config_error_flag']:
-    pkdr_utils.config_dict['db_table_dict']['msgtxt'] = 'Caller Config Error: '
-    pkdr_utils.config_dict['db_table_dict']['msgtxt'] += pkdr_utils.config_dict['caller_error_msg']
-    pkdr_utils.db_generic_insert('ErrorLog')
+    log_level = 4 # 4 = CRITICAL
+    pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+    pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
+    pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Caller Config Error: '
+    pkdr_utils.config_dict['db_table_dict']['log_message'] += pkdr_utils.config_dict['caller_error_msg']
+    pkdr_utils.db_generic_insert()
 else:
     variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['mqtt_broker_ip']
     variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['mqtt_broker_port']
