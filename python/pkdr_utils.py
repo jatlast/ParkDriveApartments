@@ -50,6 +50,8 @@ def initialize_config_dict(caller_dict):
         config_dict['num_str'] = '0'
         config_dict['mqtt'] = ''
         config_dict['mqtt_valid'] = False
+        config_dict['mqtt_credentials_error_flag'] = False
+        config_dict['mqtt_credentials_error_msg'] = ""
         config_dict['caller_error_flag'] = False
         config_dict['caller_error_msg'] = ""
         config_dict['program_valid'] = False
@@ -61,6 +63,8 @@ def initialize_config_dict(caller_dict):
         db_table_dict_init(config_dict['db_log_name'])
 
         add_pkdr_caller_info_to_config_dict()
+
+        add_pkdr_mqtt_info_to_config_dict()
 
     return not config_dict['error_flag']
 
@@ -341,22 +345,41 @@ def add_pkdr_caller_info_to_config_dict():
         config_dict['db_table_dict']['log_message'] = mqtt_topic_list
         db_generic_insert(config_dict['db_log_name'])
 
+def add_pkdr_mqtt_info_to_config_dict():
+    mqtt_credentials_error_flag = False
+    mqtt_credentials_error_msg = ""
+
+    mqtt_credentials_error_flag = False
+    # pkdr mqtt config
+    if config_dict.get('pkdr_mqtt_config', -1) == -1:
+        mqtt_credentials_error_flag = True
+        mqtt_credentials_error_msg += "Configuration Error: pkdr_mqtt_config not in config file"
+    else:
+        # paho client
+        if config_dict['pkdr_mqtt_config'].get('paho_client_dict', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: paho_client_dict not in config file"
+        # paho log level lookup list
+        elif config_dict['pkdr_mqtt_config']['paho_client_dict'].get('log_levels_dict', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: log_levels_dict not in config file"
+
+        # mosquitto broker
+        if config_dict['pkdr_mqtt_config'].get('mosquitto_broker_config', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: mosquitto_broker_config not in config file"
+        # mosquitto broker credentials dict
+        elif config_dict['pkdr_mqtt_config']['mosquitto_broker_config'].get('credentials_dict', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: log_levels_dict not in config file"
+
+    config_dict['mqtt_credentials_error_flag'] = mqtt_credentials_error_flag
+    config_dict['mqtt_credentials_error_msg'] = mqtt_credentials_error_msg
+
+
 def db_table_dict_init(table_name):
     # Thermostats | RuntimeLog (default) as of 20220215
     config_dict['db_insert_dict'] = {}
-
-# - author_date # datetime DEFAULT NULL,
-# - author_name # varchar(64) DEFAULT NULL,
-# - author_path # varchar(64) DEFAULT NULL,
-# - author_address # varchar(64) DEFAULT NULL,
-# - author_version # varchar(64) DEFAULT NULL,
-# - log_level # TINYINT DEFAULT NULL,
-# - log_level_name # varchar(8) DEFAULT NULL,
-# - log_message text DEFAULT NULL,
-# - exception_type # varchar(32) DEFAULT NULL,
-# - exception_text # varchar(255) DEFAULT NULL,
-# - query_text # varchar(255) DEFAULT NULL,
-# - query_attempts # TINYINT DEFAULT NULL,
 
     if table_name == config_dict['db_log_name']:
         config_dict['db_table_dict'] = {
