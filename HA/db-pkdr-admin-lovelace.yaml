@@ -46,20 +46,15 @@
 kiosk_mode:
   admin_settings:
     kiosk: false
-  non_admin_settings:
-    kiosk: true
+  # non_admin_settings:
+  #   kiosk: true
 title: PkDr Admin
 views:
-  # - title: Home
-  #   theme: darkorange
-  #   visible:
-  #     - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
-  #   require_admin: true
-  #   path: default_view
-  - title: PkDr
+  - title: PkDr Controls
     theme: darkorange
     visible:
-      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: f2a7bc7c54114ae18850444b825ccc30
+    path: pkdr-admin?disable_km
     require_admin: true
     badges:
 #      - entity: binary_sensor.pir_apt01_living_room
@@ -388,4 +383,3 @@ views:
           - switch.b4_entrance_buttons
           - switch.b4_entrance_video
         title: PkDr Entrance
-    path: PkDr_PkDr # PkDr

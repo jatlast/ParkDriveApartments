@@ -18,6 +18,11 @@
 #   - configuration location
 #       /etc/systemd/system/pkdr_kiosk_doorbell.service
 #   - can be managed using systemctl to (stop, start, restart, enable, disable, etc)
+# WARNING: old boxes still use the old version on the old NAS...
+#   Pi = /usr/bin/python /home/PkDr/HA/code/python/pkdr_htu21df_db.py >> /home/pi/logs/htu2ldf.log 2>&1
+#  Old = \\10.16.0.21\HA\code\python\pkdr_htu21df_db.py
+# Still deciding on dir format...
+#  New = \\10.16.0.22\HA\code\python\pkdr_htu21df_db.py
 # ------------
 
 # Install the required package...

@@ -1,7 +1,7 @@
 ###########################
 #####  Main - Begin  ######
 ###########################
-
+automation:
 # All 4 Buildings On & Off ...
 #  Automate On
 - id: pkdr_lights_on
