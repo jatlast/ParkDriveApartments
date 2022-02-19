@@ -9,8 +9,6 @@ views:
   #####################
   # Apt 01
   #####################
-  # JTB Apt - 2-Bdroom
-  #####################
   - title: 01
     panel: true
     theme: darkorange

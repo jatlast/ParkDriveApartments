@@ -15,7 +15,10 @@
 -- START TRANSACTION;
 
 -- Show before...
-SHOW CREATE TABLE PkDr.ErrorLog\G
+SHOW CREATE TABLE ErrorLog\G
+
+-- Drop the old table...
+DROP TABLE IF EXISTS ErrorLog\G
 
 ------------
 -- uid --
@@ -45,8 +48,6 @@ SHOW CREATE TABLE PkDr.ErrorLog\G
 -------------------- 
 -- TINYINT (-127 - 127 signed | 255 unsigned?)
 -------------------- 
-
--- DROP TABLE IF EXISTS ErrorLog\G
 
 CREATE OR REPLACE TABLE RuntimeLog (
   uid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -88,6 +89,8 @@ CREATE OR REPLACE TABLE RuntimeLog (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4\G
 
 SHOW CREATE TABLE RuntimeLog\G
+
+SHOW CREATE TABLE ErrorLog\G
 
 /*
 CREATE OR REPLACE TABLE ErrorLog (
