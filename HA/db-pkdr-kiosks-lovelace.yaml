@@ -1,0 +1,1318 @@
+kiosk_mode:
+  admin_settings:
+    kiosk: false
+  non_admin_settings:
+    kiosk: true
+
+title: PkDr Kiosks
+views:
+  #####################
+  # JTB Apt - 2-Bdroom
+  #####################
+  - title: Apt 01
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: fbf7359a12d74b07aea2e3f7ebb8da89 # Apt01
+    # require_admin: false
+    path: PkDr_01 # apt_01_tab
+    cards:
+      - cards:
+          # - type: entities
+          #   entities:
+          #     - input_number.apt01_kiosk
+        # Row 1 - Lights
+          - cards:
+            # Building Entrance Lock
+              - entity: switch.b1_entrance_lock
+                name: Building Lock
+                type: entity-button
+            # Entrance
+              - entity: switch.01_lock
+                name: Apartment Lock
+                type: entity-button
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt01_doorbell
+                    show_name: false
+                    tap_action:
+                      action: toggle
+                    icon: 'hass:bell'
+                    icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt01_volume
+                    full_row: true
+            # Entrance
+              - entity: light.apt01_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room
+              - entity: light.apt01_livingroom_bulb
+                name: Living Room
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt01_heat
+              #- entity: climate.apt01_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt01_humidity
+                    name: ' '
+              # - entity: climate.apt01_heat
+              - entity: climate.apt01_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt01_humidity
+                    name: ' '
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Hall
+            - entity: light.apt01_hall_bulb
+              name: Hall
+              type: light
+            # Bedroom Bulb
+            - entity: light.apt01_bedroom_bulb
+              name: Bdr Lamp
+              type: light
+            # Bedroom Switch
+            - entity: light.apt01_bedroom_light
+              name: Bdr Switch
+              type: entity-button
+              icon_height: 200px
+            # office Bulb
+            - entity: light.apt01_dedroom2_bulb
+              name: Bdr2 Lamp
+              type: light
+            # Kitchen
+            - entity: light.apt01_kitchen_bulb
+              name: Kitchen
+              type: light
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: Apt01 Video Doorbell
+              camera_image: camera.apt01_video_doorbell_camera
+              image: '/local/Apt01_VDB.jpg'
+              entities:
+                - entity: camera.apt01_video_doorbell_camera
+              aspect_ratio: 0%
+            - type: picture-glance
+              title: B1 Stairs
+              camera_image: camera.b1_stairs
+              image: '/local/PkDr_B1_Stairs.jpg'
+              entities:
+                - camera.b1_stairs
+              aspect_ratio: 0%
+            # - type: picture-glance
+            #   title: Apt01 Video Doorbell
+            #   camera_image: camera.apt01_video_doorbell_camera
+            #   image: '/local/Apt01_VDB.jpg'
+            #   entities:
+            #     - entity: camera.apt01_video_doorbell_camera
+            #   aspect_ratio: 0%
+            type: horizontal-stack
+        # Row 5 - Tenant Portal
+          - cards:
+            - entities:
+                - entity: input_text.apt01_vdb_line1
+                  name: Line 1
+                - entity: input_text.apt01_vdb_line2
+                  name: Line 2
+                - entity: input_text.apt01_vdb_line3
+                  name: Line 3
+                - entity: input_text.apt01_vdb_line4
+                  name: Line 4
+              type: entities
+          #   - type: iframe
+          #     url: 'https://parkdriveapartments.managebuilding.com/Resident/portal/'
+          #     title: Tenant Portal
+          #     aspect_ratio: 100%
+            type: horizontal-stack
+        # Row 6.1 - IPTV Living Room
+          # - cards:
+          #   # - entity: media_player.iptv_1_1
+          #   #   type: media-control
+          #   - type: iframe
+          #     url: 'http://10.16.101.10:8080'
+          #     title: IPTV - Living Room
+          #     aspect_ratio: 100%
+          #   type: horizontal-stack
+        # Row 6.2 - IPTV Living Room (Buttons)
+          - cards:
+              # - entity: switch.apt01_1_reboot_iptv
+              #   hold_action:
+              #     action: more-info
+              #   icon: 'mdi:restart'
+              #   name: Try Restart IPTV
+              #   show_icon: true
+              #   show_name: true
+              #   tap_action:
+              #     action: toggle
+              #   type: entity-button
+              #   icon_height: 170px
+              - entity: script.apt01_clean_iptv_livingroom
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+                show_icon: true
+                show_name: true
+                name: Clean IPTV Living Room
+                icon: 'mdi:television-clean'
+                type: entity-button
+                icon_height: 170px
+              - entity: switch.apt01_livingroom_iptv
+                hold_action:
+                  action: more-info
+                icon: 'mdi:restart'
+                name: Off/On IPTV
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+                icon_height: 170px
+            type: horizontal-stack
+        # Row 7.1 - IPTV bedroom
+        #   - cards:
+        #       # - entity: media_player.iptv_1_1
+        #       #   type: media-control
+        #       - type: iframe
+        #         url: 'http://10.16.101.15:8080'
+        #         title: IPTV - Bedroom
+        #         aspect_ratio: 100%
+        #     type: horizontal-stack
+        # # Row 7.2 - IPTV Bedroom (Buttons)
+        #   - cards:
+        #       # - entity: switch.apt01_2_reboot_iptv
+        #       #   hold_action:
+        #       #     action: more-info
+        #       #   icon: 'mdi:restart'
+        #       #   name: Try Restart IPTV Bedroom
+        #       #   show_icon: true
+        #       #   show_name: true
+        #       #   tap_action:
+        #       #     action: toggle
+        #       #   type: entity-button
+        #       #   icon_height: 170px
+        #       - entity: script.apt01_clean_iptv_bedroom
+        #         tap_action:
+        #           action: toggle
+        #         hold_action:
+        #           action: more-info
+        #         show_icon: true
+        #         show_name: true
+        #         name: Clean IPTV Bedroom
+        #         icon: 'mdi:television-clean'
+        #         type: entity-button
+        #         icon_height: 170px
+        #     type: horizontal-stack
+        # Row 8 - Switches
+          - cards:
+            - type: entity-button
+              tap_action:
+                action: toggle
+              hold_action:
+                action: more-info
+              show_icon: true
+              show_name: true
+              entity: switch.apt01_bedroom_ender3
+              name: Ender 3
+            type: horizontal-stack
+        # Row 9 - Locks
+          # - cards:
+          #   - type: entities
+          #     entities:
+          #       - binary_sensor.apartment_1_open
+          #       - lock.apartment_1
+          #     title: Lock
+          #   type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # Apt 02
+  #####################
+  - title: Apt 02
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: b869b20517ca4418a64b54401a693085 # Apt02
+#    path: b869b20517ca4418a64b54401a693085 # apt_02_tab
+    path: PkDr_02 # apt_02_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Building Entrance Lock
+              - entity: switch.b1_entrance_lock
+                name: Building Lock
+                type: entity-button
+            # Entrance
+              - entity: light.apt02_entrance_bulb
+                name: Entrance
+                type: light
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt02_doorbell
+                    show_name: false
+                    tap_action:
+                      action: toggle
+                    icon: 'hass:bell'
+                    icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt02_volume
+                    full_row: true
+            # Living Room
+              - entity: light.apt02_livingroom_bulb
+                name: Living Room
+                type: light
+            # Kitchen
+              - entity: light.apt02_kitchen_bulb
+                name: Kitchen
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt02_heat
+              #- entity: climate.apt02_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt02_humidity
+                    name: ' '
+              - entity: climate.apt02_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt02_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 2 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Hall
+              - entity: light.apt02_hall_bulb
+                name: Hall
+                type: light
+            # Bedroom Bulb
+              - entity: light.apt02_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom Switch
+              - entity: light.apt02_bedroom_light
+                name: Bdr Switch
+                type: entity-button
+                icon_height: 200px
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B1 Stairs
+              camera_image: camera.b1_stairs
+              image: '/local/PkDr_B1_Stairs.jpg'
+              entities:
+                - camera.b2_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # 1-Bdroom Apartment
+  #####################
+  - title: Apt 03
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 611a6997f68f4953b5a16da3d5cdbd34 # Apt03
+    path: PkDr_03 # apt_03_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Building Entrance Lock
+              - entity: switch.b1_entrance_lock
+                name: Building Lock
+                type: entity-button
+            # Entrance
+              - entity: switch.03_lock
+                name: Lock
+                type: entity-button
+            # Entrance
+              - entity: light.apt03_entrance_bulb
+                name: Entrance
+                type: light
+#                icon: 'mdi:restart'
+              # - entity: binary_sensor.apt03_entrance_door
+              #   name: Door
+              #   type: entity-button
+              #   state_color: true
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt03_doorbell
+                    show_name: false
+                    tap_action:
+                      action: toggle
+                    icon: 'hass:bell'
+                    icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt03_volume
+                    full_row: true
+            # Living Room
+              - entity: light.apt03_livingroom_bulb
+                name: Living Room
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt03_heat
+              #- entity: climate.apt03_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt03_humidity
+                    name: ' '
+              - entity: climate.apt03_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt03_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 3 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Bedroom Bulb
+              - entity: light.apt03_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom Switch
+              - entity: light.apt03_bedroom_light
+                name: Bdr Switch
+                type: entity-button
+                icon_height: 200px
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B1 Stairs
+              camera_image: camera.b1_stairs
+              image: '/local/PkDr_B1_Stairs.jpg'
+              entities:
+                - camera.b1_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # 2-Bdroom Apartment
+  #####################
+  - title: Apt 04
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 93fd9511bcad475b8687924284c79ff2 # Apt04
+    path: PkDr_04 # apt_04_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt04_entrance_bulb
+                name: Entrance
+                type: light
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt04_doorbell
+                    show_name: false
+                    tap_action:
+                      action: toggle
+                    icon: 'hass:bell'
+                    icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt04_volume
+                    full_row: true
+            # Living Room
+              - entity: light.apt04_livingroom_bulb
+                name: Living Room
+                type: light
+            # Hall
+              - entity: light.apt04_hall_bulb
+                name: Hall
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt04_heat
+              #- entity: climate.apt04_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt04_humidity
+                    name: ' '
+              #- entity: climate.apt04_heat
+              - entity: climate.apt04_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt04_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 04 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Bedroom Bulb
+              - entity: light.apt04_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom2 Bulb
+              - entity: light.apt04_bedroom2_bulb
+                name: Bdr2 Lamp
+                type: light
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B3 Stairs
+              camera_image: camera.b3_stairs
+              image: '/local/PkDr_B3_Stairs.jpg'
+              entities:
+                - camera.b3_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # 1-Bdroom Apartment
+  #####################
+  - title: Apt 05
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 3ace11b19baa481f995062fd4b6ccaaa # Apt05
+#    path: 13ace11b19baa481f995062fd4b6ccaaa # apt_05_tab
+    path: PkDr_05 # apt_05_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt05_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room Bulb
+              - entity: light.apt05_livingroom_bulb
+                name: Living Room
+                type: light
+            # Hall
+              - entity: light.apt05_hall_bulb
+                name: Hall
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt05_heat
+              #- entity: climate.apt05_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt05_humidity
+                    name: ' '
+              - entity: climate.apt05_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt05_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 5 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Bedroom Bulb
+              - entity: light.apt05_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom Switch
+              - entity: light.apt05_bedroom_light
+                name: Bdr Switch
+                type: entity-button
+                icon_height: 200px
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B2 Stairs
+              camera_image: camera.b2_stairs
+              image: '/local/PkDr_B2_Stairs.jpg'
+              entities:
+                - camera.b2_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # Apt 06
+  #####################
+  - title: Apt 06
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: c9f5d2f3a46a405096d43bdab619f94a # Apt06
+#    path: c9f5d2f3a46a405096d43bdab619f94a # apt_06_tab
+    path: PkDr_06 # apt_06_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt06_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room
+              - entity: light.apt06_livingroom_bulb
+                name: Living Room
+                type: light
+            # Kitchen
+              - entity: light.apt06_kitchen_bulb
+                name: Kitchen
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt06_heat
+              #- entity: climate.apt06_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt06_humidity
+                    name: ' '
+              - entity: climate.apt06_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt06_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 6 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Hall
+              - entity: light.apt06_hall_bulb
+                name: Hall
+                type: light
+            # Bedroom Bulb
+              - entity: light.apt06_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom Switch
+              - entity: light.apt06_bedroom_light
+                name: Bdr Switch
+                type: entity-button
+                icon_height: 200px
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B2 Stairs
+              camera_image: camera.b2_stairs
+              image: '/local/PkDr_B2_Stairs.jpg'
+              entities:
+                - camera.b2_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # 2-Bdroom Apartment
+  #####################
+  - title: Apt 07
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 0610872546c9407db8ef3b32479e8654 # Apt07
+    path: PkDr_07 # apt_07_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt07_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room
+              - entity: light.apt07_livingroom_bulb
+                name: Living Room
+                type: light
+            # Hall
+              - entity: light.apt07_hall_bulb
+                name: Hall
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt07_heat
+              #- entity: climate.apt07_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt07_humidity
+                    name: ' '
+              - entity: climate.apt07_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt07_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 7 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Bedroom1 Bulb
+              - entity: light.apt07_bedroom_bulb
+                name: Bdr1 Lamp
+                type: light
+            # Bedroom2 Bulb
+              - entity: light.apt07_bedroom2_bulb
+                name: Bdr2 Lamp
+                type: light
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B4 Stairs
+              camera_image: camera.b2_stairs
+              image: '/local/PkDr_B2_Stairs.jpg'
+              entities:
+                - camera.b2_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # Apt 09
+  #####################
+  - title: Apt 09
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 09d1067b816443f0a2a3f45c7a3553a2 # Apt09
+#    path: 09d1067b816443f0a2a3f45c7a3553a2 # apt_09_tab
+    path: PkDr_09 # apt_09_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt09_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room Bulb
+              - entity: light.apt09_livingroom_bulb
+                name: Living Room
+                type: light
+            # Hall
+              - entity: light.apt09_hall_bulb
+                name: Hall
+                type: light
+            # Bedroom Bulb
+              - entity: light.apt09_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt09_heat
+              #- entity: climate.apt09_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt09_humidity
+                    name: ' '
+              #- entity: climate.apt09_heat
+              - entity: climate.apt09_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt09_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 9 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          # - cards:
+          #   # Bedroom Switch
+          #     - entity: light.apt09_bedroom_light
+          #       name: Bdr Switch
+          #       type: entity-button
+          #       icon_height: 200px
+          #   type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B3 Stairs
+              camera_image: camera.b3_stairs
+              image: '/local/PkDr_B3_Stairs.jpg'
+              entities:
+                - camera.b3_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # 2-Bdroom Apartment
+  #####################
+  - title: Apt 12
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 93fd9511bcad475b8687924284c79ff2 # Apt12
+    path: PkDr_12 # apt_12_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt12_entrance_bulb
+                name: Entrance
+                type: light
+            # Living Room
+              - entity: light.apt12_livingroom_bulb
+                name: Living Room
+                type: light
+            # Hall
+              - entity: light.apt12_hall_bulb
+                name: Hall
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt12_heat
+              #- entity: climate.apt12_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt12_humidity
+                    name: ' '
+              #- entity: climate.apt12_heat
+              - entity: climate.apt12_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt12_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 12 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Bedroom Bulb
+              - entity: light.apt12_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom2 Bulb
+              - entity: light.apt12_bedroom2_bulb
+                name: Bdr2 Lamp
+                type: light
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B3 Stairs
+              camera_image: camera.b3_stairs
+              image: '/local/PkDr_B3_Stairs.jpg'
+              entities:
+                - camera.b3_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+  #####################
+  # Apt 14
+  #####################
+  - title: Apt 14
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: 59c12eeea78f4725872702ed42fe0a7c # Apt14
+#    path: 59c12eeea78f4725872702ed42fe0a7c # apt_14_tab
+    path: PkDr_14 # apt_14_tab
+    cards:
+      - cards:
+        # Row 1 - Lights
+          - cards:
+            # Entrance
+              - entity: light.apt14_entrance_bulb
+                name: Entrance
+                type: light
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt14_doorbell
+                    show_name: false
+                    tap_action:
+                      action: toggle
+                    icon: 'hass:bell'
+                    icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt14_volume
+                    full_row: true
+            # Kitchen
+              - entity: light.apt14_kitchen_bulb
+                name: Kitchen
+                type: light
+            # Living Room
+              - entity: light.apt14_livingroom_bulb
+                name: Living Room
+                type: light
+            type: horizontal-stack
+        # Row 2 - Climate
+          - cards:
+              - entity: climate.apt14_heat
+              #- entity: climate.apt14_ac
+                name: Heat
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt14_humidity
+                    name: ' '
+              #- entity: climate.apt14_heat
+              - entity: climate.apt14_ac
+                name: AC
+                type: 'custom:simple-thermostat'
+                decimals: 1
+                step_size: 0.5
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    away: true
+                    none:
+                      name: Home
+                sensors:
+                  - entity: sensor.apt14_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 14 Forecast
+            type: horizontal-stack
+        # Row 3 - More Lights
+          - cards:
+            # Hall
+              - entity: light.apt14_hall_bulb
+                name: Hall
+                type: light
+            # Bedroom Bulb
+              - entity: light.apt14_bedroom_bulb
+                name: Bdr Lamp
+                type: light
+            # Bedroom Switch
+              - entity: light.apt14_bedroom_light
+                name: Bdr Switch
+                type: entity-button
+                icon_height: 200px
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            - type: picture-glance
+              title: B4 Stairs
+              camera_image: camera.b4_stairs
+              image: '/local/PkDr_B4_Stairs.jpg'
+              entities:
+                - camera.b4_stairs
+              aspect_ratio: 0%
+            type: horizontal-stack
+        type: vertical-stack
+
+  #####################
+  # B1 - Utility Kiosk
+  #####################
+  - title: B1 Kiosk
+    panel: true
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+      - user: c47e7c80446e46719c53801946b90a2e # B1
+    path: PkDr_B1 # Lovelace Tab - B1 Kiosk
+    cards:
+      - cards:
+        # Row 1 - Thermostats 1 & 2 Heat
+          - cards:
+            # Apt01 Heat
+              - entity: climate.apt01_heat
+                name: Apt01 Heat
+                type: thermostat
+            # Apt01 Temperature History
+              - entity: sensor.apt01_temperature
+                name: Apt01 Temperature
+                type: sensor
+                graph: line
+                hours_to_show: 24
+                detail: 2
+            # Apt02 Heat
+              - entity: climate.apt02_heat
+                name: Apt02 Heat
+                type: thermostat
+            # Apt02 Temperature History
+              - entity: sensor.apt02_temperature
+                name: Apt02 Temperature
+                type: sensor
+                graph: line
+                hours_to_show: 24
+                detail: 2
+            type: horizontal-stack
+        # Row 2 - Thermostats 3 & 4 Heat
+          - cards:
+            # Apt03 Heat
+              - entity: climate.apt03_heat
+                name: Apt03 Heat
+                type: thermostat
+            # Apt03 Temperature History
+              - entity: sensor.apt03_temperature
+                name: Apt03 Temperature
+                type: sensor
+                graph: line
+                hours_to_show: 24
+                detail: 2
+            # Apt04 Heat
+              - entity: climate.apt04_heat
+                name: Apt04 Heat
+                type: thermostat
+            # Apt04 Temperature History
+              - entity: sensor.apt04_temperature
+                name: Apt04 Temperature
+                type: sensor
+                graph: line
+                hours_to_show: 24
+                detail: 2
+            type: horizontal-stack
+        # Row 3 - Controls
+          - cards:
+            - type: entities
+              entities:
+                - entity: switch.01_heat
+                - entity: switch.02_heat
+                - entity: switch.03_heat
+                - entity: switch.04_heat
+              title: B1 Heat
+              state_color: true
+            - type: entities
+              entities:
+                - entity: switch.01_lock
+                - entity: switch.02_lock
+                - entity: switch.03_lock
+                - entity: switch.04_lock
+                - entity: switch.b1_entrance_lock
+              title: B1 Locks
+              state_color: true
+              show_name: true
+            - type: entities
+              entities:
+                - switch.b1_kiosks_odd
+                - switch.b1_kiosks_even
+              title: B1 Kiosks
+            - type: entities
+              entities:
+                - switch.b1_doorbells_odd
+                - switch.b1_doorbells_even
+              title: B1 VDBs
+            type: horizontal-stack
+        # Row 4 - Cameras
+          - cards:
+            # - type: picture-glance
+            #   title: B1 Video Doorbell
+            #   camera_image: camera.b1_vdb_camera
+            #   image: '/local/B1_VDB.jpg'
+            #   entities:
+            #     - entity: camera.b1_vdb_camera
+            #   aspect_ratio: 0%
+            # - type: picture-entity
+            #   entity: camera.b1_vdb_camera
+            #   image: '/local/B1_VDB.jpg'
+            #   aspect_ratio: 75%
+            #   camera_image: camera.b1_vdb_camera
+            #   name: VDB Live
+            #   camera_view: live
+
+            # - type: picture-glance
+            #   title: B1 Stairs
+            #   camera_image: camera.b1_stairs
+            #   image: '/local/PkDr_B1_Stairs.jpg'
+            #   entities:
+            #     - camera.b1_stairs
+            #   aspect_ratio: 0%
+
+            # - type: picture-glance
+            #   title: Apt01 Video Doorbell
+            #   camera_image: camera.apt01_video_doorbell_camera
+            #   image: '/local/Apt01_VDB.jpg'
+            #   entities:
+            #     - entity: camera.apt01_video_doorbell_camera
+            #   aspect_ratio: 0%
+            type: horizontal-stack
+        # Row 5 - Tenant Portal
+          - cards:
+            - entities:
+                - entity: input_text.b1_vdb_line1
+                  name: Line 1
+                - entity: input_text.b1_vdb_line2
+                  name: Line 2
+                - entity: input_text.b1_vdb_line3
+                  name: Line 3
+                - entity: input_text.b1_vdb_line4
+                  name: Line 4
+              type: entities
+          #   - type: iframe
+          #     url: 'https://parkdriveapartments.managebuilding.com/Resident/portal/'
+          #     title: Tenant Portal
+          #     aspect_ratio: 100%
+            type: horizontal-stack
+        type: vertical-stack
+
+# 20220218 - Finally back to working on HA OS so I am tring to get kiosk mode working...
+#   https://github.com/maykar/kiosk-mode
+# kiosk: -- Hides both the header and sidebar.
+# hide_header: -- Hides only the header.
+# hide_sidebar: -- Hides only the sidebar. Disables swipe to open.
+# hide_menubutton: -- Hides only the sidebar menu icon. Does not disable swipe to open.
+# hide_overflow: -- Hides the top right menu.
+# ignore_entity_settings: -- Useful for conditional configs and will cause entity_settings to be ignored.
+# ignore_mobile_settings: -- Useful for conditional configs and will cause mobile_settings to be ignored.
+# Query Strings
+#   The query string options are:
+#     ?hide_header     to hide only the header
+#     ?hide_sidebar    to hide only the sidebar
+#     ?hide_overflow   to hide the top right menu
+#     ?hide_menubutton to hide sidebar menu button
+#
+#     ?kiosk           to hide both header and sidebar
+#     ?kiosk&cache     to makes all views & dashboards both header and sidebar.
+#        - This works for all query strings except for the utility strings listed below.
+#
+# Utility Query Strings
+#   ?clear_km_cache   will clear all cached preferences
+#   ?disable_km       will temporarily disable any modifications
+#
+# Query String Caching
+#   You save settings in a devices cache by using the cache keyword once on the device.
+#   This will also make it so the options work on all views and dashboards.
+#   Example: ?hide_header&cache makes all views & dashboards hide the header.
+#   This works for all query strings except for the utility strings listed below.
+

@@ -14,7 +14,7 @@ config_dict = {
 }
 
 def initialize_config_dict(caller_dict):
-    config_file = '/home/PkDr/HA/code/DEV/config/secrets.yaml'
+    config_file = '/home/PkDr/HA/code/DEV/config/pkdr_config.yaml'
     error_flag = False
 
     global config_dict

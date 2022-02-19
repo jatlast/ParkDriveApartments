@@ -1,0 +1,391 @@
+# Disable Custom Header | ?disable_ch |...
+#   http://10.16.0.29:8123/lovelace/default_view?disable_ch
+# ID's
+# Administrator
+#   PkDrApts - f5868b87d9ad4d1e82dd7a686f31b84b - PDA0
+# Buildings
+#   B1 - c47e7c80446e46719c53801946b90a2e - B1:ParkDrive
+#   B2 - 
+#   B2 - 
+#   B2 - 
+# Apartments
+#   01 - fbf7359a12d74b07aea2e3f7ebb8da89 - Apt01:05046379
+#   02 - b869b20517ca4418a64b54401a693085 - Apt02:19241951
+#   03 - 611a6997f68f4953b5a16da3d5cdbd34 - Apt03:15267979
+#   04 -  - 
+#   05 - 3ace11b19baa481f995062fd4b6ccaaa - Apt05:07431241
+#   06 - c9f5d2f3a46a405096d43bdab619f94a - Apt06:74945061
+#   07 - eadb5429f7fb4308acc3150facdf3bf9 - Apt07:85008441
+#   08 -  - 
+#   09 - 09d1067b816443f0a2a3f45c7a3553a2 - 09:54985674
+#   10 -  - 
+#   11 -  - 
+#   12 - 93fd9511bcad475b8687924284c79ff2 - Apt12:86508865
+#   13 -  - 
+#   14 - 59c12eeea78f4725872702ed42fe0a7c - Apt14:03989272
+#   15 -  - 
+#   16 -  - 
+
+# ToDo 2020-01-16
+# Amcrest
+# Presence Detection
+# Scripts examples
+# Notifications
+# Temperature Presets
+
+# 20220218 - Finally back to working on HA OS so I am tring to get kiosk mode working...
+#   https://github.com/maykar/kiosk-mode
+# kiosk: -- Hides both the header and sidebar.
+#     ?kiosk           to hide both header and sidebar
+#     ?kiosk&cache     to makes all views & dashboards both header and sidebar.
+#        - This works for all query strings except for the utility strings listed below.
+# Utility Query Strings
+#   ?clear_km_cache   will clear all cached preferences
+#   ?disable_km       will temporarily disable any modifications
+
+kiosk_mode:
+  admin_settings:
+    kiosk: false
+  non_admin_settings:
+    kiosk: true
+title: PkDr Admin
+views:
+  # - title: Home
+  #   theme: darkorange
+  #   visible:
+  #     - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+  #   require_admin: true
+  #   path: default_view
+  - title: PkDr
+    theme: darkorange
+    visible:
+      - user: f5868b87d9ad4d1e82dd7a686f31b84b # PkDrApts
+    require_admin: true
+    badges:
+#      - entity: binary_sensor.pir_apt01_living_room
+#      - entity: binary_sensor.pir_apt02_living_room
+#      - entity: binary_sensor.pir_apt05_living_room
+#      - entity: binary_sensor.pir_apt06_living_room
+#      - entity: binary_sensor.pir_apt14_living_room
+      - entity: person.apt01_jason
+      - entity: person.apt14_derek
+      - entity: device_tracker.pixel_4xl
+      - entity: device_tracker.sm_g950u
+      - entity: sensor.b1_temperature
+      - entity: sensor.b1_humidity
+      - entity: sensor.b2_temperature
+      - entity: sensor.b2_humidity
+      - entity: sensor.b3_temperature
+      - entity: sensor.b3_humidity
+#      - entity: sensor.b4_temperature
+#      - entity: sensor.b4_humidity
+      - entity: sensor.apt01_temperature
+      - entity: sensor.apt02_temperature
+      - entity: sensor.apt05_temperature
+      - entity: sensor.apt06_temperature
+      - entity: sensor.apt07_temperature
+      - entity: sensor.apt09_temperature
+      - entity: sensor.apt12_temperature
+      - entity: sensor.apt14_temperature
+      - entity: binary_sensor.updater
+      - entity: sun.sun
+    cards:
+      - type: light
+        entity: light.rgbw_bulb_test
+        name: RGBW Bulb Test
+      - type: entity-button
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        show_icon: true
+        show_name: true
+        entity: switch.switch_test
+        name: Switch Test
+      - entities:
+          - entity: switch.b1_lights
+          - entity: switch.b2_lights
+          - entity: switch.b3_lights
+          - entity: switch.b4_lights
+        show_header_toggle: true
+        title: Building Lights
+        type: entities
+      - entities:
+          - entity: automation.building_lights_on
+          - entity: automation.building_lights_off
+          - entity: automation.b1_entrance_relock
+          # - entity: automation.building_lights_back_on
+          # - entity: automation.building_lights_back_off
+          - entity: automation.apt01_climate_home
+          - entity: automation.apt01_climate_away
+          - entity: automation.apt01_entrance_relock
+          - entity: automation.apt01_no_heat_with_ac
+          - entity: automation.apt01_no_ac_with_heat
+          # - entity: automation.apt02_no_heat_with_ac
+          # - entity: automation.apt02_no_ac_with_heat
+          # - entity: automation.apt05_no_heat_with_ac
+          # - entity: automation.apt05_no_ac_with_heat
+          # - entity: automation.apt06_no_heat_with_ac
+          # - entity: automation.apt06_no_ac_with_heat
+          # - entity: automation.apt07_no_heat_with_ac
+          # - entity: automation.apt07_no_ac_with_heat
+          # - entity: automation.apt09_no_heat_with_ac
+          # - entity: automation.apt09_no_ac_with_heat
+          # - entity: automation.apt12_no_heat_with_ac
+          # - entity: automation.apt12_no_ac_with_heat
+          # - entity: automation.apt14_no_heat_with_ac
+          # - entity: automation.apt14_no_ac_with_heat
+          # - entity: automation.outlet_on_every_2_1
+          # - entity: automation.outlet_off_every_1_4
+          # - entity: automation.apt14_climate_home
+          # - entity: automation.apt14_climate_away
+        title: PkDr Automations
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt01_entrance_bulb
+          - entity: light.apt01_livingroom_bulb
+          - entity: light.apt01_kitchen_bulb
+          - entity: light.apt01_hall_bulb
+          - entity: light.apt01_bedroom_bulb
+          - entity: light.apt01_bedroom_light
+          - entity: switch.apt01_livingroom_iptv
+          - entity: switch.apt01_ac
+          - entity: switch.01_heat
+          - entity: switch.01_lock
+          - entity: switch.apt01_doorbell
+          - entity: input_number.apt01_volume
+        show_header_toggle: true
+        title: Apt 1
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt02_entrance_bulb
+          - entity: light.apt02_livingroom_bulb
+          - entity: light.apt02_kitchen_bulb
+          - entity: light.apt02_hall_bulb
+          - entity: light.apt02_bedroom_bulb
+          - entity: light.apt02_bedroom_light
+          - entity: switch.apt02_livingroom_iptv
+          - entity: switch.apt02_ac
+          - entity: switch.02_heat
+          - entity: switch.02_lock
+          - entity: switch.apt02_doorbell
+          - entity: input_number.apt02_volume
+        show_header_toggle: true
+        title: Apt 2
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt03_entrance_bulb
+          - entity: light.apt03_livingroom_bulb
+          - entity: light.apt03_kitchen_bulb
+          - entity: light.apt03_hall_bulb
+          - entity: light.apt03_bedroom_bulb
+          - entity: light.apt03_bedroom_light
+          - entity: switch.apt03_livingroom_iptv
+          - entity: switch.apt03_ac
+          - entity: switch.03_heat
+          - entity: switch.03_lock
+          - entity: switch.apt03_doorbell
+          - entity: input_number.apt03_volume
+        show_header_toggle: true
+        title: Apt 3
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt05_entrance_bulb
+          - entity: light.apt05_livingroom_bulb
+          - entity: light.apt05_kitchen_bulb
+          - entity: light.apt05_hall_bulb
+          - entity: light.apt05_bedroom_bulb
+          - entity: light.apt05_bedroom_light
+          - entity: switch.apt05_livingroom_iptv
+          - entity: switch.apt05_ac
+          - entity: switch.05_heat
+          - entity: switch.05_lock
+          - entity: switch.apt05_doorbell
+          - entity: input_number.apt05_volume
+        show_header_toggle: true
+        title: Apt 5
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt06_entrance_bulb
+          - entity: light.apt06_livingroom_bulb
+          - entity: light.apt06_kitchen_bulb
+          - entity: light.apt06_hall_bulb
+          - entity: light.apt06_bedroom_bulb
+          - entity: light.apt06_bedroom_light
+          - entity: switch.apt06_livingroom_iptv
+          - entity: switch.apt06_ac
+          - entity: switch.06_heat
+          - entity: switch.05_lock
+          - entity: switch.apt05_doorbell
+          - entity: input_number.apt05_volume
+        show_header_toggle: true
+        title: Apt 6
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt07_entrance_bulb
+          - entity: light.apt07_livingroom_bulb
+          - entity: light.apt07_kitchen_bulb
+          - entity: light.apt07_hall_bulb
+          - entity: light.apt07_bedroom_bulb
+          - entity: light.apt07_bedroom2_bulb
+          - entity: switch.apt07_livingroom_iptv
+          - entity: switch.apt07_ac
+          - entity: switch.07_heat
+          - entity: switch.07_lock
+          - entity: switch.apt07_doorbell
+          - entity: input_number.apt07_volume
+        show_header_toggle: true
+        title: Apt 7
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt09_entrance_bulb
+          - entity: light.apt09_livingroom_bulb
+          - entity: light.apt09_kitchen_bulb
+          - entity: light.apt09_hall_bulb
+          - entity: light.apt09_bedroom_bulb
+          - entity: switch.apt09_livingroom_iptv
+          - entity: switch.apt09_ac
+          - entity: switch.09_heat
+          - entity: switch.09_lock
+          - entity: switch.apt09_doorbell
+          - entity: input_number.apt09_volume
+        show_header_toggle: true
+        title: Apt 9
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt12_entrance_bulb
+          - entity: light.apt12_livingroom_bulb
+          - entity: light.apt12_kitchen_bulb
+          - entity: light.apt12_hall_bulb
+          - entity: light.apt12_bedroom_bulb
+          - entity: light.apt12_bedroom2_bulb
+          - entity: switch.apt12_livingroom_iptv
+          - entity: switch.apt12_ac
+          - entity: switch.12_heat
+          - entity: switch.12_lock
+          - entity: switch.apt12_doorbell
+          - entity: input_number.apt12_volume
+        show_header_toggle: true
+        title: Apt 12
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt14_entrance_bulb
+          - entity: light.apt14_livingroom_bulb
+          - entity: light.apt14_kitchen_bulb
+          - entity: light.apt14_hall_bulb
+          - entity: light.apt14_bedroom_bulb
+          - entity: light.apt14_bedroom_light
+          - entity: switch.apt14_livingroom_iptv
+          - entity: switch.apt14_ac
+          - entity: switch.apt14_heat
+          - entity: switch.14_lock
+          - entity: switch.apt14_doorbell
+          - entity: input_number.apt14_volume
+        show_header_toggle: true
+        title: Apt 14
+        type: entities
+      - type: entity-button
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        show_icon: true
+        show_name: true
+        entity: script.kodi_notification
+        name: Apt01 Notify
+        icon_height: 150px
+      - type: entities
+        entities:
+          - switch.01_heat
+          - switch.02_heat
+          - switch.03_heat
+          - switch.04_heat
+          - switch.b1_end_switch_override
+          - switch.05_heat
+          - switch.06_heat
+          - switch.07_heat
+          - switch.08_heat
+          - switch.b2_end_switch_override
+          - switch.09_heat
+          - switch.10_heat
+          - switch.11_heat
+          - switch.12_heat
+          - switch.b3_end_switch_override
+          - switch.13_heat
+          - switch.14_heat
+          - switch.15_heat
+          - switch.16_heat
+          - switch.b4_end_switch_override
+        title: PkDr Heat
+      - type: entities
+        entities:
+          - switch.01_lock
+          - switch.02_lock
+          - switch.03_lock
+          - switch.04_lock
+          - switch.05_lock
+          - switch.06_lock
+          - switch.07_lock
+          - switch.08_lock
+          - switch.09_lock
+          - switch.10_lock
+          - switch.11_lock
+          - switch.12_lock
+          - switch.13_lock
+          - switch.14_lock
+          - switch.15_lock
+          - switch.16_lock
+        title: PkDr Locks
+      - type: entities
+        entities:
+          - switch.b1_kiosks_odd
+          - switch.b1_kiosks_even
+          - switch.b2_kiosks_odd
+          - switch.b2_kiosks_even
+          - switch.b3_kiosks_odd
+          - switch.b3_kiosks_even
+          - switch.b4_kiosks_odd
+          - switch.b4_kiosks_even
+        title: PkDr Kiosks
+      - type: entities
+        entities:
+          - switch.b2_kiosks
+          - switch.b3_kiosks
+          - switch.b4_kiosks
+        title: PkDr Kiosks (Old Way)
+      - type: entities
+        entities:
+          - switch.b1_doorbells_odd
+          - switch.b1_doorbells_even
+          - switch.b2_doorbells_odd
+          - switch.b2_doorbells_even
+          - switch.b3_doorbells_odd
+          - switch.b3_doorbells_even
+          - switch.b4_doorbells_odd
+          - switch.b4_doorbells_even
+        title: PkDr Video Doorbells
+      - type: entities
+        entities:
+          - switch.b1_entrance_lock
+          - switch.b1_entrance_buttons
+          - switch.b1_entrance_video
+          - switch.b2_entrance_lock
+          - switch.b2_entrance_buttons
+          - switch.b2_entrance_video
+          - switch.b3_entrance_lock
+          - switch.b3_entrance_buttons
+          - switch.b3_entrance_video
+          - switch.b4_entrance_lock
+          - switch.b4_entrance_buttons
+          - switch.b4_entrance_video
+        title: PkDr Entrance
+    path: PkDr_PkDr # PkDr

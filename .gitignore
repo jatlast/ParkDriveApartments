@@ -8,6 +8,10 @@
 # -------------------------------
 # Park Drive Apartments (PkDr)
 # -------------------------------
+# ignore the config dir because it should only contain PkDr Info
+#config/
+*.conf
+*_config.yaml
 # ignore local Visual Studio Code configuraton
 .vscode/
 # shell scripts created on Pi boxes using emacs to execute on Pi boxes
@@ -15,33 +19,33 @@
 #       #kiosk*.sh could be used
 bash/
 # ignore "test" scripts
+*scratchpad*
 *_test*
-# -------------------------------
-# Home Assistant
-# -------------------------------
 
-# Home Assistant's file for sensitive information
-secrets.yaml
-
-# comment to include the system log
-home-assistant.log
-
-# ignore until propritary information has been moved to secrets.yaml
-configuration.yaml
-# ignore the entire yaml dir until HA has been properly readied for public backup
+# Code that runs on PkDr HA Kiosks -- Raspberry Pis
 yaml/
 
+# -------------------------------
+# Home Assistant - Remote Box ---
+# -------------------------------
+# Default HA OS yaml - this folder will be deleted ofter HA OS is the only version
+HAOS_Original/
+
+#HA/
+configuration.yaml
+secrets.yaml
+
 # comment to include SSH information
-.ssh/
-.id_rsa*
+# .ssh/
+# .id_rsa*
 
 # comment to include Node-Red flows
-node-red/
+# node-red/
 
 # comment to include any of the following
-.storage
-.cloud
-.google.token
+# .storage
+# .cloud
+# .google.token
 
 # -------------------------------
 # Python stuff created by GitHub

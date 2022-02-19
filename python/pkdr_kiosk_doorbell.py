@@ -178,18 +178,18 @@ else:
     # add_pkdr_mqtt_info_to_config_dict() should probably be in this proc and not global
     # pkdr_utils.add_pkdr_mqtt_info_to_config_dict()
 
-    mqtt_same_as_home_assistant = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('same_as_home_assistant', -1)
-    if mqtt_same_as_home_assistant != -1:
-        if mqtt_same_as_home_assistant:
-            variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['mqtt_broker_ip']
-            variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['mqtt_broker_port']
-            variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['mqtt_username']
-            variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['mqtt_password']
-    else:
-        variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_ip', 'KeyError')
-        variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_port', 'KeyError')
-        variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_username', 'KeyError')
-        variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_password', 'KeyError')
+    # mqtt_same_as_home_assistant = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('same_as_home_assistant', -1)
+    # if mqtt_same_as_home_assistant != -1:
+    #     if mqtt_same_as_home_assistant:
+    #         variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['mqtt_broker_ip']
+    #         variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['mqtt_broker_port']
+    #         variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['mqtt_username']
+    #         variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['mqtt_password']
+    # else:
+    variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_ip', 'KeyError')
+    variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_port', 'KeyError')
+    variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_username', 'KeyError')
+    variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_password', 'KeyError')
 
     variables_dict['sound_1'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['doorbell_main']
 
