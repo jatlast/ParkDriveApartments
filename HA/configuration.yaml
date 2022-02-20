@@ -13,46 +13,22 @@ homeassistant:
   # Customization file (contents of file inserted wherever "!include filename" appears)
   # customize: !include customize.yaml
 
-  # -- Necessary for Remote Access --
-
-  # Enabling remote access configured via PkDr's Zyxel router (20220208)
-  # Tutorial used - https://thomas.vanhoutte.be/miniblog/access-your-home-assistant-via-your-own-custom-subdomain-guide/
-
-  # external_url: !secret pkdr_ha_url_external
-
-  # My guess is, enabling this may aleviate some ip banning restrictions on internal boxes
-  # internal_url: !secret pkdr_ha_url_internal
-
-# https://www.home-assistant.io/integrations/http/
-# http:
-#   server_port: !secret pkdr_ha_url_internal_port
-
-#   # Limit login attempts
-#   login_attempts_threshold: 10
-#   ip_ban_enabled: true
-  
-#   # Trust access from internal IP addresses
-#   use_x_forwarded_for: true
-#   trusted_proxies:
-#     - 127.0.0.1
-#     - !secret trusted_proxies_01
-#     - !secret trusted_proxies_02
-#     - !secret trusted_proxies_03
-#     - !secret trusted_proxies_04
-#     - !secret trusted_proxies_05
-#     - !secret trusted_proxies_06
-#     - !secret trusted_proxies_07
-#     - !secret trusted_proxies_08
-#     - !secret trusted_proxies_09
-#     - !secret trusted_proxies_10
-#     - !secret trusted_proxies_11
-#     - !secret trusted_proxies_12
-
-  # The certs were setup using certbot (which uses LetsEncrypt) and are supposed to mananged by certbot
-  #   https://certbot.eff.org/instructions?ws=nginx&os=debianbuster
-  # Apparently, the certs are not needed by home assistant when using nginx as the web proxi...
-  # ssl_certificate: /home/homeassistant/.homeassistant/ssl/fullchain.pem
-  # ssl_key: /home/homeassistant/.homeassistant/ssl/privkey.pem
+# ---------------------------------
+# -- Necessary for Remote Access --
+# ---------------------------------
+# Enabling remote access configured via PkDr's Zyxel router (20220208)
+# Tutorial used - https://thomas.vanhoutte.be/miniblog/access-your-home-assistant-via-your-own-custom-subdomain-guide/
+http: # https://www.home-assistant.io/integrations/http/
+  server_port: !secret pkdr_ha_url_internal_port
+  login_attempts_threshold: 10
+  ip_ban_enabled: true
+  use_x_forwarded_for: true
+  trusted_proxies:
+    # HA OS Docker IPs
+    - !secret trusted_proxies_00
+    # Intranet IPs of HA OS & Main Router
+    - !secret trusted_proxies_01
+# ---------------------------------
 
 # ------------------------------------------------------------
 #          -----  HA's Default Config  -----
@@ -3894,8 +3870,8 @@ climate:
     heater: switch.01_heat
     target_sensor: sensor.apt01_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     precision: 0.5
@@ -3911,7 +3887,7 @@ climate:
     heater: switch.apt01_ac
     target_sensor: sensor.apt01_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -3930,8 +3906,8 @@ climate:
     heater: switch.02_heat
     target_sensor: sensor.apt02_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -3947,7 +3923,7 @@ climate:
     heater: switch.apt02_ac
     target_sensor: sensor.apt02_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -3966,8 +3942,8 @@ climate:
     heater: switch.03_heat
     target_sensor: sensor.Apt03_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     precision: 0.5
@@ -3983,7 +3959,7 @@ climate:
     heater: switch.Apt03_ac
     target_sensor: sensor.Apt03_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4002,8 +3978,8 @@ climate:
     heater: switch.04_heat
     target_sensor: sensor.Apt04_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     precision: 0.5
@@ -4019,7 +3995,7 @@ climate:
     heater: switch.Apt04_ac
     target_sensor: sensor.Apt04_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4043,8 +4019,8 @@ climate:
     heater: switch.05_heat
     target_sensor: sensor.apt05_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4060,7 +4036,7 @@ climate:
     heater: switch.apt05_ac
     target_sensor: sensor.apt05_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4079,8 +4055,8 @@ climate:
     heater: switch.06_heat
     target_sensor: sensor.apt06_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4096,7 +4072,7 @@ climate:
     heater: switch.apt06_ac
     target_sensor: sensor.apt06_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4115,8 +4091,8 @@ climate:
     heater: switch.07_heat
     target_sensor: sensor.apt07_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4132,7 +4108,7 @@ climate:
     heater: switch.apt07_ac
     target_sensor: sensor.apt07_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4151,8 +4127,8 @@ climate:
     heater: switch.09_heat
     target_sensor: sensor.apt09_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4168,7 +4144,7 @@ climate:
     heater: switch.apt09_ac
     target_sensor: sensor.apt09_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4192,8 +4168,8 @@ climate:
     heater: switch.12_heat
     target_sensor: sensor.apt12_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4209,7 +4185,7 @@ climate:
     heater: switch.apt12_ac
     target_sensor: sensor.apt12_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4229,8 +4205,8 @@ climate:
     heater: switch.13_heat
     target_sensor: sensor.apt13_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4246,7 +4222,7 @@ climate:
     heater: switch.apt13_ac
     target_sensor: sensor.apt13_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4266,8 +4242,8 @@ climate:
     heater: switch.apt14_heat
     target_sensor: sensor.apt14_temperature
     min_temp: 45
-    target_temp: 72
-    max_temp: 77
+    # target_temp: 72
+    max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     min_cycle_duration:
@@ -4283,7 +4259,7 @@ climate:
     heater: switch.apt14_ac
     target_sensor: sensor.apt14_temperature
     min_temp: 65
-    target_temp: 72
+    # target_temp: 72
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5

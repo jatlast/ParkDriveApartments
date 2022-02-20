@@ -19,6 +19,7 @@
 import time # needed to sleep the listening loop
 import vlc # needed to play doorbell .wav file
 import paho.mqtt.client as mqtt # needed to listen for MQTT messages
+    # https://www.eclipse.org/paho/index.php?page=clients/python/docs/index.php
 import datetime # needed for now()
 import argparse # allow command line options
 import pkdr_utils # (JTB Script as Util) loads the local configurations for all PkDr Scripts
@@ -60,13 +61,14 @@ def on_disconnect(client, userdata, rc):
     global runtime_message
     runtime_message += "def on_disconnect() result code = ({})".format(rc)
     if variables_dict["verbosity"] > 2:
-        print('Runtime: '.format(runtime_messages))
+        print('K-VDB-Runtime: '.format(runtime_messages))
     # logging.debug("DisConnected result code " + str(rc))
     client.loop_stop()
 
 # Note the message parameter is a message class with members: topic, qos, payload, retain.
 def on_message(client, userdata, message):
     global runtime_message, runtime_error_message
+    runtime_messages = ' on_message() '
     action_current_datetime = datetime.datetime.now()
 
     # check the volume first...
@@ -124,8 +126,8 @@ def on_message(client, userdata, message):
                     str(message.payload.decode("utf-8")),
                     message.topic,
                     variables_dict["sound_played"],
-                ),
-            print('Runtime: '.format(runtime_messages))
+                )
+            print('K-VDB-Runtime: '.format(runtime_messages))
 
 def on_log(client, userdata, level, buf):
     log_if_less_or_equal_level = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict'].get('log_if_less_or_equal_level', -1)
@@ -146,8 +148,8 @@ def on_log(client, userdata, level, buf):
         pkdr_utils.config_dict['db_table_dict']['key4'] = 'buf'
         pkdr_utils.config_dict['db_table_dict']['val4'] = buf
         pkdr_utils.db_generic_insert()
-        if variables_dict["pkdr_mqtt_client"] > 1:
-            print('Runtime: '.format(pkdr_utils.config_dict['db_table_dict']['log_message']))
+        if variables_dict["verbosity"] > 1:
+            print('K-VDB-Runtime: '.format(pkdr_utils.config_dict['db_table_dict']['log_message']))
     else:
         if variables_dict["verbosity"] > 2:
             print('Not Logged: log if {} > level {}'.format(log_if_less_or_equal_level, level))
@@ -207,7 +209,7 @@ else:
     runtime_messages += "INFO: MQQT Volume Topic: ({})\n".format(variables_dict["mqtt_subscribe_volume"])
 
     if variables_dict["verbosity"] > 0:
-        print('Runtime: '.format(runtime_messages))
+        print('K-VDB-Runtime: '.format(runtime_messages))
 
 #        pkdr_mqtt_client.publish(variables_dict['mqtt_subscribe_topic'], payload=variables_dict['actionable_payload_reset'], qos=variables_dict['mqtt_publish_qos'], retain=variables_dict['mqtt_publish_retain'])
 #        time.sleep(variables_dict['loop_sleep'])
@@ -219,60 +221,90 @@ else:
 
     pkdr_mqtt_client.on_log = on_log
 
-#    print("mqtt user ({}) pw ({})".format(variables_dict["pkdr_mqtt_un"], variables_dict["pkdr_mqtt_pw"]))
+    # print("mqtt user ({}) pw ({})".format(variables_dict["pkdr_mqtt_un"], variables_dict["pkdr_mqtt_pw"]))
     pkdr_mqtt_client.username_pw_set(username=variables_dict["pkdr_mqtt_un"],password=variables_dict["pkdr_mqtt_pw"])
-    pkdr_mqtt_client.connect(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"])  # establish connection
 
-    pkdr_mqtt_client.loop_start()  # start the loop
-
+    exception_msg = ''
+    exception_type = ''
+    exception_flag = False
     try:
-        # Subscribe to CHIME
-        ret = pkdr_mqtt_client.subscribe(
-            variables_dict["mqtt_subscribe_topic"],
-            qos=variables_dict["mqtt_subscribe_qos"],
-        )  # publish
-        if variables_dict["verbosity"] > 1:
-            runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_topic"], ret)
-            runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_volume"], ret)
-            print('Runtime: '.format(runtime_messages))
+        # 20220220 - try to connect
+        # connect(host, port=1883, keepalive=60, bind_address="")
+        pkdr_mqtt_client.connect(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"])  # establish connection
+    except OSError as err:
+        exception_type = '{}'.format(type(err))
+        exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: OSError {}'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], err)
+        exception_flag = True
+    except Exception as err:
+        exception_type = '{}'.format(type(err))
+        exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: Unexptected ({})|({}) - This should never happen'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], type(err), err)
+        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
+        exception_flag = True
 
-        while True:
-            # pause the loop to give MQTT some time to receive a new message
-            time.sleep(variables_dict["sleep_in_loop"])
-
-    except KeyboardInterrupt:
+    # ----- Log Any Coniguration Errors to DB -----
+    if exception_flag:
         log_level = 4 # 4 = CRITICAL
-        runtime_messages += "ERROR: CTRL-C pressed.  Program exiting..."
-        runtime_error_flag = True
         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
-        pkdr_utils.config_dict['db_table_dict']['log_message'] = runtime_messages
+        pkdr_utils.config_dict['db_table_dict']['key5'] = 'pkdr_mqtt_ip'
+        pkdr_utils.config_dict['db_table_dict']['val5'] = variables_dict["pkdr_mqtt_ip"]
+        pkdr_utils.config_dict['db_table_dict']['key6'] = 'pkdr_mqtt_port'
+        pkdr_utils.config_dict['db_table_dict']['val6'] = variables_dict["pkdr_mqtt_port"]
+        pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
+        pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
         pkdr_utils.db_generic_insert()
+    else:
+
+        pkdr_mqtt_client.loop_start()  # start the loop
+
+        try:
+            # Subscribe to CHIME
+            ret = pkdr_mqtt_client.subscribe(
+                variables_dict["mqtt_subscribe_topic"],
+                qos=variables_dict["mqtt_subscribe_qos"],
+            )  # publish
+            if variables_dict["verbosity"] > 1:
+                runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_topic"], ret)
+                runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_volume"], ret)
+                print('K-VDB-Runtime: '.format(runtime_messages))
+
+            while True:
+                # pause the loop to give MQTT some time to receive a new message
+                time.sleep(variables_dict["sleep_in_loop"])
+
+        except KeyboardInterrupt:
+            log_level = 4 # 4 = CRITICAL
+            runtime_messages += "ERROR: CTRL-C pressed.  Program exiting..."
+            runtime_error_flag = True
+            pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+            pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = runtime_messages
+            pkdr_utils.db_generic_insert()
+            pkdr_mqtt_client.loop_stop()  # stop the loop
+
         pkdr_mqtt_client.loop_stop()  # stop the loop
 
-    pkdr_mqtt_client.loop_stop()  # stop the loop
+        pkdr_mqtt_client.disconnect()
 
-    pkdr_mqtt_client.disconnect()
+        # Paho Python MQTT Client-Understanding The Loop
+        # http://www.steves-internet-guide.com/loop-python-mqtt-client/
+        # Because the loop is a blocking function I call it with a timeout the default timeout is 1 second.
+        # If you call the loop manually then you will need to create code to handle reconnects.
+        # Important! If your client script has more than one client connection then you must call or start a loop for each client connection.
+        # For example, if I create two clients client 1 and client2 in a script, then you would expect to see client1.loop() and client2.loop() in the script.
 
-    # Paho Python MQTT Client-Understanding The Loop
-    # http://www.steves-internet-guide.com/loop-python-mqtt-client/
-    # Because the loop is a blocking function I call it with a timeout the default timeout is 1 second.
-    # If you call the loop manually then you will need to create code to handle reconnects.
-    # Important! If your client script has more than one client connection then you must call or start a loop for each client connection.
-    # For example, if I create two clients client 1 and client2 in a script, then you would expect to see client1.loop() and client2.loop() in the script.
+        # http://www.steves-internet-guide.com/mqtt-python-callbacks/
+        # Loop example that disconnects when loop_flag_exit is not 1
+        # Note: the below comes after loop_start()
+        # loop_count = 0
+        # while variables_dict['loop_flag_exit'] == 1:
+        #     print("waiting for callback to occur {}", format(loop_count))
+        #     time.sleep(0.01) # pause 1/100 second
+        #     loop_count += 1
 
-    # http://www.steves-internet-guide.com/mqtt-python-callbacks/
-    # Loop example that disconnects when loop_flag_exit is not 1
-    # Note: the below comes after loop_start()
-    # loop_count = 0
-    # while variables_dict['loop_flag_exit'] == 1:
-    #     print("waiting for callback to occur {}", format(loop_count))
-    #     time.sleep(0.01) # pause 1/100 second
-    #     loop_count += 1
-
-    # Example of Queue and List processing
-    # while len(messages)>0:
-    #     print(messages.pop(0))
-    # while not msg_q.empty():
-    #     message = msg_q.get()
-    #     print("queue: {}".format(message))
+        # Example of Queue and List processing
+        # while len(messages)>0:
+        #     print(messages.pop(0))
+        # while not msg_q.empty():
+        #     message = msg_q.get()
+        #     print("queue: {}".format(message))
