@@ -32,7 +32,7 @@ yaml/
 HAOS_Original/
 
 #HA/
-configuration.yaml
+#configuration.yaml
 secrets.yaml
 
 # comment to include SSH information

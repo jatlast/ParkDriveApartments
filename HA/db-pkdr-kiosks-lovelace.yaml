@@ -851,7 +851,7 @@ views:
   #####################
   # Apt 08
   #####################
-  - title: 08
+  - title: (8)
     panel: true
     theme: darkorange
     visible:
@@ -953,7 +953,7 @@ views:
   #####################
   # Apt 10
   #####################
-  - title: 10
+  - title: (10)
     panel: true
     theme: darkorange
     visible:
@@ -965,7 +965,7 @@ views:
   #####################
   # Apt 11
   #####################
-  - title: 11
+  - title: (11)
     panel: true
     theme: darkorange
     visible:
@@ -1066,7 +1066,7 @@ views:
   #####################
   # Apt 13
   #####################
-  - title: 13
+  - title: (13)
     panel: true
     theme: darkorange
     visible:
@@ -1185,7 +1185,7 @@ views:
   #####################
   # Apt 15
   #####################
-  - title: 15
+  - title: (15)
     panel: true
     theme: darkorange
     visible:
@@ -1197,7 +1197,7 @@ views:
   #####################
   # Apt 16
   #####################
-  - title: 16
+  - title: (16)
     panel: true
     theme: darkorange
     visible:
@@ -1353,7 +1353,7 @@ views:
   #####################
   # B2 - Utility Kiosk
   #####################
-  - title: B2
+  - title: (B2)
     panel: true
     theme: darkorange
     visible:
@@ -1364,7 +1364,7 @@ views:
   #####################
   # B3 - Utility Kiosk
   #####################
-  - title: B3
+  - title: (B3)
     panel: true
     theme: darkorange
     visible:
@@ -1375,7 +1375,7 @@ views:
   #####################
   # B4 - Utility Kiosk
   #####################
-  - title: B4
+  - title: (B4)
     panel: true
     theme: darkorange
     visible:

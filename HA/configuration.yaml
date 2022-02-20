@@ -1,0 +1,4542 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Park Drive Apartments (HA OS)
+  # PkDr's location - required to calculate the time the sun rises and sets
+  latitude: 42.957181
+  longitude: -83.644644
+  # PkDr's elevation - impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 240 # 787 feet / 240 meters
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # PkDr's location -  http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Detroit
+  # Customization file (contents of file inserted wherever "!include filename" appears)
+  # customize: !include customize.yaml
+
+  # -- Necessary for Remote Access --
+
+  # Enabling remote access configured via PkDr's Zyxel router (20220208)
+  # Tutorial used - https://thomas.vanhoutte.be/miniblog/access-your-home-assistant-via-your-own-custom-subdomain-guide/
+
+  # external_url: !secret pkdr_ha_url_external
+
+  # My guess is, enabling this may aleviate some ip banning restrictions on internal boxes
+  # internal_url: !secret pkdr_ha_url_internal
+
+# https://www.home-assistant.io/integrations/http/
+# http:
+#   server_port: !secret pkdr_ha_url_internal_port
+
+#   # Limit login attempts
+#   login_attempts_threshold: 10
+#   ip_ban_enabled: true
+  
+#   # Trust access from internal IP addresses
+#   use_x_forwarded_for: true
+#   trusted_proxies:
+#     - 127.0.0.1
+#     - !secret trusted_proxies_01
+#     - !secret trusted_proxies_02
+#     - !secret trusted_proxies_03
+#     - !secret trusted_proxies_04
+#     - !secret trusted_proxies_05
+#     - !secret trusted_proxies_06
+#     - !secret trusted_proxies_07
+#     - !secret trusted_proxies_08
+#     - !secret trusted_proxies_09
+#     - !secret trusted_proxies_10
+#     - !secret trusted_proxies_11
+#     - !secret trusted_proxies_12
+
+  # The certs were setup using certbot (which uses LetsEncrypt) and are supposed to mananged by certbot
+  #   https://certbot.eff.org/instructions?ws=nginx&os=debianbuster
+  # Apparently, the certs are not needed by home assistant when using nginx as the web proxi...
+  # ssl_certificate: /home/homeassistant/.homeassistant/ssl/fullchain.pem
+  # ssl_key: /home/homeassistant/.homeassistant/ssl/privkey.pem
+
+# ------------------------------------------------------------
+#          -----  HA's Default Config  -----
+# default_config:
+#  https://www.home-assistant.io/integrations/default_config/
+
+#  Includes all of the follwoing (comment out the unwanted)
+
+#automation: !include automations.yaml
+
+# Split configuration example from https://www.home-assistant.io/docs/configuration/splitting_configuration/
+# My own handmade automations
+#automation manual: !include_dir_merge_list automations/
+automation manual: !include automations_hand_made.yaml
+# Automations I create in the UI
+automation ui: !include automations.yaml
+
+# cloud: # Home Assistant Cloud
+config: # Configuration
+counter:
+dhcp: # DHCP Discovery
+energy:
+frontend:
+# frontend: !include frontend.yaml # 20220218 - Disabling include for new HA OS to check functionality
+history: # Enables support for tracking state changes over time
+image:
+input_boolean:
+input_button:
+input_datetime:
+# input_number: # ----- Enabled but moved below for adding PkDr users -----
+input_select:
+# input_text: # ----- Enabled but moved below for adding PkDr users -----
+logbook: # View all events in a logbook
+map: # Enables a map showing the location of tracked devices
+media_source:
+mobile_app: # Mobile App Support
+my: # My Home Assistant
+# person: # ----- Enabled but moved below for adding PkDr users -----
+# scene: !include scenes.yaml
+script: !include scripts.yaml
+ssdp: # Simple Service Discovery Protocol (SSDP)
+# The stream integration provides a way to proxy live streams through Home Assistant.
+#   There are no additional options.
+#   https://www.home-assistant.io/integrations/stream
+stream:
+sun: # Track the sun -- Original reason for using Home Assistant was to use sun tracking and four Sonoff Basic switches to replace PkDr's mechanical building switches
+system_health: # HA's System Health Integration
+tag:
+timer:
+updater: # Checks for available updates
+  # Optional, allows Home Assistant developers to focus on popular components.
+  reporting: true # share system information when checking for updates.
+  # include_used_components: true # depricated - thus, not including in new HA OS rollout (20220219)
+#usb:
+webhook:
+zeroconf: # Zero-configuration networking
+zone:
+# ------------------------------------------------------------
+#          -----          Emd           -----
+# ------------------------------------------------------------
+
+discovery: # Discover available devices automatically
+group: !include groups.yaml
+
+# MQTT is an ISO standard publish-subscribe-based messaging protocol (Wikipedia)
+mqtt:
+  broker: !secret mqtt_broker_ip
+  port: !secret mqtt_broker_port
+  client_id: !secret mqtt_client_id
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+# Enable advanced notifications like actionable notifications and categories
+ios:
+
+# Example working logger settings
+#logger:
+#  default: critical
+#logger: !include ha_logger
+
+#logs:
+#    homeassistant.components.http: warning
+
+# Scripts in python_scripts dir (20220218 - still no python needed)
+# python_script:
+
+# The ffmpeg integration allows other Home Assistant integrations to process video and audio streams. 
+# This integration supports all FFmpeg versions since 3.0.0; if you have an older version, please update.
+#   https://www.home-assistant.io/integrations/ffmpeg/
+ffmpeg:
+
+# 20220219 - While rolling out HA OS and seeing errors that HA Supervisor cannot connect to Kodi
+#   and knowing apartment Kiosks have not been able to connect to Kodi since I isolated apartments with VLANs
+#   it occurred to me, I should just open up the four PkDr Switches to allow VLAN 247 (along with VLAN 1)
+#   access to all VLANs.  This would allow tenants to control their PkDr IPTV from their kiosks.
+wake_on_lan: # Wake on LAN enables HA to turn on Kodi
+
+# PkDr Persons
+# person:
+#   # Apt01
+#   - name: Apt01 Jason
+#     id: person_apt01_jason
+#     user_id: fbf7359a12d74b07aea2e3f7ebb8da89
+#     device_trackers:
+#       - device_tracker.pixel_4xl
+#   # Apt14
+#   - name: Apt14 Derek
+#     id: person_apt04_derek
+#     user_id: 59c12eeea78f4725872702ed42fe0a7c
+#     device_trackers:
+#       - device_tracker.sm_g950u
+
+# HA OS requires "recorder" in order to configure access to an external database
+# https://www.home-assistant.io/integrations/recorder/
+# Example configuration.yaml entry with exclude
+# recorder:
+#   purge_keep_days: 5
+#   db_url: !secret pkdr_sql_db_url
+#   exclude:
+#     domains:
+#       - automation
+#       - updater
+#     entity_globs:
+#       - sensor.weather_*
+#     entities:
+#       - sun.sun # Don't record sun data
+#       - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+#       - sensor.date
+#     event_types:
+#       - call_service # Don't record service calls
+# When enabled, "recorder" adds the following tables to the target database
+# MariaDB [PkDr]> show tables;
+  # +-----------------------+
+  # | Tables_in_PkDr        |
+  # +-----------------------+
+  # | events                |
+  # | recorder_runs         |
+  # | schema_changes        |
+  # | states                |
+  # | statistics            |
+  # | statistics_meta       |
+  # | statistics_runs       |
+  # | statistics_short_term |
+  # +-----------------------+
+
+# 20220219 4:10 PM - HA was able to connect to my external DB and create tables but I still cannot figure 
+#   out why the sql temperature sensors are not working.
+
+# Allow HA to send messages to Kodi
+notify:
+  - platform: kodi
+    name: Apt01 Notify
+    host: !secret Apt_01_IPTV_LR_LAN
+  - platform: kodi
+    name: Apt02 Notify
+    host: !secret Apt_02_IPTV_LR_LAN
+
+# Apt Volume Sliders for Doorbell Volumes
+input_number:
+  apt01_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt02_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt03_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt04_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt05_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt06_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt07_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt08_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt09_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt10_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt11_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt12_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt13_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt14_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt15_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+  apt16_volume:
+    name: Doorbell Volume
+    initial: 70
+    min: 0
+    max: 100
+    step: 5
+
+input_text:
+##################
+# PkDr - Tenants #
+##################
+# Occupants - Set By Tenants
+  pkdr_01_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_02_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_03_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_04_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_05_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_06_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_07_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_08_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_09_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_10_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_11_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_12_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_13_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_14_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_15_occupant:
+    name: Occupant Name
+    max: 20
+  pkdr_16_occupant:
+    name: Occupant Name
+    max: 20
+# On Ring VDB Text - Set By Tenants
+#----------------
+#- Building 1 --- 
+#----------------
+# Apt 01
+  pkdr_01_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_01_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_01_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_01_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 02
+  pkdr_02_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_02_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_02_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_02_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 03
+  pkdr_03_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_03_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_03_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_03_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 04
+  pkdr_04_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_04_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_04_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_04_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+#----------------
+#- Building 2 --- 
+#----------------
+# Apt 05
+  pkdr_05_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_05_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_05_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_05_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 06
+  pkdr_06_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_06_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_06_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_06_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 07
+  pkdr_07_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_07_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_07_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_07_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 08
+  pkdr_08_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_08_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_08_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_08_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+#----------------
+#- Building 3 --- 
+#----------------
+# Apt 09
+  pkdr_09_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_09_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_09_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_09_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 10
+  pkdr_10_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_10_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_10_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_10_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 11
+  pkdr_11_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_11_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_11_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_11_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 12
+  pkdr_12_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_12_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_12_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_12_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+#----------------
+#- Building 4 --- 
+#----------------
+# Apt 13
+  pkdr_13_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_13_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_13_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_13_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 14
+  pkdr_14_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_14_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_14_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_14_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 15
+  pkdr_15_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_15_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_15_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_15_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+# Apt 16
+  pkdr_16_vdb_1:
+    name: "On Ring: Line 1"
+    max: 20
+  pkdr_16_vdb_2:
+    name: "On Ring: Line 2"
+    max: 20
+  pkdr_16_vdb_3:
+    name: "On Ring: Line 3"
+    max: 20
+  pkdr_16_vdb_4:
+    name: "On Ring: Line 4"
+    max: 20
+
+#################
+# Building VDBs #
+#################
+
+#----------------
+#- Building 1 --- 
+#----------------
+
+#- Set by PkDr -
+
+# b1-vdb
+  b1_vdb_line1:
+    name: Line 1
+    max: 20
+  b1_vdb_line2:
+    name: Line 2
+    max: 20
+  b1_vdb_line3:
+    name: Line 3
+    max: 20
+  b1_vdb_line4:
+    name: Line 4
+    max: 20
+
+#############
+# Unit VDBs #
+#############
+
+#- Set by Tenants -
+
+# apt01-vdb
+  apt01_vdb_line1:
+    name: Line 1
+    max: 20
+  apt01_vdb_line2:
+    name: Line 2
+    max: 20
+  apt01_vdb_line3:
+    name: Line 3
+    max: 20
+  apt01_vdb_line4:
+    name: Line 4
+    max: 20
+  
+# Tasmota WiFi Light Bulbs
+# Flashing
+#   https://github.com/arendst/Tasmota/wiki/MagicHome-with-ESP8285
+#   Old Module - MagicHome (34)
+#   New Module - Ariux LC11 (38)
+# Tasmota Console Commands
+#   PowerRetain 1 - persistant power states - instead of using "retain: true"
+#   SetOption17 1 - Enable decimal colors
+#   SetOption59 1 - Enable tele topic reporting after a light state change
+#  Check if 37 is the correct color configuration before resetting
+#   ...because the new 20200322 bulbs work with default 0 setting.
+# SetOption 37 ...
+#  Really Old (MagicHome (34)) - No white adjustment...
+#   SetOption37 25 - Re-mapping the RGBWcWw channels (G,R,B,Ww,Wc)
+#  Old (Ariux LC11 (38)) - Only yellowish white works...
+#   SetOption37 13 - Re-mapping the RGBWcWw channels (R,Wc,G,Ww,B)
+#  New (Ariux LC11 (38)) Both cool & yellow white works...
+#   SetOption37 0 - Re-mapping the RGBWcWw channels (R,G,B,Wc,Ww)
+#     https://tasmota.github.io/docs/#/SetOption37
+
+light:
+### Tasmota Bulb Testing
+  # MagicHome RGBW Bulb
+  - platform: mqtt
+    name: "RGBW Bulb Test"
+    command_topic: "PkDr/BorA/Room/cmnd/Bulb/POWER"
+    state_topic: "PkDr/BorA/Room/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/BorA/Room/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/BorA/Room/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/BorA/Room/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/BorA/Room/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/BorA/Room/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/BorA/Room/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/BorA/Room/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/BorA/Room/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/BorA/Room/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+# These don't seem to do anything
+#      - 3 colorfade down
+#      - 4 random colors
+#      - 6 candle lights
+#      - 12 fire pattern
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+# These add a "White value" slider but it doesn't seem to do anything
+#    white_value_state_topic: "PkDr/BorA/Room/tele/Bulb/STATE"
+#    white_value_command_topic: "PkDr/BorA/Room/cmnd/Bulb/white"
+#    white_value_scale: 100
+#    white_value_template: "{{ value_json.Channel[3] }}"
+### Apt 01
+  # Entrance
+  - platform: mqtt
+    name: "Apt01 Entrance Bulb"
+    command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt01/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt01 LivingRoom Bulb"
+    command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0
+      - 2
+      - 3
+      - 4
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt01 Hall Bulb"
+    command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt01/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt01/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt01/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt01 Kitchen Bulb"
+    command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt01/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt01 Bedroom Bulb"
+    command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt01/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt01 Bedroom Light"
+    state_topic: "PkDr/Apt01/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt01/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+#    retain: true
+### Apt 02
+  # Entrance
+  - platform: mqtt
+    name: "Apt02 Entrance Bulb"
+    command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt02/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt02/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt02/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt02/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt02/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt02/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt02 LivingRoom Bulb"
+    command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt02/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt02/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt02/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt02/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt02/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt02/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt02 Kitchen Bulb"
+    command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt02/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt02/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt02/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt02/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt02/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt02/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt02 Hall Bulb"
+    command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt02/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt02/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt02/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt02/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt02/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt02/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt02 Bedroom Bulb"
+    command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt02/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt02/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt02/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt02/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt02/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt02/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt02 Bedroom Light"
+    state_topic: "PkDr/Apt02/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt02/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+### Apt 03
+  # Entrance
+  - platform: mqtt
+    name: "Apt03 Entrance Bulb"
+    command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt03/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt03 LivingRoom Bulb"
+    command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0
+      - 2
+      - 3
+      - 4
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt03 Hall Bulb"
+    command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt03/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt03/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt03/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt03 Kitchen Bulb"
+    command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt03/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt03 Bedroom Bulb"
+    command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt03/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt03 Bedroom Light"
+    state_topic: "PkDr/Apt03/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt03/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+#    retain: true
+### Apt 05
+  # Entrance
+  - platform: mqtt
+    name: "Apt05 Entrance Bulb"
+    command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt05/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt05 LivingRoom Bulb"
+    command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # LivingRoom Switch (Lamp2)
+#  - platform: mqtt
+#    name: "Apt05 LivingRoom Light"
+#    state_topic: "PkDr/Apt05/LivingRoom/stat/Light/POWER"
+#    command_topic: "PkDr/Apt05/LivingRoom/cmnd/Light/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+  # Kitchen
+  - platform: mqtt
+    name: "Apt05 Kitchen Bulb"
+    command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt05/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt05 Hall Bulb"
+    command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt05/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt05/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt05/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt05 Bedroom Bulb"
+    command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt05/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt05 Bedroom Light"
+    state_topic: "PkDr/Apt05/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt05/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+### Apt 06
+  # Entrance
+  - platform: mqtt
+    name: "Apt06 Entrance Bulb"
+    command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt06/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt06 LivingRoom Bulb"
+    command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt06 Kitchen Bulb"
+    command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt06/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt06 Hall Bulb"
+    command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt06/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt06/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt06/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt06 Bedroom Bulb"
+    command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt06/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt06 Bedroom Light"
+    state_topic: "PkDr/Apt06/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt06/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+### Apt 07
+  # Entrance
+  - platform: mqtt
+    name: "Apt07 Entrance Bulb"
+    command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt07 LivingRoom Bulb"
+    command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/LivingRoom/stat/Bulb/RESULT"
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    brightness_scale: 100
+    color_temp_command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt07 Hall Bulb"
+    command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt07 Kitchen Bulb"
+    command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt07 Bedroom Bulb"
+    command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom2 Bulb
+  - platform: mqtt
+    name: "Apt07 Bedroom2 Bulb"
+    command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt07/Bedroom2/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt07/Bedroom2/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt07/Bedroom2/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt07/Bedroom2/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt07/Bedroom2/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt07/Bedroom2/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt07 Bedroom Light"
+    state_topic: "PkDr/Apt07/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt07/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  # Bedroom2 Switch
+  - platform: mqtt
+    name: "Apt07 Bedroom2 Light"
+    state_topic: "PkDr/Apt07/Bedroom2/stat/Light/POWER"
+    command_topic: "PkDr/Apt07/Bedroom2/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+### Apt 09
+  # Entrance
+  - platform: mqtt
+    name: "Apt09 Entrance Bulb"
+    command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt09/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt09/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt09/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt09/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt09/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt09/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt09 LivingRoom Bulb"
+    command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt09/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt09/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt09/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt09/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt09/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt09/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # LivingRoom Switch (Lamp2)
+  - platform: mqtt
+    name: "Apt09 LivingRoom Light"
+    state_topic: "PkDr/Apt09/LivingRoom/stat/Light/POWER"
+    command_topic: "PkDr/Apt09/LivingRoom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  # Kitchen
+  - platform: mqtt
+    name: "Apt09 Kitchen Bulb"
+    command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt09/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt09/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt09/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt09/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt09/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt09/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt09 Hall Bulb"
+    command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt09/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt09/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt09/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt09/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt09/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt09/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt09 Bedroom Bulb"
+    command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt09/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt09/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt09/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt09/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt09/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt09/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt09 Bedroom Light"
+    state_topic: "PkDr/Apt09/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt09/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+### Apt 12
+  # Entrance
+  - platform: mqtt
+    name: "Apt12 Entrance Bulb"
+    command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt12 LivingRoom Bulb"
+    command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/LivingRoom/stat/Bulb/RESULT"
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    brightness_scale: 100
+    color_temp_command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt12 Hall Bulb"
+    command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt12 Kitchen Bulb"
+    command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt12 Bedroom Bulb"
+    command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom2 Bulb
+  - platform: mqtt
+    name: "Apt12 Bedroom2 Bulb"
+    command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt12/Bedroom2/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt12/Bedroom2/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt12/Bedroom2/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt12/Bedroom2/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt12/Bedroom2/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt12/Bedroom2/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt12 Bedroom Light"
+    state_topic: "PkDr/Apt12/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt12/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  # Bedroom2 Switch
+  - platform: mqtt
+    name: "Apt12 Bedroom2 Light"
+    state_topic: "PkDr/Apt12/Bedroom2/stat/Light/POWER"
+    command_topic: "PkDr/Apt12/Bedroom2/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+### Apt 13
+  # Entrance
+  - platform: mqtt
+    name: "Apt13 Entrance Bulb"
+    command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt13/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt13 LivingRoom Bulb"
+    command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt13 Hall Bulb"
+    command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt13/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt13/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt13/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt13 Kitchen Bulb"
+    command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt13/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt13 Bedroom Bulb"
+    command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt13/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt13 Bedroom Light"
+    state_topic: "PkDr/Apt13/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt13/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+### Apt 14
+  # Entrance
+  - platform: mqtt
+    name: "Apt14 Entrance Bulb"
+    command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt14/Entrance/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Living Room
+  - platform: mqtt
+    name: "Apt14 LivingRoom Bulb"
+    command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Hall
+  - platform: mqtt
+    name: "Apt14 Hall Bulb"
+    command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt14/Hall/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt14/Hall/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt14/Hall/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Kitchen
+  - platform: mqtt
+    name: "Apt14 Kitchen Bulb"
+    command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt14/Kitchen/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Bulb
+  - platform: mqtt
+    name: "Apt14 Bedroom Bulb"
+    command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "PkDr/Apt14/Bedroom/tele/Bulb/LWT"
+    brightness_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Dimmer"
+    brightness_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    color_temp_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/CT"
+    color_temp_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/STATE"
+    color_temp_value_template: "{{value_json.CT}}"
+    rgb_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Color2"
+    rgb_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Scheme"
+    effect_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0 none
+      - 2 color cycle
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+#    retain: false
+  # Bedroom Switch
+  - platform: mqtt
+    name: "Apt14 Bedroom Light"
+    state_topic: "PkDr/Apt14/Bedroom/stat/Light/POWER"
+    command_topic: "PkDr/Apt14/Bedroom/cmnd/Light/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+switch:
+  # Apt Doorbells
+  # (JTB 20220106: Python running on Raspberry Pi Kiosk boxes listening to MQTT topic and using VLC to play .wav files)
+  # Apt 01
+  - platform: mqtt
+    name: "Apt01 Doorbell"
+    unique_id: apt01_doorbell
+    state_topic: "PkDr/Apt01/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt01/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 02
+  - platform: mqtt
+    name: "Apt02 Doorbell"
+    unique_id: apt02_doorbell
+    state_topic: "PkDr/Apt02/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt02/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 03
+  - platform: mqtt
+    name: "Apt03 Doorbell"
+    unique_id: apt03_doorbell
+    state_topic: "PkDr/Apt03/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt03/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 04
+  - platform: mqtt
+    name: "Apt04 Doorbell"
+    unique_id: apt04_doorbell
+    state_topic: "PkDr/Apt04/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt04/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 05
+  - platform: mqtt
+    name: "Apt05 Doorbell"
+    unique_id: apt05_doorbell
+    state_topic: "PkDr/Apt05/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt05/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 06
+  - platform: mqtt
+    name: "Apt06 Doorbell"
+    unique_id: apt06_doorbell
+    state_topic: "PkDr/Apt06/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt06/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 07
+  - platform: mqtt
+    name: "Apt07 Doorbell"
+    unique_id: apt07_doorbell
+    state_topic: "PkDr/Apt07/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt07/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 08
+  - platform: mqtt
+    name: "Apt08 Doorbell"
+    unique_id: apt08_doorbell
+    state_topic: "PkDr/Apt08/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt08/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 09
+  - platform: mqtt
+    name: "Apt09 Doorbell"
+    unique_id: apt09_doorbell
+    state_topic: "PkDr/Apt09/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt09/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 10
+  - platform: mqtt
+    name: "Apt10 Doorbell"
+    unique_id: apt10_doorbell
+    state_topic: "PkDr/Apt10/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt10/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 11
+  - platform: mqtt
+    name: "Apt11 Doorbell"
+    unique_id: apt11_doorbell
+    state_topic: "PkDr/Apt11/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt11/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 12
+  - platform: mqtt
+    name: "Apt12 Doorbell"
+    unique_id: apt12_doorbell
+    state_topic: "PkDr/Apt12/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt12/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 13
+  - platform: mqtt
+    name: "Apt13 Doorbell"
+    unique_id: apt13_doorbell
+    state_topic: "PkDr/Apt13/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt13/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 14
+  - platform: mqtt
+    name: "Apt14 Doorbell"
+    unique_id: apt14_doorbell
+    state_topic: "PkDr/Apt14/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt14/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 15
+  - platform: mqtt
+    name: "Apt15 Doorbell"
+    unique_id: apt15_doorbell
+    state_topic: "PkDr/Apt15/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt15/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+  # Apt 16
+  - platform: mqtt
+    name: "Apt16 Doorbell"
+    unique_id: apt16_doorbell
+    state_topic: "PkDr/Apt16/Entrance/stat/Doorbell/POWER"
+    command_topic: "PkDr/Apt16/Entrance/cmnd/Doorbell/POWER"
+    qos: 1
+    payload_on: "CHIME"
+    payload_off: "OFF"
+    retain: false
+
+  # Tasmota Initial Testing...
+  - platform: mqtt
+    name: "Switch Test"
+    state_topic: "PkDr/BorA/Room/stat/tasmota/POWER"
+    command_topic: "PkDr/BorA/Room/cmnd/tasmota/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  # PkDr Main Switches...
+  - platform: mqtt
+    name: "B1 Lights"
+    state_topic: "PkDr/B1/Building/stat/Lights/POWER"
+    command_topic: "PkDr/B1/Building/cmnd/Lights/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Lights"
+    state_topic: "PkDr/B2/Building/stat/Lights/POWER"
+    command_topic: "PkDr/B2/Building/cmnd/Lights/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Lights"
+    state_topic: "PkDr/B3/Building/stat/Lights/POWER"
+    command_topic: "PkDr/B3/Building/cmnd/Lights/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Lights"
+    state_topic: "PkDr/B4/Building/stat/Lights/POWER"
+    command_topic: "PkDr/B4/Building/cmnd/Lights/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  # PkDr Utility Closet Relay Switches...
+
+# 20220210 - The old way until I can make B1-B4 the same as B1
+  - platform: mqtt
+    name: "B2 Kiosks"
+    state_topic: "PkDr/B2/Utility/output/B2_Kiosks"
+    command_topic: "PkDr/B2/Utility/output/B2_Kiosks/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Kiosks"
+    state_topic: "PkDr/B3/Utility/output/B3_Kiosks"
+    command_topic: "PkDr/B3/Utility/output/B3_Kiosks/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Kiosks"
+    state_topic: "PkDr/B4/Utility/output/B4_Kiosks"
+    command_topic: "PkDr/B4/Utility/output/B4_Kiosks/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+# End Old Way
+
+  # B1
+  - platform: mqtt
+    name: "01 Heat"
+    state_topic: "PkDr/B1/Utility/output/01_Heat"
+    command_topic: "PkDr/B1/Utility/output/01_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "02 Heat"
+    state_topic: "PkDr/B1/Utility/output/02_Heat"
+    command_topic: "PkDr/B1/Utility/output/02_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "03 Heat"
+    state_topic: "PkDr/B1/Utility/output/03_Heat"
+    command_topic: "PkDr/B1/Utility/output/03_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "04 Heat"
+    state_topic: "PkDr/B1/Utility/output/04_Heat"
+    command_topic: "PkDr/B1/Utility/output/04_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 End Switch Override"
+    state_topic: "PkDr/B1/Utility/output/End_Switch_Override"
+    command_topic: "PkDr/B1/Utility/output/End_Switch_Override/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Kiosks Odd"
+    state_topic: "PkDr/B1/Utility/output/Kiosks_Odd"
+    command_topic: "PkDr/B1/Utility/output/Kiosks_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Kiosks Even"
+    state_topic: "PkDr/B1/Utility/output/Kiosks_Even"
+    command_topic: "PkDr/B1/Utility/output/Kiosks_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Entrance Buttons"
+    state_topic: "PkDr/B1/Utility/output/Entrance_Buttons"
+    command_topic: "PkDr/B1/Utility/output/Entrance_Buttons/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Entrance Video"
+    state_topic: "PkDr/B1/Utility/output/Entrance_Video"
+    command_topic: "PkDr/B1/Utility/output/Entrance_Video/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Entrance Lock"
+    state_topic: "PkDr/B1/Utility/output/Entrance_Lock"
+    command_topic: "PkDr/B1/Utility/output/Entrance_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "01 Lock"
+    state_topic: "PkDr/B1/Utility/output/01_Lock"
+    command_topic: "PkDr/B1/Utility/output/01_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "02 Lock"
+    state_topic: "PkDr/B1/Utility/output/02_Lock"
+    command_topic: "PkDr/B1/Utility/output/02_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "03 Lock"
+    state_topic: "PkDr/B1/Utility/output/03_Lock"
+    command_topic: "PkDr/B1/Utility/output/03_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "04 Lock"
+    state_topic: "PkDr/B1/Utility/output/04_Lock"
+    command_topic: "PkDr/B1/Utility/output/04_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Doorbells Odd"
+    state_topic: "PkDr/B1/Utility/output/Doorbells_Odd"
+    command_topic: "PkDr/B1/Utility/output/Doorbells_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Doorbells Even"
+    state_topic: "PkDr/B1/Utility/output/Doorbells_Even"
+    command_topic: "PkDr/B1/Utility/output/Doorbells_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B1 Extra"
+    state_topic: "PkDr/B1/Utility/output/Extra"
+    command_topic: "PkDr/B1/Utility/output/Extra/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  # B2
+  - platform: mqtt
+    name: "05 Heat"
+    state_topic: "PkDr/B2/Utility/output/05_Heat"
+    command_topic: "PkDr/B2/Utility/output/05_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "06 Heat"
+    state_topic: "PkDr/B2/Utility/output/06_Heat"
+    command_topic: "PkDr/B2/Utility/output/06_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "07 Heat"
+    state_topic: "PkDr/B2/Utility/output/07_Heat"
+    command_topic: "PkDr/B2/Utility/output/07_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "08 Heat"
+    state_topic: "PkDr/B2/Utility/output/08_Heat"
+    command_topic: "PkDr/B2/Utility/output/08_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 End Switch Override"
+    state_topic: "PkDr/B2/Utility/output/End_Switch_Override"
+    command_topic: "PkDr/B2/Utility/output/End_Switch_Override/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Kiosks Odd"
+    state_topic: "PkDr/B2/Utility/output/Kiosks_Odd"
+    command_topic: "PkDr/B2/Utility/output/Kiosks_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Kiosks Even"
+    state_topic: "PkDr/B2/Utility/output/Kiosks_Even"
+    command_topic: "PkDr/B2/Utility/output/Kiosks_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Entrance Buttons"
+    state_topic: "PkDr/B2/Utility/output/Entrance_Buttons"
+    command_topic: "PkDr/B2/Utility/output/Entrance_Buttons/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Entrance Video"
+    state_topic: "PkDr/B2/Utility/output/Entrance_Video"
+    command_topic: "PkDr/B2/Utility/output/Entrance_Video/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Entrance Lock"
+    state_topic: "PkDr/B2/Utility/output/Entrance_Lock"
+    command_topic: "PkDr/B2/Utility/output/Entrance_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "05 Lock"
+    state_topic: "PkDr/B2/Utility/output/05_Lock"
+    command_topic: "PkDr/B2/Utility/output/05_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "06 Lock"
+    state_topic: "PkDr/B2/Utility/output/06_Lock"
+    command_topic: "PkDr/B2/Utility/output/06_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "07 Lock"
+    state_topic: "PkDr/B2/Utility/output/07_Lock"
+    command_topic: "PkDr/B2/Utility/output/07_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "08 Lock"
+    state_topic: "PkDr/B2/Utility/output/08_Lock"
+    command_topic: "PkDr/B2/Utility/output/08_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Doorbells Odd"
+    state_topic: "PkDr/B2/Utility/output/Doorbells_Odd"
+    command_topic: "PkDr/B2/Utility/output/Doorbells_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Doorbells Even"
+    state_topic: "PkDr/B2/Utility/output/Doorbells_Even"
+    command_topic: "PkDr/B2/Utility/output/Doorbells_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B2 Extra"
+    state_topic: "PkDr/B2/Utility/output/Extra"
+    command_topic: "PkDr/B2/Utility/output/Extra/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  
+  # B3
+  - platform: mqtt
+    name: "09 Heat"
+    state_topic: "PkDr/B3/Utility/output/09_Heat"
+    command_topic: "PkDr/B3/Utility/output/09_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "10 Heat"
+    state_topic: "PkDr/B3/Utility/output/10_Heat"
+    command_topic: "PkDr/B3/Utility/output/10_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "11 Heat"
+    state_topic: "PkDr/B3/Utility/output/11_Heat"
+    command_topic: "PkDr/B3/Utility/output/11_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "12 Heat"
+    state_topic: "PkDr/B3/Utility/output/12_Heat"
+    command_topic: "PkDr/B3/Utility/output/12_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 End Switch Override"
+    state_topic: "PkDr/B3/Utility/output/End_Switch_Override"
+    command_topic: "PkDr/B3/Utility/output/End_Switch_Override/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Kiosks Odd"
+    state_topic: "PkDr/B3/Utility/output/Kiosks_Odd"
+    command_topic: "PkDr/B3/Utility/output/Kiosks_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Kiosks Even"
+    state_topic: "PkDr/B3/Utility/output/Kiosks_Even"
+    command_topic: "PkDr/B3/Utility/output/Kiosks_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Entrance Buttons"
+    state_topic: "PkDr/B3/Utility/output/Entrance_Buttons"
+    command_topic: "PkDr/B3/Utility/output/Entrance_Buttons/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Entrance Video"
+    state_topic: "PkDr/B3/Utility/output/Entrance_Video"
+    command_topic: "PkDr/B3/Utility/output/Entrance_Video/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Entrance Lock"
+    state_topic: "PkDr/B3/Utility/output/Entrance_Lock"
+    command_topic: "PkDr/B3/Utility/output/Entrance_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "09 Lock"
+    state_topic: "PkDr/B3/Utility/output/09_Lock"
+    command_topic: "PkDr/B3/Utility/output/09_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "10 Lock"
+    state_topic: "PkDr/B3/Utility/output/10_Lock"
+    command_topic: "PkDr/B3/Utility/output/10_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "11 Lock"
+    state_topic: "PkDr/B3/Utility/output/11_Lock"
+    command_topic: "PkDr/B3/Utility/output/11_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "12 Lock"
+    state_topic: "PkDr/B3/Utility/output/12_Lock"
+    command_topic: "PkDr/B3/Utility/output/12_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Doorbells Odd"
+    state_topic: "PkDr/B3/Utility/output/Doorbells_Odd"
+    command_topic: "PkDr/B3/Utility/output/Doorbells_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Doorbells Even"
+    state_topic: "PkDr/B3/Utility/output/Doorbells_Even"
+    command_topic: "PkDr/B3/Utility/output/Doorbells_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B3 Extra"
+    state_topic: "PkDr/B3/Utility/output/Extra"
+    command_topic: "PkDr/B3/Utility/output/Extra/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    
+  # B4
+  - platform: mqtt
+    name: "13 Heat"
+    state_topic: "PkDr/B4/Utility/output/13_Heat"
+    command_topic: "PkDr/B4/Utility/output/13_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "14 Heat"
+    state_topic: "PkDr/B4/Utility/output/14_Heat"
+    command_topic: "PkDr/B4/Utility/output/14_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "15 Heat"
+    state_topic: "PkDr/B4/Utility/output/15_Heat"
+    command_topic: "PkDr/B4/Utility/output/15_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "16 Heat"
+    state_topic: "PkDr/B4/Utility/output/16_Heat"
+    command_topic: "PkDr/B4/Utility/output/16_Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 End Switch Override"
+    state_topic: "PkDr/B4/Utility/output/End_Switch_Override"
+    command_topic: "PkDr/B4/Utility/output/End_Switch_Override/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Kiosks Odd"
+    state_topic: "PkDr/B4/Utility/output/Kiosks_Odd"
+    command_topic: "PkDr/B4/Utility/output/Kiosks_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Kiosks Even"
+    state_topic: "PkDr/B4/Utility/output/Kiosks_Even"
+    command_topic: "PkDr/B4/Utility/output/Kiosks_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Entrance Buttons"
+    state_topic: "PkDr/B4/Utility/output/Entrance_Buttons"
+    command_topic: "PkDr/B4/Utility/output/Entrance_Buttons/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Entrance Video"
+    state_topic: "PkDr/B4/Utility/output/Entrance_Video"
+    command_topic: "PkDr/B4/Utility/output/Entrance_Video/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Entrance Lock"
+    state_topic: "PkDr/B4/Utility/output/Entrance_Lock"
+    command_topic: "PkDr/B4/Utility/output/Entrance_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "13 Lock"
+    state_topic: "PkDr/B4/Utility/output/13_Lock"
+    command_topic: "PkDr/B4/Utility/output/13_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "14 Lock"
+    state_topic: "PkDr/B4/Utility/output/14_Lock"
+    command_topic: "PkDr/B4/Utility/output/14_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "15 Lock"
+    state_topic: "PkDr/B4/Utility/output/15_Lock"
+    command_topic: "PkDr/B4/Utility/output/15_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "16 Lock"
+    state_topic: "PkDr/B4/Utility/output/16_Lock"
+    command_topic: "PkDr/B4/Utility/output/16_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Doorbells Odd"
+    state_topic: "PkDr/B4/Utility/output/Doorbells_Odd"
+    command_topic: "PkDr/B4/Utility/output/Doorbells_Odd/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Doorbells Even"
+    state_topic: "PkDr/B4/Utility/output/Doorbells_Even"
+    command_topic: "PkDr/B4/Utility/output/Doorbells_Even/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "B4 Extra"
+    state_topic: "PkDr/B4/Utility/output/Extra"
+    command_topic: "PkDr/B4/Utility/output/Extra/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  # Testing physical switch on a remote Pi with python code written by JTB (20220101)
+  - platform: mqtt
+    name: "B4 Switch"
+    command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
+    state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+# Apt 01 Switches...
+  # Entrance Lock
+  # Controlled from Pi with 16 channel relay in the building's utility closet
+  # - platform: mqtt
+  #   name: "Apt01 Entrance Lock"
+  #   state_topic: "PkDr/B1/Utility/output/01_Lock"
+  #   command_topic: "PkDr/B1/Utility/output/01_Lock/set"
+  #   qos: 1
+  #   payload_on: "ON"
+  #   payload_off: "OFF"
+  #   retain: true
+  # Using Sonoff Basic with switch detecting the door state (open/closed)
+  #     (110V AC to 12V DC with AC/DC converter)
+  # - platform: mqtt
+  #   name: "Apt01 Entrance Lock"
+  #   state_topic: "PkDr/Apt01/Entrance/stat/Lock/POWER"
+  #   command_topic: "PkDr/Apt01/Entrance/cmnd/Lock/POWER"
+  #   qos: 1
+  #   payload_on: "ON"
+  #   payload_off: "OFF"
+  #   retain: true
+  - platform: mqtt
+    name: "Apt01 AC"
+    state_topic: "PkDr/Apt01/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt01/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt01 LivingRoom IPTV"
+    state_topic: "PkDr/Apt01/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt01/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt01 Bedroom IPTV"
+    state_topic: "PkDr/Apt01/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt01/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt01_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_01_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt01_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_01_IPTV_BR_1_WiFi -user pi"
+  - platform: mqtt
+    name: "Apt01 Bedroom Ender3"
+    state_topic: "PkDr/Apt01/Bedroom/stat/Ender3/POWER"
+    command_topic: "PkDr/Apt01/Bedroom/cmnd/Ender3/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    # Apt 02 Switches...
+  - platform: mqtt
+    name: "Apt02 AC"
+    state_topic: "PkDr/Apt02/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt02/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt02 LivingRoom IPTV"
+    state_topic: "PkDr/Apt02/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt02/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt02 Bedroom IPTV"
+    state_topic: "PkDr/Apt02/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt02/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt02_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_02_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt02_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_02_IPTV_BR_1_WiFi -user pi"
+# Apt 03 Switches...
+  # Controlled from Pi with 16 channel relay in the building's utility closet
+  - platform: mqtt
+    name: "Apt03 Entrance Lock"
+    state_topic: "PkDr/B1/Utility/output/03_Lock"
+    command_topic: "PkDr/B1/Utility/output/03_Lock/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt03 AC"
+    state_topic: "PkDr/Apt03/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt03/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt03 LivingRoom IPTV"
+    state_topic: "PkDr/Apt03/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt03/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt03 Bedroom IPTV"
+    state_topic: "PkDr/Apt03/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt03/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt03_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_03_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt03_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_03_IPTV_BR_1_WiFi -user pi"
+    # Apt 05 Switches...
+#  - platform: mqtt
+#    name: "Apt05 Heat"
+#    state_topic: "PkDr/Apt05/output/Heat"
+#    command_topic: "PkDr/Apt05/output/Heat/set"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+  - platform: mqtt
+    name: "Apt05 AC"
+    state_topic: "PkDr/Apt05/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt05/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt05 LivingRoom IPTV"
+    state_topic: "PkDr/Apt05/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt05/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt05 Bedroom IPTV"
+    state_topic: "PkDr/Apt05/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt05/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt05_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_05_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt05_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_05_IPTV_BR_1_WiFi -user pi"
+    # Apt 06 Switches...
+#  - platform: mqtt
+#    name: "Apt06 Heat"
+#    state_topic: "PkDr/Apt06/output/Heat"
+#    command_topic: "PkDr/Apt06/output/Heat/set"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+  - platform: mqtt
+    name: "Apt06 AC"
+    state_topic: "PkDr/Apt06/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt06/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt06 LivingRoom IPTV"
+    state_topic: "PkDr/Apt06/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt06/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt06 Bedroom IPTV"
+    state_topic: "PkDr/Apt06/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt06/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt06_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_06_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt06_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_06_IPTV_BR_1_WiFi -user pi"
+    # Apt 07 Switches...
+#  - platform: mqtt
+#    name: "Apt06 Heat"
+#    state_topic: "PkDr/Apt06/output/Heat"
+#    command_topic: "PkDr/Apt06/output/Heat/set"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+  - platform: mqtt
+    name: "Apt07 AC"
+    state_topic: "PkDr/Apt07/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt07/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt07 LivingRoom IPTV"
+    state_topic: "PkDr/Apt07/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt07/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt07 Bedroom IPTV"
+    state_topic: "PkDr/Apt07/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt07/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt07_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_07_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt07_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_07_IPTV_BR_1_WiFi -user pi"
+    # Apt 09 Switches...
+  - platform: mqtt
+    name: "Apt09 AC"
+    state_topic: "PkDr/Apt09/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt09/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt09 LivingRoom IPTV"
+    state_topic: "PkDr/Apt09/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt09/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt09 Bedroom IPTV"
+    state_topic: "PkDr/Apt09/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt09/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt09_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_09_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt09_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_09_IPTV_BR_1_WiFi -user pi"
+    # Apt 12 Switches...
+#  - platform: mqtt
+#    name: "Apt12 Heat"
+#    state_topic: "PkDr/Apt12/output/Heat"
+#    command_topic: "PkDr/Apt12/output/Heat/set"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+  - platform: mqtt
+    name: "Apt12 AC"
+    state_topic: "PkDr/Apt12/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt12/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt12 LivingRoom IPTV"
+    state_topic: "PkDr/Apt12/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt12/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt12 Bedroom IPTV"
+    state_topic: "PkDr/Apt12/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt12/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt12 Bedroom2 IPTV"
+    state_topic: "PkDr/Apt12/Bedroom2/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt12/Bedroom2/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+#  - platform: command_line
+#    switches:
+#      apt12_1_reboot_iptv:
+#        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_12_IPTV_LR_LAN -user pi"
+#  - platform: command_line
+#    switches:
+#      apt12_2_reboot_iptv:
+#        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_12_IPTV_BR_1_WiFi -user pi"
+#  - platform: command_line
+#    switches:
+#      apt12_3_reboot_iptv:
+#        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_12_IPTV_BR_2_WiFi -user pi"
+    # Apt 14 Switches...
+  - platform: mqtt
+    name: "Apt14 Heat"
+    state_topic: "PkDr/Apt14/output/Heat"
+    command_topic: "PkDr/Apt14/output/Heat/set"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt14 AC"
+    state_topic: "PkDr/Apt14/LivingRoom/stat/AC/POWER"
+    command_topic: "PkDr/Apt14/LivingRoom/cmnd/AC/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt14 LivingRoom IPTV"
+    state_topic: "PkDr/Apt14/LivingRoom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt14/LivingRoom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "Apt14 Bedroom IPTV"
+    state_topic: "PkDr/Apt14/Bedroom/stat/IPTV/POWER"
+    command_topic: "PkDr/Apt14/Bedroom/cmnd/IPTV/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: command_line
+    switches:
+      apt14_1_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_14_IPTV_LR_LAN -user pi"
+  - platform: command_line
+    switches:
+      apt14_2_reboot_iptv:
+        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_14_IPTV_BR_1_WiFi -user pi"
+
+# Door State Sensors & Motion Detectors
+binary_sensor:
+  # Apt 01...
+
+  # Entrance Door State Sensor
+  # JTB 20220109
+  # This sensor is in the Sonoff Basic which is no longer needed since moving door locks to the utility closets
+  # - platform: mqtt
+  #   name: "Apt01 Entrance Door"
+  #   state_topic: "PkDr/Apt01/Entrance/cmnd/Door/POWER2"
+  #   payload_on: "ON"
+  #   payload_off: "OFF"
+  #   device_class: door
+
+#  - platform: remote_rpi_gpio
+#    host: !secret Apt01_HA_Kiosk_WiFi
+#    ports:
+#      17: PIR Apt01 Living Room
+#    invert_logic: true
+    # Apt 02...
+  - platform: remote_rpi_gpio
+    host: !secret Apt02_HA_Kiosk_WiFi
+    ports:
+      17: PIR Apt02 Living Room
+    invert_logic: true
+    # Apt 05...
+  - platform: remote_rpi_gpio
+    host: !secret Apt05_HA_Kiosk_WiFi
+    ports:
+      17: PIR Apt05 Living Room
+    invert_logic: true
+    # Apt 06...
+  - platform: remote_rpi_gpio
+    host: !secret Apt06_HA_Kiosk_WiFi
+    ports:
+      17: PIR Apt06 Living Room
+    invert_logic: true
+
+    # Apt 07...
+
+    # Apt 14...
+  - platform: remote_rpi_gpio
+    host: !secret Apt14_HA_Kiosk_WiFi
+    ports:
+      17: PIR Apt14 Living Room
+    invert_logic: true
+
+# Example configuration.yaml entry
+sensor:
+# Enable time and date
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+#      - 'date_time_utc'
+#      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+#  - platform: openweathermap
+#    api_key: !secret openweathermap_api_key
+#    monitored_conditions:
+#      - weather
+#      - temperature
+#      - humidity
+  # B1 Sensors...
+  # Apt 01 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B1 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B1 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 41 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # B2 Sensors...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B2 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 42 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B2 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 42 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # B3 Sensors...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B3 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B3 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # B4 Sensors...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B4 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B4 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+
+  # Apt 01 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt01 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt01 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 02 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt02 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt02 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 03 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt03 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt03 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 04 Temperature & Humididy...
+  # - platform: sql
+  #   db_url: !secret pkdr_sql_db_url
+  #   queries:
+  #     - name: Apt04 Temperature
+  #       query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
+  #       column: 'temperature'
+  #       unit_of_measurement: 'F'
+  # - platform: sql
+  #   db_url: !secret pkdr_sql_db_url
+  #   queries:
+  #     - name: Apt04 Humidity
+  #       query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
+  #       column: 'humidity'
+  #       unit_of_measurement: '%'
+  # Apt 05 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt05 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt05 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 06 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt06 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt06 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 07 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt07 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt07 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+
+  # Apt 08 Temperature & Humididy...
+
+  # Apt 09 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt09 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt09 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+
+  # Apt 10 Temperature & Humididy...
+
+  # Apt 11 Temperature & Humididy...
+
+  # Apt 12 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt12 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt12 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 13 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt13 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt13 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+  # Apt 14 Temperature & Humididy...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt14 Temperature
+        query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt14 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
+
+  # Apt 15 Temperature & Humididy...
+
+  # Apt 16 Temperature & Humididy...
+
+# Generic Thermostat...
+climate:
+  # Apt 01 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt01 Heat
+    heater: switch.01_heat
+    target_sensor: sensor.apt01_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt01 AC
+    heater: switch.apt01_ac
+    target_sensor: sensor.apt01_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 02 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt02 Heat
+    heater: switch.02_heat
+    target_sensor: sensor.apt02_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt02 AC
+    heater: switch.apt02_ac
+    target_sensor: sensor.apt02_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 03 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt03 Heat
+    heater: switch.03_heat
+    target_sensor: sensor.Apt03_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt03 AC
+    heater: switch.Apt03_ac
+    target_sensor: sensor.Apt03_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 04 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt04 Heat
+    heater: switch.04_heat
+    target_sensor: sensor.Apt04_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt04 AC
+    heater: switch.Apt04_ac
+    target_sensor: sensor.Apt04_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+
+  # Apt 05 Thermostats...
+  ### Heat ###
+  ### AC ###
+
+  # Apt 05 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt05 Heat
+    heater: switch.05_heat
+    target_sensor: sensor.apt05_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt05 AC
+    heater: switch.apt05_ac
+    target_sensor: sensor.apt05_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 06 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt06 Heat
+    heater: switch.06_heat
+    target_sensor: sensor.apt06_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt06 AC
+    heater: switch.apt06_ac
+    target_sensor: sensor.apt06_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 07 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt07 Heat
+    heater: switch.07_heat
+    target_sensor: sensor.apt07_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt07 AC
+    heater: switch.apt07_ac
+    target_sensor: sensor.apt07_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+  # Apt 09 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt09 Heat
+    heater: switch.09_heat
+    target_sensor: sensor.apt09_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt09 AC
+    heater: switch.apt09_ac
+    target_sensor: sensor.apt09_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+
+  # Apt 10 Thermostats...
+  ### Heat ###
+  ### AC ###
+
+  # Apt 12 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt12 Heat
+    heater: switch.12_heat
+    target_sensor: sensor.apt12_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt12 AC
+    heater: switch.apt12_ac
+    target_sensor: sensor.apt12_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+
+  # Apt 13 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt13 Heat
+    heater: switch.13_heat
+    target_sensor: sensor.apt13_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt13 AC
+    heater: switch.apt13_ac
+    target_sensor: sensor.apt13_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+
+  # Apt 14 Thermostats...
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt14 Heat
+    heater: switch.apt14_heat
+    target_sensor: sensor.apt14_temperature
+    min_temp: 45
+    target_temp: 72
+    max_temp: 77
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat" # off | heat | cool
+    away_temp: 65
+    precision: 0.5
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt14 AC
+    heater: switch.apt14_ac
+    target_sensor: sensor.apt14_temperature
+    min_temp: 65
+    target_temp: 72
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    precision: 0.5
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off" # off | heat | cool
+    away_temp: 90
+    ac_mode: true
+
+  # Apt 15 Thermostats...
+  ### Heat ###
+  ### AC ###
+
+  # Apt 16 Thermostats...
+  ### Heat ###
+  ### AC ###
+
+# IPTVs (media players)
+media_player:
+  # 01
+  - platform: kodi
+    name: IPTV 1.1
+    host: !secret Apt_01_IPTV_BR_1_LAN
+  - platform: kodi
+    name: IPTV 1.2
+    host: !secret Apt_01_IPTV_BR_1_WiFi
+  # 02
+  - platform: kodi
+    name: IPTV 2.1
+    host: !secret Apt_02_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 2.2
+    host: !secret Apt_02_IPTV_BR_1_WiFi
+  # 03
+  - platform: kodi
+    name: IPTV 3.1
+    host: !secret Apt_03_IPTV_LR_LAN
+  # 04
+  - platform: kodi
+    name: IPTV 4.1
+    host: !secret Apt_04_IPTV_LR_LAN
+  # 05
+  - platform: kodi
+    name: IPTV 5.1
+    host: !secret Apt_05_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 5.2
+    host: !secret Apt_05_IPTV_BR_1_WiFi
+  # 06
+  - platform: kodi
+    name: IPTV 6.1
+    host: !secret Apt_06_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 6.2
+    host: !secret Apt_06_IPTV_BR_1_WiFi
+  # 07
+  - platform: kodi
+    name: IPTV 7.1
+    host: !secret Apt_07_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 7.2
+    host: !secret Apt_07_IPTV_BR_1_WiFi
+  # 08
+  - platform: kodi
+    name: IPTV 8.1
+    host: !secret Apt_08_IPTV_LR_LAN
+  # 09
+  - platform: kodi
+    name: IPTV 9.1
+    host: !secret Apt_09_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 9.2
+    host: !secret Apt_09_IPTV_BR_1_WiFi
+  # 10
+  - platform: kodi
+    name: IPTV 10.1
+    host: !secret Apt_10_IPTV_LR_LAN
+  # 11
+  - platform: kodi
+    name: IPTV 11.1
+    host: !secret Apt_11_IPTV_LR_LAN
+  # 12
+  - platform: kodi
+    name: IPTV 12.1
+    host: !secret Apt_12_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 12.2
+    host: !secret Apt_12_IPTV_BR_1_WiFi
+  - platform: kodi
+    name: IPTV 12.3
+    host: !secret Apt_12_IPTV_BR_2_WiFi
+  # 13
+  - platform: kodi
+    name: IPTV 13.1
+    host: !secret Apt_13_IPTV_LR_LAN
+  # 14
+  - platform: kodi
+    name: IPTV 14.1
+    host: !secret Apt_14_IPTV_LR_LAN
+  - platform: kodi
+    name: IPTV 14.2
+    host: !secret Apt_14_IPTV_BR_1_WiFi
+  # 15
+  - platform: kodi
+    name: IPTV 15.1
+    host: !secret Apt_15_IPTV_LR_LAN
+  # 16
+  - platform: kodi
+    name: IPTV 16.1
+    host: !secret Apt_16_IPTV_LR_LAN
+
+#######################################################
+######### Features It's not ready for yet  ############
+#######################################################
+# Show links to resources in log and frontend
+#introduction:
+
+# expose a RESTful API for remote access (depends on http component)
+#api:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Text to speech
+#tts:
+#  - platform: google
+
+########## NOTE ##########
+# Both Surveillance & device_tracker
+#  need to be confgured at the network level
+#  otherwise Surveillence doesn't work at the Kiosk level
+#  and device_tracker only works at the Kiosk level
+##########################
+
+# Amcrest Surveillance Cameras
+amcrest:
+  # Stairs
+  - host: !secret Cam_IP_Stair_B1_LAN
+    name: B1 Stairs
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+#    port: 37777
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+  - host: !secret Cam_IP_Stair_B2_LAN
+    name: B2 Stairs
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+  - host: !secret Cam_IP_Stair_B3_LAN
+    name: B3 Stairs
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+  - host: !secret Cam_IP_Stair_B4_LAN
+    name: B4 Stairs
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+  # Utility Closets (20220219 - need to make these use LAN instead of WiFi)
+  - host: !secret Cam_IP_Utility_B1_WiFi
+    name: B1 Utility Closet
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+  - host: !secret Cam_IP_Utility_B2_LAN
+    name: B2 Utility Closet
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+    resolution: high
+    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+    binary_sensors:
+      - audio_detected  # Return on when audio is detected, off when not.
+      - motion_detected # Return on when audio is detected, off when not.
+      - online          # Return on when camera is available (i.e., responding to commands), off when not.
+    sensors:
+      - sdcard # Return the SD card usage by reporting the total and used space.
+      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+##########################
+
+#device_tracker:
+#  - platform: nmap_tracker
+#    hosts:
+#      - !secret JTB-Phone-Pixel2_B1_Portable
+#    exclude:
+#     - !secret HA-Core_B2_Live
+#    home_interval: 5
+#    new_device_defaults:
+#      track_new_devices: true
+#      hide_if_away: false
+##########################
+
+#weather:
+#  - platform: darksky
+#    api_key: !secret darksky_api_key
+#    latitude: 42.957181
+#    longitude: -83.644644
+#    units: us
+
+#weather:
+#weather-forecast:
+#  - platform: openweathermap
+#    api_key: !secret openweathermap_api_key
+#    name: Park Drive Forecast
+#    latitude: 42.957181
+#    longitude: -83.644644
+    
+##################################################
