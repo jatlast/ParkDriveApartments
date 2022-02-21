@@ -30,7 +30,7 @@ yaml/
 # -------------------------------
 # Default HA OS yaml - this folder will be deleted ofter HA OS is the only version
 HAOS_Original/
-
+themes/
 #HA/
 #configuration.yaml
 secrets.yaml

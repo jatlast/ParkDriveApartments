@@ -48,7 +48,7 @@ def initialize_config_dict(caller_dict):
         config_dict['apt_or_bld'] = ''
         config_dict['num_int'] = 0
         config_dict['num_str'] = '0'
-        config_dict['mqtt'] = ''
+        config_dict['mqtt_topic_apt_or_bld'] = ''
         config_dict['mqtt_valid'] = False
         config_dict['mqtt_credentials_error_flag'] = False
         config_dict['mqtt_credentials_error_msg'] = ""
@@ -129,41 +129,41 @@ def add_pkdr_caller_info_to_config_dict():
         else:
             if config_dict['num_int'] <= 16:
                 config_dict['apt_or_bld'] = 'apt'
-                config_dict['mqtt'] = 'Apt'
+                config_dict['mqtt_topic_apt_or_bld'] = 'Apt'
                 if config_dict['num_int'] < 10:
                     config_dict['num_str'] = '0' + str(config_dict['num_int'])
                 else:
                     config_dict['num_str'] = str(config_dict['num_int'])
-                config_dict['mqtt'] += config_dict['num_str']
+                config_dict['mqtt_topic_apt_or_bld'] += config_dict['num_str']
             elif config_dict['num_int'] <= 44 and config_dict['num_int'] > 40:
                 config_dict['apt_or_bld'] = 'bld'
-                config_dict['mqtt'] = 'B' + str(config_dict['num_int'] % 40)
+                config_dict['mqtt_topic_apt_or_bld'] = 'B' + str(config_dict['num_int'] % 40)
             else:
                 caller_error_flag = True
                 caller_error_msg += "ERROR: Number not an Apt or Bld"
                 config_dict['apt_or_bld'] = 'unk'
                 config_dict['num_str'] = str(config_dict['num_int'])
-                config_dict['mqtt'] = 'BorA'
+                config_dict['mqtt_topic_apt_or_bld'] = 'BorA'
 
 # From Tasmota Config
 # // -- MQTT topics ---------------------------------
 # define MQTT_FULLTOPIC "PkDr/BorA/Room/%prefix%/%topic%/" // [FullTopic] Subscribe and Publish full topic name - Legacy topic
 
     # Valid MQTT against config file
-    if len(config_dict['mqtt']) > 1 and config_dict['mqtt'] != 'BorA':
+    if len(config_dict['mqtt_topic_apt_or_bld']) > 1 and config_dict['mqtt_topic_apt_or_bld'] != 'BorA':
         if config_dict.get('mqtt_valid_topic_location_list', -1) == -1:
             caller_error_flag = True
             caller_error_msg += "Configuration Error: mqtt_valid_topic_location_list not in config file"
         else:
             mqtt_topic_list = "MQTT Topic Search <"
             for i in config_dict["mqtt_valid_topic_location_list"]:
-                if config_dict['mqtt'] == i:
+                if config_dict['mqtt_topic_apt_or_bld'] == i:
                     if config_dict['verbosity'] > 2:
-                        mqtt_topic_list += "({}) == ({}) - Found".format(config_dict['mqtt'], i)
+                        mqtt_topic_list += "({}) == ({}) - Found".format(config_dict['mqtt_topic_apt_or_bld'], i)
                     config_dict['mqtt_valid'] = True
                     break
                 else:
-                    mqtt_topic_list += "({}) != ({})".format(config_dict['mqtt'], i)
+                    mqtt_topic_list += "({}) != ({})".format(config_dict['mqtt_topic_apt_or_bld'], i)
             mqtt_topic_list += ">"
 
     # Valid Production Code Config Check

@@ -51,8 +51,23 @@ config: # Configuration
 counter:
 dhcp: # DHCP Discovery
 energy:
+# ------
+# 20220218 - Disabling include for new HA OS to check functionality
+# 20220220 - frontend: is apparently where HA themes come from. 
+#   This should mean a lot has happebed since - (20200102) https://github.com/arsaboo/homeassistant-config/blob/master/frontend.yaml
+# frontend: !include frontend.yaml 
+# frontend: # https://www.home-assistant.io/integrations/frontend/
+#   themes:
+#     dark_and_light: !include /config/themes/m3-04-magenta/m3-04-magenta.yaml
+    # daytime: 
+    # nighttime:
+    # kiosks-apt: !include /config/themes/pkdr_frontend_2020.yaml
+    # kiosks-bld:
+# Theme Configuration Splitting...
+#   Create a dedicated folder (e.g., my_themes) and include all files from within this folder
 frontend:
-# frontend: !include frontend.yaml # 20220218 - Disabling include for new HA OS to check functionality
+  themes: !include_dir_merge_named themes
+# ------
 history: # Enables support for tracking state changes over time
 image:
 input_boolean:

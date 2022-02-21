@@ -1,3 +1,23 @@
+# --- JavaScript Modules - Necessary for PkDr Unit & Tenant logins ---
+# One or the other but not both at the same time
+#   custom-header.js (been working since 2019) 
+#     - https://github.com/maykar/custom-header 
+#     - https://github.com/maykar/custom-header.git (repository url for use with HACS too)
+#     - https://maykar.github.io/custom-header/#intro/intro (Documentation)
+#     - Kiosk Mode
+#     - Default Tab Functionality 
+#   kiosk_mode.js (just discovered 2022)
+#     - https://github.com/maykar/kiosk-mode
+#     - Kiosk Mode
+# Looks like it is back to custom_header.js (added using HACS Custom repositories)
+# 2020220 - Apparently, not even HACS allows adding custom_header, probably because when the author stopped
+#   supporting it he mentioned the new version of HA was going to break his code.
+#   Thus, back to kiosk_mode and I will just have to wait and see if tenants are able to mess up anything
+# custom_header:
+#   kiosk_mode: true
+#   default_tab: 'k-{{ user }}'
+#   theme: dark-mode
+
 kiosk_mode:
   admin_settings:
     kiosk: false
@@ -10,8 +30,8 @@ views:
   # Apt 01
   #####################
   - title: 01
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "type: sidebar # replaced "panel: true""
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 5df09d42cb09485ea0f6277100818d3b # Apt01
@@ -259,8 +279,8 @@ views:
   # Apt 02
   #####################
   - title: 02
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 3c21d53e7f154dce80e8f1bcdc2f9f87 # Apt02
@@ -369,8 +389,8 @@ views:
   # Apt 03
   #####################
   - title: 03
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 17733214666a413299bf272786a683a9 # Apt03
@@ -480,8 +500,8 @@ views:
   # Apt 04
   #####################
   - title: 04
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: e8bff05bc1cd4be1af36e288468d85fd # Apt04
@@ -582,8 +602,8 @@ views:
   # Apt 05
   #####################
   - title: 05
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: cc40a29c034a474e86a023289734e9b8 # Apt05
@@ -671,8 +691,8 @@ views:
   # Apt 06
   #####################
   - title: 06
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 1bc46a652c8741af8e57191f74240bc0 # Apt06
@@ -764,8 +784,8 @@ views:
   # Apt 07
   #####################
   - title: 07
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 4d97cb0348bd48518140f50edf98a814 # Apt07
@@ -852,8 +872,8 @@ views:
   # Apt 08
   #####################
   - title: (8)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: e0b9fe90ad1e4d69abbaeca67189298d # Apt08
@@ -863,8 +883,8 @@ views:
   # Apt 09
   #####################
   - title: 09
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 48cc2d3934f44031b37c9239e9b509c9 # Apt09
@@ -954,8 +974,8 @@ views:
   # Apt 10
   #####################
   - title: (10)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 4182c149a4254639b3e790ddeb2f7354 # Apt10
@@ -966,8 +986,8 @@ views:
   # Apt 11
   #####################
   - title: (11)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 1440f67a25e64605b2857539796b1d31 # Apt11
@@ -977,8 +997,8 @@ views:
   # Apt 12
   #####################
   - title: 12
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 8ee5d466e69e42358894f13ff2d516a7 # Apt12
@@ -1067,8 +1087,8 @@ views:
   # Apt 13
   #####################
   - title: (13)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: d2f307cf2d5244149308528f48fcc521 # Apt13
@@ -1078,8 +1098,8 @@ views:
   # Apt 14
   #####################
   - title: 14
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: ee4612b7248046f792fc13bd87285418 # Apt14
@@ -1186,8 +1206,8 @@ views:
   # Apt 15
   #####################
   - title: (15)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 868518213280450e8003bd6dcf407987 # Apt15
@@ -1198,8 +1218,8 @@ views:
   # Apt 16
   #####################
   - title: (16)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 9edc0125b8aa422e82a5956ebefbe73b # Apt16
@@ -1209,8 +1229,8 @@ views:
   # B1 - Utility Kiosk
   #####################
   - title: B1
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user:  92789052ad71465f99761e12c5af5bc9 # B1
@@ -1354,8 +1374,8 @@ views:
   # B2 - Utility Kiosk
   #####################
   - title: (B2)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 9245a47b7d334dd59b792a4a00113d09 # B2
@@ -1365,8 +1385,8 @@ views:
   # B3 - Utility Kiosk
   #####################
   - title: (B3)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: aa6d5fc87def4e1dbea489ffa5788ee1 # B3
@@ -1376,8 +1396,8 @@ views:
   # B4 - Utility Kiosk
   #####################
   - title: (B4)
-    panel: true
-    theme: darkorange
+    type: sidebar # replaced "panel: true"
+    # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: bc39d5b5450c4061b4e391dc9c6f1545 # B4
