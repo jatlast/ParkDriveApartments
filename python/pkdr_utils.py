@@ -56,6 +56,7 @@ def initialize_config_dict(caller_dict):
         config_dict['caller_error_msg'] = ""
         config_dict['program_valid'] = False
         config_dict['sensor_type_error_flag'] = False
+        config_dict['sensor_temperature_window_error_flag'] = False
         config_dict['db_log_name'] = 'RuntimeLog'
         config_dict['log_level_name'] = 'INFO'
         config_dict['log_level'] = 1
@@ -274,6 +275,24 @@ def add_pkdr_caller_info_to_config_dict():
                         config_dict['sensor_type_error_flag'] = True
                     else:
                         config_dict['sensor_type_address'] = sensor_type_address
+
+            # Check for temperature window dict...
+            if config_dict['sensor_config']['i2c_temperature_config'].get('temperature_window', -1) == -1:
+                config_dict['sensor_temperature_window_error_flag'] = True
+                caller_error_flag = True
+                caller_error_msg += "Configuration Error: temperature_window not in config file"
+            else:
+                temperature_valid_min = config_dict['sensor_config']['i2c_temperature_config']['temperature_window'].get('temperature_valid_min', -1)
+                if temperature_valid_min == -1:
+                    config_dict['sensor_temperature_window_error_flag'] = True
+                else:
+                    config_dict['temperature_valid_min'] = temperature_valid_min
+                    temperature_valid_max = config_dict['sensor_config']['i2c_temperature_config']['temperature_window'].get('temperature_valid_max', -1)
+                    if temperature_valid_max == -1:
+                        config_dict['sensor_temperature_window_error_flag'] = True
+                    else:
+                        config_dict['temperature_valid_max'] = temperature_valid_max
+
 
     # Check for sound files dict...
     config_dict['sound_config_error_flag'] = False

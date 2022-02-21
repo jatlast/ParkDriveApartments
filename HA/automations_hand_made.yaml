@@ -1,11 +1,10 @@
 ###########################
 #####  Main - Begin  ######
 ###########################
-automation:
 # All 4 Buildings On & Off ...
 #  Automate On
-- id: pkdr_lights_on
-  alias: "Building Lights On"
+- alias: "Building Lights On"
+  id: pkdr_lights_on
   #hide_entity: True
   trigger:
   - platform: sun
@@ -15,9 +14,10 @@ automation:
   action:
     service: switch.turn_on
     entity_id: group.building_lights
+
 #  Automate Off
-- id: pkdr_lights_off
-  alias: "Building Lights Off"
+- alias: "Building Lights Off"
+  id: pkdr_lights_off
   #hide_entity: True
   trigger:
   - platform: sun
@@ -30,8 +30,8 @@ automation:
 
 # All 4 Buildings On & Off - Revert ...
 #  Automate Back On
-- id: pkdr_lights_on_revert
-  alias: "Building Lights Back On"
+- alias: "Building Lights Back On"
+  id: pkdr_lights_on_revert
   #hide_entity: True
   trigger:
   - platform: time_pattern
@@ -51,9 +51,10 @@ automation:
   action:
     service: switch.turn_on
     entity_id: group.building_lights
+
 #  Automate Back Off
-- id: pkdr_lights_off_revert
-  alias: "Building Lights Back Off"
+- alias: "Building Lights Back Off"
+  id: pkdr_lights_off_revert
   #hide_entity: True
   trigger:
 #  - platform: time
@@ -79,8 +80,8 @@ automation:
 # This automation script runs when B1 VDB Doorbell is less than 2.5.
 # I.e., baseline voltage is 3.00 and above, so anything below that should be a doorbell button press
 # It publishes its value to the specified MQTT topic
-- id: b1_doorbell_pressed
-  alias: "B1 Doorbell Pressed"
+- alias: "B1 Doorbell Pressed"
+  id: b1_doorbell_pressed
   trigger:
     - platform: numeric_state
       entity_id: sensor.b1_vdb_doorbells
@@ -100,11 +101,11 @@ automation:
               below: 0.90
           sequence:
             - service: switch.turn_on
-              alias: "Ring Apt01 Doorbell"
+            - alias: "Ring Apt01 Doorbell"
               target:
                 entity_id: switch.apt01_doorbell
             - service: input_text.set_value
-              alias: "Message Line 1 - Apt #"
+            - alias: "Message Line 1 - Apt #"
               data:
                 value: "Apt 1"
               target:
@@ -117,7 +118,7 @@ automation:
               below: 1.50
           sequence:
             - service: switch.turn_on
-              alias: "Ring Apt02 Doorbell"
+            - alias: "Ring Apt02 Doorbell"
               target:
                 entity_id: switch.apt02_doorbell
     - choose:
@@ -128,7 +129,7 @@ automation:
               below: 1.80
           sequence:
             - service: switch.turn_on
-              alias: "Ring Apt03 Doorbell"
+            - alias: "Ring Apt03 Doorbell"
               target:
                 entity_id: switch.apt03_doorbell
     - choose:
@@ -139,13 +140,14 @@ automation:
               below: 2.50
           sequence:
             - service: switch.turn_on
-              alias: "Ring Apt04 Doorbell"
+            - alias: "Ring Apt04 Doorbell"
               target:
                 entity_id: switch.apt04_doorbell
 
 # This automation script runs when the Apt Volume Slider is moved.
 # It publishes its value to the specified MQTT topic
 - alias: "Apt01 Volume Changed"
+  id: apt01_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt01_volume
@@ -155,7 +157,9 @@ automation:
       topic: "PkDr/Apt01/Doorbell/stat/Volume/setVolume"
       retain: true
       payload: "{{ states('input_number.apt01_volume') | int }}"
+
 - alias: "Apt02 Volume Changed"
+  id: apt02_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt02_volume
@@ -165,7 +169,9 @@ automation:
       topic: "PkDr/Apt02/Doorbell/stat/Volume/setVolume"
       retain: true
       payload: "{{ states('input_number.apt02_volume') | int }}"
+
 - alias: "Apt03 Volume Changed"
+  id: apt03_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt03_volume
@@ -176,6 +182,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt03_volume') | int }}"
 - alias: "Apt04 Volume Changed"
+  id: apt04_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt04_volume
@@ -186,6 +193,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt04_volume') | int }}"
 - alias: "Apt05 Volume Changed"
+  id: apt05_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt05_volume
@@ -196,6 +204,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt05_volume') | int }}"
 - alias: "Apt06 Volume Changed"
+  id: apt06_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt06_volume
@@ -206,6 +215,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt06_volume') | int }}"
 - alias: "Apt07 Volume Changed"
+  id: apt07_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt07_volume
@@ -216,6 +226,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt07_volume') | int }}"
 - alias: "Apt08 Volume Changed"
+  id: apt08_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt08_volume
@@ -226,6 +237,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt08_volume') | int }}"
 - alias: "Apt09 Volume Changed"
+  id: apt09_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt09_volume
@@ -236,6 +248,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt09_volume') | int }}"
 - alias: "Apt10 Volume Changed"
+  id: apt10_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt10_volume
@@ -246,6 +259,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt10_volume') | int }}"
 - alias: "Apt11 Volume Changed"
+  id: apt11_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt11_volume
@@ -256,6 +270,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt11_volume') | int }}"
 - alias: "Apt12 Volume Changed"
+  id: apt12_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt12_volume
@@ -266,6 +281,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt12_volume') | int }}"
 - alias: "Apt13 Volume Changed"
+  id: apt13_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt13_volume
@@ -276,6 +292,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt13_volume') | int }}"
 - alias: "Apt14 Volume Changed"
+  id: apt14_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt14_volume
@@ -286,6 +303,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt14_volume') | int }}"
 - alias: "Apt15 Volume Changed"
+  id: apt15_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt15_volume
@@ -296,6 +314,7 @@ automation:
       retain: true
       payload: "{{ states('input_number.apt15_volume') | int }}"
 - alias: "Apt16 Volume Changed"
+  id: apt16_volume_changed
   trigger:
     platform: state
     entity_id: input_number.apt16_volume
@@ -311,6 +330,7 @@ automation:
 #####  Apt 01 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt01 No AC with Heat
+  id: apt01_no_ac_with_heat
 # Unnecessary Options
 #  hide_entity: true   # Hide from front end
 #  initial_state: true # Always on
@@ -323,6 +343,7 @@ automation:
       entity_id: switch.apt01_heat
 
 - alias: Apt01 No Heat with AC
+  id: apt01_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt01_heat
@@ -333,6 +354,7 @@ automation:
 
 # Climate Away...
 - alias: Apt01 Climate Away
+  id: apt01_climate_away
   trigger:
     - platform: state
       entity_id: person.apt01_jason
@@ -349,6 +371,7 @@ automation:
       
 # Cimate Home...
 - alias: Apt01 Climate Home
+  id: apt01_climate_home
   trigger:
     - platform: state
       entity_id: person.apt01_jason
@@ -400,6 +423,7 @@ automation:
 #####  Apt 02 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt02 No AC with Heat
+  id: apt02_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt02_ac
@@ -409,6 +433,7 @@ automation:
       entity_id: switch.apt02_heat
 
 - alias: Apt02 No Heat with AC
+  id: apt02_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt02_heat
@@ -422,6 +447,7 @@ automation:
 #####  Apt 05 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt05 No AC with Heat
+  id: apt05_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt05_ac
@@ -431,6 +457,7 @@ automation:
       entity_id: switch.apt05_heat
 
 - alias: Apt05 No Heat with AC
+  id: apt05_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt05_heat
@@ -444,6 +471,7 @@ automation:
 #####  Apt 06 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt06 No AC with Heat
+  id: apt06_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt06_ac
@@ -453,6 +481,7 @@ automation:
       entity_id: switch.apt06_heat
 
 - alias: Apt06 No Heat with AC
+  id: apt06_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt06_heat
@@ -466,6 +495,7 @@ automation:
 #####  Apt 07 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt07 No AC with Heat
+  id: apt07_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt07_ac
@@ -475,6 +505,7 @@ automation:
       entity_id: switch.apt07_heat
 
 - alias: Apt07 No Heat with AC
+  id: apt07_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt07_heat
@@ -488,6 +519,7 @@ automation:
 #####  Apt 12 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt12 No AC with Heat
+  id: apt12_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt12_ac
@@ -497,6 +529,7 @@ automation:
       entity_id: switch.apt12_heat
 
 - alias: Apt12 No Heat with AC
+  id: apt12_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt12_heat
@@ -510,6 +543,7 @@ automation:
 #####  Apt 14 ######
 # No Heat w/ AC && No AC w/ Heat
 - alias: Apt14 No AC with Heat
+  id: apt14_no_ac_with_heat
   trigger:
     - platform: state
       entity_id: switch.apt14_ac
@@ -519,6 +553,7 @@ automation:
       entity_id: switch.apt14_heat
 
 - alias: Apt14 No Heat with AC
+  id: apt14_no_heat_with_ac
   trigger:
     - platform: state
       entity_id: switch.apt14_heat
@@ -529,6 +564,7 @@ automation:
 
 # Climate Away
 - alias: Apt14 Climate Away
+  id: apt14_climate_away
   trigger:
     - platform: state
       entity_id: person.apt14_derek
@@ -545,6 +581,7 @@ automation:
       
 # Cimate Home...
 - alias: Apt14 Climate Home
+  id: apt14_climate_home
   trigger:
     - platform: state
       entity_id: person.apt14_derek
@@ -564,7 +601,8 @@ automation:
 ############################
 #####  All Door Locks ######
 
-- alias: B1 Entrance Relock
+- alias: B1 Relock Entrance
+  id: b1_relock_entrance
   trigger:
     platform: state
     entity_id: switch.b1_entrance_lock
@@ -575,7 +613,8 @@ automation:
     service: switch.turn_off
     entity_id: switch.b1_entrance_lock
 
-- alias: Apt01 Entrance Relock
+- alias: Apt01 Relock Entrance
+  id: apt01_relock_entrance
   trigger:
     platform: state
     entity_id: switch.apt01_entrance_lock

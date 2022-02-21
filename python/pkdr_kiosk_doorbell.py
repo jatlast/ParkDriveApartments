@@ -129,18 +129,20 @@ def on_message(client, userdata, message):
         pkdr_utils.config_dict['db_table_dict']['log_level'] = msg_log_level
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][msg_log_level]
         pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Doorbell Chime'
-        pkdr_utils.config_dict['db_table_dict']['key0'] = 'mqtt_apt_or_bld'
-        pkdr_utils.config_dict['db_table_dict']['val0'] = pkdr_utils.config_dict['mqtt_topic_apt_or_bld']
-        pkdr_utils.config_dict['db_table_dict']['key1'] = 'topic'
-        pkdr_utils.config_dict['db_table_dict']['val1'] = message.topic
-        pkdr_utils.config_dict['db_table_dict']['key2'] = 'payload'
-        pkdr_utils.config_dict['db_table_dict']['val2'] = variables_dict['actionable_payload']
-        pkdr_utils.config_dict['db_table_dict']['key3'] = 'sound_played'
-        pkdr_utils.config_dict['db_table_dict']['val3'] = variables_dict['sound_played']
-        pkdr_utils.config_dict['db_table_dict']['key4'] = 'doorbell_volume'
-        pkdr_utils.config_dict['db_table_dict']['val4'] = variables_dict["doorbell_volume"]
-        pkdr_utils.config_dict['db_table_dict']['key5'] = 'time_since_previous'
-        pkdr_utils.config_dict['db_table_dict']['val5'] = duration_since_last_doorbell
+        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+        pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->found_payload'
+        pkdr_utils.config_dict['db_table_dict']['key1'] = 'mqtt_apt_or_bld'
+        pkdr_utils.config_dict['db_table_dict']['val1'] = pkdr_utils.config_dict['mqtt_topic_apt_or_bld']
+        pkdr_utils.config_dict['db_table_dict']['key2'] = 'topic'
+        pkdr_utils.config_dict['db_table_dict']['val2'] = message.topic
+        pkdr_utils.config_dict['db_table_dict']['key3'] = 'payload'
+        pkdr_utils.config_dict['db_table_dict']['val3'] = variables_dict['actionable_payload']
+        pkdr_utils.config_dict['db_table_dict']['key4'] = 'sound_played'
+        pkdr_utils.config_dict['db_table_dict']['val4'] = variables_dict['sound_played']
+        pkdr_utils.config_dict['db_table_dict']['key5'] = 'doorbell_volume'
+        pkdr_utils.config_dict['db_table_dict']['val5'] = variables_dict["doorbell_volume"]
+        pkdr_utils.config_dict['db_table_dict']['key6'] = 'time_since_previous'
+        pkdr_utils.config_dict['db_table_dict']['val6'] = duration_since_last_doorbell
         pkdr_utils.db_generic_insert()
 
 def on_log(client, userdata, level, buf):
@@ -151,16 +153,18 @@ def on_log(client, userdata, level, buf):
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
         # pkdr_utils.config_dict['db_table_dict']['log_message'] = "on_log(client, userdata={}, level={} buf={})".format(userdata, level, buf)
         pkdr_utils.config_dict['db_table_dict']['log_message'] = 'MQTT Runtime Log'
-        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_if_less_or_equal_level'
-        pkdr_utils.config_dict['db_table_dict']['val0'] = log_if_less_or_equal_level
-        pkdr_utils.config_dict['db_table_dict']['key1'] = 'level_lookup'
-        pkdr_utils.config_dict['db_table_dict']['val1'] = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
-        pkdr_utils.config_dict['db_table_dict']['key2'] = 'level'
-        pkdr_utils.config_dict['db_table_dict']['val2'] = level
-        pkdr_utils.config_dict['db_table_dict']['key3'] = 'mqtt_callback'
-        pkdr_utils.config_dict['db_table_dict']['val3'] = 'def on_log(client, userdata, level, buf)'
-        pkdr_utils.config_dict['db_table_dict']['key4'] = 'buf'
-        pkdr_utils.config_dict['db_table_dict']['val4'] = buf
+        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+        pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->on_log'
+        pkdr_utils.config_dict['db_table_dict']['key1'] = 'log_if_less_or_equal_level'
+        pkdr_utils.config_dict['db_table_dict']['val1'] = log_if_less_or_equal_level
+        pkdr_utils.config_dict['db_table_dict']['key2'] = 'level_lookup'
+        pkdr_utils.config_dict['db_table_dict']['val2'] = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
+        pkdr_utils.config_dict['db_table_dict']['key3'] = 'level'
+        pkdr_utils.config_dict['db_table_dict']['val3'] = level
+        pkdr_utils.config_dict['db_table_dict']['key4'] = 'mqtt_callback'
+        pkdr_utils.config_dict['db_table_dict']['val4'] = 'def on_log(client, userdata, level, buf)'
+        pkdr_utils.config_dict['db_table_dict']['key5'] = 'buf'
+        pkdr_utils.config_dict['db_table_dict']['val5'] = buf
         pkdr_utils.db_generic_insert()
         if variables_dict["verbosity"] > 1:
             print('K-VDB-Runtime: '.format(pkdr_utils.config_dict['db_table_dict']['log_message']))
@@ -185,6 +189,8 @@ elif (
     pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
     pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
     pkdr_utils.config_dict['db_table_dict']['log_message'] = 'VDB Config Error: '
+    pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+    pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->config->error'
 
     if not pkdr_utils.config_dict['mqtt_valid'] or pkdr_utils.config_dict['sound_config_error_flag']:
         pkdr_utils.config_dict['db_table_dict']['log_message'] += pkdr_utils.config_dict['caller_error_msg']
@@ -263,12 +269,14 @@ else:
         log_level = 4 # 4 = CRITICAL
         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
-        pkdr_utils.config_dict['db_table_dict']['key5'] = 'pkdr_mqtt_ip'
-        pkdr_utils.config_dict['db_table_dict']['val5'] = variables_dict["pkdr_mqtt_ip"]
-        pkdr_utils.config_dict['db_table_dict']['key6'] = 'pkdr_mqtt_port'
-        pkdr_utils.config_dict['db_table_dict']['val6'] = variables_dict["pkdr_mqtt_port"]
         pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
         pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
+        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+        pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->exception'
+        pkdr_utils.config_dict['db_table_dict']['key1'] = 'pkdr_mqtt_ip'
+        pkdr_utils.config_dict['db_table_dict']['val1'] = variables_dict["pkdr_mqtt_ip"]
+        pkdr_utils.config_dict['db_table_dict']['key2'] = 'pkdr_mqtt_port'
+        pkdr_utils.config_dict['db_table_dict']['val2'] = variables_dict["pkdr_mqtt_port"]
         pkdr_utils.db_generic_insert()
     else:
 
@@ -296,6 +304,8 @@ else:
             pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
             pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
             pkdr_utils.config_dict['db_table_dict']['log_message'] = runtime_messages
+            pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+            pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->exception->ctl_c'
             pkdr_utils.db_generic_insert()
             pkdr_mqtt_client.loop_stop()  # stop the loop
 

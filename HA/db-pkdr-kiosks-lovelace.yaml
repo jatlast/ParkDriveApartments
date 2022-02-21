@@ -24,13 +24,14 @@ kiosk_mode:
   non_admin_settings:
     kiosk: true
 
-title: PkDr Kiosks
+title: Kiosks
 views:
   #####################
   # Apt 01
   #####################
   - title: 01
-    type: sidebar # replaced "type: sidebar # replaced "panel: true""
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -279,7 +280,8 @@ views:
   # Apt 02
   #####################
   - title: 02
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -389,7 +391,8 @@ views:
   # Apt 03
   #####################
   - title: 03
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -500,7 +503,8 @@ views:
   # Apt 04
   #####################
   - title: 04
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -602,7 +606,8 @@ views:
   # Apt 05
   #####################
   - title: 05
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -691,8 +696,8 @@ views:
   # Apt 06
   #####################
   - title: 06
-    type: sidebar # replaced "panel: true"
-    # theme: M3-04-Magenta
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
       - user: 1bc46a652c8741af8e57191f74240bc0 # Apt06
@@ -784,7 +789,8 @@ views:
   # Apt 07
   #####################
   - title: 07
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -872,7 +878,8 @@ views:
   # Apt 08
   #####################
   - title: (8)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -883,7 +890,8 @@ views:
   # Apt 09
   #####################
   - title: 09
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -974,7 +982,8 @@ views:
   # Apt 10
   #####################
   - title: (10)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -986,7 +995,8 @@ views:
   # Apt 11
   #####################
   - title: (11)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -997,7 +1007,8 @@ views:
   # Apt 12
   #####################
   - title: 12
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1087,7 +1098,8 @@ views:
   # Apt 13
   #####################
   - title: (13)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1098,7 +1110,8 @@ views:
   # Apt 14
   #####################
   - title: 14
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1206,7 +1219,8 @@ views:
   # Apt 15
   #####################
   - title: (15)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1218,7 +1232,8 @@ views:
   # Apt 16
   #####################
   - title: (16)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1229,7 +1244,8 @@ views:
   # B1 - Utility Kiosk
   #####################
   - title: B1
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1374,7 +1390,8 @@ views:
   # B2 - Utility Kiosk
   #####################
   - title: (B2)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1385,7 +1402,8 @@ views:
   # B3 - Utility Kiosk
   #####################
   - title: (B3)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
@@ -1396,7 +1414,8 @@ views:
   # B4 - Utility Kiosk
   #####################
   - title: (B4)
-    type: sidebar # replaced "panel: true"
+    type: sidebar # (masonry [default], sidebar, panel)
+    panel: true
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts

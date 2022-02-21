@@ -31,14 +31,14 @@
 #   sudo pip3 install adafruit-circuitpython-sht31d
 #       https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout/python-circuitpython
 
-from cgitb import reset
-from cmath import log
-import socket
+# from cgitb import reset
+# from cmath import log
+# import socket
 import datetime
 # from mysql.connector import errorcode
 # from mysql.connector import Error
 # import mysql.connector
-import time
+# import time
 import board
 import busio
 import adafruit_htu21d  # htu21d - Temperature & Humidity
@@ -139,19 +139,23 @@ else:
         exception_flag = True
 
     # ----- Log Any Coniguration Errors to DB -----
-    if exception_flag or sensor_error_flag:
+    if exception_flag or sensor_error_flag or pkdr_utils.config_dict['sensor_temperature_window_error_flag']:
         log_level = 4 # 4 = CRITICAL
         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
-        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
-        pkdr_utils.config_dict['db_table_dict']['key5'] = 'sensor_type'
-        pkdr_utils.config_dict['db_table_dict']['val5'] = sensor_type
-        pkdr_utils.config_dict['db_table_dict']['key6'] = 'sensor_address'
-        pkdr_utils.config_dict['db_table_dict']['val6'] = sensor_address
+        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
+        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+        pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->type_or_address'
+        pkdr_utils.config_dict['db_table_dict']['key1'] = 'sensor_type'
+        pkdr_utils.config_dict['db_table_dict']['val1'] = sensor_type
+        pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_address'
+        pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_address
         if exception_flag:
             pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
             pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
         elif sensor_error_flag:
             pkdr_utils.config_dict['db_table_dict']['log_message'] = sensor_error_msg
+        elif pkdr_utils.config_dict['sensor_temperature_window_error_flag']:
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Config Error: Sensor Window not configured for valid temperature readings in PkDr config YAML.'
         pkdr_utils.db_generic_insert()
     else:
         if sensor_type == 'HTU21D' and sensor_address == 0x40:
@@ -183,6 +187,35 @@ else:
 
             # call utility function to insert into the DB
             pkdr_utils.db_generic_insert('Thermostats')
+            
+            # 20220221 - Apt12's faulty HTU21D is reading negative temperatures, so I am updating the logic to check for such signs of a faulty sensor.
+            # Also, since HA uses these values to determin if it should turn on the heat, the script should not log any temperature outside of a certain window.
+            if temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min']:
+                log_level = 4 # 4 = CRITICAL
+                pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+                pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
+                pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Error: {} is outside of valid range: {} < {} > {}'.format(temperature, pkdr_utils.config_dict['temperature_valid_min'], temperature, pkdr_utils.config_dict['temperature_valid_max'])
+                pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+                pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->temperature->range_error'
+                pkdr_utils.config_dict['db_table_dict']['key1'] = 'apt_int'
+                pkdr_utils.config_dict['db_table_dict']['val1'] = pkdr_utils.config_dict['num_int']
+                pkdr_utils.config_dict['db_table_dict']['key2'] = 'valid_min'
+                pkdr_utils.config_dict['db_table_dict']['val2'] = pkdr_utils.config_dict['temperature_valid_min']
+                pkdr_utils.config_dict['db_table_dict']['key3'] = 'temperature'
+                pkdr_utils.config_dict['db_table_dict']['val3'] = temperature
+                pkdr_utils.config_dict['db_table_dict']['key4'] = 'valid_max'
+                pkdr_utils.config_dict['db_table_dict']['val4'] = pkdr_utils.config_dict['temperature_valid_max']
+                pkdr_utils.config_dict['db_table_dict']['key5'] = 'humidity'
+                pkdr_utils.config_dict['db_table_dict']['val5'] = humidity
+                pkdr_utils.config_dict['db_table_dict']['key6'] = 'sensor_type'
+                pkdr_utils.config_dict['db_table_dict']['val6'] = sensor_type
+                pkdr_utils.config_dict['db_table_dict']['key7'] = 'sensor_address'
+                pkdr_utils.config_dict['db_table_dict']['val7'] = sensor_address
+
+                pkdr_utils.db_generic_insert()
+
 
     # SQL for checking Thermostats table...
     # MariaDB [PkDr]> select apt, temperature as C, (temperature * 9/5) + 32 as F, taken from Thermostats order by uid desc limit 20;
+
+# /usr/bin/python3 /home/PkDr/HA/code/PROD/python/pkdr_i2c_to_db.py -v 0 >> /home/pi/pkdr/logs/pkdr_i2c_to_db.log
