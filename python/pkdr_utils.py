@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
+from __future__ import print_function # from __future__ imports must occur at the beginning of the file
 #import sys # argv & python version
-from sys import argv as my_argv, version_info as my_version_info
+from sys import argv as my_argv, version_info as my_version_info, stderr as my_stderr
 import os # program name from full path
 import socket # needed for gethostname() & getsockname()
 import re # for regular expressions
@@ -12,6 +13,16 @@ import mysql.connector # for DB PkDr.RuntimeLog inserts
 config_dict = {
     'error_msg' : '',
 }
+
+# function to allow programs to print directly to stderr...
+# The optional function eprint saves some repetition. It can be used in the same way as the standard print function:
+#   https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python
+# ---------------------------------------------
+# from __future__ import print_function # SyntaxError: from __future__ imports must occur at the beginning of the file
+
+def eprint(*args, **kwargs):
+    print(*args, file=my_stderr, **kwargs)
+# ---------------------------------------------
 
 def initialize_config_dict(caller_dict):
     config_file = '/home/PkDr/HA/code/DEV/config/pkdr_config.yaml'
