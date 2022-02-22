@@ -165,10 +165,10 @@ else:
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
         pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
         pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->type_or_address'
-        pkdr_utils.config_dict['db_table_dict']['key1'] = 'sensor_type'
-        pkdr_utils.config_dict['db_table_dict']['val1'] = sensor_type
-        pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_address'
-        pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_address
+        pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
+        pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_type
+        pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
+        pkdr_utils.config_dict['db_table_dict']['val3'] = sensor_address
         if exception_flag:
             pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->exception->set_generic'
             pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
@@ -231,10 +231,10 @@ else:
                 pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Exception: temperature = sensor.temperature'
                 pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
                 pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->exception->temperature'
-                pkdr_utils.config_dict['db_table_dict']['key1'] = 'sensor_type'
-                pkdr_utils.config_dict['db_table_dict']['val1'] = sensor_type
-                pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_address'
-                pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_address
+                pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
+                pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_type
+                pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
+                pkdr_utils.config_dict['db_table_dict']['val3'] = sensor_address
                 if exception_flag:
                     pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
                     pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
@@ -290,8 +290,6 @@ else:
                     pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
                     pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
                     pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Error: {} is outside of valid range: {} < {} > {}'.format(temperature, pkdr_utils.config_dict['temperature_valid_min'], temperature, pkdr_utils.config_dict['temperature_valid_max'])
-                    pkdr_utils.config_dict['db_table_dict']['key1'] = 'apt_int'
-                    pkdr_utils.config_dict['db_table_dict']['val1'] = pkdr_utils.config_dict['num_int']
                     pkdr_utils.config_dict['db_table_dict']['key2'] = 'temperature'
                     pkdr_utils.config_dict['db_table_dict']['val2'] = temperature
                     pkdr_utils.config_dict['db_table_dict']['key3'] = 'humidity'

@@ -427,7 +427,23 @@ def db_table_dict_init(table_name):
             'exception_text' : '',
             'query_text' : '',
             'query_attempts' : 0,
+            # 20220222 - new key0 convention to help with future SQL digging for log data...
+            # Note: key0 & val0 usage convention in progress...
+            # key0 = 'log_key' to signify val0 = 'info_about->something->something_more'
+            'key0' : 'key_log',
+            'val0' : 'script_did_not_set', # shoud be set by script to supply why the message was logged
+            'key1' : 'apt_or_bld',
+            'val1' : '{}'.format(config_dict['mqtt_topic_apt_or_bld']), # [Apt## || B#]
         }
+
+# select val0, count(*) from RuntimeLog where key0 = 'log_key' group by val0;
+# +----------------------------------+----------+
+# | val0                             | count(*) |
+# +----------------------------------+----------+
+# | sensor->exception->set_generic   |        2 |
+# | sensor->temperature->range_error |        9 |
+# | sensor->type_or_address          |        1 |
+# +----------------------------------+----------+
 
 def db_generic_insert(table_name = 'RuntimeLog'):
     config_dict['db_error_msg'] = ""
