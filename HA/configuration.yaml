@@ -3643,7 +3643,8 @@ sensor:
     queries:
       - name: B1 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 41 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 41 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 41 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3659,7 +3660,8 @@ sensor:
     queries:
       - name: B2 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 42 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 42 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 42 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3675,7 +3677,8 @@ sensor:
     queries:
       - name: B3 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 43 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 43 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 43 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3691,7 +3694,8 @@ sensor:
     queries:
       - name: B4 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 44 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 44 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3710,7 +3714,8 @@ sensor:
       # I forgot HA does not support Stored Procedure calls in query: param of sql sensor
       # Invalid config for [sensor.sql]: Only SELECT queries allowed for dictionary value @ data['queries'][0]['query']. Got 'CALL sp_get_kiosk_temp_fahrenheit(1);'. (See ?, line ?).
         # query: CALL sp_get_kiosk_temp_fahrenheit(1);
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 1 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 1 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 1 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3726,7 +3731,8 @@ sensor:
     queries:
       - name: Apt02 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 2 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 2 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 2 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3742,7 +3748,8 @@ sensor:
     queries:
       - name: Apt03 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 3 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 3 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 3 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3758,7 +3765,8 @@ sensor:
   #   queries:
   #     - name: Apt04 Temperature
   #       query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
-        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 4 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 4 ORDER BY uid DESC LIMIT 1;"
+        # query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 4 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
   #       column: 'temperature'
   #       unit_of_measurement: 'F'
   # - platform: sql
@@ -3774,7 +3782,8 @@ sensor:
     queries:
       - name: Apt05 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 5 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 5 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 5 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3790,7 +3799,8 @@ sensor:
     queries:
       - name: Apt06 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 6 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 6 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 6 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3806,7 +3816,8 @@ sensor:
     queries:
       - name: Apt07 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 7 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 7 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 7 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3825,7 +3836,8 @@ sensor:
     queries:
       - name: Apt09 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 9 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 9 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 9 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3846,7 +3858,8 @@ sensor:
     queries:
       - name: Apt12 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 12 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 12 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 12 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3862,7 +3875,8 @@ sensor:
     queries:
       - name: Apt13 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 13 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 13 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt 13x AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -3878,7 +3892,8 @@ sensor:
     queries:
       - name: Apt14 Temperature
         # query: "SELECT (temperature * 9/5) + 32 AS temperature FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
-        query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 72)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 14 ORDER BY uid DESC LIMIT 1;"
+        # query: "SELECT (IF(TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30, temperature, 22.22)* 9/5)+ 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND temperature BETWEEN 10 AND 50 AND apt = 14 ORDER BY uid DESC LIMIT 1;"
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 14 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
