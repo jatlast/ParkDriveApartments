@@ -258,7 +258,7 @@ else:
         exception_type = '{}'.format(type(err))
         exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: OSError {}'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], err)
         exception_flag = True
-    except Exception as err:
+    except BaseException as err:
         exception_type = '{}'.format(type(err))
         exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: Unexptected ({})|({}) - This should never happen'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], type(err), err)
         pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])

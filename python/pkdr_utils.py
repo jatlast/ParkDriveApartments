@@ -212,7 +212,7 @@ def add_pkdr_caller_info_to_config_dict():
             caller_error_msg += "Configuration Error: verbosity_override_flag | verbosity_override_value not in config file"
         else:
             if config_dict['verbosity'] != config_dict['production_code_config']['verbosity_override_value']:
-                print("Changed Verbosity {} to {}".format(config_dict['verbosity'], config_dict['production_code_config']['verbosity_override_value']))
+                print("{}: Changed Verbosity {} to {}".format(config_dict['datestamp'], config_dict['verbosity'], config_dict['production_code_config']['verbosity_override_value']))
                 config_dict['verbosity'] = config_dict['production_code_config']['verbosity_override_value']
 
         # Production Code Check
@@ -406,7 +406,6 @@ def add_pkdr_mqtt_info_to_config_dict():
     config_dict['mqtt_credentials_error_flag'] = mqtt_credentials_error_flag
     config_dict['mqtt_credentials_error_msg'] = mqtt_credentials_error_msg
 
-
 def db_table_dict_init(table_name):
     # Thermostats | RuntimeLog (default) as of 20220215
     config_dict['db_insert_dict'] = {}
@@ -487,7 +486,7 @@ def db_generic_insert(table_name = 'RuntimeLog'):
             )
 
     if config_dict['verbosity'] > 2:
-        print("SQL {}".format(query_insert))
+        print("{}: SQL {}".format(config_dict['datestamp'], query_insert))
 
     # if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
         # Check if dynamic table is being called
@@ -511,7 +510,7 @@ def db_generic_insert(table_name = 'RuntimeLog'):
             # Succcess
             if cursor.rowcount > 0:
                 if config_dict['verbosity'] > 1:
-                    print("DB Success: {} insert into {} table".format(cursor.rowcount, table_name))
+                    print("{}: DB Success: {} insert into {} table".format(config_dict['datestamp'], cursor.rowcount, table_name))
             # Failure
             else:
                 config_dict['log_level'] = 3 # 3 = ERROR
@@ -522,20 +521,21 @@ def db_generic_insert(table_name = 'RuntimeLog'):
                     print(config_dict['db_error_msg'])
 
                 if config_dict['verbosity'] > 2:
-                    print("SQL {}".format(query_insert))
+                    print("{}: SQL {}".format(config_dict['datestamp'], query_insert))
 
                 cursor.close()
 
         # Couldn't connect to the DB
-        except mysql.connector.Error as error:
-            config_dict['db_error_msg'] = "DB Error: Failed to insert into table {} | mysql.connector.Error ({})".format(table_name, error)
+        # except mysql.connector.Error as error: # 20220222 - replaced with generic catch
+        except BaseException as err:
+            config_dict['db_error_msg'] = "DB Error: Failed to insert into table {} | connection = mysql.connector.connect(host={},database={},user={},) - raised exception ({})|({})".format(table_name, config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_host_ip"], config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_name"], config_dict['pkdr_remote_db_config']['db_credentials_dict']["db_user"], type(err), err)
             config_dict['db_error_flag'] = True
             config_dict['log_level'] = 4 # 4 = CRITICAL
             config_dict['db_table_dict']['log_level'] = config_dict['log_level']
             config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
-
-            if config_dict['verbosity'] > 2:
-                print(config_dict['db_error_msg'])
+            exception_msg = '({} @ {}) sensor.temperature raised: OSError ({})|({})'.format(sensor_type, sensor_address, type(err), err)
+            if config_dict['verbosity'] >= 0:
+                print('{}: {}'.format(config_dict['datestamp'], config_dict['db_error_msg']))
 
     # Catch DB Error and log the error to RuntimeLog table
     if config_dict['db_error_flag']:

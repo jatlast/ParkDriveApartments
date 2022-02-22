@@ -93,18 +93,53 @@ variables_dict = {
 if not pkdr_utils.initialize_config_dict(variables_dict):
     print('{}: Configuration Failure {}'.format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
 else:
+    # ----------------
+    # RuntimeLog (key#/val#) Variables Convention
+    # ----------------
+    # set in pkdr_utils.py
+    # ----------------
+    # key0 - key_log
+    # key1 - apt_or_bld
+    # ----------------
+    # set in this program...
+    # ----------------
+    # key2 - sensor_type
+    # key3 - sensor_address
+    # key4 - temperature
+    # key5 - humidity
+    # key6 - duration->sensor_set_generic
+    # key7 - duration->sensor_set_specific
+    # key8 - duration->sensor_read_temperature
+    # key9 - duration->program_execution
+    # duration->sensor_read_humidity # not currently used
+    # ----------------
+
+    # initialized at top for reference & restating key# w/ val# for readability within the body of the program...
+    pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+    pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->' # set root of log_key value to be appended to based on program flow
+    pkdr_utils.config_dict['db_table_dict']['key1'] = 'apt_or_bld'
+    pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
+    pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
+    pkdr_utils.config_dict['db_table_dict']['key4'] = 'temperature'
+    pkdr_utils.config_dict['db_table_dict']['key5'] = 'humidity'
+    pkdr_utils.config_dict['db_table_dict']['key6'] = 'duration->sensor_set_generic'
+    pkdr_utils.config_dict['db_table_dict']['key7'] = 'duration->sensor_set_specific'
+    pkdr_utils.config_dict['db_table_dict']['key8'] = 'duration->sensor_read_temperature'
+    pkdr_utils.config_dict['db_table_dict']['key9'] = 'duration->program_execution'    
+
     # Create library object using Adafruit's Bus I2C port
     i2c = busio.I2C(board.SCL, board.SDA) # (SCL, SDA) default | returns <busio.I2C object at 0x763d6e50>
-    temperature = 0
-    humidity = 0
+    temperature = 0.0
+    humidity = 0.0
     log_text = ''
     code_block_times_dict = {
-        'program_execution' : 0.0,
-        'sensor_set_generic' : 0.0,
-        'sensor_set_specific' : 0.0,
-        'sensor_read_temperature' : 0.0,
-        'sensor_read_humidity' : 0.0,
-        'db_insert_readings' : 0.0,
+        # initialize to negative since durations are always positive...
+        'program_execution' : -1.0,
+        'sensor_set_generic' : -1.0,
+        'sensor_set_specific' : -1.0,
+        'sensor_read_temperature' : -1.0,
+        'sensor_read_humidity' : -1.0,
+        'db_insert_readings' : -1.0,
     }
 
     # Default sensor to arg defaults...
@@ -133,6 +168,12 @@ else:
                 sensor_error_flag = True
                 sensor_error_msg = 'Config Error: sensor_type ({}) not recognized'.format(pkdr_utils.config_dict['sensor_type'])
 
+    # These can be set here and shared because they are not updated....
+    pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
+    pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_type
+    pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
+    pkdr_utils.config_dict['db_table_dict']['val3'] = sensor_address
+    
     block_start_time = time.time()
 
     # Try instantiating an i2c object using a the spcific address determined above...
@@ -146,14 +187,15 @@ else:
         exception_type = '{}'.format(type(err))
         exception_msg = '({}) I2CDevice({}, {}) raised: ValueError {}'.format(sensor_type, str(i2c), sensor_address, err)
         exception_flag = True
-    except Exception as err:
+    except BaseException as err:
         exception_type = '{}'.format(type(err))
-        exception_msg = '({}) I2CDevice({}, {}) raised: Unexptected ({})|({}) - This should never happen'.format(sensor_type, str(i2c), sensor_address, type(err), err)
-        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
+        exception_msg = '({}) I2CDevice({}, {}) raised: Unexptected ({})|({})'.format(sensor_type, str(i2c), sensor_address, type(err), err)
         exception_flag = True
 
     block_end_time = time.time()
     code_block_times_dict['sensor_set_generic'] = (block_end_time - block_start_time)
+    pkdr_utils.config_dict['db_table_dict']['key6'] = 'duration->sensor_set_generic'
+    pkdr_utils.config_dict['db_table_dict']['val6'] = code_block_times_dict['sensor_set_generic']
 
     if variables_dict['verbosity'] > 3:
         pkdr_utils.eprint('{} for exception checking: sensor = generic'.format(code_block_times_dict['sensor_set_generic']))
@@ -163,167 +205,176 @@ else:
         log_level = 4 # 4 = CRITICAL
         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
-        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
-        pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->type_or_address'
-        pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
-        pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_type
-        pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
-        pkdr_utils.config_dict['db_table_dict']['val3'] = sensor_address
+        pkdr_utils.config_dict['db_table_dict']['val0'] += 'type_or_address'
         if exception_flag:
-            pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->exception->set_generic'
+            pkdr_utils.config_dict['db_table_dict']['val0'] += 'exception->set_generic'
             pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
             pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
         elif sensor_error_flag:
-            pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->config->error'
+            pkdr_utils.config_dict['db_table_dict']['val0'] += 'config->error'
             pkdr_utils.config_dict['db_table_dict']['log_message'] = sensor_error_msg
         elif pkdr_utils.config_dict['sensor_temperature_window_error_flag']:
-            pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->config->temperature_window->error'
+            pkdr_utils.config_dict['db_table_dict']['val0'] += 'config->temperature_window->error'
             pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Config Error: Sensor Window not configured for valid temperature readings in PkDr config YAML.'
         pkdr_utils.db_generic_insert()
     else:
-        block_start_time = time.time()
-
-        if sensor_type == 'HTU21D' and sensor_address == 0x40:
-            sensor = adafruit_htu21d.HTU21D(i2c)
-        elif sensor_type == 'SHT31D' and sensor_address == 0x44:
-            sensor = adafruit_sht31d.SHT31D(i2c)
-        else:
-            sensor_error_flag = True
-            sensor_error_msg = 'Config Error: sensor_type({}) has incorrect address({}) aka({})'.format(sensor_type, sensor_address, hex(sensor_address))
-            pkdr_utils.config_dict['db_table_dict']['log_message'] = sensor_error_msg
-            pkdr_utils.db_generic_insert()
-
-        block_end_time = time.time()
         if not sensor_error_flag:
-            if variables_dict['verbosity'] > 3:
-                pkdr_utils.eprint('{} for sensor = {} @ {}'.format(code_block_times_dict['sensor_set_specific'], sensor_type, hex(sensor_address)))
-
             block_start_time = time.time()
 
             # Try accessing the sensor for a temperature reading...
             exception_msg = ''
             exception_type = ''
             exception_flag = False
+            no_sensor_tried_flag = True
+            read_attempt_string_for_info = 'sensor = adafruit_'
             try:
-                temperature = sensor.temperature
+                if sensor_type == 'HTU21D' and sensor_address == 0x40:
+                    read_attempt_string_for_info += 'htu21d.HTU21D(i2c)'
+                    no_sensor_tried_flag = False
+                    sensor = adafruit_htu21d.HTU21D(i2c) # 20220222 7:45 AM - this sensor is causing the program to hang
+                elif sensor_type == 'SHT31D' and sensor_address == 0x44:
+                    read_attempt_string_for_info += 'sht31d.SHT31D(i2c)'
+                    no_sensor_tried_flag = False
+                    sensor = adafruit_sht31d.SHT31D(i2c)
             # OSError: [Errno 121] Remote I/O error
             except OSError as err:
                 exception_type = '{}'.format(type(err))
-                exception_msg = '({} @ {}) sensor.temperature raised: OSError ({})|({}) - This should never happen'.format(sensor_type, sensor_address, type(err), err)
+                exception_msg = '({} @ {}) {} raised: OSError ({})|({})'.format(sensor_type, sensor_address, read_attempt_string_for_info, type(err), err)
                 exception_flag = True
-            except Exception as err:
+            except BaseException as err:
                 exception_type = '{}'.format(type(err))
-                exception_msg = '({} @ {}) sensor.temperature raised: Unexptected ({})|({}) - This should never happen'.format(sensor_type, sensor_address, type(err), err)
-                pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
+                exception_msg = '({} @ {}) {} raised: Unexptected ({})|({})'.format(sensor_type, sensor_address, read_attempt_string_for_info, type(err), err)
                 exception_flag = True
 
             block_end_time = time.time()
-            code_block_times_dict['sensor_read_temperature'] = (block_end_time - block_start_time)
-
+            code_block_times_dict['sensor_set_specific'] = (block_end_time - block_start_time)
+            pkdr_utils.config_dict['db_table_dict']['key7'] = 'duration->sensor_set_specific'
+            pkdr_utils.config_dict['db_table_dict']['val7'] = code_block_times_dict['sensor_set_specific']
             if variables_dict['verbosity'] > 3:
-                pkdr_utils.eprint('{} for sensor {} @ {} to execute sensor.temperature'.format(code_block_times_dict['sensor_read_temperature'], sensor_type, hex(sensor_address)))
+                pkdr_utils.eprint('{} for {} @ {} {}'.format(code_block_times_dict['sensor_set_specific'], sensor_type, hex(sensor_address), read_attempt_string_for_info))
 
             # ----- Log Any Coniguration Errors to DB -----
             if exception_flag:
                 log_level = 4 # 4 = CRITICAL
                 pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
                 pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
-                pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Exception: temperature = sensor.temperature'
-                pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
-                pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->exception->temperature'
-                pkdr_utils.config_dict['db_table_dict']['key2'] = 'sensor_type'
-                pkdr_utils.config_dict['db_table_dict']['val2'] = sensor_type
-                pkdr_utils.config_dict['db_table_dict']['key3'] = 'sensor_address'
-                pkdr_utils.config_dict['db_table_dict']['val3'] = sensor_address
-                if exception_flag:
-                    pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
-                    pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
+                pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Exception: {}'.format(read_attempt_string_for_info)
+                pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
+                pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
+                pkdr_utils.config_dict['db_table_dict']['val0'] += 'exception->set_specific'
+                pkdr_utils.db_generic_insert()
+            elif no_sensor_tried_flag:
+                sensor_error_flag = True
+                log_level = 4 # 4 = CRITICAL
+                pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+                pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
+                pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Config Error: sensor_type({}) has incorrect address({}) aka({})'.format(sensor_type, sensor_address, hex(sensor_address))
+                pkdr_utils.config_dict['db_table_dict']['val0'] += 'config->type_address->error'
                 pkdr_utils.db_generic_insert()
             else:
                 block_start_time = time.time()
 
-                humidity = sensor.relative_humidity
+                # Try accessing the sensor for a temperature reading...
+                exception_msg = ''
+                exception_type = ''
+                exception_flag = False
+                try:
+                    temperature = sensor.temperature
+                # OSError: [Errno 121] Remote I/O error
+                except OSError as err:
+                    exception_type = '{}'.format(type(err))
+                    exception_msg = '({} @ {}) sensor.temperature raised: OSError ({})|({})'.format(sensor_type, sensor_address, type(err), err)
+                    exception_flag = True
+                except BaseException as err:
+                    exception_type = '{}'.format(type(err))
+                    exception_msg = '({} @ {}) sensor.temperature raised: Unexptected ({})|({})'.format(sensor_type, sensor_address, type(err), err)
+                    exception_flag = True
+
+                pkdr_utils.config_dict['db_table_dict']['key4'] = 'temperature'
+                pkdr_utils.config_dict['db_table_dict']['val4'] = temperature
 
                 block_end_time = time.time()
-                code_block_times_dict['sensor_read_humidity'] = (block_end_time - block_start_time)
+                code_block_times_dict['sensor_read_temperature'] = (block_end_time - block_start_time)
+                pkdr_utils.config_dict['db_table_dict']['key8'] = 'duration->sensor_read_temperature'
+                pkdr_utils.config_dict['db_table_dict']['val8'] = code_block_times_dict['sensor_read_temperature']
                 if variables_dict['verbosity'] > 3:
-                    pkdr_utils.eprint('{} for sensor {} @ {} to execute sensor.relative_humidity'.format(code_block_times_dict['sensor_read_humidity'], sensor_type, hex(sensor_address)))
+                    pkdr_utils.eprint('{} for sensor {} @ {} to execute sensor.temperature'.format(code_block_times_dict['sensor_read_temperature'], sensor_type, hex(sensor_address)))
 
-                log_text += 'Using sensor sensor_type({}) @ int({}) hex({})'.format(sensor_type, sensor_address, hex(sensor_address))
-                log_text += '\n'
-                log_text += 'Befor DB call: {} F | {} %'.format(round(((temperature * 9 / 5) + 32), 2),round(humidity, 2),)
-
-                if variables_dict['verbosity'] > 1:
-                    print(log_text)
-
-                # Initialize DB Insert variables...
-                pkdr_utils.config_dict['db_insert_dict']['apt'] = pkdr_utils.config_dict['num_int']
-                pkdr_utils.config_dict['db_insert_dict']['temperature'] = temperature
-                pkdr_utils.config_dict['db_insert_dict']['humidity'] = humidity
-                pkdr_utils.config_dict['db_insert_dict']['taken'] = str(datetime.datetime.now())
-
-                block_start_time = time.time()
-
-                pkdr_utils.db_generic_insert('Thermostats')
-
-                block_end_time = time.time()
-                code_block_times_dict['db_insert_readings'] = (block_end_time - block_start_time)
-                if variables_dict['verbosity'] > 3:
-                    pkdr_utils.eprint('{} for db insert thermostats'.format(code_block_times_dict['db_insert_readings']))
-                
-                # 20220221 - Apt12's faulty HTU21D is reading negative temperatures, so I am updating the logic to check for such signs of a faulty sensor.
-                # Also, since HA uses these values to determin if it should turn on the heat, the script should not log any temperature outside of a certain window.
-                if (temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min'] or code_block_times_dict['program_execution'] > max_duration_program):
-                    program_end_time = time.time()
-                    code_block_times_dict['program_execution'] = (program_end_time - program_start_time)
-                    if variables_dict['verbosity'] > 3:
-                        pkdr_utils.eprint('{} program execution pre db log insert'.format(code_block_times_dict['program_execution']))
-
-                    pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
-                    pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->temperature->range_or_duration'
-                    if (temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min']):
-                        pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->temperature->range_error'
-                    elif (code_block_times_dict['program_execution'] > max_duration_program):
-                        pkdr_utils.config_dict['db_table_dict']['val0'] = 'sensor->temperature->duration_error'
-
+                # ----- Log Any Coniguration Errors to DB -----
+                if exception_flag:
                     log_level = 4 # 4 = CRITICAL
                     pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
                     pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
-                    pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Error: {} is outside of valid range: {} < {} > {}'.format(temperature, pkdr_utils.config_dict['temperature_valid_min'], temperature, pkdr_utils.config_dict['temperature_valid_max'])
-                    pkdr_utils.config_dict['db_table_dict']['key2'] = 'temperature'
-                    pkdr_utils.config_dict['db_table_dict']['val2'] = temperature
-                    pkdr_utils.config_dict['db_table_dict']['key3'] = 'humidity'
-                    pkdr_utils.config_dict['db_table_dict']['val3'] = humidity
-                    pkdr_utils.config_dict['db_table_dict']['key4'] = 'sensor_type'
-                    pkdr_utils.config_dict['db_table_dict']['val4'] = sensor_type
-                    pkdr_utils.config_dict['db_table_dict']['key5'] = 'sensor_address'
-                    pkdr_utils.config_dict['db_table_dict']['val5'] = sensor_address
-                    pkdr_utils.config_dict['db_table_dict']['key6'] = 'duration->sensor_set_generic'
-                    pkdr_utils.config_dict['db_table_dict']['val6'] = code_block_times_dict['sensor_set_generic']
-                    # pkdr_utils.config_dict['db_table_dict']['key8'] = 'duration->sensor_set_specific'
-                    # pkdr_utils.config_dict['db_table_dict']['val8'] = code_block_times_dict['sensor_set_specific']
-                    pkdr_utils.config_dict['db_table_dict']['key7'] = 'duration->sensor_read_temperature'
-                    pkdr_utils.config_dict['db_table_dict']['val7'] = code_block_times_dict['sensor_read_temperature']
-                    pkdr_utils.config_dict['db_table_dict']['key8'] = 'duration->sensor_read_humidity'
-                    pkdr_utils.config_dict['db_table_dict']['val8'] = code_block_times_dict['sensor_read_humidity']
-                    pkdr_utils.config_dict['db_table_dict']['key9'] = 'duration->program_execution'
-                    pkdr_utils.config_dict['db_table_dict']['val9'] = code_block_times_dict['program_execution']
-
-                    # pkdr_utils.config_dict['db_table_dict']['key2'] = 'valid_min'
-                    # pkdr_utils.config_dict['db_table_dict']['val2'] = pkdr_utils.config_dict['temperature_valid_min']
-                    # pkdr_utils.config_dict['db_table_dict']['key3'] = 'temperature'
-                    # pkdr_utils.config_dict['db_table_dict']['val3'] = temperature
-                    # pkdr_utils.config_dict['db_table_dict']['key4'] = 'valid_max'
-                    # pkdr_utils.config_dict['db_table_dict']['val4'] = pkdr_utils.config_dict['temperature_valid_max']
-                    # pkdr_utils.config_dict['db_table_dict']['key5'] = 'humidity'
-                    # pkdr_utils.config_dict['db_table_dict']['val5'] = humidity
-
+                    pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Exception: temperature = sensor.temperature'
+                    pkdr_utils.config_dict['db_table_dict']['exception_type'] = exception_type
+                    pkdr_utils.config_dict['db_table_dict']['exception_text'] = exception_msg
+                    pkdr_utils.config_dict['db_table_dict']['val0'] += 'exception->temperature'
                     pkdr_utils.db_generic_insert()
                 else:
-                    program_end_time = time.time()
-                    code_block_times_dict['program_execution'] = (program_end_time - program_start_time)
+                    block_start_time = time.time()
+
+                    humidity = sensor.relative_humidity
+                    pkdr_utils.config_dict['db_table_dict']['key5'] = 'humidity'
+                    pkdr_utils.config_dict['db_table_dict']['val5'] = humidity
+
+                    block_end_time = time.time()
+                    code_block_times_dict['sensor_read_humidity'] = (block_end_time - block_start_time)
+                    # set dict but may be overwritten later
+                    # pkdr_utils.config_dict['db_table_dict']['key?'] = 'duration->sensor_read_humidity'
+                    # pkdr_utils.config_dict['db_table_dict']['val?'] = code_block_times_dict['sensor_read_humidity']
                     if variables_dict['verbosity'] > 3:
-                        pkdr_utils.eprint('{} program execution'.format(code_block_times_dict['program_execution']))
+                        pkdr_utils.eprint('{} for sensor {} @ {} to execute sensor.relative_humidity'.format(code_block_times_dict['sensor_read_humidity'], sensor_type, hex(sensor_address)))
+
+                    log_text += 'Using sensor sensor_type({}) @ int({}) hex({})'.format(sensor_type, sensor_address, hex(sensor_address))
+                    log_text += '\n'
+                    log_text += 'Befor DB call: {} F | {} %'.format(round(((temperature * 9 / 5) + 32), 2),round(humidity, 2),)
+
+                    if variables_dict['verbosity'] > 1:
+                        print(log_text)
+
+                    # Initialize DB Insert variables...
+                    pkdr_utils.config_dict['db_insert_dict']['apt'] = pkdr_utils.config_dict['num_int']
+                    pkdr_utils.config_dict['db_insert_dict']['temperature'] = temperature
+                    pkdr_utils.config_dict['db_insert_dict']['humidity'] = humidity
+                    pkdr_utils.config_dict['db_insert_dict']['taken'] = str(datetime.datetime.now())
+
+                    block_start_time = time.time()
+
+                    pkdr_utils.db_generic_insert('Thermostats')
+
+                    block_end_time = time.time()
+                    code_block_times_dict['db_insert_readings'] = (block_end_time - block_start_time)
+                    if variables_dict['verbosity'] > 3:
+                        pkdr_utils.eprint('{} for db insert thermostats'.format(code_block_times_dict['db_insert_readings']))
+                    
+                    # 20220221 - Apt12's faulty HTU21D is reading negative temperatures, so I am updating the logic to check for such signs of a faulty sensor.
+                    # Also, since HA uses these values to determin if it should turn on the heat, the script should not log any temperature outside of a certain window.
+                    if (temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min'] or code_block_times_dict['program_execution'] > max_duration_program):
+                        program_end_time = time.time()
+                        code_block_times_dict['program_execution'] = (program_end_time - program_start_time)
+                        if variables_dict['verbosity'] > 3:
+                            pkdr_utils.eprint('{} program execution pre db log insert'.format(code_block_times_dict['program_execution']))
+
+                        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+                        pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->range_or_duration'
+                        if (temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min']):
+                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->range_error'
+                        elif (code_block_times_dict['program_execution'] > max_duration_program):
+                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->duration_error'
+
+                        log_level = 4 # 4 = CRITICAL
+                        pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+                        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
+                        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Error: {} is outside of valid range: {} < {} > {}'.format(temperature, pkdr_utils.config_dict['temperature_valid_min'], temperature, pkdr_utils.config_dict['temperature_valid_max'])
+                        pkdr_utils.config_dict['db_table_dict']['key9'] = 'duration->program_execution'
+                        pkdr_utils.config_dict['db_table_dict']['val9'] = code_block_times_dict['program_execution']
+
+                        pkdr_utils.db_generic_insert()
+                    else:
+                        program_end_time = time.time()
+                        code_block_times_dict['program_execution'] = (program_end_time - program_start_time)
+                        if variables_dict['verbosity'] > 3:
+                            pkdr_utils.eprint('{} program execution'.format(code_block_times_dict['program_execution']))
 
     if variables_dict['verbosity'] > 3:
         for key, val in code_block_times_dict.items():
