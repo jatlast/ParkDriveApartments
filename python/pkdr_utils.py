@@ -5,7 +5,8 @@ from __future__ import print_function # from __future__ imports must occur at th
 from sys import argv as my_argv, version_info as my_version_info, stderr as my_stderr
 import os # program name from full path
 import socket # needed for gethostname() & getsockname()
-import re # for regular expressions
+import re
+from tkinter.tix import Tree # for regular expressions
 import yaml # 20220213 Breaking out and consolidating config information to pkdr.yaml
 import datetime # datestamps of program execution
 import mysql.connector # for DB PkDr.RuntimeLog inserts
@@ -56,10 +57,10 @@ def initialize_config_dict(caller_dict):
 
     if not config_dict['error_flag']:
         # add caller defaluts
-        config_dict['apt_or_bld'] = ''
+        config_dict['pkdr_id'] = ''
         config_dict['num_int'] = 0
         config_dict['num_str'] = '0'
-        config_dict['mqtt_topic_apt_or_bld'] = ''
+        config_dict['pkdr_location_id'] = 'UNK'
         config_dict['mqtt_valid'] = False
         config_dict['mqtt_credentials_error_flag'] = False
         config_dict['mqtt_credentials_error_msg'] = ""
@@ -69,12 +70,13 @@ def initialize_config_dict(caller_dict):
         config_dict['sensor_type_error_flag'] = False
         config_dict['sensor_temperature_window_error_flag'] = False
         config_dict['db_log_name'] = 'RuntimeLog'
+        config_dict['db_insert_table'] = ''
         config_dict['log_level_name'] = 'INFO'
         config_dict['log_level'] = 1
 
-        db_table_dict_init(config_dict['db_log_name'])
-
         add_pkdr_caller_info_to_config_dict()
+
+        db_table_dict_init(config_dict['db_log_name'])
 
         add_pkdr_mqtt_info_to_config_dict()
 
@@ -129,53 +131,56 @@ def add_pkdr_caller_info_to_config_dict():
     code_in_production_list = ""
     mqtt_topic_list = ""
 
+    # try to set the pkdr_location_id variable
     if config_dict.get('ip_to_apt_dict', -1) == -1:
         caller_error_flag = True
         caller_error_msg += "Configuration Error: ip_to_apt_dict not in config file"
+        config_dict['pkdr_location_id'] = 'err->ip_to_apt_dict'
     else:
         # integer format (apt = 1 to 16, bld = 41 to 44, # > 44 = last # of IP)
         config_dict['num_int'] = config_dict['ip_to_apt_dict'].get(config_dict['ip'], -1)
         if config_dict['num_int'] == -1:
             caller_error_flag = True
             caller_error_msg += "Configuration Error: IP not in config file ip_to_apt_dict"
+            config_dict['pkdr_location_id'] = 'err->ip_to_apt_dict->ip'
         else:
             if config_dict['num_int'] <= 16:
-                config_dict['apt_or_bld'] = 'apt'
-                config_dict['mqtt_topic_apt_or_bld'] = 'Apt'
+                config_dict['pkdr_id'] = 'apt'
+                config_dict['pkdr_location_id'] = 'Apt'
                 if config_dict['num_int'] < 10:
                     config_dict['num_str'] = '0' + str(config_dict['num_int'])
                 else:
                     config_dict['num_str'] = str(config_dict['num_int'])
-                config_dict['mqtt_topic_apt_or_bld'] += config_dict['num_str']
+                config_dict['pkdr_location_id'] += config_dict['num_str']
             elif config_dict['num_int'] <= 44 and config_dict['num_int'] > 40:
-                config_dict['apt_or_bld'] = 'bld'
-                config_dict['mqtt_topic_apt_or_bld'] = 'B' + str(config_dict['num_int'] % 40)
+                config_dict['pkdr_id'] = 'bld'
+                config_dict['pkdr_location_id'] = 'B' + str(config_dict['num_int'] % 40)
             else:
                 caller_error_flag = True
                 caller_error_msg += "ERROR: Number not an Apt or Bld"
-                config_dict['apt_or_bld'] = 'unk'
+                config_dict['pkdr_id'] = 'unk'
                 config_dict['num_str'] = str(config_dict['num_int'])
-                config_dict['mqtt_topic_apt_or_bld'] = 'BorA'
+                config_dict['pkdr_location_id'] = 'BorA'
 
 # From Tasmota Config
 # // -- MQTT topics ---------------------------------
 # define MQTT_FULLTOPIC "PkDr/BorA/Room/%prefix%/%topic%/" // [FullTopic] Subscribe and Publish full topic name - Legacy topic
 
     # Valid MQTT against config file
-    if len(config_dict['mqtt_topic_apt_or_bld']) > 1 and config_dict['mqtt_topic_apt_or_bld'] != 'BorA':
+    if len(config_dict['pkdr_location_id']) > 1 and config_dict['pkdr_location_id'] != 'BorA':
         if config_dict.get('mqtt_valid_topic_location_list', -1) == -1:
             caller_error_flag = True
             caller_error_msg += "Configuration Error: mqtt_valid_topic_location_list not in config file"
         else:
             mqtt_topic_list = "MQTT Topic Search <"
             for i in config_dict["mqtt_valid_topic_location_list"]:
-                if config_dict['mqtt_topic_apt_or_bld'] == i:
+                if config_dict['pkdr_location_id'] == i:
                     if config_dict['verbosity'] > 2:
-                        mqtt_topic_list += "({}) == ({}) - Found".format(config_dict['mqtt_topic_apt_or_bld'], i)
+                        mqtt_topic_list += "({}) == ({}) - Found".format(config_dict['pkdr_location_id'], i)
                     config_dict['mqtt_valid'] = True
                     break
                 else:
-                    mqtt_topic_list += "({}) != ({})".format(config_dict['mqtt_topic_apt_or_bld'], i)
+                    mqtt_topic_list += "({}) != ({})".format(config_dict['pkdr_location_id'], i)
             mqtt_topic_list += ">"
 
     # Valid Production Code Config Check
@@ -389,10 +394,14 @@ def add_pkdr_mqtt_info_to_config_dict():
         if config_dict['pkdr_mqtt_config'].get('paho_client_dict', -1) == -1:
             mqtt_credentials_error_flag = True
             mqtt_credentials_error_msg += "Configuration Error: paho_client_dict not in config file"
-        # paho log level lookup list
+        # paho log level lookup number to name dict
         elif config_dict['pkdr_mqtt_config']['paho_client_dict'].get('log_levels_dict', -1) == -1:
             mqtt_credentials_error_flag = True
             mqtt_credentials_error_msg += "Configuration Error: log_levels_dict not in config file"
+        # paho log level lookup name to log-if value
+        elif config_dict['pkdr_mqtt_config']['paho_client_dict'].get('log_levels_if_dict', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: log_levels_if_dict not in config file"
 
         # mosquitto broker
         if config_dict['pkdr_mqtt_config'].get('mosquitto_broker_config', -1) == -1:
@@ -401,7 +410,7 @@ def add_pkdr_mqtt_info_to_config_dict():
         # mosquitto broker credentials dict
         elif config_dict['pkdr_mqtt_config']['mosquitto_broker_config'].get('credentials_dict', -1) == -1:
             mqtt_credentials_error_flag = True
-            mqtt_credentials_error_msg += "Configuration Error: log_levels_dict not in config file"
+            mqtt_credentials_error_msg += "Configuration Error: credentials_dict not in config file"
 
     config_dict['mqtt_credentials_error_flag'] = mqtt_credentials_error_flag
     config_dict['mqtt_credentials_error_msg'] = mqtt_credentials_error_msg
@@ -411,29 +420,70 @@ def db_table_dict_init(table_name):
     config_dict['db_insert_dict'] = {}
 
     if table_name == config_dict['db_log_name']:
-        config_dict['db_table_dict'] = {
-            'author_date' : str(config_dict['datestamp']),
-            'author_name' : '{}'.format(config_dict['hostname']),
-            # ToDo: Remove the name from the path
-            'author_path' : '{}'.format(config_dict['program_path']),
-            'author_options' : '{}'.format(config_dict['program_options']),
-            'author_address' : '{}'.format(config_dict['ip']),
-            'author_version' : '{}'.format(config_dict['python_version']),
-            'log_level' : config_dict['log_level'],
-            'log_level_name' : config_dict['log_level_name'],
-            'log_message' : '',
-            'exception_type' : '',
-            'exception_text' : '',
-            'query_text' : '',
-            'query_attempts' : 0,
-            # 20220222 - new key0 convention to help with future SQL digging for log data...
-            # Note: key0 & val0 usage convention in progress...
-            # key0 = 'log_key' to signify val0 = 'info_about->something->something_more'
-            'key0' : 'key_log',
-            'val0' : 'script_did_not_set', # shoud be set by script to supply why the message was logged
-            'key1' : 'apt_or_bld',
-            'val1' : '{}'.format(config_dict['mqtt_topic_apt_or_bld']), # [Apt## || B#]
-        }
+        if config_dict.get('db_table_dict', -1) == -1:
+            config_dict['db_table_dict'] = {
+                'author_date' : str(config_dict['datestamp']),
+                'author_name' : '{}'.format(config_dict['hostname']),
+                # ToDo: Remove the name from the path
+                'author_path' : '{}'.format(config_dict['program_path']),
+                'author_options' : '{}'.format(config_dict['program_options']),
+                'author_address' : '{}'.format(config_dict['ip']),
+                'author_version' : '{}'.format(config_dict['python_version']),
+                'log_level' : config_dict['log_level'],
+                'log_level_name' : config_dict['log_level_name'],
+                'log_message' : '',
+                'exception_type' : '',
+                'exception_text' : '',
+                'query_text' : '',
+                'query_attempts' : 0,
+                # 20220222 - new key0 convention to help with future SQL digging for log data...
+                # Note: key0 & val0 usage convention in progress...
+                # key0 = 'log_key' to signify val0 = 'info_about->something->something_more'
+                'key0' : 'key_log',
+                'val0' : 'script_did_not_set', # shoud be set by script to supply why the message was logged
+                'key1' : 'pkdr_id',
+                'val1' : '{}'.format(config_dict['pkdr_location_id']), # [Apt## || B#]
+            }
+        else:
+            config_dict['db_table_dict']['query_attempts'] += 1
+
+def db_variables_add_dict(key_value_pair_dict):
+    insert_failed_flag = False
+    for key, value in key_value_pair_dict.items():
+        if not db_variables_add_key_value(key, value):
+            insert_failed_flag = True
+            break
+    return not insert_failed_flag
+
+def db_variables_add_key_value(key, value):
+    db_variable_total = 10 # key0 & key1 are spoken for by convention
+    key_name = ''
+    insert_failed_flag = True
+    # make a list containing variable key names to match the db variable names
+    for i in range(db_variable_total):
+        if i > 1:
+            key_name = 'key{}'.format(str(i))
+            if config_dict['db_table_dict'].get(key_name, -1) == -1:
+                config_dict['db_table_dict'][key_name] = key
+                config_dict['db_table_dict']['val' + str(i)] = value
+                insert_failed_flag = False
+                break
+            else:
+                if config_dict['verbosity'] > 3:
+                    print("key {} unavailable".format(key_name))
+        else:
+            pass # key0 and key1 are spoken for by convention
+    
+    debug_text = ''
+    if insert_failed_flag:
+        debug_text = "Failed:  db_variables_add_key_value({}, {})".format(key, value)
+    else:
+        debug_text = "Success: db_variables_add_key_value({}, {}) used {}".format(key, value, key_name)
+
+    if config_dict['verbosity'] > 3:
+        print("{}: {}".format(config_dict['datestamp'], debug_text))
+
+    return not insert_failed_flag
 
 # select val0, count(*) from RuntimeLog where key0 = 'log_key' group by val0;
 # +----------------------------------+----------+
@@ -448,12 +498,6 @@ def db_generic_insert(table_name = 'RuntimeLog'):
     config_dict['db_error_msg'] = ""
     config_dict['db_error_flag'] = False
 
-    # Always increment the db_call_count to prevent infinite loops
-    if config_dict['db_table_dict'].get('db_call_count', -1) == -1:
-        config_dict['db_table_dict']['db_call_count'] = 1
-    else:
-        config_dict['db_table_dict']['db_call_count'] += 1
-
     # The log level might be changed before this function calls the database
     # config_dict['db_table_dict']['log_level'] = config_dict['log_level']
     # config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
@@ -462,13 +506,13 @@ def db_generic_insert(table_name = 'RuntimeLog'):
     query_column_list = []
     query_values_list = []
     if table_name == config_dict['db_log_name']:
+        db_table_dict_init(table_name) # initialize the config for a logfile insers
         for key, value in config_dict['db_table_dict'].items():
-            if key != 'db_call_count':
-                query_column_list.append(key)
-                query_values_list.append(value)
-                column_count += 1
+            query_column_list.append(key)
+            query_values_list.append(value)
+            column_count += 1
     else:
-        config_dict['db_table_dict']['db_insert_table'] = table_name
+        config_dict['db_insert_table'] = table_name
         for key, value in config_dict['db_insert_dict'].items():
             query_column_list.append(key)
             query_values_list.append(value)
@@ -488,12 +532,12 @@ def db_generic_insert(table_name = 'RuntimeLog'):
     if config_dict['verbosity'] > 2:
         print("{}: SQL {}".format(config_dict['datestamp'], query_insert))
 
-    # if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
+    # if config_dict['db_table_dict']['query_attempts'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
         # Check if dynamic table is being called
-        # if config_dict['db_dynamic_table_dict']['db_call_count'] > 0:
+        # if config_dict['db_dynamic_table_dict']['query_attempts'] > 0:
 
-    if config_dict['db_table_dict']['db_call_count'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
-        config_dict['db_error_msg'] = "DB Call Recursion Error: attempts ({}) > max ({})".format(config_dict['db_table_dict']['db_call_count'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'])
+    if config_dict['db_table_dict']['query_attempts'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
+        config_dict['db_error_msg'] = "DB Call Recursion Error: attempts ({}) > max ({})".format(config_dict['db_table_dict']['query_attempts'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'])
         print(config_dict['db_error_msg'])
         print("Recursion Error: {}".format(query_insert))
     else:
@@ -533,14 +577,11 @@ def db_generic_insert(table_name = 'RuntimeLog'):
             config_dict['log_level'] = 4 # 4 = CRITICAL
             config_dict['db_table_dict']['log_level'] = config_dict['log_level']
             config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
-            exception_msg = '({} @ {}) sensor.temperature raised: OSError ({})|({})'.format(sensor_type, sensor_address, type(err), err)
             if config_dict['verbosity'] >= 0:
                 print('{}: {}'.format(config_dict['datestamp'], config_dict['db_error_msg']))
 
     # Catch DB Error and log the error to RuntimeLog table
     if config_dict['db_error_flag']:
-        config_dict['db_table_dict']['query_attempts'] = config_dict['db_table_dict']['db_call_count']
-
         # Always try adding the current query to the RuntimeLog column query_text
         if config_dict['db_table_dict'].get('query_text', -1) == -1:
             config_dict['db_table_dict']['query_text'] = query_insert
@@ -553,9 +594,8 @@ def db_generic_insert(table_name = 'RuntimeLog'):
         else:
             config_dict['db_table_dict']['log_message'] += ' <append> ' + config_dict['db_error_msg']
 
-        if config_dict['db_table_dict'].get('db_insert_table', -1) != -1:
-            config_dict['db_table_dict']['key0'] = 'db_table'
-            config_dict['db_table_dict']['val0'] = config_dict['db_table_dict']['db_insert_table']
+        if config_dict.get('db_insert_table', -1) != -1:
+            db_variables_add_key_value('db_table', config_dict['db_insert_table'])
 
         # Use recursion to log any errors that happened within this function...
         db_generic_insert(config_dict['db_log_name'])
@@ -682,3 +722,27 @@ def db_generic_insert(table_name = 'RuntimeLog'):
 # # ----- Main Program Body - Begin -----
 # else:
 # ----- pkdr_kiosk_doorbell.py ( End ) -----
+
+# def db_variables_add_key_value(key_to_add, associated_value_of_key_to_add):
+#     db_variable_total = 10 # key0 & key1 are spoken for by convention
+#     db_variable_names = []
+#     db_variable_unavailable = []
+#     # make a list containing variable key names to match the db variable names
+#     for i in range(db_variable_total):
+#         if config_dict['db_table_dict'].get('key' + str(i), -1) == -1:
+#             db_variable_names = 'key{}'.format(i)
+#             config_dict['db_table_dict'][db_variable_name] = key_to_add
+
+#     # make a list containing the variable key names already populated, hence unavailable
+#     for db_variable_name in config_dict['db_table_dict'].keys():
+#         if 'key' in db_variable_name:
+#             db_variable_unavailable.append(db_variable_name)
+#         else:
+#             pass
+#     # check if varable slots are available
+#     if len(db_variable_unavailable) < db_variable_total:
+#         for i in range(db_variable_total):
+#             if i > 1:
+#                 db_variable_names = 'key{}'.format(i)
+#             else:
+#                 pass # key0 and key1 are spoken for by convention
