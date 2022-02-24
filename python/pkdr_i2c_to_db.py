@@ -373,11 +373,11 @@ else:
 
                         pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
                         if (temperature > pkdr_utils.config_dict['temperature_valid_max'] or temperature < pkdr_utils.config_dict['temperature_valid_min']):
-                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->range_error'
+                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->error->range'
                         elif (code_block_times_dict['program_execution'] > max_duration_program):
-                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->duration_error'
+                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->error->duration'
                         else:
-                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->range_or_duration'
+                            pkdr_utils.config_dict['db_table_dict']['val0'] += 'temperature->error->or(range|duration)'
 
                         log_level = 4 # 4 = CRITICAL
                         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
