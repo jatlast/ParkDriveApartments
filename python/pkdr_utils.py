@@ -449,11 +449,17 @@ def db_table_dict_init(table_name):
 
 def db_variables_add_dict(key_value_pair_dict):
     insert_failed_flag = False
+    key_passed_to_key_used_dict = {}
+    key_used_temp = ''
     for key, value in key_value_pair_dict.items():
-        if not db_variables_add_key_value(key, value):
+        key_used_temp = db_variables_add_key_value(key, value)
+        if len(key_used_temp) < 3:
+            key_passed_to_key_used_dict[key] = ''
             insert_failed_flag = True
             break
-    return not insert_failed_flag
+        else:
+            key_passed_to_key_used_dict[key] = key_used_temp
+    return key_passed_to_key_used_dict
 
 def db_variables_add_key_value(key, value):
     db_variable_total = 10 # key0 & key1 are spoken for by convention
@@ -476,6 +482,7 @@ def db_variables_add_key_value(key, value):
     
     debug_text = ''
     if insert_failed_flag:
+        key_name = ''
         debug_text = "Failed:  db_variables_add_key_value({}, {})".format(key, value)
     else:
         debug_text = "Success: db_variables_add_key_value({}, {}) used {}".format(key, value, key_name)
@@ -483,7 +490,7 @@ def db_variables_add_key_value(key, value):
     if config_dict['verbosity'] > 3:
         print("{}: {}".format(config_dict['datestamp'], debug_text))
 
-    return not insert_failed_flag
+    return key_name
 
 # select val0, count(*) from RuntimeLog where key0 = 'log_key' group by val0;
 # +----------------------------------+----------+

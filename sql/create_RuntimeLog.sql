@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS ErrorLog\G
 -- msgtxt --
 ------------
 -- TEXT (maximum length 65,535)
--- This column is made large to enable storing messages larger than the VARCHAR() max of 255 characters
+-- This column is made large to enable storing messages larger than the VARCHAR() max of 65,535 characters
 
 -------------------- 
 -- query_attempts --
@@ -92,6 +92,8 @@ SHOW CREATE TABLE RuntimeLog\G
 
 SHOW CREATE TABLE ErrorLog\G
 
+
+
 /*
 CREATE OR REPLACE TABLE ErrorLog (
   uid mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -124,5 +126,73 @@ CREATE OR REPLACE TABLE ErrorLog (
   val9 varchar(255) DEFAULT NULL,
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+*/
+
+/*
+20220224 8:50 AM - Possible log change for future consideration...
+Note: The bottom of the below site gives a useful visualization of varchar sizes from 32 to 1024
+  https://stackoverflow.com/questions/8295131/best-practices-for-sql-varchar-column-length
+
+CREATE OR REPLACE TABLE RuntimeLog (
+  uid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  inserted datetime NOT NULL DEFAULT current_timestamp(),
+  author_date datetime DEFAULT NULL,
+  author_name varchar(64) DEFAULT NULL,
+  author_path varchar(128) DEFAULT NULL,
+  author_options varchar(64) DEFAULT NULL,
+  author_version varchar(16) DEFAULT NULL,
+  author_address varchar(16) DEFAULT NULL,
+  pkdr_id varchar(65) DEFAULT NULL,
+  log_level TINYINT DEFAULT NULL,
+  log_level_name varchar(32) DEFAULT NULL,
+  log_key varchar(255) DEFAULT NULL,
+  log_message varchar(2048) DEFAULT NULL,
+  exception_type varchar(64) DEFAULT NULL,
+  exception_text varchar(255) DEFAULT NULL,
+  query_text varchar(1024) DEFAULT NULL,
+  query_attempts TINYINT DEFAULT NULL,
+  key0 varchar(64) DEFAULT NULL,
+  val0 varchar(255) DEFAULT NULL,
+  key1 varchar(64) DEFAULT NULL,
+  val1 varchar(255) DEFAULT NULL,
+  key2 varchar(64) DEFAULT NULL,
+  val2 varchar(255) DEFAULT NULL,
+  key3 varchar(64) DEFAULT NULL,
+  val3 varchar(255) DEFAULT NULL,
+  key4 varchar(64) DEFAULT NULL,
+  val4 varchar(255) DEFAULT NULL,
+  key5 varchar(64) DEFAULT NULL,
+  val5 varchar(255) DEFAULT NULL,
+  key6 varchar(64) DEFAULT NULL,
+  val6 varchar(255) DEFAULT NULL,
+  key7 varchar(64) DEFAULT NULL,
+  val7 varchar(255) DEFAULT NULL,
+  key8 varchar(64) DEFAULT NULL,
+  val8 varchar(255) DEFAULT NULL,
+  key9 varchar(64) DEFAULT NULL,
+  val9 varchar(255) DEFAULT NULL,
+  key10 varchar(64) DEFAULT NULL,
+  val10 varchar(512) DEFAULT NULL,
+  key11 varchar(64) DEFAULT NULL,
+  val11 varchar(512) DEFAULT NULL,
+  key12 varchar(64) DEFAULT NULL,
+  val12 varchar(512) DEFAULT NULL,
+  key13 varchar(64) DEFAULT NULL,
+  val13 varchar(512) DEFAULT NULL,
+  key14 varchar(64) DEFAULT NULL,
+  val14 varchar(512) DEFAULT NULL,
+  key15 varchar(64) DEFAULT NULL,
+  val15 varchar(1024) DEFAULT NULL,
+  key16 varchar(64) DEFAULT NULL,
+  val16 varchar(1024) DEFAULT NULL,
+  key17 varchar(64) DEFAULT NULL,
+  val17 varchar(1024) DEFAULT NULL,
+  key18 varchar(64) DEFAULT NULL,
+  val18 varchar(1024) DEFAULT NULL,
+  key19 varchar(64) DEFAULT NULL,
+  val19 varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4\G
 
 */

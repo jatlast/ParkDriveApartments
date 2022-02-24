@@ -271,7 +271,7 @@ else:
         exception_flag = True
     except BaseException as err:
         exception_type = '{}'.format(type(err))
-        exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: Unexptected ({})|({}) - This should never happen'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], type(err), err)
+        exception_msg = 'Exception pkdr_mqtt_client.connect(host={}, port={}) raised: Unexptected ({})|({})'.format(variables_dict["pkdr_mqtt_ip"], variables_dict["pkdr_mqtt_port"], type(err), err)
         pkdr_utils.config_dict['db_table_dict']['log_message'] = 'CODE: {} requires updating'.format(pkdr_utils.config_dict['program_path'])
         exception_flag = True
 
@@ -313,17 +313,20 @@ else:
                 # pause the loop to give MQTT some time to receive a new message
                 time.sleep(variables_dict["sleep_in_loop"])
 
-        except KeyboardInterrupt:
+        # except KeyboardInterrupt:
+        except BaseException as err:
+            # runtime_messages += "ERROR: CTRL-C pressed.  Program exiting..."
+            # runtime_error_flag = True
             log_level = 4 # 4 = CRITICAL
-            runtime_messages += "ERROR: CTRL-C pressed.  Program exiting..."
-            runtime_error_flag = True
             pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
             pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
-            pkdr_utils.config_dict['db_table_dict']['log_message'] = runtime_messages
+            pkdr_utils.config_dict['db_table_dict']['exception_type'] = '{}'.format(type(err))
+            pkdr_utils.config_dict['db_table_dict']['exception_text'] = 'Exception pkdr_mqtt_client.subscribe(topic={}, qos={}) raised: Unexptected ({})|({})'.format(variables_dict["mqtt_subscribe_topic"], variables_dict["mqtt_subscribe_qos"], type(err), err)
             pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
             pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->exception->ctl_c'
+            # pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->exception'
             pkdr_utils.db_generic_insert()
-            pkdr_mqtt_client.loop_stop()  # stop the loop
+            # pkdr_mqtt_client.loop_stop()  # stop the loop
 
         pkdr_mqtt_client.loop_stop()  # stop the loop
 
