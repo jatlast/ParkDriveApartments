@@ -587,28 +587,28 @@ def db_generic_insert(table_name = 'RuntimeLog'):
             if config_dict['verbosity'] >= 0:
                 print('{}: {}'.format(config_dict['datestamp'], config_dict['db_error_msg']))
 
-    # Catch DB Error and log the error to RuntimeLog table
-    if config_dict['db_error_flag']:
-        # Always try adding the current query to the RuntimeLog column query_text
-        if config_dict['db_table_dict'].get('query_text', -1) == -1:
-            config_dict['db_table_dict']['query_text'] = query_insert
-        # Check if the previous querytext is the same as the current querytext
-        elif config_dict['db_table_dict']['query_text'] == query_insert:
-            print("Current Insert was already attempted: {}".format(query_insert))
+        # Catch DB Error and log the error to RuntimeLog table
+        if config_dict['db_error_flag']:
+            # Always try adding the current query to the RuntimeLog column query_text
+            if config_dict['db_table_dict'].get('query_text', -1) == -1:
+                config_dict['db_table_dict']['query_text'] = query_insert
+            # Check if the previous querytext is the same as the current querytext
+            elif config_dict['db_table_dict']['query_text'] == query_insert:
+                print("Current Insert was already attempted: {}".format(query_insert))
 
-        if config_dict['db_table_dict'].get('log_message', -1) == -1:
-            config_dict['db_table_dict']['log_message'] = config_dict['db_error_msg']
+            if config_dict['db_table_dict'].get('log_message', -1) == -1:
+                config_dict['db_table_dict']['log_message'] = config_dict['db_error_msg']
+            else:
+                config_dict['db_table_dict']['log_message'] += ' <append> ' + config_dict['db_error_msg']
+
+            if config_dict.get('db_insert_table', -1) != -1:
+                db_variables_add_key_value('db_table', config_dict['db_insert_table'])
+
+            # Use recursion to log any errors that happened within this function...
+            db_generic_insert(config_dict['db_log_name'])
         else:
-            config_dict['db_table_dict']['log_message'] += ' <append> ' + config_dict['db_error_msg']
-
-        if config_dict.get('db_insert_table', -1) != -1:
-            db_variables_add_key_value('db_table', config_dict['db_insert_table'])
-
-        # Use recursion to log any errors that happened within this function...
-        db_generic_insert(config_dict['db_log_name'])
-    else:
-        # clear db_table_dict
-        db_table_dict_init(config_dict['db_log_name'])
+            # clear db_table_dict
+            db_table_dict_init(config_dict['db_log_name'])
 
 
 # INFO: sys.version vs sys.version_info...
