@@ -95,7 +95,8 @@ tag:
 timer:
 updater: # Checks for available updates
   # Optional, allows Home Assistant developers to focus on popular components.
-  reporting: true # share system information when checking for updates.
+  # reporting: true # (20220225 removed as depricated) share system information when checking for updates.
+  #   The analytics part of this integration (aka reporting:) has moved to the new 'analytics' integration
   # include_used_components: true # depricated - thus, not including in new HA OS rollout (20220219)
 #usb:
 webhook:

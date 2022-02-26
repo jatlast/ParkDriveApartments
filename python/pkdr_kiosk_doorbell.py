@@ -14,6 +14,8 @@
 #   - configuration location
 #       /etc/systemd/system/pkdr_kiosk_doorbell.service
 #   - can be managed using systemctl to (stop, start, restart, enable, disable, etc)
+# Code Formatting using black executed using windows shells (as of 20220226 requires revision)
+#  black pkdr_kiosk_doorbell.py --target-version py39 --verbose --config FILE
 # ------------
 
 import time # needed to sleep the listening loop
@@ -57,136 +59,6 @@ runtime_messages = ''
 runtime_error_message = ''
 runtime_error_flag = False
 
-def on_disconnect(client, userdata, rc):
-    global runtime_message
-    runtime_message = "def on_disconnect() result code = ({})".format(rc)
-    if variables_dict["verbosity"] > 2:
-        print('K-VDB-Runtime: '.format(runtime_messages))
-    # logging.debug("DisConnected result code " + str(rc))
-    client.loop_stop()
-
-# Note the message parameter is a message class with members: topic, qos, payload, retain.
-def on_message(client, userdata, message):
-    global runtime_message, runtime_error_message
-    runtime_messages = ' on_message() '
-    action_current_datetime = datetime.datetime.now()
-
-    # check the volume first...
-    if message.topic == variables_dict["mqtt_subscribe_volume"]:
-        runtime_messages += "INFO: doorbell_volume changed from {} to {}\n".format(variables_dict["doorbell_volume"])
-        variables_dict["doorbell_volume"] = str(message.payload.decode("utf-8"))
-        runtime_messages += "INFO: {} Topic: {} | Payload: {}".format(action_current_datetime,message.topic)
-
-    if (str(message.payload.decode("utf-8")) == variables_dict["actionable_payload"]):
-
-        action_duration = (action_current_datetime - variables_dict["action_previous_datetime"])
-
-        # reset the previous action variable
-        variables_dict["action_previous_datetime"] = action_current_datetime
-
-        # Duration in seconds
-        seconds = action_duration.total_seconds()
-        # Duration in years
-        years = divmod(seconds, 31536000)[0]  # Seconds in a year=365*24*60*60 = 31536000.
-        # Duration in days
-        days = action_duration.days  # Built-in datetime function
-        #        days = divmod(seconds, 86400)[0]       # Seconds in a day = 86400
-        # Duration in hours
-        hours = divmod(seconds, 3600)[0]  # Seconds in an hour = 3600
-        # Duration in minutes
-        minutes = divmod(seconds, 60)[0]  # Seconds in a minute = 60
-
-        # black pkdr_kiosk_doorbell.py --target-version py39 --verbose --config FILE
-
-        if seconds > 60:
-            variables_dict['sound_played'] = variables_dict['sound_1']
-        elif seconds > 30:
-            variables_dict['sound_played'] = variables_dict['sound_2']
-        elif seconds > 20:
-            variables_dict['sound_played'] = variables_dict['sound_3']
-        elif seconds > variables_dict['sleep_after_vlc']:
-            variables_dict['sound_played'] = variables_dict['sound_4']
-        else:
-            variables_dict['sound_played'] = variables_dict['sound_patience']
-
-        vlc_player = vlc.MediaPlayer(variables_dict['sound_played'])
-        # https://www.geeksforgeeks.org/python-vlc-mediaplayer-setting-volume/
-        vlc_player.audio_set_volume(variables_dict['doorbell_volume'])
-        # vlc_player.audio_set_volume(80)
-        vlc_player.play()
-        time.sleep(variables_dict['sleep_after_vlc'])
-
-        # the stop() is required to prevent orphaned vlc player objects
-        vlc_player.stop()
-
-        duration_since_last_doorbell = "Duration: seconds {} | minutes {} | hours {} | days {} | years {} | ".format(seconds, minutes, hours, days, years)
-        if variables_dict['verbosity'] > 0:
-            print(duration_since_last_doorbell)
-            print("K-VDB-Runtime: {} | Found: {} | Payload: {} | Topic: {} | Played: {}".format(datetime.datetime.now(), variables_dict['actionable_payload'], str(message.payload.decode("utf-8")), message.topic, variables_dict['sound_played']))
-
-        # Log the doorbell ring...
-        msg_log_level = 1 # INFO
-        pkdr_utils.config_dict['db_table_dict']['log_level'] = msg_log_level
-        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][msg_log_level]
-        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Doorbell Chime'
-        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
-        pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->found_payload'
-        
-        pkdr_utils.db_variables_add_key_value('topic', message.topic)
-        pkdr_utils.db_variables_add_key_value('payload', variables_dict['actionable_payload'])
-        pkdr_utils.db_variables_add_key_value('sound_played', variables_dict['sound_played'])
-        pkdr_utils.db_variables_add_key_value('doorbell_volume', variables_dict['doorbell_volume'])
-        pkdr_utils.db_variables_add_key_value('time_since_previous', duration_since_last_doorbell)
-        
-        # pkdr_utils.config_dict['db_table_dict']['key3'] = 'topic'
-        # pkdr_utils.config_dict['db_table_dict']['val3'] = message.topic
-        # pkdr_utils.config_dict['db_table_dict']['key4'] = 'payload'
-        # pkdr_utils.config_dict['db_table_dict']['val4'] = variables_dict['actionable_payload']
-        # pkdr_utils.config_dict['db_table_dict']['key5'] = 'sound_played'
-        # pkdr_utils.config_dict['db_table_dict']['val5'] = variables_dict['sound_played']
-        # pkdr_utils.config_dict['db_table_dict']['key6'] = 'doorbell_volume'
-        # pkdr_utils.config_dict['db_table_dict']['val6'] = variables_dict["doorbell_volume"]
-        # pkdr_utils.config_dict['db_table_dict']['key7'] = 'time_since_previous'
-        # pkdr_utils.config_dict['db_table_dict']['val7'] = duration_since_last_doorbell
-        pkdr_utils.db_generic_insert()
-
-def on_log(client, userdata, level, buf):
-    paho_log_level_name = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
-    log_if = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_if_dict'].get(paho_log_level_name, False)
-
-    if log_if:
-        log_level = 1 # 1 = INFO
-        pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
-        pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
-        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'MQTT Runtime Log'
-        pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
-        pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->on_log'
-
-        pkdr_utils.db_variables_add_key_value('log_if', log_if)
-        pkdr_utils.db_variables_add_key_value('level_lookup', paho_log_level_name)
-        pkdr_utils.db_variables_add_key_value('level', level)
-        pkdr_utils.db_variables_add_key_value('mqtt_callback', 'def on_log(client, userdata, level, buf)')
-        pkdr_utils.db_variables_add_key_value('buf', buf)
-
-        # pkdr_utils.config_dict['db_table_dict']['key3'] = 'level_lookup'
-        # pkdr_utils.config_dict['db_table_dict']['val3'] = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
-        # pkdr_utils.config_dict['db_table_dict']['key4'] = 'level'
-        # pkdr_utils.config_dict['db_table_dict']['val4'] = level
-        # pkdr_utils.config_dict['db_table_dict']['key5'] = 'mqtt_callback'
-        # pkdr_utils.config_dict['db_table_dict']['val5'] = 'def on_log(client, userdata, level, buf)'
-        # pkdr_utils.config_dict['db_table_dict']['key6'] = 'buf'
-        # pkdr_utils.config_dict['db_table_dict']['val6'] = buf
-        pkdr_utils.db_generic_insert()
-        if variables_dict["verbosity"] > 1:
-            print('K-VDB-Runtime: '.format(pkdr_utils.config_dict['db_table_dict']['log_message']))
-    else:
-        if variables_dict["verbosity"] > 2:
-            print('Not Logged: {}->{} log->{}'.format(level,paho_log_level_name, log_if))
-
-# -------------------------------------------
-# ----- Program Execution Block - Start -----
-# -------------------------------------------
-
 # ----- Initialize using PkDr Utils -----
 if not pkdr_utils.initialize_config_dict(variables_dict):
     print("{}: Configuration Failure ({})".format(pkdr_utils.config_dict['datestamp'], pkdr_utils.config_dict['error_msg']))
@@ -211,17 +83,121 @@ elif (
     # log the error
     pkdr_utils.db_generic_insert()
 else:
-    # add_pkdr_mqtt_info_to_config_dict() should probably be in this proc and not global
-    # pkdr_utils.add_pkdr_mqtt_info_to_config_dict()
+    # -------------------------------------------
+    # ----- Calback Functions - Start -----------
+    # -------------------------------------------
+    def on_disconnect(client, userdata, rc):
+        global runtime_message
+        runtime_message = "def on_disconnect() result code = ({})".format(rc)
+        if variables_dict["verbosity"] > 2:
+            print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
+        # logging.debug("DisConnected result code " + str(rc))
+        client.loop_stop()
 
-    # mqtt_same_as_home_assistant = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('same_as_home_assistant', -1)
-    # if mqtt_same_as_home_assistant != -1:
-    #     if mqtt_same_as_home_assistant:
-    #         variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['mqtt_broker_ip']
-    #         variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['mqtt_broker_port']
-    #         variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['mqtt_username']
-    #         variables_dict['pkdr_mqtt_pw'] = pkdr_utils.config_dict['mqtt_password']
-    # else:
+    # Note the message parameter is a message class with members: topic, qos, payload, retain.
+    def on_message(client, userdata, message):
+        global runtime_message, runtime_error_message
+        runtime_messages = ' on_message() '
+        action_current_datetime = datetime.datetime.now()
+
+        # check the volume first...
+        if message.topic == variables_dict["mqtt_subscribe_volume"]:
+            runtime_messages += "INFO: doorbell_volume changed from {} to {}\n".format(variables_dict["doorbell_volume"])
+            variables_dict["doorbell_volume"] = str(message.payload.decode("utf-8"))
+            runtime_messages += "INFO: {} Topic: {} | Payload: {}".format(action_current_datetime,message.topic)
+
+        if (str(message.payload.decode("utf-8")) == variables_dict["actionable_payload"]):
+
+            action_duration = (action_current_datetime - variables_dict["action_previous_datetime"])
+
+            # reset the previous action variable
+            variables_dict["action_previous_datetime"] = action_current_datetime
+
+            # Duration in seconds
+            seconds = action_duration.total_seconds()
+            # Duration in years
+            years = divmod(seconds, 31536000)[0]  # Seconds in a year=365*24*60*60 = 31536000.
+            # Duration in days
+            days = action_duration.days  # Built-in datetime function
+            # days = divmod(seconds, 86400)[0]       # Seconds in a day = 86400
+            # Duration in hours
+            hours = divmod(seconds, 3600)[0]  # Seconds in an hour = 3600
+            # Duration in minutes
+            minutes = divmod(seconds, 60)[0]  # Seconds in a minute = 60
+
+            if seconds > 60:
+                variables_dict['sound_played'] = variables_dict['sound_1']
+            elif seconds > 30:
+                variables_dict['sound_played'] = variables_dict['sound_2']
+            elif seconds > 20:
+                variables_dict['sound_played'] = variables_dict['sound_3']
+            elif seconds > variables_dict['sleep_after_vlc']:
+                variables_dict['sound_played'] = variables_dict['sound_4']
+            else:
+                variables_dict['sound_played'] = variables_dict['sound_patience']
+
+            vlc_player = vlc.MediaPlayer(variables_dict['sound_played'])
+            # https://www.geeksforgeeks.org/python-vlc-mediaplayer-setting-volume/
+            vlc_player.audio_set_volume(variables_dict['doorbell_volume'])
+            # vlc_player.audio_set_volume(80)
+            vlc_player.play()
+            time.sleep(variables_dict['sleep_after_vlc'])
+
+            # the stop() is required to prevent orphaned vlc player objects
+            vlc_player.stop()
+
+            duration_since_last_doorbell = "Duration: seconds {} | minutes {} | hours {} | days {} | years {} | ".format(seconds, minutes, hours, days, years)
+            if variables_dict['verbosity'] > 0:
+                print("{}: K-VDB-Runtime: Found: {} | Payload: {} | Topic: {} | Played: {} | Previous: {}".format(datetime.datetime.now(), variables_dict['actionable_payload'], str(message.payload.decode("utf-8")), message.topic, variables_dict['sound_played'], duration_since_last_doorbell))
+
+            # Log the doorbell ring...
+            msg_log_level = 1 # INFO
+            pkdr_utils.config_dict['db_table_dict']['log_level'] = msg_log_level
+            pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][msg_log_level]
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Doorbell Chime'
+            pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+            pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->found_payload'
+            
+            pkdr_utils.db_variables_add_key_value('topic', message.topic)
+            pkdr_utils.db_variables_add_key_value('payload', variables_dict['actionable_payload'])
+            pkdr_utils.db_variables_add_key_value('sound_played', variables_dict['sound_played'])
+            pkdr_utils.db_variables_add_key_value('doorbell_volume', variables_dict['doorbell_volume'])
+            pkdr_utils.db_variables_add_key_value('time_since_previous', duration_since_last_doorbell)
+            
+            pkdr_utils.db_generic_insert()
+
+    def on_log(client, userdata, level, buf):
+        paho_log_level_name = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
+        log_if = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_if_dict'].get(paho_log_level_name, False)
+
+        if log_if:
+            log_level = 1 # 1 = INFO
+            pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
+            pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level] # 4 = CRITICAL
+            pkdr_utils.config_dict['db_table_dict']['log_message'] = 'MQTT Runtime Log'
+            pkdr_utils.config_dict['db_table_dict']['key0'] = 'log_key'
+            pkdr_utils.config_dict['db_table_dict']['val0'] = 'doorbell->mqtt->on_log'
+
+            pkdr_utils.db_variables_add_key_value('log_if', log_if)
+            pkdr_utils.db_variables_add_key_value('level_lookup', paho_log_level_name)
+            pkdr_utils.db_variables_add_key_value('level', level)
+            pkdr_utils.db_variables_add_key_value('mqtt_callback', 'def on_log(client, userdata, level, buf)')
+            pkdr_utils.db_variables_add_key_value('buf', buf)
+
+            pkdr_utils.db_generic_insert()
+            if variables_dict["verbosity"] > 1:
+                print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), pkdr_utils.config_dict['db_table_dict']['log_message']))
+        else:
+            if variables_dict["verbosity"] > 2:
+                print('{}: Not Logged: {}->{} log->{}'.format(datetime.datetime.now(), level, paho_log_level_name, log_if))
+
+    # -------------------------------------------
+    # ----- Calback Functions - End -------------
+    # -------------------------------------------
+
+    # -------------------------------------------
+    # ----- Program Execution Block - Start -----
+    # -------------------------------------------
     variables_dict['pkdr_mqtt_ip'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_ip', 'KeyError')
     variables_dict['pkdr_mqtt_port'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_broker_port', 'KeyError')
     variables_dict['pkdr_mqtt_un'] = pkdr_utils.config_dict['pkdr_mqtt_config']['mosquitto_broker_config']['credentials_dict'].get('pkdr_mqtt_username', 'KeyError')
@@ -243,16 +219,14 @@ else:
     runtime_messages += "INFO: MQQT Volume Topic: ({})\n".format(variables_dict["mqtt_subscribe_volume"])
 
     if variables_dict["verbosity"] > 0:
-        print('K-VDB-Runtime: '.format(runtime_messages))
-
-#        pkdr_mqtt_client.publish(variables_dict['mqtt_subscribe_topic'], payload=variables_dict['actionable_payload_reset'], qos=variables_dict['mqtt_publish_qos'], retain=variables_dict['mqtt_publish_retain'])
-#        time.sleep(variables_dict['loop_sleep'])
+        print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
 
     pkdr_mqtt_client = mqtt.Client(variables_dict["pkdr_mqtt_client"])  # create client object
 
     # bind to the on_message function because this is where this script logic lives
     pkdr_mqtt_client.on_message = on_message
 
+    # this line enables the on_log callback function
     pkdr_mqtt_client.on_log = on_log
 
     # print("mqtt user ({}) pw ({})".format(variables_dict["pkdr_mqtt_un"], variables_dict["pkdr_mqtt_pw"]))
@@ -288,11 +262,6 @@ else:
         pkdr_utils.db_variables_add_key_value('pkdr_mqtt_ip', variables_dict["pkdr_mqtt_ip"])
         pkdr_utils.db_variables_add_key_value('pkdr_mqtt_port', variables_dict["pkdr_mqtt_port"])
 
-        # pkdr_utils.config_dict['db_table_dict']['key2'] = 'pkdr_mqtt_ip'
-        # pkdr_utils.config_dict['db_table_dict']['val2'] = variables_dict["pkdr_mqtt_ip"]
-        # pkdr_utils.config_dict['db_table_dict']['key3'] = 'pkdr_mqtt_port'
-        # pkdr_utils.config_dict['db_table_dict']['val3'] = variables_dict["pkdr_mqtt_port"]
-
         pkdr_utils.db_generic_insert()
     else:
 
@@ -307,7 +276,7 @@ else:
             if variables_dict["verbosity"] > 1:
                 runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_topic"], ret)
                 runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_volume"], ret)
-                print('K-VDB-Runtime: '.format(runtime_messages))
+                print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
 
             while True:
                 # pause the loop to give MQTT some time to receive a new message
@@ -332,9 +301,9 @@ else:
 
         pkdr_mqtt_client.disconnect()
 
-# -------------------------------------------
-# ----- Program Execution Block - End -----
-# -------------------------------------------
+    # -------------------------------------------
+    # ----- Program Execution Block - End -----
+    # -------------------------------------------
 
 
 # Paho Python MQTT Client-Understanding The Loop

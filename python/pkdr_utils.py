@@ -47,13 +47,14 @@ def initialize_config_dict(caller_dict):
         config_dict = yaml.load(f, Loader=yaml.FullLoader)
         f.close()
 
+    # Utility verbosity takes calling program's value unless changed by pkdr_config.yaml
+    config_dict['verbosity'] = caller_dict['verbosity']
+
     get_calling_program_info(caller_dict)
     
     config_dict['config_file'] = config_file
     config_dict['error_flag'] = error_flag
     config_dict['error_msg'] = ''
-
-    config_dict['verbosity'] = caller_dict['verbosity']
 
     if not config_dict['error_flag']:
         # add caller defaluts
@@ -75,6 +76,10 @@ def initialize_config_dict(caller_dict):
         config_dict['log_level'] = 1
 
         add_pkdr_caller_info_to_config_dict()
+
+        # calling program takes utility's verbosity value after being initialized by pkdr_config.yaml
+        #  verbosity override happens within function add_pkdr_caller_info_to_config_dict()
+        caller_dict['verbosity'] = config_dict['verbosity']
 
         db_table_dict_init(config_dict['db_log_name'])
 
@@ -217,7 +222,7 @@ def add_pkdr_caller_info_to_config_dict():
             caller_error_msg += "Configuration Error: verbosity_override_flag | verbosity_override_value not in config file"
         else:
             if config_dict['verbosity'] != config_dict['production_code_config']['verbosity_override_value']:
-                print("{}: Changed Verbosity {} to {}".format(config_dict['datestamp'], config_dict['verbosity'], config_dict['production_code_config']['verbosity_override_value']))
+                print("{}: Changed Verbosity {} to {}".format(config_dict['datestamp'], config_dict['verbosity'], config_dict['production_code_config']['verbosity_override_value']), flush=True)
                 config_dict['verbosity'] = config_dict['production_code_config']['verbosity_override_value']
 
         # Production Code Check
@@ -544,9 +549,7 @@ def db_generic_insert(table_name = 'RuntimeLog'):
         # if config_dict['db_dynamic_table_dict']['query_attempts'] > 0:
 
     if config_dict['db_table_dict']['query_attempts'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
-        config_dict['db_error_msg'] = "DB Call Recursion Error: attempts ({}) > max ({})".format(config_dict['db_table_dict']['query_attempts'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'])
-        print(config_dict['db_error_msg'])
-        print("Recursion Error: {}".format(query_insert))
+        print("{}: DB Call Recursion Error: attempts ({}) > max ({}) | SQL: {}".format(config_dict['datestamp'], config_dict['db_table_dict']['query_attempts'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'], query_insert))
     else:
         try:
             connection = mysql.connector.connect(
@@ -564,15 +567,13 @@ def db_generic_insert(table_name = 'RuntimeLog'):
                     print("{}: DB Success: {} insert into {} table".format(config_dict['datestamp'], cursor.rowcount, table_name))
             # Failure
             else:
+                config_dict['db_error_flag'] = True
                 config_dict['log_level'] = 3 # 3 = ERROR
                 config_dict['db_table_dict']['log_level'] = config_dict['log_level']
                 config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
                 config_dict['db_error_msg'] += "DB Fail: Unable to insert into {} table".format(table_name)
-                if config_dict['verbosity'] > 0:
-                    print(config_dict['db_error_msg'])
-
-                if config_dict['verbosity'] > 2:
-                    print("{}: SQL {}".format(config_dict['datestamp'], query_insert))
+                if config_dict['verbosity'] >= 0:
+                    print("{}: DB Error: {} | SQL: {}".format(config_dict['datestamp'], config_dict['db_error_msg'], query_insert))
 
                 cursor.close()
 
@@ -610,146 +611,39 @@ def db_generic_insert(table_name = 'RuntimeLog'):
             # clear db_table_dict
             db_table_dict_init(config_dict['db_log_name'])
 
+def print_caller_info():
+    print('--------------- Caller Info ---------------')
+    if config_dict.get('program_name', -1) != -1:
+        print("datestamp = {}".format(config_dict['datestamp']))
+        print("ip = {}".format(config_dict['ip']))
+        print("hostname = {}".format(config_dict['hostname']))
+        print("program_name = {}".format(config_dict['program_name']))
+        print("utils_path = {}".format(config_dict['utils_path']))
+        print("program_path = {}".format(config_dict['program_path']))
+        print("program_options = {}".format(config_dict['program_options']))
+        print("python_version = {}".format(config_dict['python_version']))
+    print('-------------------------------------------')
 
-# INFO: sys.version vs sys.version_info...
-# sys.version - string containing the version number of the Python interpreter plus additional information on the build number and compiler used.
-#   config_dict['python_version'] = sys.version
-# sys.version_info - tuple containing the five components of the version number: major, minor, micro, releaselevel, and serial.
-#   config_dict['python_version_list'] = sys.version_info
-
-# INFO: Tuple vs List vs Set (https://jerrynsh.com/tuples-vs-lists-vs-sets-in-python/)
-# List []
-# Tuple ()  - JTB: since my config info is immutable, tuple is probably the better choice
-# Set {}
- 
-# 20220213 - Note: apt_to_ip_dict & ip_to_apt_dict used to reside in the current pkdr_utils.py file
-#  apt_to_ip_dict was deemed redundant
-#  ip_to_apt_dict - was moved to pkdr.yaml config file
-#     The new way to resolve IP to Apt # is...
-#        apt_num = pkdr_utils.config[ip_to_apt_dict][ip]
-
-# 20220214 - Removing the main program check from the sensor script
-#   if __name__ == '__main__':
-# I am keeping it here because pkdr_utils.py is the only code that I wrote that is executed by other scripts
 # The purpose of the '__main__' check is to determine if the code is being executed by external code
-#   If yes, any code outside of the 'if __name__' block will be executed
+#   If the code is being executed by external code, any code outside of the 'if __name__' block will be executed
 #   However, any code inside of the 'if __name__' block will not be executed
+def main():
+    empty_dict = {}
+    initialize_config_dict(empty_dict)
+    if config_dict.get('program_name', -1) != -1:
+        print("NOTICE: {} is a utility script not meant to be executed directly.".format(config_dict['program_name']))
+        print_caller_info()
+        config_dict['log_level'] = 1 # 1 = INFO
+        config_dict['db_table_dict']['log_level'] = config_dict['log_level']
+        config_dict['db_table_dict']['log_level_name'] = config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][config_dict['db_table_dict']['log_level']]
+        config_dict['db_table_dict']['log_message'] = "NOTICE: {} was executed as an independent script instead of a utility script".format(config_dict['program_name'])
+        config_dict['db_table_dict']['val0'] = 'utils->test'
+        db_generic_insert()
+        print("Contents of the pkdr_utils.config_dict:")
+        for key, val in config_dict.items():
+            print("{} = {}".format(key, val))
+    else:
+        print("Configuration Error: unable to initialize the pkdr_utils.config_dict")
 
-# ------------
-# - Old Code - 
-# ------------
-
-# ----- pkdr_kiosk_doorbell.py (Begin) -----
-# 20220215 - Kepping the below for now because it is the logic that was recreated from scratch in pkdr_utils.py today
-# --------
-# print("config_dict:...")
-# for item, doc in pkdr_utils.config_dict.items():
-#     print(item, ":", doc)
-
-# print("variables_dict:...")
-# for item, doc in variables_dict.items():
-#     print(item, ":", doc)
-
-# ip = pkdr_utils.get_ip_address()
-# proper_apt_num_by_ip = pkdr_utils.config_dict["ip_to_apt_dict"][ip]
-
-# # ----- IP to Apt # or Bld # -----
-# # Full Topic Format
-# #   'PkDr/Apt01/Entrance/cmnd/Doorbell/POWER'
-# #   'PkDr/B1/Entrance/cmnd/Doorbell/POWER'
-# # Use the caller's ip address to dynamically determine /Apt##/ or /B#/
-# exception_msg = ""
-# topic_location = ""
-# if proper_apt_num_by_ip <= 16:
-#     topic_location = "Apt"
-#     if proper_apt_num_by_ip < 10:
-#         topic_location += "0" + str(proper_apt_num_by_ip)
-#     else:
-#         topic_location += str(proper_apt_num_by_ip)
-# elif proper_apt_num_by_ip <= 44 and proper_apt_num_by_ip > 40:
-#     topic_location += "B" + str(proper_apt_num_by_ip % 40)
-# else:
-#     topic_location = "?"
-
-# ----- Configuration Tests - Begin -----
-# Caller IP valid if format like Apt## or B#
-# 	All valid options are defined in pkdr_utils config file.
-# caller_ip_valid = False
-# for i in pkdr_utils.config_dict["mqtt_valid_topic_location_list"]:
-#     if topic_location == i:
-#         if variables_dict["verbosity"] > 2:
-#             print(
-#                 "({}) == ({})".format(topic_location, i),
-#                 flush=variables_dict["print_flush_flag"],
-#             )
-#         caller_ip_valid = True
-#         break
-#     else:
-#         if variables_dict["verbosity"] > 2:
-#             print(
-#                 "({}) != ({})".format(topic_location, i),
-#                 flush=variables_dict["print_flush_flag"],
-#             )
-
-# # Check the config file to see if the code is in production...
-# valid_production_code = False
-# for i in pkdr_utils.config_dict["code_in_production_list"]:
-#     if variables_dict["program_name"] == i:
-#         if variables_dict["verbosity"] > 2:
-#             print(
-#                 "({}) == ({})".format(variables_dict["program_name"], i),
-#                 flush=variables_dict["print_flush_flag"],
-#             )
-#         valid_production_code = True
-#         break
-#     else:
-#         if variables_dict["verbosity"] > 2:
-#             print(
-#                 "({}) != ({})".format(variables_dict["program_name"], i),
-#                 flush=variables_dict["print_flush_flag"],
-#             )
-
-# # Only start the process if the topic location is valid...
-# if not caller_ip_valid:
-#     print(
-#         "ERROR CONFIG: Invalid Topic Location ({})".format(
-#             topic_location, flush=variables_dict["print_flush_flag"]
-#         )
-#     )
-# Only start the process if the program is supposed to be in production...
-# elif not valid_production_code:
-#     print(
-#         "ERROR CONFIG: Invalid Production Program ({})".format(
-#             variables_dict["program_name"], flush=variables_dict["print_flush_flag"]
-#         ),
-#         flush=variables_dict["print_flush_flag"],
-#     )
-# # ----- Configuration Tests - End -----
-
-# # ----- Main Program Body - Begin -----
-# else:
-# ----- pkdr_kiosk_doorbell.py ( End ) -----
-
-# def db_variables_add_key_value(key_to_add, associated_value_of_key_to_add):
-#     db_variable_total = 10 # key0 & key1 are spoken for by convention
-#     db_variable_names = []
-#     db_variable_unavailable = []
-#     # make a list containing variable key names to match the db variable names
-#     for i in range(db_variable_total):
-#         if config_dict['db_table_dict'].get('key' + str(i), -1) == -1:
-#             db_variable_names = 'key{}'.format(i)
-#             config_dict['db_table_dict'][db_variable_name] = key_to_add
-
-#     # make a list containing the variable key names already populated, hence unavailable
-#     for db_variable_name in config_dict['db_table_dict'].keys():
-#         if 'key' in db_variable_name:
-#             db_variable_unavailable.append(db_variable_name)
-#         else:
-#             pass
-#     # check if varable slots are available
-#     if len(db_variable_unavailable) < db_variable_total:
-#         for i in range(db_variable_total):
-#             if i > 1:
-#                 db_variable_names = 'key{}'.format(i)
-#             else:
-#                 pass # key0 and key1 are spoken for by convention
+if __name__ == "__main__":
+    main()
