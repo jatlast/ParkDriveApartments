@@ -477,12 +477,12 @@ def db_variables_add_key_value(key, value):
             else:
                 if config_dict['verbosity'] > 3:
                     print("key {} unavailable".format(key_name))
+                key_name = ''
         else:
             pass # key0 and key1 are spoken for by convention
     
     debug_text = ''
     if insert_failed_flag:
-        key_name = ''
         debug_text = "Failed:  db_variables_add_key_value({}, {})".format(key, value)
     else:
         debug_text = "Success: db_variables_add_key_value({}, {}) used {}".format(key, value, key_name)
