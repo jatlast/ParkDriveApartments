@@ -200,7 +200,7 @@ else:
         exception_flag = True
 
     block_end_time = time.time()
-    code_block_times_dict['sensor_set_generic'] = (block_end_time - block_start_time)
+    code_block_times_dict['sensor_set_generic'] = round((block_end_time - block_start_time), 6)
     # pkdr_utils.config_dict['db_table_dict']['key6'] = 'duration->sensor_set_generic'
     # pkdr_utils.config_dict['db_table_dict']['val6'] = code_block_times_dict['sensor_set_generic']
 
@@ -257,7 +257,7 @@ else:
                 exception_flag = True
 
             block_end_time = time.time()
-            code_block_times_dict['sensor_set_specific'] = (block_end_time - block_start_time)
+            code_block_times_dict['sensor_set_specific'] = round((block_end_time - block_start_time), 6)
             # pkdr_utils.config_dict['db_table_dict']['key7'] = 'duration->sensor_set_specific'
             # pkdr_utils.config_dict['db_table_dict']['val7'] = code_block_times_dict['sensor_set_specific']
             if variables_dict['verbosity'] > 3:
@@ -307,7 +307,7 @@ else:
                 pkdr_utils.db_variables_add_key_value('temperature', temperature)
 
                 block_end_time = time.time()
-                code_block_times_dict['sensor_read_temperature'] = (block_end_time - block_start_time)
+                code_block_times_dict['sensor_read_temperature'] = round((block_end_time - block_start_time), 6)
                 # pkdr_utils.config_dict['db_table_dict']['key8'] = 'duration->sensor_read_temperature'
                 # pkdr_utils.config_dict['db_table_dict']['val8'] = code_block_times_dict['sensor_read_temperature']
                 if variables_dict['verbosity'] > 3:
@@ -333,7 +333,7 @@ else:
                     pkdr_utils.db_variables_add_key_value('humidity', humidity)
 
                     block_end_time = time.time()
-                    code_block_times_dict['sensor_read_humidity'] = (block_end_time - block_start_time)
+                    code_block_times_dict['sensor_read_humidity'] = round((block_end_time - block_start_time), 6)
                     # set dict but may be overwritten later
                     # pkdr_utils.config_dict['db_table_dict']['key?'] = 'duration->sensor_read_humidity'
                     # pkdr_utils.config_dict['db_table_dict']['val?'] = code_block_times_dict['sensor_read_humidity']
@@ -358,7 +358,7 @@ else:
                     pkdr_utils.db_generic_insert('Thermostats')
 
                     block_end_time = time.time()
-                    code_block_times_dict['db_insert_readings'] = (block_end_time - block_start_time)
+                    code_block_times_dict['db_insert_readings'] = round((block_end_time - block_start_time), 6)
                     if variables_dict['verbosity'] > 3:
                         pkdr_utils.eprint('{} for db insert thermostats'.format(code_block_times_dict['db_insert_readings']))
                     
@@ -382,7 +382,7 @@ else:
                         log_level = 4 # 4 = CRITICAL
                         pkdr_utils.config_dict['db_table_dict']['log_level'] = log_level
                         pkdr_utils.config_dict['db_table_dict']['log_level_name'] = pkdr_utils.config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_error_num_to_name_dict'][log_level]
-                        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Error: {} is outside of valid range: {} < {} > {}'.format(temperature, pkdr_utils.config_dict['temperature_valid_min'], temperature, pkdr_utils.config_dict['temperature_valid_max'])
+                        pkdr_utils.config_dict['db_table_dict']['log_message'] = 'Sensor Range Error: {} < {} > {}'.format(pkdr_utils.config_dict['temperature_valid_min'], round(temperature, 3), pkdr_utils.config_dict['temperature_valid_max'])
                         # pkdr_utils.config_dict['db_table_dict']['key9'] = 'duration->program_execution'
                         # pkdr_utils.config_dict['db_table_dict']['val9'] = code_block_times_dict['program_execution']
                         pkdr_utils.db_variables_add_dict(code_block_times_dict)

@@ -221,7 +221,7 @@ def add_pkdr_caller_info_to_config_dict():
             caller_error_flag = True
             caller_error_msg += "Configuration Error: verbosity_override_flag | verbosity_override_value not in config file"
         else:
-            if config_dict['verbosity'] != config_dict['production_code_config']['verbosity_override_value']:
+            if config_dict['production_code_config']['verbosity_override_flag'] and config_dict['verbosity'] != config_dict['production_code_config']['verbosity_override_value']:
                 print("{}: Changed Verbosity {} to {}".format(config_dict['datestamp'], config_dict['verbosity'], config_dict['production_code_config']['verbosity_override_value']), flush=True)
                 config_dict['verbosity'] = config_dict['production_code_config']['verbosity_override_value']
 
