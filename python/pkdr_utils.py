@@ -81,8 +81,6 @@ def initialize_config_dict(caller_dict):
         #  verbosity override happens within function add_pkdr_caller_info_to_config_dict()
         caller_dict['verbosity'] = config_dict['verbosity']
 
-        db_table_dict_init(config_dict['db_log_name'])
-
         add_pkdr_mqtt_info_to_config_dict()
 
     return not config_dict['error_flag']
@@ -187,6 +185,8 @@ def add_pkdr_caller_info_to_config_dict():
                 else:
                     mqtt_topic_list += "({}) != ({})".format(config_dict['pkdr_location_id'], i)
             mqtt_topic_list += ">"
+            if config_dict['verbosity'] > 3:
+                print(mqtt_topic_list)
 
     # Valid Production Code Config Check
     if config_dict.get('production_code_config', -1) == -1:
@@ -362,6 +362,9 @@ def add_pkdr_caller_info_to_config_dict():
     config_dict['caller_error_flag'] = caller_error_flag
     config_dict['caller_error_msg'] = caller_error_msg
 
+    # initialize the DB Log prior to using it and after the necessary DB variables have been gathered from the config yaml
+    db_table_dict_init(config_dict['db_log_name'])
+
     # Log problems encountered in this function to DB...
     if caller_error_flag:
         config_dict['log_level'] = 4 # 4 = CRITICAL
@@ -417,10 +420,15 @@ def add_pkdr_mqtt_info_to_config_dict():
             mqtt_credentials_error_flag = True
             mqtt_credentials_error_msg += "Configuration Error: credentials_dict not in config file"
 
+        # relay cong dict for Building Kiosks
+        if config_dict['pkdr_mqtt_config'].get('pkdr_id_to_mqtt_dict', -1) == -1:
+            mqtt_credentials_error_flag = True
+            mqtt_credentials_error_msg += "Configuration Error: pkdr_id_to_mqtt_dict not in config file"
+
     config_dict['mqtt_credentials_error_flag'] = mqtt_credentials_error_flag
     config_dict['mqtt_credentials_error_msg'] = mqtt_credentials_error_msg
 
-def db_table_dict_init(table_name):
+def db_table_dict_init(table_name = 'RuntimeLog'):
     # Thermostats | RuntimeLog (default) as of 20220215
     config_dict['db_insert_dict'] = {}
 
@@ -451,6 +459,10 @@ def db_table_dict_init(table_name):
             }
         else:
             config_dict['db_table_dict']['query_attempts'] += 1
+
+def db_table_dict_init_force():
+    config_dict['db_table_dict'] = -1
+    db_table_dict_init()
 
 def db_variables_add_dict(key_value_pair_dict):
     insert_failed_flag = False
@@ -550,6 +562,9 @@ def db_generic_insert(table_name = 'RuntimeLog'):
 
     if config_dict['db_table_dict']['query_attempts'] > config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max']:
         print("{}: DB Call Recursion Error: attempts ({}) > max ({}) | SQL: {}".format(config_dict['datestamp'], config_dict['db_table_dict']['query_attempts'], config_dict['pkdr_remote_db_config']['log_table_config_dict']['log_insert_attempts_max'], query_insert))
+        # reset recursion variables...
+        config_dict['db_error_flag'] = False
+        config_dict['db_table_dict']['query_attempts'] = 0
     else:
         try:
             connection = mysql.connector.connect(

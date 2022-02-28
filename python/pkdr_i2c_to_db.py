@@ -397,7 +397,7 @@ else:
         for key, val in code_block_times_dict.items():
             if key != 'program_execution':
                 if val > max_duration_block:
-                    pkdr_utils.eprint('{} block took {} > {} second to complete'.format(key, val, max_duration_block))
+                    pkdr_utils.eprint('{} WARNING->DURATION: {} block took {} > {} second to complete'.format(str(datetime.datetime.now()), key, val, max_duration_block))
         
     # SQL for checking Thermostats table...
     # MariaDB [PkDr]> select apt, temperature as C, (temperature * 9/5) + 32 as F, taken from Thermostats order by uid desc limit 20;

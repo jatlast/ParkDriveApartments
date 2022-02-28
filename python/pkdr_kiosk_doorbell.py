@@ -18,6 +18,7 @@
 #  black pkdr_kiosk_doorbell.py --target-version py39 --verbose --config FILE
 # ------------
 
+from cProfile import run
 import time # needed to sleep the listening loop
 import vlc # needed to play doorbell .wav file
 import paho.mqtt.client as mqtt # needed to listen for MQTT messages
@@ -97,14 +98,13 @@ else:
     # Note the message parameter is a message class with members: topic, qos, payload, retain.
     def on_message(client, userdata, message):
         global runtime_message, runtime_error_message
-        runtime_messages = ' on_message() '
+        runtime_messages = "{} INFO: on_message() - Topic: {} | Payload: {}\n".format(action_current_datetime, message.topic, str(message.payload.decode("utf-8")))
         action_current_datetime = datetime.datetime.now()
 
         # check the volume first...
         if message.topic == variables_dict["mqtt_subscribe_volume"]:
-            runtime_messages += "INFO: doorbell_volume changed from {} to {}\n".format(variables_dict["doorbell_volume"])
+            runtime_messages += "doorbell_volume changed from {} to {}".format(variables_dict["doorbell_volume"], str(message.payload.decode("utf-8")))
             variables_dict["doorbell_volume"] = str(message.payload.decode("utf-8"))
-            runtime_messages += "INFO: {} Topic: {} | Payload: {}".format(action_current_datetime,message.topic)
 
         if (str(message.payload.decode("utf-8")) == variables_dict["actionable_payload"]):
 
@@ -165,6 +165,9 @@ else:
             pkdr_utils.db_variables_add_key_value('time_since_previous', duration_since_last_doorbell)
             
             pkdr_utils.db_generic_insert()
+        else:
+            if variables_dict["verbosity"] > 2:
+                print(runtime_message)
 
     def on_log(client, userdata, level, buf):
         paho_log_level_name = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))

@@ -20,6 +20,8 @@ robocopy "Z:\PkDr\HA\code\DEV\config" "Z:\PkDr\HA\code\PROD\config" "pkdr_config
 robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_i2c_to_db.py" /z
 @REM      pkdr_kiosk_doorbell.py
 robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_kiosk_doorbell.py" /z
+@REM      pkdr_kiosk_relays.py
+robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_kiosk_relays.py" /z
 @REM      pkdr_utils.py
 robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_utils.py" /z
 
