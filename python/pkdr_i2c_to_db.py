@@ -196,7 +196,7 @@ else:
         exception_flag = True
     except BaseException as err:
         exception_type = '{}'.format(type(err))
-        exception_msg = '({}) I2CDevice({}, {}) raised: Unexptected ({})|({})'.format(sensor_type, str(i2c), sensor_address, type(err), err)
+        exception_msg = '({}) I2CDevice({}, {}) raised: Unexpected ({})|({})'.format(sensor_type, str(i2c), sensor_address, type(err), err)
         exception_flag = True
 
     block_end_time = time.time()
@@ -253,7 +253,7 @@ else:
                 exception_flag = True
             except BaseException as err:
                 exception_type = '{}'.format(type(err))
-                exception_msg = '({} @ {}) {} raised: Unexptected ({})|({})'.format(sensor_type, sensor_address, read_attempt_string_for_info, type(err), err)
+                exception_msg = '({} @ {}) {} raised: Unexpected ({})|({})'.format(sensor_type, sensor_address, read_attempt_string_for_info, type(err), err)
                 exception_flag = True
 
             block_end_time = time.time()
@@ -299,7 +299,7 @@ else:
                     exception_flag = True
                 except BaseException as err:
                     exception_type = '{}'.format(type(err))
-                    exception_msg = '({} @ {}) sensor.temperature raised: Unexptected ({})|({})'.format(sensor_type, sensor_address, type(err), err)
+                    exception_msg = '({} @ {}) sensor.temperature raised: Unexpected ({})|({})'.format(sensor_type, sensor_address, type(err), err)
                     exception_flag = True
 
                 # pkdr_utils.config_dict['db_table_dict']['key4'] = 'temperature'
