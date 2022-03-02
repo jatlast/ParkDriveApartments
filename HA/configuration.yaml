@@ -2608,24 +2608,24 @@ switch:
 # 20220210 - The old way until I can make B1-B4 the same as B1
   - platform: mqtt
     name: "B2 Kiosks"
-    state_topic: "PkDr/B2/Utility/output/B2_Kiosks"
-    command_topic: "PkDr/B2/Utility/output/B2_Kiosks/set"
+    state_topic: "PkDr/B2/Utility/B2_Kiosks"
+    command_topic: "PkDr/B2/Utility/B2_Kiosks/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Kiosks"
-    state_topic: "PkDr/B3/Utility/output/B3_Kiosks"
-    command_topic: "PkDr/B3/Utility/output/B3_Kiosks/set"
+    state_topic: "PkDr/B3/Utility/B3_Kiosks"
+    command_topic: "PkDr/B3/Utility/B3_Kiosks/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B4 Kiosks"
-    state_topic: "PkDr/B4/Utility/output/B4_Kiosks"
-    command_topic: "PkDr/B4/Utility/output/B4_Kiosks/set"
+    state_topic: "PkDr/B4/Utility/B4_Kiosks"
+    command_topic: "PkDr/B4/Utility/B4_Kiosks/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -2635,136 +2635,136 @@ switch:
   # B1
   - platform: mqtt
     name: "01 Heat"
-    state_topic: "PkDr/B1/Utility/output/01_Heat"
-    command_topic: "PkDr/B1/Utility/output/01_Heat/set"
+    state_topic: "PkDr/B1/Utility/01_Heat"
+    command_topic: "PkDr/B1/Utility/01_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "02 Heat"
-    state_topic: "PkDr/B1/Utility/output/02_Heat"
-    command_topic: "PkDr/B1/Utility/output/02_Heat/set"
+    state_topic: "PkDr/B1/Utility/02_Heat"
+    command_topic: "PkDr/B1/Utility/02_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "03 Heat"
-    state_topic: "PkDr/B1/Utility/output/03_Heat"
-    command_topic: "PkDr/B1/Utility/output/03_Heat/set"
+    state_topic: "PkDr/B1/Utility/03_Heat"
+    command_topic: "PkDr/B1/Utility/03_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "04 Heat"
-    state_topic: "PkDr/B1/Utility/output/04_Heat"
-    command_topic: "PkDr/B1/Utility/output/04_Heat/set"
+    state_topic: "PkDr/B1/Utility/04_Heat"
+    command_topic: "PkDr/B1/Utility/04_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 End Switch Override"
-    state_topic: "PkDr/B1/Utility/output/End_Switch_Override"
-    command_topic: "PkDr/B1/Utility/output/End_Switch_Override/set"
+    state_topic: "PkDr/B1/Utility/End_Switch_Override"
+    command_topic: "PkDr/B1/Utility/End_Switch_Override/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Kiosks Odd"
-    state_topic: "PkDr/B1/Utility/output/Kiosks_Odd"
-    command_topic: "PkDr/B1/Utility/output/Kiosks_Odd/set"
+    state_topic: "PkDr/B1/Utility/Kiosks_Odd"
+    command_topic: "PkDr/B1/Utility/Kiosks_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Kiosks Even"
-    state_topic: "PkDr/B1/Utility/output/Kiosks_Even"
-    command_topic: "PkDr/B1/Utility/output/Kiosks_Even/set"
+    state_topic: "PkDr/B1/Utility/Kiosks_Even"
+    command_topic: "PkDr/B1/Utility/Kiosks_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Entrance Buttons"
-    state_topic: "PkDr/B1/Utility/output/Entrance_Buttons"
-    command_topic: "PkDr/B1/Utility/output/Entrance_Buttons/set"
+    state_topic: "PkDr/B1/Utility/Entrance_Buttons"
+    command_topic: "PkDr/B1/Utility/Entrance_Buttons/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Entrance Video"
-    state_topic: "PkDr/B1/Utility/output/Entrance_Video"
-    command_topic: "PkDr/B1/Utility/output/Entrance_Video/set"
+    state_topic: "PkDr/B1/Utility/Entrance_Video"
+    command_topic: "PkDr/B1/Utility/Entrance_Video/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Entrance Lock"
-    state_topic: "PkDr/B1/Utility/output/Entrance_Lock"
-    command_topic: "PkDr/B1/Utility/output/Entrance_Lock/set"
+    state_topic: "PkDr/B1/Utility/Entrance_Lock"
+    command_topic: "PkDr/B1/Utility/Entrance_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "01 Lock"
-    state_topic: "PkDr/B1/Utility/output/01_Lock"
-    command_topic: "PkDr/B1/Utility/output/01_Lock/set"
+    state_topic: "PkDr/B1/Utility/01_Lock"
+    command_topic: "PkDr/B1/Utility/01_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "02 Lock"
-    state_topic: "PkDr/B1/Utility/output/02_Lock"
-    command_topic: "PkDr/B1/Utility/output/02_Lock/set"
+    state_topic: "PkDr/B1/Utility/02_Lock"
+    command_topic: "PkDr/B1/Utility/02_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "03 Lock"
-    state_topic: "PkDr/B1/Utility/output/03_Lock"
-    command_topic: "PkDr/B1/Utility/output/03_Lock/set"
+    state_topic: "PkDr/B1/Utility/03_Lock"
+    command_topic: "PkDr/B1/Utility/03_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "04 Lock"
-    state_topic: "PkDr/B1/Utility/output/04_Lock"
-    command_topic: "PkDr/B1/Utility/output/04_Lock/set"
+    state_topic: "PkDr/B1/Utility/04_Lock"
+    command_topic: "PkDr/B1/Utility/04_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Doorbells Odd"
-    state_topic: "PkDr/B1/Utility/output/Doorbells_Odd"
-    command_topic: "PkDr/B1/Utility/output/Doorbells_Odd/set"
+    state_topic: "PkDr/B1/Utility/Doorbells_Odd"
+    command_topic: "PkDr/B1/Utility/Doorbells_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Doorbells Even"
-    state_topic: "PkDr/B1/Utility/output/Doorbells_Even"
-    command_topic: "PkDr/B1/Utility/output/Doorbells_Even/set"
+    state_topic: "PkDr/B1/Utility/Doorbells_Even"
+    command_topic: "PkDr/B1/Utility/Doorbells_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B1 Extra"
-    state_topic: "PkDr/B1/Utility/output/Extra"
-    command_topic: "PkDr/B1/Utility/output/Extra/set"
+    state_topic: "PkDr/B1/Utility/Extra"
+    command_topic: "PkDr/B1/Utility/Extra/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -2773,136 +2773,136 @@ switch:
   # B2
   - platform: mqtt
     name: "05 Heat"
-    state_topic: "PkDr/B2/Utility/output/05_Heat"
-    command_topic: "PkDr/B2/Utility/output/05_Heat/set"
+    state_topic: "PkDr/B2/Utility/05_Heat"
+    command_topic: "PkDr/B2/Utility/05_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "06 Heat"
-    state_topic: "PkDr/B2/Utility/output/06_Heat"
-    command_topic: "PkDr/B2/Utility/output/06_Heat/set"
+    state_topic: "PkDr/B2/Utility/06_Heat"
+    command_topic: "PkDr/B2/Utility/06_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "07 Heat"
-    state_topic: "PkDr/B2/Utility/output/07_Heat"
-    command_topic: "PkDr/B2/Utility/output/07_Heat/set"
+    state_topic: "PkDr/B2/Utility/07_Heat"
+    command_topic: "PkDr/B2/Utility/07_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "08 Heat"
-    state_topic: "PkDr/B2/Utility/output/08_Heat"
-    command_topic: "PkDr/B2/Utility/output/08_Heat/set"
+    state_topic: "PkDr/B2/Utility/08_Heat"
+    command_topic: "PkDr/B2/Utility/08_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 End Switch Override"
-    state_topic: "PkDr/B2/Utility/output/End_Switch_Override"
-    command_topic: "PkDr/B2/Utility/output/End_Switch_Override/set"
+    state_topic: "PkDr/B2/Utility/End_Switch_Override"
+    command_topic: "PkDr/B2/Utility/End_Switch_Override/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Kiosks Odd"
-    state_topic: "PkDr/B2/Utility/output/Kiosks_Odd"
-    command_topic: "PkDr/B2/Utility/output/Kiosks_Odd/set"
+    state_topic: "PkDr/B2/Utility/Kiosks_Odd"
+    command_topic: "PkDr/B2/Utility/Kiosks_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Kiosks Even"
-    state_topic: "PkDr/B2/Utility/output/Kiosks_Even"
-    command_topic: "PkDr/B2/Utility/output/Kiosks_Even/set"
+    state_topic: "PkDr/B2/Utility/Kiosks_Even"
+    command_topic: "PkDr/B2/Utility/Kiosks_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Entrance Buttons"
-    state_topic: "PkDr/B2/Utility/output/Entrance_Buttons"
-    command_topic: "PkDr/B2/Utility/output/Entrance_Buttons/set"
+    state_topic: "PkDr/B2/Utility/Entrance_Buttons"
+    command_topic: "PkDr/B2/Utility/Entrance_Buttons/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Entrance Video"
-    state_topic: "PkDr/B2/Utility/output/Entrance_Video"
-    command_topic: "PkDr/B2/Utility/output/Entrance_Video/set"
+    state_topic: "PkDr/B2/Utility/Entrance_Video"
+    command_topic: "PkDr/B2/Utility/Entrance_Video/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Entrance Lock"
-    state_topic: "PkDr/B2/Utility/output/Entrance_Lock"
-    command_topic: "PkDr/B2/Utility/output/Entrance_Lock/set"
+    state_topic: "PkDr/B2/Utility/Entrance_Lock"
+    command_topic: "PkDr/B2/Utility/Entrance_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "05 Lock"
-    state_topic: "PkDr/B2/Utility/output/05_Lock"
-    command_topic: "PkDr/B2/Utility/output/05_Lock/set"
+    state_topic: "PkDr/B2/Utility/05_Lock"
+    command_topic: "PkDr/B2/Utility/05_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "06 Lock"
-    state_topic: "PkDr/B2/Utility/output/06_Lock"
-    command_topic: "PkDr/B2/Utility/output/06_Lock/set"
+    state_topic: "PkDr/B2/Utility/06_Lock"
+    command_topic: "PkDr/B2/Utility/06_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "07 Lock"
-    state_topic: "PkDr/B2/Utility/output/07_Lock"
-    command_topic: "PkDr/B2/Utility/output/07_Lock/set"
+    state_topic: "PkDr/B2/Utility/07_Lock"
+    command_topic: "PkDr/B2/Utility/07_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "08 Lock"
-    state_topic: "PkDr/B2/Utility/output/08_Lock"
-    command_topic: "PkDr/B2/Utility/output/08_Lock/set"
+    state_topic: "PkDr/B2/Utility/08_Lock"
+    command_topic: "PkDr/B2/Utility/08_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Doorbells Odd"
-    state_topic: "PkDr/B2/Utility/output/Doorbells_Odd"
-    command_topic: "PkDr/B2/Utility/output/Doorbells_Odd/set"
+    state_topic: "PkDr/B2/Utility/Doorbells_Odd"
+    command_topic: "PkDr/B2/Utility/Doorbells_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Doorbells Even"
-    state_topic: "PkDr/B2/Utility/output/Doorbells_Even"
-    command_topic: "PkDr/B2/Utility/output/Doorbells_Even/set"
+    state_topic: "PkDr/B2/Utility/Doorbells_Even"
+    command_topic: "PkDr/B2/Utility/Doorbells_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B2 Extra"
-    state_topic: "PkDr/B2/Utility/output/Extra"
-    command_topic: "PkDr/B2/Utility/output/Extra/set"
+    state_topic: "PkDr/B2/Utility/Extra"
+    command_topic: "PkDr/B2/Utility/Extra/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -2911,136 +2911,136 @@ switch:
   # B3
   - platform: mqtt
     name: "09 Heat"
-    state_topic: "PkDr/B3/Utility/output/09_Heat"
-    command_topic: "PkDr/B3/Utility/output/09_Heat/set"
+    state_topic: "PkDr/B3/Utility/09_Heat"
+    command_topic: "PkDr/B3/Utility/09_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "10 Heat"
-    state_topic: "PkDr/B3/Utility/output/10_Heat"
-    command_topic: "PkDr/B3/Utility/output/10_Heat/set"
+    state_topic: "PkDr/B3/Utility/10_Heat"
+    command_topic: "PkDr/B3/Utility/10_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "11 Heat"
-    state_topic: "PkDr/B3/Utility/output/11_Heat"
-    command_topic: "PkDr/B3/Utility/output/11_Heat/set"
+    state_topic: "PkDr/B3/Utility/11_Heat"
+    command_topic: "PkDr/B3/Utility/11_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "12 Heat"
-    state_topic: "PkDr/B3/Utility/output/12_Heat"
-    command_topic: "PkDr/B3/Utility/output/12_Heat/set"
+    state_topic: "PkDr/B3/Utility/12_Heat"
+    command_topic: "PkDr/B3/Utility/12_Heat/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 End Switch Override"
-    state_topic: "PkDr/B3/Utility/output/End_Switch_Override"
-    command_topic: "PkDr/B3/Utility/output/End_Switch_Override/set"
+    state_topic: "PkDr/B3/Utility/End_Switch_Override"
+    command_topic: "PkDr/B3/Utility/End_Switch_Override/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Kiosks Odd"
-    state_topic: "PkDr/B3/Utility/output/Kiosks_Odd"
-    command_topic: "PkDr/B3/Utility/output/Kiosks_Odd/set"
+    state_topic: "PkDr/B3/Utility/Kiosks_Odd"
+    command_topic: "PkDr/B3/Utility/Kiosks_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Kiosks Even"
-    state_topic: "PkDr/B3/Utility/output/Kiosks_Even"
-    command_topic: "PkDr/B3/Utility/output/Kiosks_Even/set"
+    state_topic: "PkDr/B3/Utility/Kiosks_Even"
+    command_topic: "PkDr/B3/Utility/Kiosks_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Entrance Buttons"
-    state_topic: "PkDr/B3/Utility/output/Entrance_Buttons"
-    command_topic: "PkDr/B3/Utility/output/Entrance_Buttons/set"
+    state_topic: "PkDr/B3/Utility/Entrance_Buttons"
+    command_topic: "PkDr/B3/Utility/Entrance_Buttons/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Entrance Video"
-    state_topic: "PkDr/B3/Utility/output/Entrance_Video"
-    command_topic: "PkDr/B3/Utility/output/Entrance_Video/set"
+    state_topic: "PkDr/B3/Utility/Entrance_Video"
+    command_topic: "PkDr/B3/Utility/Entrance_Video/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Entrance Lock"
-    state_topic: "PkDr/B3/Utility/output/Entrance_Lock"
-    command_topic: "PkDr/B3/Utility/output/Entrance_Lock/set"
+    state_topic: "PkDr/B3/Utility/Entrance_Lock"
+    command_topic: "PkDr/B3/Utility/Entrance_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "09 Lock"
-    state_topic: "PkDr/B3/Utility/output/09_Lock"
-    command_topic: "PkDr/B3/Utility/output/09_Lock/set"
+    state_topic: "PkDr/B3/Utility/09_Lock"
+    command_topic: "PkDr/B3/Utility/09_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "10 Lock"
-    state_topic: "PkDr/B3/Utility/output/10_Lock"
-    command_topic: "PkDr/B3/Utility/output/10_Lock/set"
+    state_topic: "PkDr/B3/Utility/10_Lock"
+    command_topic: "PkDr/B3/Utility/10_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "11 Lock"
-    state_topic: "PkDr/B3/Utility/output/11_Lock"
-    command_topic: "PkDr/B3/Utility/output/11_Lock/set"
+    state_topic: "PkDr/B3/Utility/11_Lock"
+    command_topic: "PkDr/B3/Utility/11_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "12 Lock"
-    state_topic: "PkDr/B3/Utility/output/12_Lock"
-    command_topic: "PkDr/B3/Utility/output/12_Lock/set"
+    state_topic: "PkDr/B3/Utility/12_Lock"
+    command_topic: "PkDr/B3/Utility/12_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Doorbells Odd"
-    state_topic: "PkDr/B3/Utility/output/Doorbells_Odd"
-    command_topic: "PkDr/B3/Utility/output/Doorbells_Odd/set"
+    state_topic: "PkDr/B3/Utility/Doorbells_Odd"
+    command_topic: "PkDr/B3/Utility/Doorbells_Odd/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Doorbells Even"
-    state_topic: "PkDr/B3/Utility/output/Doorbells_Even"
-    command_topic: "PkDr/B3/Utility/output/Doorbells_Even/set"
+    state_topic: "PkDr/B3/Utility/Doorbells_Even"
+    command_topic: "PkDr/B3/Utility/Doorbells_Even/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "B3 Extra"
-    state_topic: "PkDr/B3/Utility/output/Extra"
-    command_topic: "PkDr/B3/Utility/output/Extra/set"
+    state_topic: "PkDr/B3/Utility/Extra"
+    command_topic: "PkDr/B3/Utility/Extra/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -3216,8 +3216,8 @@ switch:
   # Controlled from Pi with 16 channel relay in the building's utility closet
   # - platform: mqtt
   #   name: "Apt01 Entrance Lock"
-  #   state_topic: "PkDr/B1/Utility/output/01_Lock"
-  #   command_topic: "PkDr/B1/Utility/output/01_Lock/set"
+  #   state_topic: "PkDr/B1/Utility/01_Lock"
+  #   command_topic: "PkDr/B1/Utility/01_Lock/set"
   #   qos: 1
   #   payload_on: "ON"
   #   payload_off: "OFF"
@@ -3309,8 +3309,8 @@ switch:
   # Controlled from Pi with 16 channel relay in the building's utility closet
   - platform: mqtt
     name: "Apt03 Entrance Lock"
-    state_topic: "PkDr/B1/Utility/output/03_Lock"
-    command_topic: "PkDr/B1/Utility/output/03_Lock/set"
+    state_topic: "PkDr/B1/Utility/03_Lock"
+    command_topic: "PkDr/B1/Utility/03_Lock/set"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -4505,7 +4505,7 @@ amcrest:
       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
   # Utility Closets (20220219 - need to make these use LAN instead of WiFi)
   - host: !secret Cam_IP_Utility_B1_WiFi
-    name: B1 Utility Closet
+    name: B1 Utility
     username: !secret amcrest_un
     password: !secret amcrest_pw
     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
@@ -4518,8 +4518,8 @@ amcrest:
     sensors:
       - sdcard # Return the SD card usage by reporting the total and used space.
       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  - host: !secret Cam_IP_Utility_B2_LAN
-    name: B2 Utility Closet
+  - host: !secret Cam_IP_Utility_B2_WiFi
+    name: B2 Utility
     username: !secret amcrest_un
     password: !secret amcrest_pw
     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
@@ -4532,7 +4532,55 @@ amcrest:
     sensors:
       - sdcard # Return the SD card usage by reporting the total and used space.
       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+
 ##########################
+
+########## Non-IP Cams ##########
+# Cameras that require non-IP configuration...
+camera:
+# Amcrest DVR_B1-2_B2_Closet
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b2_cam_b1b2_court
+    name: B1-2 Court
+  # - platform: ffmpeg
+  #   input: !secret amcrest_dvr_b2_cam_b1_laundry
+  #   name: B1 Laundry
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b2_cam_b2_laundry
+    name: B2 Laundry
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b2_cam_b2_lot
+    name: B2 Lot
+# Amcrest DVR_B3-4_B3_Closet
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b3_cam_b3b4_court
+    name: B3-4 Court
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b3_cam_b3_lot
+    name: B3 Lot
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b3_cam_b3_laundry
+    name: B3 Laundry
+  # - platform: ffmpeg
+  #   input: !secret amcrest_dvr_b3_cam_b4_laundry
+  #   name: B4 Laundry
+
+  - platform: generic
+    still_image_url: !secret amcrest_dvr_b2_cam_b1_laundry_img
+    stream_source: !secret amcrest_dvr_b2_cam_b1_laundry
+    name: B1 Laundry
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    verify_ssl: false
+  - platform: generic
+    still_image_url: !secret amcrest_dvr_b3_cam_b4_laundry_img
+    stream_source: !secret amcrest_dvr_b3_cam_b4_laundry
+    name: B4 Laundry
+    username: !secret amcrest_un
+    password: !secret amcrest_pw
+    verify_ssl: false
+
+#################################
 
 #device_tracker:
 #  - platform: nmap_tracker

@@ -1336,36 +1336,36 @@ views:
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
-            # - type: picture-glance
-            #   title: B1 Video Doorbell
-            #   camera_image: camera.b1_vdb_camera
-            #   image: '/local/B1_VDB.jpg'
-            #   entities:
-            #     - entity: camera.b1_vdb_camera
-            #   aspect_ratio: 0%
-            # - type: picture-entity
-            #   entity: camera.b1_vdb_camera
-            #   image: '/local/B1_VDB.jpg'
-            #   aspect_ratio: 75%
-            #   camera_image: camera.b1_vdb_camera
-            #   name: VDB Live
-            #   camera_view: live
+            - type: picture-glance
+              title: B1 Video Doorbell
+              camera_image: camera.b1_vdb_camera
+              image: '/local/B1_VDB.jpg'
+              entities:
+                - entity: camera.b1_vdb_camera
+              aspect_ratio: 0%
+            - type: picture-entity
+              entity: camera.b1_vdb_camera
+              image: '/local/B1_VDB.jpg'
+              aspect_ratio: 75%
+              camera_image: camera.b1_vdb_camera
+              name: VDB Live
+              camera_view: live
 
-            # - type: picture-glance
-            #   title: B1 Stairs
-            #   camera_image: camera.b1_stairs
-            #   image: '/local/PkDr_B1_Stairs.jpg'
-            #   entities:
-            #     - camera.b1_stairs
-            #   aspect_ratio: 0%
+            - type: picture-glance
+              title: B1 Stairs
+              camera_image: camera.b1_stairs
+              image: '/local/PkDr_B1_Stairs.jpg'
+              entities:
+                - camera.b1_stairs
+              aspect_ratio: 0%
 
-            # - type: picture-glance
-            #   title: Apt01 Video Doorbell
-            #   camera_image: camera.apt01_video_doorbell_camera
-            #   image: '/local/Apt01_VDB.jpg'
-            #   entities:
-            #     - entity: camera.apt01_video_doorbell_camera
-            #   aspect_ratio: 0%
+            - type: picture-glance
+              title: B1-2 Court
+              camera_image: camera.b1_2_court
+              # image: '/local/Apt01_VDB.jpg'
+              entities:
+                - entity: camera.b1_2_court
+              aspect_ratio: 0%
             type: horizontal-stack
         # Row 5 - Tenant Portal
           - cards:
