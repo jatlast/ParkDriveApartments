@@ -369,220 +369,220 @@ input_text:
 #----------------
 # Apt 01
   pkdr_01_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_01_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_01_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_01_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 02
   pkdr_02_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_02_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_02_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_02_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 03
   pkdr_03_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_03_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_03_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_03_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 04
   pkdr_04_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_04_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_04_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_04_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 #----------------
 #- Building 2 --- 
 #----------------
 # Apt 05
   pkdr_05_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_05_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_05_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_05_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 06
   pkdr_06_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_06_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_06_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_06_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 07
   pkdr_07_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_07_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_07_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_07_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 08
   pkdr_08_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_08_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_08_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_08_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 #----------------
 #- Building 3 --- 
 #----------------
 # Apt 09
   pkdr_09_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_09_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_09_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_09_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 10
   pkdr_10_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_10_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_10_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_10_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 11
   pkdr_11_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_11_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_11_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_11_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 12
   pkdr_12_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_12_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_12_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_12_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 #----------------
 #- Building 4 --- 
 #----------------
 # Apt 13
   pkdr_13_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_13_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_13_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_13_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 14
   pkdr_14_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_14_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_14_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_14_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 15
   pkdr_15_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_15_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_15_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_15_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 # Apt 16
   pkdr_16_vdb_1:
-    name: "On Ring: Line 1"
+    name: 'On Ring: Line 1'
     max: 20
   pkdr_16_vdb_2:
-    name: "On Ring: Line 2"
+    name: 'On Ring: Line 2'
     max: 20
   pkdr_16_vdb_3:
-    name: "On Ring: Line 3"
+    name: 'On Ring: Line 3'
     max: 20
   pkdr_16_vdb_4:
-    name: "On Ring: Line 4"
+    name: 'On Ring: Line 4'
     max: 20
 
 #################
@@ -635,7 +635,7 @@ input_text:
 #   Old Module - MagicHome (34)
 #   New Module - Ariux LC11 (38)
 # Tasmota Console Commands
-#   PowerRetain 1 - persistant power states - instead of using "retain: true"
+#   PowerRetain 1 - persistant power states - instead of using 'retain: true'
 #   SetOption17 1 - Enable decimal colors
 #   SetOption59 1 - Enable tele topic reporting after a light state change
 #  Check if 37 is the correct color configuration before resetting
@@ -681,10 +681,10 @@ light:
 #      - 4 random colors
 #      - 6 candle lights
 #      - 12 fire pattern
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
 # These add a "White value" slider but it doesn't seem to do anything
@@ -695,7 +695,8 @@ light:
 ### Apt 01
   # Entrance
   - platform: mqtt
-    name: "Apt01 Entrance Bulb"
+    name: "Apt01 Bulb Entrance"
+    unique_id: apt01_bulb_entrance
     command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -717,15 +718,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt01 LivingRoom Bulb"
+    name: "Apt01 Bulb LivingRoom"
+    unique_id: apt01_bulb_livingroom
     command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
     state_value_template: "{{value_json.POWER}}"
@@ -749,15 +751,16 @@ light:
       - 2
       - 3
       - 4
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt01 Hall Bulb"
+    name: "Apt01 Bulb Hall"
+    unique_id: apt01_bulb_hall
     command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -779,15 +782,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt01 Kitchen Bulb"
+    name: "Apt01 Bulb Kitchen"
+    unique_id: apt01_bulb_kitchen
     command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -809,15 +813,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt01 Bedroom Bulb"
+    name: "Apt01 Bulb Bedroom"
+    unique_id: apt01_bulb_bedroom
     command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -839,25 +844,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt01 Bedroom Light"
+    name: "Apt01 Light Bedroom"
+    unique_id: apt01_light_bedroom
     state_topic: "PkDr/Apt01/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt01/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
 #    retain: true
 ### Apt 02
   # Entrance
   - platform: mqtt
-    name: "Apt02 Entrance Bulb"
+    name: "Apt02 Bulb Entrance"
+    unique_id: apt02_bulb_entrance
     command_topic: "PkDr/Apt02/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt02/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -879,15 +886,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt02 LivingRoom Bulb"
+    name: "Apt02 Bulb LivingRoom"
+    unique_id: apt02_bulb_livingroom
     command_topic: "PkDr/Apt02/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt02/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -909,15 +917,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt02 Kitchen Bulb"
+    name: "Apt02 Bulb Kitchen"
+    unique_id: apt02_bulb_kitchen
     command_topic: "PkDr/Apt02/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt02/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -939,15 +948,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt02 Hall Bulb"
+    name: "Apt02 Bulb Hall"
+    unique_id: apt02_bulb_hall
     command_topic: "PkDr/Apt02/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt02/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -969,15 +979,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt02 Bedroom Bulb"
+    name: "Apt02 Bulb Bedroom"
+    unique_id: apt02_bulb_bedroom
     command_topic: "PkDr/Apt02/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt02/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -999,25 +1010,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt02 Bedroom Light"
+    name: "Apt02 Light Bedroom"
+    unique_id: apt02_light_bedroom
     state_topic: "PkDr/Apt02/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt02/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 ### Apt 03
   # Entrance
   - platform: mqtt
-    name: "Apt03 Entrance Bulb"
+    name: "Apt03 Bulb Entrance"
+    unique_id: apt03_bulb_entrance
     command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1039,15 +1052,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt03 LivingRoom Bulb"
+    name: "Apt03 Bulb LivingRoom"
+    unique_id: apt03_bulb_livingroom
     command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
     state_value_template: "{{value_json.POWER}}"
@@ -1071,15 +1085,16 @@ light:
       - 2
       - 3
       - 4
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt03 Hall Bulb"
+    name: "Apt03 Bulb Hall"
+    unique_id: apt03_bulb_hall
     command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1101,15 +1116,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt03 Kitchen Bulb"
+    name: "Apt03 Bulb Kitchen"
+    unique_id: apt03_bulb_kitchen
     command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1131,15 +1147,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt03 Bedroom Bulb"
+    name: "Apt03 Bulb Bedroom"
+    unique_id: apt03_bulb_bedroom
     command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1161,25 +1178,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt03 Bedroom Light"
+    name: "Apt03 Light Bedroom"
+    unique_id: apt03_light_bedroom
     state_topic: "PkDr/Apt03/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt03/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
 #    retain: true
 ### Apt 05
   # Entrance
   - platform: mqtt
-    name: "Apt05 Entrance Bulb"
+    name: "Apt05 Bulb Entrance"
+    unique_id: apt05_bulb_entrance
     command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1201,15 +1220,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt05 LivingRoom Bulb"
+    name: "Apt05 Bulb LivingRoom"
+    unique_id: apt05_bulb_livingroom
     command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1231,24 +1251,15 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
-#    retain: false
-  # LivingRoom Switch (Lamp2)
-#  - platform: mqtt
-#    name: "Apt05 LivingRoom Light"
-#    state_topic: "PkDr/Apt05/LivingRoom/stat/Light/POWER"
-#    command_topic: "PkDr/Apt05/LivingRoom/cmnd/Light/POWER"
-#    qos: 1
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    retain: true
   # Kitchen
   - platform: mqtt
-    name: "Apt05 Kitchen Bulb"
+    name: "Apt05 Bulb Kitchen"
+    unique_id: apt05_bulb_kitchen
     command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1270,15 +1281,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt05 Hall Bulb"
+    name: "Apt05 Bulb Hall"
+    unique_id: apt05_bulb_hall
     command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1300,15 +1312,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt05 Bedroom Bulb"
+    name: "Apt05 Bulb Bedroom"
+    unique_id: apt05_bulb_bedroom
     command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1330,25 +1343,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt05 Bedroom Light"
+    name: "Apt05 Light Bedroom"
+    unique_id: apt05_light_bedroom
     state_topic: "PkDr/Apt05/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt05/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 ### Apt 06
   # Entrance
   - platform: mqtt
-    name: "Apt06 Entrance Bulb"
+    name: "Apt06 Bulb Entrance"
+    unique_id: apt06_bulb_entrance
     command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1370,15 +1385,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt06 LivingRoom Bulb"
+    name: "Apt06 Bulb LivingRoom"
+    unique_id: apt06_bulb_livingroom
     command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1400,15 +1416,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt06 Kitchen Bulb"
+    name: "Apt06 Bulb Kitchen"
+    unique_id: apt06_bulb_kitchen
     command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1430,15 +1447,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt06 Hall Bulb"
+    name: "Apt06 Bulb Hall"
+    unique_id: apt06_bulb_hall
     command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1460,15 +1478,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt06 Bedroom Bulb"
+    name: "Apt06 Bulb Bedroom"
+    unique_id: apt06_bulb_bedroom
     command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1490,25 +1509,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt06 Bedroom Light"
+    name: "Apt06 Light Bedroom"
+    unique_id: apt06_light_bedroom
     state_topic: "PkDr/Apt06/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt06/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 ### Apt 07
   # Entrance
   - platform: mqtt
-    name: "Apt07 Entrance Bulb"
+    name: "Apt07 Bulb Entrance"
+    unique_id: apt07_bulb_entrance
     command_topic: "PkDr/Apt07/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1530,15 +1551,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt07 LivingRoom Bulb"
+    name: "Apt07 Bulb LivingRoom"
+    unique_id: apt07_bulb_livingroom
     command_topic: "PkDr/Apt07/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1560,15 +1582,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt07 Hall Bulb"
+    name: "Apt07 Bulb Hall"
+    unique_id: apt07_bulb_hall
     command_topic: "PkDr/Apt07/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1590,15 +1613,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt07 Kitchen Bulb"
+    name: "Apt07 Bulb Kitchen"
+    unique_id: apt07_bulb_kitchen
     command_topic: "PkDr/Apt07/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1620,15 +1644,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt07 Bedroom Bulb"
+    name: "Apt07 Bulb Bedroom"
+    unique_id: apt07_bulb_bedroom
     command_topic: "PkDr/Apt07/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1650,15 +1675,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom2 Bulb
+  # Bulb Bedroom2
   - platform: mqtt
-    name: "Apt07 Bedroom2 Bulb"
+    name: "Apt07 Bulb Bedroom2"
+    unique_id: apt07_bulb_bedroom2
     command_topic: "PkDr/Apt07/Bedroom2/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt07/Bedroom2/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1680,34 +1706,37 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt07 Bedroom Light"
+    name: "Apt07 Light Bedroom"
+    unique_id: apt07_light_bedroom
     state_topic: "PkDr/Apt07/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt07/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   # Bedroom2 Switch
   - platform: mqtt
     name: "Apt07 Bedroom2 Light"
+    unique_id: apt07_light_bedroom2
     state_topic: "PkDr/Apt07/Bedroom2/stat/Light/POWER"
     command_topic: "PkDr/Apt07/Bedroom2/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 ### Apt 09
   # Entrance
   - platform: mqtt
-    name: "Apt09 Entrance Bulb"
+    name: "Apt09 Bulb Entrance"
+    unique_id: apt09_bulb_entrance
     command_topic: "PkDr/Apt09/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt09/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1729,15 +1758,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt09 LivingRoom Bulb"
+    name: "Apt09 Bulb LivingRoom"
+    unique_id: apt09_bulb_livingroom
     command_topic: "PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt09/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1759,24 +1789,15 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
-#    retain: false
-  # LivingRoom Switch (Lamp2)
-  - platform: mqtt
-    name: "Apt09 LivingRoom Light"
-    state_topic: "PkDr/Apt09/LivingRoom/stat/Light/POWER"
-    command_topic: "PkDr/Apt09/LivingRoom/cmnd/Light/POWER"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    retain: true
   # Kitchen
   - platform: mqtt
-    name: "Apt09 Kitchen Bulb"
+    name: "Apt09 Bulb Kitchen"
+    unique_id: apt09_bulb_kitchen
     command_topic: "PkDr/Apt09/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt09/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1798,15 +1819,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt09 Hall Bulb"
+    name: "Apt09 Bulb Hall"
+    unique_id: apt09_bulb_hall
     command_topic: "PkDr/Apt09/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt09/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1828,15 +1850,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt09 Bedroom Bulb"
+    name: "Apt09 Bulb Bedroom"
+    unique_id: apt09_bulb_bedroom
     command_topic: "PkDr/Apt09/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt09/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1858,25 +1881,27 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt09 Bedroom Light"
+    name: "Apt09 Light Bedroom"
+    unique_id: apt09_light_bedroom
     state_topic: "PkDr/Apt09/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt09/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 ### Apt 12
   # Entrance
   - platform: mqtt
-    name: "Apt12 Entrance Bulb"
+    name: "Apt12 Bulb Entrance"
+    unique_id: apt12_bulb_entrance
     command_topic: "PkDr/Apt12/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1898,15 +1923,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt12 LivingRoom Bulb"
+    name: "Apt12 Bulb LivingRoom"
+    unique_id: apt12_bulb_livingroom
     command_topic: "PkDr/Apt12/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1928,15 +1954,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt12 Hall Bulb"
+    name: "Apt12 Bulb Hall"
+    unique_id: apt12_bulb_hall
     command_topic: "PkDr/Apt12/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1958,15 +1985,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt12 Kitchen Bulb"
+    name: "Apt12 Bulb Kitchen"
+    unique_id: apt12_bulb_kitchen
     command_topic: "PkDr/Apt12/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -1988,15 +2016,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt12 Bedroom Bulb"
+    name: "Apt12 Bulb Bedroom"
+    unique_id: apt12_bulb_bedroom
     command_topic: "PkDr/Apt12/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2018,15 +2047,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom2 Bulb
+  # Bulb Bedroom2
   - platform: mqtt
-    name: "Apt12 Bedroom2 Bulb"
+    name: "Apt12 Bulb Bedroom2"
+    unique_id: apt12_bulb_bedroom2
     command_topic: "PkDr/Apt12/Bedroom2/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt12/Bedroom2/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2048,35 +2078,38 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt12 Bedroom Light"
+    name: "Apt12 Light Bedroom"
+    unique_id: apt12_light_bedroom
     state_topic: "PkDr/Apt12/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt12/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   # Bedroom2 Switch
   - platform: mqtt
     name: "Apt12 Bedroom2 Light"
+    unique_id: apt12_light_bedroom2
     state_topic: "PkDr/Apt12/Bedroom2/stat/Light/POWER"
     command_topic: "PkDr/Apt12/Bedroom2/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
 ### Apt 13
   # Entrance
   - platform: mqtt
-    name: "Apt13 Entrance Bulb"
+    name: "Apt13 Bulb Entrance"
+    unique_id: apt13_bulb_entrance
     command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2098,15 +2131,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt13 LivingRoom Bulb"
+    name: "Apt13 Bulb LivingRoom"
+    unique_id: apt13_bulb_livingroom
     command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2128,15 +2162,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt13 Hall Bulb"
+    name: "Apt13 Bulb Hall"
+    unique_id: apt13_bulb_hall
     command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2158,15 +2193,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt13 Kitchen Bulb"
+    name: "Apt13 Bulb Kitchen"
+    unique_id: apt13_bulb_kitchen
     command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2188,15 +2224,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt13 Bedroom Bulb"
+    name: "Apt13 Bulb Bedroom"
+    unique_id: apt13_bulb_bedroom
     command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2218,26 +2255,28 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt13 Bedroom Light"
+    name: "Apt13 Light Bedroom"
+    unique_id: apt13_light_bedroom
     state_topic: "PkDr/Apt13/Bedroom/stat/Light/POWER"
     command_topic: "PkDr/Apt13/Bedroom/cmnd/Light/POWER"
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
 ### Apt 14
   # Entrance
   - platform: mqtt
-    name: "Apt14 Entrance Bulb"
+    name: "Apt14 Bulb Entrance"
+    unique_id: apt14_bulb_entrance
     command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2259,15 +2298,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Living Room
   - platform: mqtt
-    name: "Apt14 LivingRoom Bulb"
+    name: "Apt14 Bulb LivingRoom"
+    unique_id: apt14_bulb_livingroom
     command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2289,15 +2329,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Hall
   - platform: mqtt
-    name: "Apt14 Hall Bulb"
+    name: "Apt14 Bulb Hall"
+    unique_id: apt14_bulb_hall
     command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2319,15 +2360,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Kitchen
   - platform: mqtt
-    name: "Apt14 Kitchen Bulb"
+    name: "Apt14 Bulb Kitchen"
+    unique_id: apt14_bulb_kitchen
     command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2349,15 +2391,16 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
-  # Bedroom Bulb
+  # Bulb Bedroom
   - platform: mqtt
-    name: "Apt14 Bedroom Bulb"
+    name: "Apt14 Bulb Bedroom"
+    unique_id: apt14_bulb_bedroom
     command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/POWER"
     state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
     state_value_template: "{{value_json.POWER}}"
@@ -2379,20 +2422,21 @@ light:
     effect_list:
       - 0 none
       - 2 color cycle
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
+    payload_on: 'ON'
+    payload_off: 'OFF'
+    payload_available: 'Online'
+    payload_not_available: 'Offline'
     qos: 1
 #    retain: false
   # Bedroom Switch
   - platform: mqtt
-    name: "Apt14 Bedroom Light"
-    state_topic: "PkDr/Apt14/Bedroom/stat/Light/POWER"
-    command_topic: "PkDr/Apt14/Bedroom/cmnd/Light/POWER"
+    name: Apt14 Light Bedroom
+    unique_id: apt14_light_bedroom
+    state_topic: PkDr/Apt14/Bedroom/stat/Light/POWER
+    command_topic: PkDr/Apt14/Bedroom/cmnd/Light/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
 switch:
@@ -2400,650 +2444,708 @@ switch:
   # (JTB 20220106: Python running on Raspberry Pi Kiosk boxes listening to MQTT topic and using VLC to play .wav files)
   # Apt 01
   - platform: mqtt
-    name: "Apt01 Doorbell"
+    name: Apt01 Doorbell
     unique_id: apt01_doorbell
-    state_topic: "PkDr/Apt01/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt01/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt01/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt01/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 02
   - platform: mqtt
-    name: "Apt02 Doorbell"
+    name: Apt02 Doorbell
     unique_id: apt02_doorbell
-    state_topic: "PkDr/Apt02/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt02/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt02/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt02/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 03
   - platform: mqtt
-    name: "Apt03 Doorbell"
+    name: Apt03 Doorbell
     unique_id: apt03_doorbell
-    state_topic: "PkDr/Apt03/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt03/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt03/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt03/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 04
   - platform: mqtt
-    name: "Apt04 Doorbell"
+    name: Apt04 Doorbell
     unique_id: apt04_doorbell
-    state_topic: "PkDr/Apt04/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt04/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt04/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt04/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 05
   - platform: mqtt
-    name: "Apt05 Doorbell"
+    name: Apt05 Doorbell
     unique_id: apt05_doorbell
-    state_topic: "PkDr/Apt05/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt05/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt05/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt05/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 06
   - platform: mqtt
-    name: "Apt06 Doorbell"
+    name: Apt06 Doorbell
     unique_id: apt06_doorbell
-    state_topic: "PkDr/Apt06/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt06/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt06/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt06/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 07
   - platform: mqtt
-    name: "Apt07 Doorbell"
+    name: Apt07 Doorbell
     unique_id: apt07_doorbell
-    state_topic: "PkDr/Apt07/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt07/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt07/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt07/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 08
   - platform: mqtt
-    name: "Apt08 Doorbell"
+    name: Apt08 Doorbell
     unique_id: apt08_doorbell
-    state_topic: "PkDr/Apt08/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt08/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt08/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt08/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 09
   - platform: mqtt
-    name: "Apt09 Doorbell"
+    name: Apt09 Doorbell
     unique_id: apt09_doorbell
-    state_topic: "PkDr/Apt09/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt09/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt09/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt09/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 10
   - platform: mqtt
-    name: "Apt10 Doorbell"
+    name: Apt10 Doorbell
     unique_id: apt10_doorbell
-    state_topic: "PkDr/Apt10/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt10/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt10/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt10/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 11
   - platform: mqtt
-    name: "Apt11 Doorbell"
+    name: Apt11 Doorbell
     unique_id: apt11_doorbell
-    state_topic: "PkDr/Apt11/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt11/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt11/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt11/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 12
   - platform: mqtt
-    name: "Apt12 Doorbell"
+    name: Apt12 Doorbell
     unique_id: apt12_doorbell
-    state_topic: "PkDr/Apt12/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt12/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt12/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt12/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 13
   - platform: mqtt
-    name: "Apt13 Doorbell"
+    name: Apt13 Doorbell
     unique_id: apt13_doorbell
-    state_topic: "PkDr/Apt13/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt13/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt13/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt13/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 14
   - platform: mqtt
-    name: "Apt14 Doorbell"
+    name: Apt14 Doorbell
     unique_id: apt14_doorbell
-    state_topic: "PkDr/Apt14/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt14/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt14/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt14/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 15
   - platform: mqtt
-    name: "Apt15 Doorbell"
+    name: Apt15 Doorbell
     unique_id: apt15_doorbell
-    state_topic: "PkDr/Apt15/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt15/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt15/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt15/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
   # Apt 16
   - platform: mqtt
-    name: "Apt16 Doorbell"
+    name: Apt16 Doorbell
     unique_id: apt16_doorbell
-    state_topic: "PkDr/Apt16/Entrance/stat/Doorbell/POWER"
-    command_topic: "PkDr/Apt16/Entrance/cmnd/Doorbell/POWER"
+    state_topic: PkDr/Apt16/Entrance/stat/Doorbell/POWER
+    command_topic: PkDr/Apt16/Entrance/cmnd/Doorbell/POWER
     qos: 1
-    payload_on: "CHIME"
-    payload_off: "OFF"
+    payload_on: 'CHIME'
+    payload_off: 'OFF'
     retain: false
 
   # Tasmota Initial Testing...
   - platform: mqtt
-    name: "Switch Test"
-    state_topic: "PkDr/BorA/Room/stat/tasmota/POWER"
-    command_topic: "PkDr/BorA/Room/cmnd/tasmota/POWER"
+    name: Switch Test
+    state_topic: PkDr/BorA/Room/stat/tasmota/POWER
+    command_topic: PkDr/BorA/Room/cmnd/tasmota/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
   # PkDr Main Switches...
   - platform: mqtt
-    name: "B1 Lights"
-    state_topic: "PkDr/B1/Building/stat/Lights/POWER"
-    command_topic: "PkDr/B1/Building/cmnd/Lights/POWER"
+    name: B1 Lights
+    unique_id: b1_lights
+    state_topic: PkDr/B1/Building/stat/Lights/POWER
+    command_topic: PkDr/B1/Building/cmnd/Lights/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Lights"
-    state_topic: "PkDr/B2/Building/stat/Lights/POWER"
-    command_topic: "PkDr/B2/Building/cmnd/Lights/POWER"
+    name: B2 Lights
+    unique_id: b2_lights
+    state_topic: PkDr/B2/Building/stat/Lights/POWER
+    command_topic: PkDr/B2/Building/cmnd/Lights/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Lights"
-    state_topic: "PkDr/B3/Building/stat/Lights/POWER"
-    command_topic: "PkDr/B3/Building/cmnd/Lights/POWER"
+    name: B3 Lights
+    unique_id: b3_lights
+    state_topic: PkDr/B3/Building/stat/Lights/POWER
+    command_topic: PkDr/B3/Building/cmnd/Lights/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B4 Lights"
-    state_topic: "PkDr/B4/Building/stat/Lights/POWER"
-    command_topic: "PkDr/B4/Building/cmnd/Lights/POWER"
+    name: B4 Lights
+    unique_id: b4_lights
+    state_topic: PkDr/B4/Building/stat/Lights/POWER
+    command_topic: PkDr/B4/Building/cmnd/Lights/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
   # PkDr Utility Closet Relay Switches...
 
 # 20220210 - The old way until I can make B1-B4 the same as B1
   - platform: mqtt
-    name: "B2 Kiosks"
-    state_topic: "PkDr/B2/Utility/B2_Kiosks"
-    command_topic: "PkDr/B2/Utility/B2_Kiosks/set"
+    name: B2 Kiosks
+    unique_id: b2_kiosks
+    state_topic: PkDr/B2/Utility/B2_Kiosks
+    command_topic: PkDr/B2/Utility/B2_Kiosks/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Kiosks"
-    state_topic: "PkDr/B3/Utility/B3_Kiosks"
-    command_topic: "PkDr/B3/Utility/B3_Kiosks/set"
+    name: B3 Kiosks
+    unique_id: b3_kiosks
+    state_topic: PkDr/B3/Utility/B3_Kiosks
+    command_topic: PkDr/B3/Utility/B3_Kiosks/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B4 Kiosks"
-    state_topic: "PkDr/B4/Utility/B4_Kiosks"
-    command_topic: "PkDr/B4/Utility/B4_Kiosks/set"
+    name: B4 Kiosks
+    unique_id: b4_kiosks
+    state_topic: PkDr/B4/Utility/B4_Kiosks
+    command_topic: PkDr/B4/Utility/B4_Kiosks/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 # End Old Way
 
   # B1
   - platform: mqtt
-    name: "01 Heat"
-    state_topic: "PkDr/B1/Utility/01_Heat"
-    command_topic: "PkDr/B1/Utility/01_Heat/set"
+    name: 01 Heat
+    unique_id: 01_heat
+    state_topic: PkDr/B1/Utility/01_Heat
+    command_topic: PkDr/B1/Utility/01_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "02 Heat"
-    state_topic: "PkDr/B1/Utility/02_Heat"
-    command_topic: "PkDr/B1/Utility/02_Heat/set"
+    name: 02 Heat
+    unique_id: 02_heat
+    state_topic: PkDr/B1/Utility/02_Heat
+    command_topic: PkDr/B1/Utility/02_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "03 Heat"
-    state_topic: "PkDr/B1/Utility/03_Heat"
-    command_topic: "PkDr/B1/Utility/03_Heat/set"
+    name: 03 Heat
+    unique_id: 03_heat
+    state_topic: PkDr/B1/Utility/03_Heat
+    command_topic: PkDr/B1/Utility/03_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "04 Heat"
-    state_topic: "PkDr/B1/Utility/04_Heat"
-    command_topic: "PkDr/B1/Utility/04_Heat/set"
+    name: 04 Heat
+    unique_id: 04_heat
+    state_topic: PkDr/B1/Utility/04_Heat
+    command_topic: PkDr/B1/Utility/04_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 End Switch Override"
-    state_topic: "PkDr/B1/Utility/End_Switch_Override"
-    command_topic: "PkDr/B1/Utility/End_Switch_Override/set"
+    name: B1 End Switch Override
+    unique_id: b1_end_switch_override
+    state_topic: PkDr/B1/Utility/End_Switch_Override
+    command_topic: PkDr/B1/Utility/End_Switch_Override/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Kiosks Odd"
-    state_topic: "PkDr/B1/Utility/Kiosks_Odd"
-    command_topic: "PkDr/B1/Utility/Kiosks_Odd/set"
+    name: B1 Kiosks Odd
+    unique_id: b1_kiosks_odd
+    state_topic: PkDr/B1/Utility/Kiosks_Odd
+    command_topic: PkDr/B1/Utility/Kiosks_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Kiosks Even"
-    state_topic: "PkDr/B1/Utility/Kiosks_Even"
-    command_topic: "PkDr/B1/Utility/Kiosks_Even/set"
+    name: B1 Kiosks Even
+    unique_id: b1_kiosks_even
+    state_topic: PkDr/B1/Utility/Kiosks_Even
+    command_topic: PkDr/B1/Utility/Kiosks_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Entrance Buttons"
-    state_topic: "PkDr/B1/Utility/Entrance_Buttons"
-    command_topic: "PkDr/B1/Utility/Entrance_Buttons/set"
+    name: B1 Entrance Buttons
+    unique_id: b1_entrance_buttons
+    state_topic: PkDr/B1/Utility/Entrance_Buttons
+    command_topic: PkDr/B1/Utility/Entrance_Buttons/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Entrance Video"
-    state_topic: "PkDr/B1/Utility/Entrance_Video"
-    command_topic: "PkDr/B1/Utility/Entrance_Video/set"
+    name: B1 Entrance Video
+    unique_id: b1_entrance_video
+    state_topic: PkDr/B1/Utility/Entrance_Video
+    command_topic: PkDr/B1/Utility/Entrance_Video/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Entrance Lock"
-    state_topic: "PkDr/B1/Utility/Entrance_Lock"
-    command_topic: "PkDr/B1/Utility/Entrance_Lock/set"
+    name: B1 Entrance Lock
+    unique_id: b1_entrance_lock
+    state_topic: PkDr/B1/Utility/Entrance_Lock
+    command_topic: PkDr/B1/Utility/Entrance_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "01 Lock"
-    state_topic: "PkDr/B1/Utility/01_Lock"
-    command_topic: "PkDr/B1/Utility/01_Lock/set"
+    name: 01 Lock
+    unique_id: 01_lock
+    state_topic: PkDr/B1/Utility/01_Lock
+    command_topic: PkDr/B1/Utility/01_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "02 Lock"
-    state_topic: "PkDr/B1/Utility/02_Lock"
-    command_topic: "PkDr/B1/Utility/02_Lock/set"
+    name: 02 Lock
+    unique_id: 02_lock
+    state_topic: PkDr/B1/Utility/02_Lock
+    command_topic: PkDr/B1/Utility/02_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "03 Lock"
-    state_topic: "PkDr/B1/Utility/03_Lock"
-    command_topic: "PkDr/B1/Utility/03_Lock/set"
+    name: 03 Lock
+    unique_id: 03_lock
+    state_topic: PkDr/B1/Utility/03_Lock
+    command_topic: PkDr/B1/Utility/03_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "04 Lock"
-    state_topic: "PkDr/B1/Utility/04_Lock"
-    command_topic: "PkDr/B1/Utility/04_Lock/set"
+    name: 04 Lock
+    unique_id: 04_lock
+    state_topic: PkDr/B1/Utility/04_Lock
+    command_topic: PkDr/B1/Utility/04_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Doorbells Odd"
-    state_topic: "PkDr/B1/Utility/Doorbells_Odd"
-    command_topic: "PkDr/B1/Utility/Doorbells_Odd/set"
+    name: B1 Doorbells Odd
+    unique_id: b1_doorbells_odd
+    state_topic: PkDr/B1/Utility/Doorbells_Odd
+    command_topic: PkDr/B1/Utility/Doorbells_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Doorbells Even"
-    state_topic: "PkDr/B1/Utility/Doorbells_Even"
-    command_topic: "PkDr/B1/Utility/Doorbells_Even/set"
+    name: B1 Doorbells Even
+    unique_id: b1_doorbells_even
+    state_topic: PkDr/B1/Utility/Doorbells_Even
+    command_topic: PkDr/B1/Utility/Doorbells_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B1 Extra"
-    state_topic: "PkDr/B1/Utility/Extra"
-    command_topic: "PkDr/B1/Utility/Extra/set"
+    name: B1 Extra
+    unique_id: b1_extra
+    state_topic: PkDr/B1/Utility/Extra
+    command_topic: PkDr/B1/Utility/Extra/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 
   # B2
   - platform: mqtt
-    name: "05 Heat"
-    state_topic: "PkDr/B2/Utility/05_Heat"
-    command_topic: "PkDr/B2/Utility/05_Heat/set"
+    name: 05 Heat
+    unique_id: 05_heat
+    state_topic: PkDr/B2/Utility/05_Heat
+    command_topic: PkDr/B2/Utility/05_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "06 Heat"
-    state_topic: "PkDr/B2/Utility/06_Heat"
-    command_topic: "PkDr/B2/Utility/06_Heat/set"
+    name: 06 Heat
+    unique_id: 06_heat
+    state_topic: PkDr/B2/Utility/06_Heat
+    command_topic: PkDr/B2/Utility/06_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "07 Heat"
-    state_topic: "PkDr/B2/Utility/07_Heat"
-    command_topic: "PkDr/B2/Utility/07_Heat/set"
+    name: 07 Heat
+    unique_id: 07_heat
+    state_topic: PkDr/B2/Utility/07_Heat
+    command_topic: PkDr/B2/Utility/07_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "08 Heat"
-    state_topic: "PkDr/B2/Utility/08_Heat"
-    command_topic: "PkDr/B2/Utility/08_Heat/set"
+    name: 08 Heat
+    unique_id: 08_heat
+    state_topic: PkDr/B2/Utility/08_Heat
+    command_topic: PkDr/B2/Utility/08_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 End Switch Override"
-    state_topic: "PkDr/B2/Utility/End_Switch_Override"
-    command_topic: "PkDr/B2/Utility/End_Switch_Override/set"
+    name: B2 End Switch Override
+    unique_id: b2_end_switch_override
+    state_topic: PkDr/B2/Utility/End_Switch_Override
+    command_topic: PkDr/B2/Utility/End_Switch_Override/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Kiosks Odd"
-    state_topic: "PkDr/B2/Utility/Kiosks_Odd"
-    command_topic: "PkDr/B2/Utility/Kiosks_Odd/set"
+    name: B2 Kiosks Odd
+    unique_id: b2_kiosks_odd
+    state_topic: PkDr/B2/Utility/Kiosks_Odd
+    command_topic: PkDr/B2/Utility/Kiosks_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Kiosks Even"
-    state_topic: "PkDr/B2/Utility/Kiosks_Even"
-    command_topic: "PkDr/B2/Utility/Kiosks_Even/set"
+    name: B2 Kiosks Even
+    unique_id: b2_kiosks_even
+    state_topic: PkDr/B2/Utility/Kiosks_Even
+    command_topic: PkDr/B2/Utility/Kiosks_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Entrance Buttons"
-    state_topic: "PkDr/B2/Utility/Entrance_Buttons"
-    command_topic: "PkDr/B2/Utility/Entrance_Buttons/set"
+    name: B2 Entrance Buttons
+    unique_id: b2_entrance_buttons
+    state_topic: PkDr/B2/Utility/Entrance_Buttons
+    command_topic: PkDr/B2/Utility/Entrance_Buttons/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Entrance Video"
-    state_topic: "PkDr/B2/Utility/Entrance_Video"
-    command_topic: "PkDr/B2/Utility/Entrance_Video/set"
+    name: B2 Entrance Video
+    unique_id: b2_entrance_video
+    state_topic: PkDr/B2/Utility/Entrance_Video
+    command_topic: PkDr/B2/Utility/Entrance_Video/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Entrance Lock"
-    state_topic: "PkDr/B2/Utility/Entrance_Lock"
-    command_topic: "PkDr/B2/Utility/Entrance_Lock/set"
+    name: B2 Entrance Lock
+    unique_id: b2_entrance_lock
+    state_topic: PkDr/B2/Utility/Entrance_Lock
+    command_topic: PkDr/B2/Utility/Entrance_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "05 Lock"
-    state_topic: "PkDr/B2/Utility/05_Lock"
-    command_topic: "PkDr/B2/Utility/05_Lock/set"
+    name: 05 Lock
+    unique_id: 05_lock
+    state_topic: PkDr/B2/Utility/05_Lock
+    command_topic: PkDr/B2/Utility/05_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "06 Lock"
-    state_topic: "PkDr/B2/Utility/06_Lock"
-    command_topic: "PkDr/B2/Utility/06_Lock/set"
+    name: 06 Lock
+    unique_id: 06_lock
+    state_topic: PkDr/B2/Utility/06_Lock
+    command_topic: PkDr/B2/Utility/06_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "07 Lock"
-    state_topic: "PkDr/B2/Utility/07_Lock"
-    command_topic: "PkDr/B2/Utility/07_Lock/set"
+    name: 07 Lock
+    unique_id: 07_lock
+    state_topic: PkDr/B2/Utility/07_Lock
+    command_topic: PkDr/B2/Utility/07_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "08 Lock"
-    state_topic: "PkDr/B2/Utility/08_Lock"
-    command_topic: "PkDr/B2/Utility/08_Lock/set"
+    name: 08 Lock
+    unique_id: 08_lock
+    state_topic: PkDr/B2/Utility/08_Lock
+    command_topic: PkDr/B2/Utility/08_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Doorbells Odd"
-    state_topic: "PkDr/B2/Utility/Doorbells_Odd"
-    command_topic: "PkDr/B2/Utility/Doorbells_Odd/set"
+    name: B2 Doorbells Odd
+    unique_id: b2_doorbells_odd
+    state_topic: PkDr/B2/Utility/Doorbells_Odd
+    command_topic: PkDr/B2/Utility/Doorbells_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Doorbells Even"
-    state_topic: "PkDr/B2/Utility/Doorbells_Even"
-    command_topic: "PkDr/B2/Utility/Doorbells_Even/set"
+    name: B2 Doorbells Even
+    unique_id: b2_doorbells_even
+    state_topic: PkDr/B2/Utility/Doorbells_Even
+    command_topic: PkDr/B2/Utility/Doorbells_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B2 Extra"
-    state_topic: "PkDr/B2/Utility/Extra"
-    command_topic: "PkDr/B2/Utility/Extra/set"
+    name: B2 Extra
+    unique_id: b2_extra
+    state_topic: PkDr/B2/Utility/Extra
+    command_topic: PkDr/B2/Utility/Extra/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   
   # B3
   - platform: mqtt
-    name: "09 Heat"
-    state_topic: "PkDr/B3/Utility/09_Heat"
-    command_topic: "PkDr/B3/Utility/09_Heat/set"
+    name: 09 Heat
+    unique_id: 09_heat
+    state_topic: PkDr/B3/Utility/09_Heat
+    command_topic: PkDr/B3/Utility/09_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "10 Heat"
-    state_topic: "PkDr/B3/Utility/10_Heat"
-    command_topic: "PkDr/B3/Utility/10_Heat/set"
+    name: 10 Heat
+    unique_id: 10_heat
+    state_topic: PkDr/B3/Utility/10_Heat
+    command_topic: PkDr/B3/Utility/10_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "11 Heat"
-    state_topic: "PkDr/B3/Utility/11_Heat"
-    command_topic: "PkDr/B3/Utility/11_Heat/set"
+    name: 11 Heat
+    unique_id: 11_heat
+    state_topic: PkDr/B3/Utility/11_Heat
+    command_topic: PkDr/B3/Utility/11_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "12 Heat"
-    state_topic: "PkDr/B3/Utility/12_Heat"
-    command_topic: "PkDr/B3/Utility/12_Heat/set"
+    name: 12 Heat
+    unique_id: 12_heat
+    state_topic: PkDr/B3/Utility/12_Heat
+    command_topic: PkDr/B3/Utility/12_Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 End Switch Override"
-    state_topic: "PkDr/B3/Utility/End_Switch_Override"
-    command_topic: "PkDr/B3/Utility/End_Switch_Override/set"
+    name: B3 End Switch Override
+    unique_id: b3_end_switch_override
+    state_topic: PkDr/B3/Utility/End_Switch_Override
+    command_topic: PkDr/B3/Utility/End_Switch_Override/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Kiosks Odd"
-    state_topic: "PkDr/B3/Utility/Kiosks_Odd"
-    command_topic: "PkDr/B3/Utility/Kiosks_Odd/set"
+    name: B3 Kiosks Odd
+    unique_id: b3_kiosks_odd
+    state_topic: PkDr/B3/Utility/Kiosks_Odd
+    command_topic: PkDr/B3/Utility/Kiosks_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Kiosks Even"
-    state_topic: "PkDr/B3/Utility/Kiosks_Even"
-    command_topic: "PkDr/B3/Utility/Kiosks_Even/set"
+    name: B3 Kiosks Even
+    unique_id: b3_kiosks_evem
+    state_topic: PkDr/B3/Utility/Kiosks_Even
+    command_topic: PkDr/B3/Utility/Kiosks_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Entrance Buttons"
-    state_topic: "PkDr/B3/Utility/Entrance_Buttons"
-    command_topic: "PkDr/B3/Utility/Entrance_Buttons/set"
+    name: B3 Entrance Buttons
+    unique_id: b3_entrance_buttons
+    state_topic: PkDr/B3/Utility/Entrance_Buttons
+    command_topic: PkDr/B3/Utility/Entrance_Buttons/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Entrance Video"
-    state_topic: "PkDr/B3/Utility/Entrance_Video"
-    command_topic: "PkDr/B3/Utility/Entrance_Video/set"
+    name: B3 Entrance Video
+    unique_id: b3_entrance_video
+    state_topic: PkDr/B3/Utility/Entrance_Video
+    command_topic: PkDr/B3/Utility/Entrance_Video/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Entrance Lock"
-    state_topic: "PkDr/B3/Utility/Entrance_Lock"
-    command_topic: "PkDr/B3/Utility/Entrance_Lock/set"
+    name: B3 Entrance Lock
+    unique_id: b3_entrance_lock
+    state_topic: PkDr/B3/Utility/Entrance_Lock
+    command_topic: PkDr/B3/Utility/Entrance_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "09 Lock"
-    state_topic: "PkDr/B3/Utility/09_Lock"
-    command_topic: "PkDr/B3/Utility/09_Lock/set"
+    name: 09 Lock
+    unique_id: 09_lock
+    state_topic: PkDr/B3/Utility/09_Lock
+    command_topic: PkDr/B3/Utility/09_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "10 Lock"
-    state_topic: "PkDr/B3/Utility/10_Lock"
-    command_topic: "PkDr/B3/Utility/10_Lock/set"
+    name: 10 Lock
+    unique_id: 10_lock
+    state_topic: PkDr/B3/Utility/10_Lock
+    command_topic: PkDr/B3/Utility/10_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "11 Lock"
-    state_topic: "PkDr/B3/Utility/11_Lock"
-    command_topic: "PkDr/B3/Utility/11_Lock/set"
+    name: 11 Lock
+    unique_id: 11_lock
+    state_topic: PkDr/B3/Utility/11_Lock
+    command_topic: PkDr/B3/Utility/11_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "12 Lock"
-    state_topic: "PkDr/B3/Utility/12_Lock"
-    command_topic: "PkDr/B3/Utility/12_Lock/set"
+    name: 12 Lock
+    unique_id: 12_lock
+    state_topic: PkDr/B3/Utility/12_Lock
+    command_topic: PkDr/B3/Utility/12_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Doorbells Odd"
-    state_topic: "PkDr/B3/Utility/Doorbells_Odd"
-    command_topic: "PkDr/B3/Utility/Doorbells_Odd/set"
+    name: B3 Doorbells Odd
+    unique_id: b3_doorbells_odd
+    state_topic: PkDr/B3/Utility/Doorbells_Odd
+    command_topic: PkDr/B3/Utility/Doorbells_Odd/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Doorbells Even"
-    state_topic: "PkDr/B3/Utility/Doorbells_Even"
-    command_topic: "PkDr/B3/Utility/Doorbells_Even/set"
+    name: B3 Doorbells Even
+    unique_id: b3_doorbells_even
+    state_topic: PkDr/B3/Utility/Doorbells_Even
+    command_topic: PkDr/B3/Utility/Doorbells_Even/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "B3 Extra"
-    state_topic: "PkDr/B3/Utility/Extra"
-    command_topic: "PkDr/B3/Utility/Extra/set"
+    name: B3 Extra
+    unique_id: b3_extra
+    state_topic: PkDr/B3/Utility/Extra
+    command_topic: PkDr/B3/Utility/Extra/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
     
   # B4 (updated 20220227)
@@ -3203,58 +3305,58 @@ switch:
 
   # Testing physical switch on a remote Pi with python code written by JTB (20220101)
   # - platform: mqtt
-  #   name: "B4 Switch"
-  #   command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
-  #   state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #   name: B4 Switch
+  #   command_topic: PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER
+  #   state_topic: PkDr/Apt01/LivingRoom/tele/Bulb/STATE
   #   qos: 1
-  #   payload_on: "ON"
-  #   payload_off: "OFF"
+  #   payload_on: 'ON'
+  #   payload_off: 'OFF'
   #   retain: true
 
 # Apt 01 Switches...
   # Entrance Lock
   # Controlled from Pi with 16 channel relay in the building's utility closet
   # - platform: mqtt
-  #   name: "Apt01 Entrance Lock"
-  #   state_topic: "PkDr/B1/Utility/01_Lock"
-  #   command_topic: "PkDr/B1/Utility/01_Lock/set"
+  #   name: Apt01 Entrance Lock
+  #   state_topic: PkDr/B1/Utility/01_Lock
+  #   command_topic: PkDr/B1/Utility/01_Lock/set
   #   qos: 1
-  #   payload_on: "ON"
-  #   payload_off: "OFF"
+  #   payload_on: 'ON'
+  #   payload_off: 'OFF'
   #   retain: true
   # Using Sonoff Basic with switch detecting the door state (open/closed)
   #     (110V AC to 12V DC with AC/DC converter)
   # - platform: mqtt
-  #   name: "Apt01 Entrance Lock"
-  #   state_topic: "PkDr/Apt01/Entrance/stat/Lock/POWER"
-  #   command_topic: "PkDr/Apt01/Entrance/cmnd/Lock/POWER"
+  #   name: Apt01 Entrance Lock
+  #   state_topic: PkDr/Apt01/Entrance/stat/Lock/POWER
+  #   command_topic: PkDr/Apt01/Entrance/cmnd/Lock/POWER
   #   qos: 1
-  #   payload_on: "ON"
-  #   payload_off: "OFF"
+  #   payload_on: 'ON'
+  #   payload_off: 'OFF'
   #   retain: true
   - platform: mqtt
-    name: "Apt01 AC"
-    state_topic: "PkDr/Apt01/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt01/LivingRoom/cmnd/AC/POWER"
+    name: Apt01 AC
+    state_topic: PkDr/Apt01/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt01/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt01 LivingRoom IPTV"
-    state_topic: "PkDr/Apt01/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt01/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt01 LivingRoom IPTV
+    state_topic: PkDr/Apt01/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt01/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt01 Bedroom IPTV"
-    state_topic: "PkDr/Apt01/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt01/Bedroom/cmnd/IPTV/POWER"
+    name: Apt01 Bedroom IPTV
+    state_topic: PkDr/Apt01/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt01/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3265,37 +3367,37 @@ switch:
       apt01_2_reboot_iptv:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_01_IPTV_BR_1_WiFi -user pi"
   - platform: mqtt
-    name: "Apt01 Bedroom Ender3"
-    state_topic: "PkDr/Apt01/Bedroom/stat/Ender3/POWER"
-    command_topic: "PkDr/Apt01/Bedroom/cmnd/Ender3/POWER"
+    name: Apt01 Bedroom Ender3
+    state_topic: PkDr/Apt01/Bedroom/stat/Ender3/POWER
+    command_topic: PkDr/Apt01/Bedroom/cmnd/Ender3/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
     # Apt 02 Switches...
   - platform: mqtt
-    name: "Apt02 AC"
-    state_topic: "PkDr/Apt02/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt02/LivingRoom/cmnd/AC/POWER"
+    name: Apt02 AC
+    state_topic: PkDr/Apt02/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt02/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt02 LivingRoom IPTV"
-    state_topic: "PkDr/Apt02/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt02/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt02 LivingRoom IPTV
+    state_topic: PkDr/Apt02/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt02/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt02 Bedroom IPTV"
-    state_topic: "PkDr/Apt02/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt02/Bedroom/cmnd/IPTV/POWER"
+    name: Apt02 Bedroom IPTV
+    state_topic: PkDr/Apt02/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt02/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3308,36 +3410,36 @@ switch:
 # Apt 03 Switches...
   # Controlled from Pi with 16 channel relay in the building's utility closet
   - platform: mqtt
-    name: "Apt03 Entrance Lock"
-    state_topic: "PkDr/B1/Utility/03_Lock"
-    command_topic: "PkDr/B1/Utility/03_Lock/set"
+    name: Apt03 Entrance Lock
+    state_topic: PkDr/B1/Utility/03_Lock
+    command_topic: PkDr/B1/Utility/03_Lock/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt03 AC"
-    state_topic: "PkDr/Apt03/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt03/LivingRoom/cmnd/AC/POWER"
+    name: Apt03 AC
+    state_topic: PkDr/Apt03/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt03/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt03 LivingRoom IPTV"
-    state_topic: "PkDr/Apt03/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt03/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt03 LivingRoom IPTV
+    state_topic: PkDr/Apt03/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt03/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt03 Bedroom IPTV"
-    state_topic: "PkDr/Apt03/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt03/Bedroom/cmnd/IPTV/POWER"
+    name: Apt03 Bedroom IPTV
+    state_topic: PkDr/Apt03/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt03/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3347,38 +3449,29 @@ switch:
     switches:
       apt03_2_reboot_iptv:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_03_IPTV_BR_1_WiFi -user pi"
-    # Apt 05 Switches...
-#  - platform: mqtt
-#    name: "Apt05 Heat"
-#    state_topic: "PkDr/Apt05/output/Heat"
-#    command_topic: "PkDr/Apt05/output/Heat/set"
-#    qos: 1
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    retain: true
   - platform: mqtt
-    name: "Apt05 AC"
-    state_topic: "PkDr/Apt05/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt05/LivingRoom/cmnd/AC/POWER"
+    name: Apt05 AC
+    state_topic: PkDr/Apt05/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt05/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt05 LivingRoom IPTV"
-    state_topic: "PkDr/Apt05/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt05/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt05 LivingRoom IPTV
+    state_topic: PkDr/Apt05/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt05/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt05 Bedroom IPTV"
-    state_topic: "PkDr/Apt05/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt05/Bedroom/cmnd/IPTV/POWER"
+    name: Apt05 Bedroom IPTV
+    state_topic: PkDr/Apt05/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt05/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3388,38 +3481,29 @@ switch:
     switches:
       apt05_2_reboot_iptv:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_05_IPTV_BR_1_WiFi -user pi"
-    # Apt 06 Switches...
-#  - platform: mqtt
-#    name: "Apt06 Heat"
-#    state_topic: "PkDr/Apt06/output/Heat"
-#    command_topic: "PkDr/Apt06/output/Heat/set"
-#    qos: 1
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    retain: true
   - platform: mqtt
-    name: "Apt06 AC"
-    state_topic: "PkDr/Apt06/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt06/LivingRoom/cmnd/AC/POWER"
+    name: Apt06 AC
+    state_topic: PkDr/Apt06/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt06/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt06 LivingRoom IPTV"
-    state_topic: "PkDr/Apt06/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt06/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt06 LivingRoom IPTV
+    state_topic: PkDr/Apt06/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt06/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt06 Bedroom IPTV"
-    state_topic: "PkDr/Apt06/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt06/Bedroom/cmnd/IPTV/POWER"
+    name: Apt06 Bedroom IPTV
+    state_topic: PkDr/Apt06/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt06/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3429,38 +3513,29 @@ switch:
     switches:
       apt06_2_reboot_iptv:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_06_IPTV_BR_1_WiFi -user pi"
-    # Apt 07 Switches...
-#  - platform: mqtt
-#    name: "Apt06 Heat"
-#    state_topic: "PkDr/Apt06/output/Heat"
-#    command_topic: "PkDr/Apt06/output/Heat/set"
-#    qos: 1
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    retain: true
   - platform: mqtt
-    name: "Apt07 AC"
-    state_topic: "PkDr/Apt07/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt07/LivingRoom/cmnd/AC/POWER"
+    name: Apt07 AC
+    state_topic: PkDr/Apt07/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt07/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt07 LivingRoom IPTV"
-    state_topic: "PkDr/Apt07/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt07/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt07 LivingRoom IPTV
+    state_topic: PkDr/Apt07/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt07/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt07 Bedroom IPTV"
-    state_topic: "PkDr/Apt07/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt07/Bedroom/cmnd/IPTV/POWER"
+    name: Apt07 Bedroom IPTV
+    state_topic: PkDr/Apt07/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt07/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3472,28 +3547,28 @@ switch:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_07_IPTV_BR_1_WiFi -user pi"
     # Apt 09 Switches...
   - platform: mqtt
-    name: "Apt09 AC"
-    state_topic: "PkDr/Apt09/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt09/LivingRoom/cmnd/AC/POWER"
+    name: Apt09 AC
+    state_topic: PkDr/Apt09/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt09/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt09 LivingRoom IPTV"
-    state_topic: "PkDr/Apt09/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt09/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt09 LivingRoom IPTV
+    state_topic: PkDr/Apt09/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt09/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt09 Bedroom IPTV"
-    state_topic: "PkDr/Apt09/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt09/Bedroom/cmnd/IPTV/POWER"
+    name: Apt09 Bedroom IPTV
+    state_topic: PkDr/Apt09/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt09/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3503,46 +3578,37 @@ switch:
     switches:
       apt09_2_reboot_iptv:
         command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_09_IPTV_BR_1_WiFi -user pi"
-    # Apt 12 Switches...
-#  - platform: mqtt
-#    name: "Apt12 Heat"
-#    state_topic: "PkDr/Apt12/output/Heat"
-#    command_topic: "PkDr/Apt12/output/Heat/set"
-#    qos: 1
-#    payload_on: "ON"
-#    payload_off: "OFF"
-#    retain: true
   - platform: mqtt
-    name: "Apt12 AC"
-    state_topic: "PkDr/Apt12/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt12/LivingRoom/cmnd/AC/POWER"
+    name: Apt12 AC
+    state_topic: PkDr/Apt12/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt12/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt12 LivingRoom IPTV"
-    state_topic: "PkDr/Apt12/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt12/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt12 LivingRoom IPTV
+    state_topic: PkDr/Apt12/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt12/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt12 Bedroom IPTV"
-    state_topic: "PkDr/Apt12/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt12/Bedroom/cmnd/IPTV/POWER"
+    name: Apt12 Bedroom IPTV
+    state_topic: PkDr/Apt12/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt12/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt12 Bedroom2 IPTV"
-    state_topic: "PkDr/Apt12/Bedroom2/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt12/Bedroom2/cmnd/IPTV/POWER"
+    name: Apt12 Bedroom2 IPTV
+    state_topic: PkDr/Apt12/Bedroom2/stat/IPTV/POWER
+    command_topic: PkDr/Apt12/Bedroom2/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
 #  - platform: command_line
 #    switches:
@@ -3558,36 +3624,36 @@ switch:
 #        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_12_IPTV_BR_2_WiFi -user pi"
     # Apt 14 Switches...
   - platform: mqtt
-    name: "Apt14 Heat"
-    state_topic: "PkDr/Apt14/output/Heat"
-    command_topic: "PkDr/Apt14/output/Heat/set"
+    name: Apt14 Heat
+    state_topic: PkDr/Apt14/output/Heat
+    command_topic: PkDr/Apt14/output/Heat/set
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt14 AC"
-    state_topic: "PkDr/Apt14/LivingRoom/stat/AC/POWER"
-    command_topic: "PkDr/Apt14/LivingRoom/cmnd/AC/POWER"
+    name: Apt14 AC
+    state_topic: PkDr/Apt14/LivingRoom/stat/AC/POWER
+    command_topic: PkDr/Apt14/LivingRoom/cmnd/AC/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt14 LivingRoom IPTV"
-    state_topic: "PkDr/Apt14/LivingRoom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt14/LivingRoom/cmnd/IPTV/POWER"
+    name: Apt14 LivingRoom IPTV
+    state_topic: PkDr/Apt14/LivingRoom/stat/IPTV/POWER
+    command_topic: PkDr/Apt14/LivingRoom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: mqtt
-    name: "Apt14 Bedroom IPTV"
-    state_topic: "PkDr/Apt14/Bedroom/stat/IPTV/POWER"
-    command_topic: "PkDr/Apt14/Bedroom/cmnd/IPTV/POWER"
+    name: Apt14 Bedroom IPTV
+    state_topic: PkDr/Apt14/Bedroom/stat/IPTV/POWER
+    command_topic: PkDr/Apt14/Bedroom/cmnd/IPTV/POWER
     qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
+    payload_on: 'ON'
+    payload_off: 'OFF'
     retain: true
   - platform: command_line
     switches:
@@ -3608,8 +3674,8 @@ binary_sensor:
   # - platform: mqtt
   #   name: "Apt01 Entrance Door"
   #   state_topic: "PkDr/Apt01/Entrance/cmnd/Door/POWER2"
-  #   payload_on: "ON"
-  #   payload_off: "OFF"
+  #   payload_on: 'ON'
+  #   payload_off: 'OFF'
   #   device_class: door
 
 #  - platform: remote_rpi_gpio
@@ -3925,7 +3991,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
   ### AC ###
   - platform: generic_thermostat
@@ -3942,7 +4008,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 02 Thermostats...
@@ -3956,13 +4022,13 @@ climate:
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
+    precision: 0.5
     min_cycle_duration:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
-    precision: 0.5
   ### AC ###
   - platform: generic_thermostat
     name: Apt02 AC
@@ -3978,7 +4044,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 03 Thermostats...
@@ -3986,7 +4052,7 @@ climate:
   - platform: generic_thermostat
     name: Apt03 Heat
     heater: switch.03_heat
-    target_sensor: sensor.Apt03_temperature
+    target_sensor: sensor.apt03_temperature
     min_temp: 45
     # target_temp: 72
     max_temp: 79
@@ -3997,13 +4063,13 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
   ### AC ###
   - platform: generic_thermostat
     name: Apt03 AC
-    heater: switch.Apt03_ac
-    target_sensor: sensor.Apt03_temperature
+    heater: switch.apt03_ac
+    target_sensor: sensor.apt03_temperature
     min_temp: 65
     # target_temp: 72
     max_temp: 90
@@ -4014,7 +4080,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 04 Thermostats...
@@ -4022,7 +4088,7 @@ climate:
   - platform: generic_thermostat
     name: Apt04 Heat
     heater: switch.04_heat
-    target_sensor: sensor.Apt04_temperature
+    target_sensor: sensor.apt04_temperature
     min_temp: 45
     # target_temp: 72
     max_temp: 79
@@ -4033,13 +4099,13 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
   ### AC ###
   - platform: generic_thermostat
     name: Apt04 AC
-    heater: switch.Apt04_ac
-    target_sensor: sensor.Apt04_temperature
+    heater: switch.apt04_ac
+    target_sensor: sensor.apt04_temperature
     min_temp: 65
     # target_temp: 72
     max_temp: 90
@@ -4050,7 +4116,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
 
@@ -4073,7 +4139,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4091,7 +4157,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 06 Thermostats...
@@ -4109,7 +4175,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4127,7 +4193,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 07 Thermostats...
@@ -4145,7 +4211,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4163,7 +4229,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
   # Apt 09 Thermostats...
@@ -4181,7 +4247,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4199,7 +4265,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
 
@@ -4222,7 +4288,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4240,7 +4306,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
 
@@ -4259,7 +4325,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4277,7 +4343,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
 
@@ -4296,7 +4362,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "heat" # off | heat | cool
+    # initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     away_temp: 65
     precision: 0.5
   ### AC ###
@@ -4314,7 +4380,7 @@ climate:
       seconds: 5
     keep_alive:
       minutes: 3
-    initial_hvac_mode: "off" # off | heat | cool
+    # initial_hvac_mode: "off" # "off" | "heat" | "cool"
     away_temp: 90
     ac_mode: true
 

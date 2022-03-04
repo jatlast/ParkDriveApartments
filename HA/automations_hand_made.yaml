@@ -1,65 +1,64 @@
-###########################
-#####  Main - Begin  ######
-###########################
-# All 4 Buildings On & Off ...
-#  Automate On
-- alias: "Building Lights On"
-  id: pkdr_lights_on
-  #hide_entity: True
+- id: pkdr_lights_on
+  alias: Building Lights On
+  description: Turn ON all the common area lights before sunset
   trigger:
-  - platform: sun
-  # Possible values: sunset, sunrise
-    event: sunset
-    offset: "-00:30:00"
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '0'
+  condition: []
   action:
-    service: switch.turn_on
-    entity_id: group.building_lights
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+      - switch.b1_lights
+      - switch.b2_lights
+      - switch.b3_lights
+      - switch.b4_lights
+  mode: single
 
-#  Automate Off
-- alias: "Building Lights Off"
-  id: pkdr_lights_off
-  #hide_entity: True
+- id: pkdr_lights_off
+  alias: Building Lights Off
+  description: Turn OFF all the common area lights before sunset
   trigger:
-  - platform: sun
-  # Possible values: sunset, sunrise
-    event: sunrise
-    offset: "+00:29:00"
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: '0'
+  condition: []
   action:
-    service: switch.turn_off
-    entity_id: group.building_lights
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.b1_lights
+      - switch.b2_lights
+      - switch.b3_lights
+      - switch.b4_lights
+  mode: single
 
-# All 4 Buildings On & Off - Revert ...
-#  Automate Back On
-- alias: "Building Lights Back On"
-  id: pkdr_lights_on_revert
-  #hide_entity: True
+- id: pkdr_lights_on_revert
+  alias: Building Lights Back On
   trigger:
   - platform: time_pattern
-#  - platform: time
-    # Match on interval. This will match every 5 minutes
-    minutes: 5
+    minutes: 15
     seconds: 00
   condition:
     condition: or  # 'when dark' condition: either after sunset or before sunrise
     conditions:
       - condition: sun
         after: sunset
-#        offset: "+00:30:00"
       - condition: sun
         before: sunrise
-#        offset: "-00:30:00"
   action:
-    service: switch.turn_on
+  - service: switch.turn_on
     entity_id: group.building_lights
 
-#  Automate Back Off
-- alias: "Building Lights Back Off"
-  id: pkdr_lights_off_revert
-  #hide_entity: True
+- id: pkdr_lights_off_revert
+  alias: Building Lights Back Off
   trigger:
-#  - platform: time
   - platform: time_pattern
-    # Match on interval. This will match every 30 minutes
     minutes: 30
     seconds: 00
   condition:
@@ -67,31 +66,415 @@
     conditions:
       - condition: sun
         after: sunrise
-#        offset: "+00:30:00"
       - condition: sun
         before: sunset
-#        offset: "-00:30:00"
   action:
-    service: switch.turn_off
+  - service: switch.turn_off
     entity_id: group.building_lights
-###########################
 
-# B1 VDB with Doorbells (ESPHome: TTGO Camera, Motion, & Analog to Digital Button Sensor)
-# This automation script runs when B1 VDB Doorbell is less than 2.5.
-# I.e., baseline voltage is 3.00 and above, so anything below that should be a doorbell button press
-# It publishes its value to the specified MQTT topic
-- alias: "B1 Doorbell Pressed"
-  id: b1_doorbell_pressed
+- id: apt01_volume_changed
+  alias: Apt01 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt01_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt01/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt01_volume') | int }}"
+
+- id: apt02_volume_changed
+  alias: Apt02 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt02_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt02/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt02_volume') | int }}"
+
+- id: apt03_volume_changed
+  alias: Apt03 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt03_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt03/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt03_volume') | int }}"
+
+- id: apt04_volume_changed
+  alias: Apt04 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt04_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt04/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt04_volume') | int }}"
+
+- id: apt05_volume_changed
+  alias: Apt05 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt05_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt05/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt05_volume') | int }}"
+
+- id: apt06_volume_changed
+  alias: Apt06 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt06_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt06/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt06_volume') | int }}"
+
+- id: apt07_volume_changed
+  alias: Apt07 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt07_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt07/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt07_volume') | int }}"
+
+- id: apt08_volume_changed
+  alias: Apt08 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt08_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt08/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt08_volume') | int }}"
+
+- id: apt09_volume_changed
+  alias: Apt09 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt09_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt09/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt09_volume') | int }}"
+
+- id: apt10_volume_changed
+  alias: Apt10 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt10_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt10/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt10_volume') | int }}"
+
+- id: apt11_volume_changed
+  alias: Apt11 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt11_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt11/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt11_volume') | int }}"
+
+- id: apt12_volume_changed
+  alias: Apt12 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt12_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt12/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt12_volume') | int }}"
+
+- id: apt13_volume_changed
+  alias: Apt13 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt13_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt13/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt13_volume') | int }}"
+
+- id: apt14_volume_changed
+  alias: Apt14 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt14_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt14/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt14_volume') | int }}"
+
+- id: apt15_volume_changed
+  alias: Apt15 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt15_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt15/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt15_volume') | int }}"
+
+- id: apt16_volume_changed
+  alias: Apt16 Volume Changed
+  trigger:
+    platform: state
+    entity_id: input_number.apt16_volume
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt16/Doorbell/stat/Volume/setVolume
+      retain: true
+      payload: "{{ states('input_number.apt16_volume') | int }}"
+
+- id: apt01_no_ac_with_heat
+  alias: Apt01 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt01_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.01_heat
+
+- id: apt01_no_heat_with_ac
+  alias: Apt01 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.01_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt01_ac
+
+- id: apt02_no_ac_with_heat
+  alias: Apt02 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt02_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.02_heat
+
+- id: apt02_no_heat_with_ac
+  alias: Apt02 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.02_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt02_ac
+
+- id: apt03_no_ac_with_heat
+  alias: Apt03 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt03_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.03_heat
+
+- id: apt03_no_heat_with_ac
+  alias: Apt03 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.03_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt03_ac
+
+- id: apt05_no_ac_with_heat
+  alias: Apt05 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt05_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.05_heat
+
+- id: apt05_no_heat_with_ac
+  alias: Apt05 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.05_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt05_ac
+
+- id: apt06_no_ac_with_heat
+  alias: Apt06 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt06_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.06_heat
+
+- id: apt06_no_heat_with_ac
+  alias: Apt06 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.06_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt06_ac
+
+- id: apt07_no_ac_with_heat
+  alias: Apt07 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt07_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.07_heat
+
+- id: apt07_no_heat_with_ac
+  alias: Apt07 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.07_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt07_ac
+
+- id: apt09_no_ac_with_heat
+  alias: Apt09 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.09_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.09_heat
+
+- id: apt09_no_heat_with_ac
+  alias: Apt09 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.09_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt09_ac
+
+- id: apt12_no_ac_with_heat
+  alias: Apt12 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt12_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.12_heat
+
+- id: apt12_no_heat_with_ac
+  alias: Apt12 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.12_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt12_ac
+
+- id: apt14_no_ac_with_heat
+  alias: Apt14 No AC with Heat
+  trigger:
+    - platform: state
+      entity_id: switch.apt14_ac
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.14_heat
+
+- id: apt14_no_heat_with_ac
+  alias: Apt14 No Heat with AC
+  trigger:
+    - platform: state
+      entity_id: switch.14_heat
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.apt14_ac
+
+- id: b1_entrance_relock
+  alias: B1 Entrance Relock
+  trigger:
+    platform: state
+    entity_id: switch.b1_entrance_lock
+    to: 'on'
+    for:
+      minutes: 1
+  action:
+  - service: switch.turn_off
+    entity_id: switch.b1_entrance_lock
+
+- id: apt01_entrance_relock
+  alias: Apt01 Entrance Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt01_entrance_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt01_entrance_lock
+
+- id: b1_doorbell_pressed
+  alias: B1 Doorbell Pressed
   trigger:
     - platform: numeric_state
       entity_id: sensor.b1_vdb_doorbells
       below: 2.50
       above: 0.00
-  # Analog to Digital voltage values for the four switches
-  # 1 = 0.00-0.99
-  # 2 = 1.00-1.50
-  # 3 = 1.60-1.80
-  # 4 = 1.90-2.50
   action:
     - choose:
         - conditions:
@@ -101,13 +484,13 @@
               below: 0.90
           sequence:
             - service: switch.turn_on
-            - alias: "Ring Apt01 Doorbell"
+              alias: Ring Apt01 Doorbell
               target:
                 entity_id: switch.apt01_doorbell
             - service: input_text.set_value
-            - alias: "Message Line 1 - Apt #"
+              alias: Set Message Line 1
               data:
-                value: "Apt 1"
+                value: Apt 1
               target:
                 entity_id: input_text.b1_vdb_line1
     - choose:
@@ -118,9 +501,15 @@
               below: 1.50
           sequence:
             - service: switch.turn_on
-            - alias: "Ring Apt02 Doorbell"
+              alias: Ring Apt02 Doorbell
               target:
                 entity_id: switch.apt02_doorbell
+            - service: input_text.set_value
+              alias: Set Message Line 2
+              data:
+                value: Apt 2
+              target:
+                entity_id: input_text.b1_vdb_line2
     - choose:
         - conditions:
             - condition: numeric_state
@@ -129,9 +518,15 @@
               below: 1.80
           sequence:
             - service: switch.turn_on
-            - alias: "Ring Apt03 Doorbell"
+              alias: Ring Apt03 Doorbell
               target:
                 entity_id: switch.apt03_doorbell
+            - service: input_text.set_value
+              alias: Set Message Line 3
+              data:
+                value: Apt 3
+              target:
+                entity_id: input_text.b1_vdb_line3
     - choose:
         - conditions:
             - condition: numeric_state
@@ -140,221 +535,18 @@
               below: 2.50
           sequence:
             - service: switch.turn_on
-            - alias: "Ring Apt04 Doorbell"
+              alias: Ring Apt04 Doorbell
               target:
                 entity_id: switch.apt04_doorbell
+            - service: input_text.set_value
+              alias: Set Message Line 4
+              data:
+                value: Apt 4
+              target:
+                entity_id: input_text.b1_vdb_line4
 
-# This automation script runs when the Apt Volume Slider is moved.
-# It publishes its value to the specified MQTT topic
-- alias: "Apt01 Volume Changed"
-  id: apt01_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt01_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt01/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt01_volume') | int }}"
-
-- alias: "Apt02 Volume Changed"
-  id: apt02_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt02_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt02/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt02_volume') | int }}"
-
-- alias: "Apt03 Volume Changed"
-  id: apt03_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt03_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt03/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt03_volume') | int }}"
-- alias: "Apt04 Volume Changed"
-  id: apt04_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt04_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt04/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt04_volume') | int }}"
-- alias: "Apt05 Volume Changed"
-  id: apt05_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt05_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt05/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt05_volume') | int }}"
-- alias: "Apt06 Volume Changed"
-  id: apt06_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt06_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt06/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt06_volume') | int }}"
-- alias: "Apt07 Volume Changed"
-  id: apt07_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt07_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt07/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt07_volume') | int }}"
-- alias: "Apt08 Volume Changed"
-  id: apt08_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt08_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt08/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt08_volume') | int }}"
-- alias: "Apt09 Volume Changed"
-  id: apt09_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt09_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt09/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt09_volume') | int }}"
-- alias: "Apt10 Volume Changed"
-  id: apt10_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt10_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt10/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt10_volume') | int }}"
-- alias: "Apt11 Volume Changed"
-  id: apt11_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt11_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt11/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt11_volume') | int }}"
-- alias: "Apt12 Volume Changed"
-  id: apt12_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt12_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt12/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt12_volume') | int }}"
-- alias: "Apt13 Volume Changed"
-  id: apt13_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt13_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt13/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt13_volume') | int }}"
-- alias: "Apt14 Volume Changed"
-  id: apt14_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt14_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt14/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt14_volume') | int }}"
-- alias: "Apt15 Volume Changed"
-  id: apt15_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt15_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt15/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt15_volume') | int }}"
-- alias: "Apt16 Volume Changed"
-  id: apt16_volume_changed
-  trigger:
-    platform: state
-    entity_id: input_number.apt16_volume
-  action:
-    service: mqtt.publish
-    data:
-      topic: "PkDr/Apt16/Doorbell/stat/Volume/setVolume"
-      retain: true
-      payload: "{{ states('input_number.apt16_volume') | int }}"
-    
-
-####################
-#####  Apt 01 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt01 No AC with Heat
-  id: apt01_no_ac_with_heat
-# Unnecessary Options
-#  hide_entity: true   # Hide from front end
-#  initial_state: true # Always on
-  trigger:
-    - platform: state
-      entity_id: switch.apt01_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt01_heat
-
-- alias: Apt01 No Heat with AC
-  id: apt01_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt01_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt01_ac
-
-# Climate Away...
-- alias: Apt01 Climate Away
-  id: apt01_climate_away
+- id: apt01_climate_away
+  alias: Apt01 Climate Away
   trigger:
     - platform: state
       entity_id: person.apt01_jason
@@ -369,9 +561,8 @@
           - climate.apt01_ac
         away_mode: 'on'
       
-# Cimate Home...
-- alias: Apt01 Climate Home
-  id: apt01_climate_home
+- id: apt01_climate_home
+  alias: Apt01 Climate Home
   trigger:
     - platform: state
       entity_id: person.apt01_jason
@@ -388,13 +579,44 @@
     - service: light.turn_on
       data:
         entity_id:
-          - apt01_entrance_bulb
-          - apt01_hall_bulb
-          - apt01_livingroom_bulb
-        
-# Video Doorbell...      
-- alias: Apt01 Doorbel Button
-  id: apt01_doorbell_button
+          - apt01_bulb_entrance
+          - apt01_bulb_hall
+          - apt01_bulb_livingroom
+
+- id: apt14_climate_away
+  alias: Apt14 Climate Away
+  trigger:
+    - platform: state
+      entity_id: person.apt14_derek
+      to: 'not_home'
+      for:
+        minutes: 15
+  action: 
+    - service: climate.set_away_mode
+      data:
+        entity_id:
+          - climate.apt14_heat
+          - climate.apt14_ac
+        away_mode: 'on'
+      
+- id: apt14_climate_home
+  alias: Apt14 Climate Home
+  trigger:
+    - platform: state
+      entity_id: person.apt14_derek
+      to: 'home'
+      for:
+        minutes: 3
+  action: 
+    - service: climate.set_away_mode
+      data:
+        entity_id:
+          - climate.apt14_heat
+          - climate.apt14_ac
+        away_mode: 'off'
+
+- id: apt01_doorbell_button
+  alias: Apt01 Doorbel Button
   trigger:
     - platform: state
       entity_id: binary_sensor.apt01_video_doorbell_button
@@ -411,218 +633,4 @@
           push:
             category: camera
           entity_id: camera.apt01_video_doorbell_camera
-#    - service: script.apt01_doorbell_flash_script
-#    - service: camera.play_stream
-#      data:
-#        entity_id: camera.apt01_video_doorbell_camera
-#        media_player: media_player.iptv_1_1
 
-####################
-
-####################
-#####  Apt 02 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt02 No AC with Heat
-  id: apt02_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt02_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt02_heat
-
-- alias: Apt02 No Heat with AC
-  id: apt02_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt02_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt02_ac
-####################
-
-####################
-#####  Apt 05 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt05 No AC with Heat
-  id: apt05_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt05_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt05_heat
-
-- alias: Apt05 No Heat with AC
-  id: apt05_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt05_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt05_ac
-####################
-
-####################
-#####  Apt 06 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt06 No AC with Heat
-  id: apt06_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt06_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt06_heat
-
-- alias: Apt06 No Heat with AC
-  id: apt06_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt06_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt06_ac
-####################
-
-####################
-#####  Apt 07 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt07 No AC with Heat
-  id: apt07_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt07_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt07_heat
-
-- alias: Apt07 No Heat with AC
-  id: apt07_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt07_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt07_ac
-####################
-
-####################
-#####  Apt 12 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt12 No AC with Heat
-  id: apt12_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt12_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt12_heat
-
-- alias: Apt12 No Heat with AC
-  id: apt12_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt12_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt12_ac
-
-####################
-####################
-#####  Apt 14 ######
-# No Heat w/ AC && No AC w/ Heat
-- alias: Apt14 No AC with Heat
-  id: apt14_no_ac_with_heat
-  trigger:
-    - platform: state
-      entity_id: switch.apt14_ac
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt14_heat
-
-- alias: Apt14 No Heat with AC
-  id: apt14_no_heat_with_ac
-  trigger:
-    - platform: state
-      entity_id: switch.apt14_heat
-      to: "on"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.apt14_ac
-
-# Climate Away
-- alias: Apt14 Climate Away
-  id: apt14_climate_away
-  trigger:
-    - platform: state
-      entity_id: person.apt14_derek
-      to: 'not_home'
-      for:
-        minutes: 15
-  action: 
-    - service: climate.set_away_mode
-      data:
-        entity_id:
-          - climate.apt14_heat
-          - climate.apt14_ac
-        away_mode: 'on'
-      
-# Cimate Home...
-- alias: Apt14 Climate Home
-  id: apt14_climate_home
-  trigger:
-    - platform: state
-      entity_id: person.apt14_derek
-      to: 'home'
-      for:
-        minutes: 3
-  action: 
-    - service: climate.set_away_mode
-      data:
-        entity_id:
-          - climate.apt14_heat
-          - climate.apt14_ac
-        away_mode: 'off'
-
-####################
-
-############################
-#####  All Door Locks ######
-
-- alias: B1 Relock Entrance
-  id: b1_relock_entrance
-  trigger:
-    platform: state
-    entity_id: switch.b1_entrance_lock
-    to: 'on'
-    for:
-      minutes: 1
-  action:
-    service: switch.turn_off
-    entity_id: switch.b1_entrance_lock
-
-- alias: Apt01 Relock Entrance
-  id: apt01_relock_entrance
-  trigger:
-    platform: state
-    entity_id: switch.apt01_entrance_lock
-    to: 'on'
-    for:
-      minutes: 5
-  action:
-    service: switch.turn_off
-    entity_id: switch.apt01_entrance_lock
-
-############################

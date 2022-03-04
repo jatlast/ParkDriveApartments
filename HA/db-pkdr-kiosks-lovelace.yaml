@@ -66,11 +66,11 @@ views:
                     entity: input_number.apt01_volume
                     full_row: true
             # Entrance
-              - entity: light.apt01_entrance_bulb
+              - entity: light.apt01_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room
-              - entity: light.apt01_livingroom_bulb
+              - entity: light.apt01_bulb_livingroom
                 name: Living Room
                 type: light
             type: horizontal-stack
@@ -114,24 +114,24 @@ views:
         # Row 3 - More Lights
           - cards:
             # Hall
-            - entity: light.apt01_hall_bulb
+            - entity: light.apt01_bulb_hall
               name: Hall
               type: light
             # Bedroom Bulb
-            - entity: light.apt01_bedroom_bulb
+            - entity: light.apt01_bulb_bedroom
               name: Bdr Lamp
               type: light
             # Bedroom Switch
-            - entity: light.apt01_bedroom_light
+            - entity: light.apt01_light_bedroom
               name: Bdr Switch
               type: entity-button
               icon_height: 200px
             # office Bulb
-            - entity: light.apt01_dedroom2_bulb
+            - entity: light.apt01_bulb_bedroom2
               name: Bdr2 Lamp
               type: light
             # Kitchen
-            - entity: light.apt01_kitchen_bulb
+            - entity: light.apt01_bulb_kitchen
               name: Kitchen
               type: light
             type: horizontal-stack
@@ -141,15 +141,12 @@ views:
               title: Apt01 Video Doorbell
               camera_image: camera.apt01_video_doorbell_camera
               image: '/local/Apt01_VDB.jpg'
-              entities:
-                - entity: camera.apt01_video_doorbell_camera
+              entities: []
               aspect_ratio: 0%
             - type: picture-glance
-              title: B1 Stairs
               camera_image: camera.b1_stairs
               image: '/local/PkDr_B1_Stairs.jpg'
-              entities:
-                - camera.b1_stairs
+              entities: []
               aspect_ratio: 0%
             # - type: picture-glance
             #   title: Apt01 Video Doorbell
@@ -296,7 +293,7 @@ views:
                 name: Building Lock
                 type: entity-button
             # Entrance
-              - entity: light.apt02_entrance_bulb
+              - entity: light.apt02_bulb_entrance
                 name: Entrance
                 type: light
             # Entrance Doorbell
@@ -313,11 +310,11 @@ views:
                     entity: input_number.apt02_volume
                     full_row: true
             # Living Room
-              - entity: light.apt02_livingroom_bulb
+              - entity: light.apt02_bulb_livingroom
                 name: Living Room
                 type: light
             # Kitchen
-              - entity: light.apt02_kitchen_bulb
+              - entity: light.apt02_bulb_kitchen
                 name: Kitchen
                 type: light
             type: horizontal-stack
@@ -363,15 +360,15 @@ views:
         # Row 3 - More Lights
           - cards:
             # Hall
-              - entity: light.apt02_hall_bulb
+              - entity: light.apt02_bulb_hall
                 name: Hall
                 type: light
             # Bedroom Bulb
-              - entity: light.apt02_bedroom_bulb
+              - entity: light.apt02_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt02_bedroom_light
+              - entity: light.apt02_light_bedroom
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -379,11 +376,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B1 Stairs
               camera_image: camera.b1_stairs
               image: '/local/PkDr_B1_Stairs.jpg'
-              entities:
-                - camera.b2_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -411,7 +406,7 @@ views:
                 name: Lock
                 type: entity-button
             # Entrance
-              - entity: light.apt03_entrance_bulb
+              - entity: light.apt03_bulb_entrance
                 name: Entrance
                 type: light
 #                icon: 'mdi:restart'
@@ -433,7 +428,7 @@ views:
                     entity: input_number.apt03_volume
                     full_row: true
             # Living Room
-              - entity: light.apt03_livingroom_bulb
+              - entity: light.apt03_bulb_livingroom
                 name: Living Room
                 type: light
             type: horizontal-stack
@@ -479,11 +474,11 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom Bulb
-              - entity: light.apt03_bedroom_bulb
+              - entity: light.apt03_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt03_bedroom_light
+              - entity: light.apt03_light_bedroom
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -491,11 +486,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B1 Stairs
               camera_image: camera.b1_stairs
               image: '/local/PkDr_B1_Stairs.jpg'
-              entities:
-                - camera.b1_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -515,7 +508,7 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt04_entrance_bulb
+              - entity: light.apt04_bulb_entrance
                 name: Entrance
                 type: light
             # Entrance Doorbell
@@ -532,11 +525,11 @@ views:
                     entity: input_number.apt04_volume
                     full_row: true
             # Living Room
-              - entity: light.apt04_livingroom_bulb
+              - entity: light.apt04_bulb_livingroom
                 name: Living Room
                 type: light
             # Hall
-              - entity: light.apt04_hall_bulb
+              - entity: light.apt04_bulb_hall
                 name: Hall
                 type: light
             type: horizontal-stack
@@ -583,22 +576,20 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom Bulb
-              - entity: light.apt04_bedroom_bulb
+              - entity: light.apt04_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom2 Bulb
-              - entity: light.apt04_bedroom2_bulb
+              - entity: light.apt04_bulb_bedroom2
                 name: Bdr2 Lamp
                 type: light
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B3 Stairs
-              camera_image: camera.b3_stairs
-              image: '/local/PkDr_B3_Stairs.jpg'
-              entities:
-                - camera.b3_stairs
+              camera_image: camera.b1_stairs
+              image: '/local/PkDr_B1_Stairs.jpg'
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -618,15 +609,15 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt05_entrance_bulb
+              - entity: light.apt05_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room Bulb
-              - entity: light.apt05_livingroom_bulb
+              - entity: light.apt05_bulb_livingroom
                 name: Living Room
                 type: light
             # Hall
-              - entity: light.apt05_hall_bulb
+              - entity: light.apt05_bulb_hall
                 name: Hall
                 type: light
             type: horizontal-stack
@@ -672,11 +663,11 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom Bulb
-              - entity: light.apt05_bedroom_bulb
+              - entity: light.apt05_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt05_bedroom_light
+              - entity: light.apt05_light_bedroom
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -684,11 +675,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B2 Stairs
               camera_image: camera.b2_stairs
               image: '/local/PkDr_B2_Stairs.jpg'
-              entities:
-                - camera.b2_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -707,15 +696,15 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt06_entrance_bulb
+              - entity: light.apt06_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room
-              - entity: light.apt06_livingroom_bulb
+              - entity: light.apt06_bulb_livingroom
                 name: Living Room
                 type: light
             # Kitchen
-              - entity: light.apt06_kitchen_bulb
+              - entity: light.apt06_bulb_kitchen
                 name: Kitchen
                 type: light
             type: horizontal-stack
@@ -761,15 +750,15 @@ views:
         # Row 3 - More Lights
           - cards:
             # Hall
-              - entity: light.apt06_hall_bulb
+              - entity: light.apt06_bulb_hall
                 name: Hall
                 type: light
             # Bedroom Bulb
-              - entity: light.apt06_bedroom_bulb
+              - entity: light.apt06_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt06_bedroom_light
+              - entity: light.apt06_light_bedroom
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -777,11 +766,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B2 Stairs
               camera_image: camera.b2_stairs
               image: '/local/PkDr_B2_Stairs.jpg'
-              entities:
-                - camera.b2_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -801,15 +788,15 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt07_entrance_bulb
+              - entity: light.apt07_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room
-              - entity: light.apt07_livingroom_bulb
+              - entity: light.apt07_bulb_livingroom
                 name: Living Room
                 type: light
             # Hall
-              - entity: light.apt07_hall_bulb
+              - entity: light.apt07_bulb_hall
                 name: Hall
                 type: light
             type: horizontal-stack
@@ -855,22 +842,20 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom1 Bulb
-              - entity: light.apt07_bedroom_bulb
+              - entity: light.apt07_bulb_bedroom
                 name: Bdr1 Lamp
                 type: light
             # Bedroom2 Bulb
-              - entity: light.apt07_bedroom2_bulb
+              - entity: light.apt07_bulb_bedroom2
                 name: Bdr2 Lamp
                 type: light
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B4 Stairs
               camera_image: camera.b2_stairs
               image: '/local/PkDr_B2_Stairs.jpg'
-              entities:
-                - camera.b2_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -902,19 +887,19 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt09_entrance_bulb
+              - entity: light.apt09_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room Bulb
-              - entity: light.apt09_livingroom_bulb
+              - entity: light.apt09_bulb_livingroom
                 name: Living Room
                 type: light
             # Hall
-              - entity: light.apt09_hall_bulb
+              - entity: light.apt09_bulb_hall
                 name: Hall
                 type: light
             # Bedroom Bulb
-              - entity: light.apt09_bedroom_bulb
+              - entity: light.apt09_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             type: horizontal-stack
@@ -961,7 +946,7 @@ views:
         # Row 3 - More Lights
           # - cards:
           #   # Bedroom Switch
-          #     - entity: light.apt09_bedroom_light
+          #     - entity: light.apt09_light_bedroom
           #       name: Bdr Switch
           #       type: entity-button
           #       icon_height: 200px
@@ -969,11 +954,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B3 Stairs
               camera_image: camera.b3_stairs
               image: '/local/PkDr_B3_Stairs.jpg'
-              entities:
-                - camera.b3_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -1019,15 +1002,15 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt12_entrance_bulb
+              - entity: light.apt12_bulb_entrance
                 name: Entrance
                 type: light
             # Living Room
-              - entity: light.apt12_livingroom_bulb
+              - entity: light.apt12_bulb_livingroom
                 name: Living Room
                 type: light
             # Hall
-              - entity: light.apt12_hall_bulb
+              - entity: light.apt12_bulb_hall
                 name: Hall
                 type: light
             type: horizontal-stack
@@ -1074,22 +1057,20 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom Bulb
-              - entity: light.apt12_bedroom_bulb
+              - entity: light.apt12_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom2 Bulb
-              - entity: light.apt12_bedroom2_bulb
+              - entity: light.apt12_bulb_bedroom2
                 name: Bdr2 Lamp
                 type: light
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B3 Stairs
               camera_image: camera.b3_stairs
               image: '/local/PkDr_B3_Stairs.jpg'
-              entities:
-                - camera.b3_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -1122,7 +1103,7 @@ views:
         # Row 1 - Lights
           - cards:
             # Entrance
-              - entity: light.apt14_entrance_bulb
+              - entity: light.apt14_bulb_entrance
                 name: Entrance
                 type: light
             # Entrance Doorbell
@@ -1139,11 +1120,11 @@ views:
                     entity: input_number.apt14_volume
                     full_row: true
             # Kitchen
-              - entity: light.apt14_kitchen_bulb
+              - entity: light.apt14_bulb_kitchen
                 name: Kitchen
                 type: light
             # Living Room
-              - entity: light.apt14_livingroom_bulb
+              - entity: light.apt14_bulb_livingroom
                 name: Living Room
                 type: light
             type: horizontal-stack
@@ -1190,15 +1171,15 @@ views:
         # Row 3 - More Lights
           - cards:
             # Hall
-              - entity: light.apt14_hall_bulb
+              - entity: light.apt14_bulb_hall
                 name: Hall
                 type: light
             # Bedroom Bulb
-              - entity: light.apt14_bedroom_bulb
+              - entity: light.apt14_bulb_bedroom
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt14_bedroom_light
+              - entity: light.apt14_light_bedroom
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -1206,11 +1187,9 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B4 Stairs
               camera_image: camera.b4_stairs
               image: '/local/PkDr_B4_Stairs.jpg'
-              entities:
-                - camera.b4_stairs
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         type: vertical-stack
@@ -1249,7 +1228,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
-      - user:  92789052ad71465f99761e12c5af5bc9 # B1
+      - user: 92789052ad71465f99761e12c5af5bc9 # B1
     path: k-b1 # Lovelace Tab - B1 Kiosk
     cards:
       - cards:
@@ -1337,11 +1316,8 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              title: B1 Video Doorbell
               camera_image: camera.b1_vdb_camera
-              image: '/local/B1_VDB.jpg'
-              entities:
-                - entity: camera.b1_vdb_camera
+              entities: []
               aspect_ratio: 0%
             - type: picture-entity
               entity: camera.b1_vdb_camera
@@ -1352,19 +1328,13 @@ views:
               camera_view: live
 
             - type: picture-glance
-              title: B1 Stairs
               camera_image: camera.b1_stairs
-              image: '/local/PkDr_B1_Stairs.jpg'
-              entities:
-                - camera.b1_stairs
+              entities: []
               aspect_ratio: 0%
 
             - type: picture-glance
-              title: B1-2 Court
               camera_image: camera.b1_2_court
-              # image: '/local/Apt01_VDB.jpg'
-              entities:
-                - entity: camera.b1_2_court
+              entities: []
               aspect_ratio: 0%
             type: horizontal-stack
         # Row 5 - Tenant Portal

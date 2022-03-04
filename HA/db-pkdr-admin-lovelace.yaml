@@ -51,7 +51,7 @@ kiosk_mode:
 title: PkDr Admin
 views:
   - title: PkDr Controls
-    theme: darkorange
+    theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30
     path: pkdr-admin?disable_km
@@ -109,27 +109,29 @@ views:
           - entity: automation.building_lights_on
           - entity: automation.building_lights_off
           - entity: automation.b1_entrance_relock
-          # - entity: automation.building_lights_back_on
-          # - entity: automation.building_lights_back_off
+          - entity: automation.building_lights_back_on
+          - entity: automation.building_lights_back_off
           - entity: automation.apt01_climate_home
           - entity: automation.apt01_climate_away
           - entity: automation.apt01_entrance_relock
           - entity: automation.apt01_no_heat_with_ac
           - entity: automation.apt01_no_ac_with_heat
-          # - entity: automation.apt02_no_heat_with_ac
-          # - entity: automation.apt02_no_ac_with_heat
-          # - entity: automation.apt05_no_heat_with_ac
-          # - entity: automation.apt05_no_ac_with_heat
-          # - entity: automation.apt06_no_heat_with_ac
-          # - entity: automation.apt06_no_ac_with_heat
-          # - entity: automation.apt07_no_heat_with_ac
-          # - entity: automation.apt07_no_ac_with_heat
-          # - entity: automation.apt09_no_heat_with_ac
-          # - entity: automation.apt09_no_ac_with_heat
-          # - entity: automation.apt12_no_heat_with_ac
-          # - entity: automation.apt12_no_ac_with_heat
-          # - entity: automation.apt14_no_heat_with_ac
-          # - entity: automation.apt14_no_ac_with_heat
+          - entity: automation.apt02_no_heat_with_ac
+          - entity: automation.apt02_no_ac_with_heat
+          - entity: automation.apt03_no_heat_with_ac
+          - entity: automation.apt03_no_ac_with_heat
+          - entity: automation.apt05_no_heat_with_ac
+          - entity: automation.apt05_no_ac_with_heat
+          - entity: automation.apt06_no_heat_with_ac
+          - entity: automation.apt06_no_ac_with_heat
+          - entity: automation.apt07_no_heat_with_ac
+          - entity: automation.apt07_no_ac_with_heat
+          - entity: automation.apt09_no_heat_with_ac
+          - entity: automation.apt09_no_ac_with_heat
+          - entity: automation.apt12_no_heat_with_ac
+          - entity: automation.apt12_no_ac_with_heat
+          - entity: automation.apt14_no_heat_with_ac
+          - entity: automation.apt14_no_ac_with_heat
           # - entity: automation.outlet_on_every_2_1
           # - entity: automation.outlet_off_every_1_4
           # - entity: automation.apt14_climate_home
@@ -138,12 +140,12 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt01_entrance_bulb
-          - entity: light.apt01_livingroom_bulb
-          - entity: light.apt01_kitchen_bulb
-          - entity: light.apt01_hall_bulb
-          - entity: light.apt01_bedroom_bulb
-          - entity: light.apt01_bedroom_light
+          - entity: light.apt01_bulb_entrance
+          - entity: light.apt01_bulb_livingroom
+          - entity: light.apt01_bulb_kitchen
+          - entity: light.apt01_bulb_hall
+          - entity: light.apt01_bulb_bedroom
+          - entity: light.apt01_light_bedroom
           - entity: switch.apt01_livingroom_iptv
           - entity: switch.apt01_ac
           - entity: switch.01_heat
@@ -155,12 +157,12 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt02_entrance_bulb
-          - entity: light.apt02_livingroom_bulb
-          - entity: light.apt02_kitchen_bulb
-          - entity: light.apt02_hall_bulb
-          - entity: light.apt02_bedroom_bulb
-          - entity: light.apt02_bedroom_light
+          - entity: light.apt02_bulb_entrance
+          - entity: light.apt02_bulb_livingroom
+          - entity: light.apt02_bulb_kitchen
+          - entity: light.apt02_bulb_hall
+          - entity: light.apt02_bulb_bedroom
+          - entity: light.apt02_light_bedroom
           - entity: switch.apt02_livingroom_iptv
           - entity: switch.apt02_ac
           - entity: switch.02_heat
@@ -172,12 +174,12 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt03_entrance_bulb
-          - entity: light.apt03_livingroom_bulb
-          - entity: light.apt03_kitchen_bulb
-          - entity: light.apt03_hall_bulb
-          - entity: light.apt03_bedroom_bulb
-          - entity: light.apt03_bedroom_light
+          - entity: light.apt03_bulb_entrance
+          - entity: light.apt03_bulb_livingroom
+          - entity: light.apt03_bulb_kitchen
+          - entity: light.apt03_bulb_hall
+          - entity: light.apt03_bulb_bedroom
+          - entity: light.apt03_light_bedroom
           - entity: switch.apt03_livingroom_iptv
           - entity: switch.apt03_ac
           - entity: switch.03_heat
@@ -189,12 +191,12 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt05_entrance_bulb
-          - entity: light.apt05_livingroom_bulb
-          - entity: light.apt05_kitchen_bulb
-          - entity: light.apt05_hall_bulb
-          - entity: light.apt05_bedroom_bulb
-          - entity: light.apt05_bedroom_light
+          - entity: light.apt05_bulb_entrance
+          - entity: light.apt05_bulb_livingroom
+          - entity: light.apt05_bulb_kitchen
+          - entity: light.apt05_bulb_hall
+          - entity: light.apt05_bulb_bedroom
+          - entity: light.apt05_light_bedroom
           - entity: switch.apt05_livingroom_iptv
           - entity: switch.apt05_ac
           - entity: switch.05_heat
@@ -206,12 +208,12 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt06_entrance_bulb
-          - entity: light.apt06_livingroom_bulb
-          - entity: light.apt06_kitchen_bulb
-          - entity: light.apt06_hall_bulb
-          - entity: light.apt06_bedroom_bulb
-          - entity: light.apt06_bedroom_light
+          - entity: light.apt06_bulb_entrance
+          - entity: light.apt06_bulb_livingroom
+          - entity: light.apt06_bulb_kitchen
+          - entity: light.apt06_bulb_hall
+          - entity: light.apt06_bulb_bedroom
+          - entity: light.apt06_light_bedroom
           - entity: switch.apt06_livingroom_iptv
           - entity: switch.apt06_ac
           - entity: switch.06_heat
@@ -223,11 +225,11 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt07_entrance_bulb
-          - entity: light.apt07_livingroom_bulb
-          - entity: light.apt07_kitchen_bulb
-          - entity: light.apt07_hall_bulb
-          - entity: light.apt07_bedroom_bulb
+          - entity: light.apt07_bulb_entrance
+          - entity: light.apt07_bulb_livingroom
+          - entity: light.apt07_bulb_kitchen
+          - entity: light.apt07_bulb_hall
+          - entity: light.apt07_bulb_bedroom
           - entity: light.apt07_bedroom2_bulb
           - entity: switch.apt07_livingroom_iptv
           - entity: switch.apt07_ac
@@ -240,11 +242,11 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt09_entrance_bulb
-          - entity: light.apt09_livingroom_bulb
-          - entity: light.apt09_kitchen_bulb
-          - entity: light.apt09_hall_bulb
-          - entity: light.apt09_bedroom_bulb
+          - entity: light.apt09_bulb_entrance
+          - entity: light.apt09_bulb_livingroom
+          - entity: light.apt09_bulb_kitchen
+          - entity: light.apt09_bulb_hall
+          - entity: light.apt09_bulb_bedroom
           - entity: switch.apt09_livingroom_iptv
           - entity: switch.apt09_ac
           - entity: switch.09_heat
@@ -256,11 +258,11 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt12_entrance_bulb
-          - entity: light.apt12_livingroom_bulb
-          - entity: light.apt12_kitchen_bulb
-          - entity: light.apt12_hall_bulb
-          - entity: light.apt12_bedroom_bulb
+          - entity: light.apt12_bulb_entrance
+          - entity: light.apt12_bulb_livingroom
+          - entity: light.apt12_bulb_kitchen
+          - entity: light.apt12_bulb_hall
+          - entity: light.apt12_bulb_bedroom
           - entity: light.apt12_bedroom2_bulb
           - entity: switch.apt12_livingroom_iptv
           - entity: switch.apt12_ac
@@ -273,12 +275,12 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt14_entrance_bulb
-          - entity: light.apt14_livingroom_bulb
-          - entity: light.apt14_kitchen_bulb
-          - entity: light.apt14_hall_bulb
-          - entity: light.apt14_bedroom_bulb
-          - entity: light.apt14_bedroom_light
+          - entity: light.apt14_bulb_entrance
+          - entity: light.apt14_bulb_livingroom
+          - entity: light.apt14_bulb_kitchen
+          - entity: light.apt14_bulb_hall
+          - entity: light.apt14_bulb_bedroom
+          - entity: light.apt14_light_bedroom
           - entity: switch.apt14_livingroom_iptv
           - entity: switch.apt14_ac
           - entity: switch.apt14_heat
