@@ -40,37 +40,47 @@
 
 - id: pkdr_lights_on_revert
   alias: Building Lights Back On
+  description: Check every 15 minutes to see if the sun is below the horizon, then turn on the building lights if they are off.
   trigger:
   - platform: time_pattern
-    minutes: 15
-    seconds: 00
+    minutes: /15
   condition:
-    condition: or  # 'when dark' condition: either after sunset or before sunrise
-    conditions:
-      - condition: sun
-        after: sunset
-      - condition: sun
-        before: sunrise
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '0'
   action:
   - service: switch.turn_on
-    entity_id: group.building_lights
+    data: {}
+    target:
+      entity_id:
+      - switch.b1_lights
+      - switch.b2_lights
+      - switch.b3_lights
+      - switch.b4_lights
+  mode: single
 
 - id: pkdr_lights_off_revert
   alias: Building Lights Back Off
+  description: Check every 15 minutes to see if the sun is above the horizon, then turn off the building lights if they are on.
   trigger:
   - platform: time_pattern
-    minutes: 30
-    seconds: 00
+    minutes: /15
   condition:
-    condition: or  # 'when dark' condition: either after sunset or before sunrise
-    conditions:
-      - condition: sun
-        after: sunrise
-      - condition: sun
-        before: sunset
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: '0'
   action:
   - service: switch.turn_off
-    entity_id: group.building_lights
+    data: {}
+    target:
+      entity_id: # group.building_lights
+      - switch.b1_lights
+      - switch.b2_lights
+      - switch.b3_lights
+      - switch.b4_lights
+  mode: single
 
 - id: apt01_volume_changed
   alias: Apt01 Volume Changed

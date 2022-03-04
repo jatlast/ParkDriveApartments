@@ -422,7 +422,7 @@ else:
 
         duration_since_last_doorbell = "Duration: seconds {} | minutes {} | hours {} | days {} | years {} | ".format(seconds, minutes, hours, days, years)
         if variables_dict['verbosity'] > 0:
-            print("{}: K-VDB-Runtime: Found: {} | Payload: {} | Topic: {} | Played: {} | Previous: {}".format(datetime.datetime.now(), variables_dict['payload_for_doorbell'], str(message.payload.decode('utf-8')), message.topic, variables_dict['sound_played'], duration_since_last_doorbell))
+            print("{}: K-VDB-Runtime: Found: {} | Played: {} | Previous: {}".format(datetime.datetime.now(), variables_dict['payload_for_doorbell'], variables_dict['sound_played'], duration_since_last_doorbell))
     # --------------------------------------------
     # ----- Doorbell Functions - End -------------
     # --------------------------------------------
