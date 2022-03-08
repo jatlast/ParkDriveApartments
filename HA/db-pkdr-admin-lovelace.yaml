@@ -46,8 +46,8 @@
 kiosk_mode:
   admin_settings:
     kiosk: false
-  # non_admin_settings:
-  #   kiosk: true
+  non_admin_settings:
+    kiosk: true
 title: PkDr Admin
 views:
   - title: PkDr Controls
@@ -56,34 +56,6 @@ views:
       - user: f2a7bc7c54114ae18850444b825ccc30
     path: pkdr-admin?disable_km
     require_admin: true
-    badges:
-#      - entity: binary_sensor.pir_apt01_living_room
-#      - entity: binary_sensor.pir_apt02_living_room
-#      - entity: binary_sensor.pir_apt05_living_room
-#      - entity: binary_sensor.pir_apt06_living_room
-#      - entity: binary_sensor.pir_apt14_living_room
-      - entity: person.apt01_jason
-      - entity: person.apt14_derek
-      - entity: device_tracker.pixel_4xl
-      - entity: device_tracker.sm_g950u
-      - entity: sensor.b1_temperature
-      - entity: sensor.b1_humidity
-      - entity: sensor.b2_temperature
-      - entity: sensor.b2_humidity
-      - entity: sensor.b3_temperature
-      - entity: sensor.b3_humidity
-#      - entity: sensor.b4_temperature
-#      - entity: sensor.b4_humidity
-      - entity: sensor.apt01_temperature
-      - entity: sensor.apt02_temperature
-      - entity: sensor.apt05_temperature
-      - entity: sensor.apt06_temperature
-      - entity: sensor.apt07_temperature
-      - entity: sensor.apt09_temperature
-      - entity: sensor.apt12_temperature
-      - entity: sensor.apt14_temperature
-      - entity: binary_sensor.updater
-      - entity: sun.sun
     cards:
       - type: light
         entity: light.rgbw_bulb_test
@@ -103,6 +75,7 @@ views:
           - entity: switch.b3_lights
           - entity: switch.b4_lights
         show_header_toggle: true
+        state_color: true
         title: Building Lights
         type: entities
       - entities:
@@ -136,6 +109,8 @@ views:
           # - entity: automation.outlet_off_every_1_4
           # - entity: automation.apt14_climate_home
           # - entity: automation.apt14_climate_away
+        show_header_toggle: true
+        state_color: true
         title: PkDr Automations
         type: entities
       # 2-BDR
@@ -153,6 +128,7 @@ views:
           - entity: switch.apt01_doorbell
           - entity: input_number.apt01_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 1
         type: entities
       # 1-BDR
@@ -170,6 +146,7 @@ views:
           - entity: switch.apt02_doorbell
           - entity: input_number.apt02_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 2
         type: entities
       # 1-BDR
@@ -187,6 +164,7 @@ views:
           - entity: switch.apt03_doorbell
           - entity: input_number.apt03_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 3
         type: entities
       # 1-BDR
@@ -204,6 +182,7 @@ views:
           - entity: switch.apt05_doorbell
           - entity: input_number.apt05_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 5
         type: entities
       # 1-BDR
@@ -221,6 +200,7 @@ views:
           - entity: switch.apt05_doorbell
           - entity: input_number.apt05_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 6
         type: entities
       # 2-BDR
@@ -230,7 +210,9 @@ views:
           - entity: light.apt07_bulb_kitchen
           - entity: light.apt07_bulb_hall
           - entity: light.apt07_bulb_bedroom
-          - entity: light.apt07_bedroom2_bulb
+          - entity: light.apt07_bulb_bedroom2
+          - entity: light.apt07_light_bedroom
+          - entity: light.apt07_light_bedroom2
           - entity: switch.apt07_livingroom_iptv
           - entity: switch.apt07_ac
           - entity: switch.07_heat
@@ -238,6 +220,7 @@ views:
           - entity: switch.apt07_doorbell
           - entity: input_number.apt07_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 7
         type: entities
       # 1-BDR
@@ -254,6 +237,7 @@ views:
           - entity: switch.apt09_doorbell
           - entity: input_number.apt09_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 9
         type: entities
       # 2-BDR
@@ -263,7 +247,9 @@ views:
           - entity: light.apt12_bulb_kitchen
           - entity: light.apt12_bulb_hall
           - entity: light.apt12_bulb_bedroom
-          - entity: light.apt12_bedroom2_bulb
+          - entity: light.apt12_bulb_bedroom2
+          - entity: light.apt12_light_bedroom
+          - entity: light.apt12_light_bedroom2
           - entity: switch.apt12_livingroom_iptv
           - entity: switch.apt12_ac
           - entity: switch.12_heat
@@ -271,6 +257,7 @@ views:
           - entity: switch.apt12_doorbell
           - entity: input_number.apt12_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 12
         type: entities
       # 1-BDR
@@ -288,6 +275,7 @@ views:
           - entity: switch.apt14_doorbell
           - entity: input_number.apt14_volume
         show_header_toggle: true
+        state_color: true
         title: Apt 14
         type: entities
       - type: entity-button
@@ -300,6 +288,74 @@ views:
         entity: script.kodi_notification
         name: Apt01 Notify
         icon_height: 150px
+      - type: entities
+        entities:
+        # Buildings
+          - entity: sensor.b1_temperature
+            name: B1
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b2_temperature
+            name: B2
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b3_temperature
+            name: B3
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b4_temperature
+            name: B4
+            icon: mdi:temperature-fahrenheit
+        # Apartments
+          - entity: sensor.apt01_temperature
+            name: '01'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt02_temperature
+            name: '02'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt03_temperature
+            name: '03'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt04_temperature
+          #   name: '04'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt05_temperature
+            name: '05'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt06_temperature
+            name: '06'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt07_temperature
+            name: '07'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt08_temperature
+          #   name: '08'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt09_temperature
+            name: '09'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt10_temperature
+          #   name: '10'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt11_temperature
+          #   name: '11'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt12_temperature
+            name: '12'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt13_temperature
+            name: '13'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt14_temperature
+            name: '14'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt15_temperature
+          #   name: '15'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt16_temperature
+          #   name: '16'
+          #   icon: mdi:temperature-fahrenheit
+        show_header_toggle: false
+        state_color: false
+        title: PkDr Temperatures
+
       - type: entities
         entities:
           - switch.01_heat
@@ -323,6 +379,8 @@ views:
           - switch.16_heat
           - switch.b4_end_switch_override
         title: PkDr Heat
+        show_header_toggle: true
+        state_color: true
       - type: entities
         entities:
           - switch.01_lock
@@ -341,6 +399,8 @@ views:
           - switch.14_lock
           - switch.15_lock
           - switch.16_lock
+        show_header_toggle: true
+        state_color: true
         title: PkDr Locks
       - type: entities
         entities:
@@ -352,12 +412,16 @@ views:
           - switch.b3_kiosks_even
           - switch.b4_kiosks_odd
           - switch.b4_kiosks_even
+        show_header_toggle: true
+        state_color: true
         title: PkDr Kiosks
       - type: entities
         entities:
           - switch.b2_kiosks
           - switch.b3_kiosks
           - switch.b4_kiosks
+        show_header_toggle: true
+        state_color: true
         title: PkDr Kiosks (Old Way)
       - type: entities
         entities:
@@ -369,6 +433,8 @@ views:
           - switch.b3_doorbells_even
           - switch.b4_doorbells_odd
           - switch.b4_doorbells_even
+        show_header_toggle: true
+        state_color: true
         title: PkDr Video Doorbells
       - type: entities
         entities:
@@ -384,4 +450,6 @@ views:
           - switch.b4_entrance_lock
           - switch.b4_entrance_buttons
           - switch.b4_entrance_video
+        show_header_toggle: true
+        state_color: true
         title: PkDr Entrance

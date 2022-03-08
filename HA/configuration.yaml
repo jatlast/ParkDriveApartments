@@ -1,17 +1,15 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
-  name: Park Drive Apartments (HA OS)
-  # PkDr's location - required to calculate the time the sun rises and sets
+  name: Park Drive Apartments
   latitude: 42.957181
   longitude: -83.644644
-  # PkDr's elevation - impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 240 # 787 feet / 240 meters
-  # metric for Metric, imperial for Imperial
   unit_system: imperial
-  # PkDr's location -  http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Detroit
   # Customization file (contents of file inserted wherever "!include filename" appears)
   # customize: !include customize.yaml
+
+  internal_url: !secret pkdr_ha_url_internal
+  external_url: !secret pkdr_ha_url_external
 
 # ---------------------------------
 # -- Necessary for Remote Access --
@@ -28,6 +26,17 @@ http: # https://www.home-assistant.io/integrations/http/
     - !secret trusted_proxies_00
     # Intranet IPs of HA OS & Main Router
     - !secret trusted_proxies_01
+    # Internal Kiosks
+    - !secret trusted_proxies_02
+    - !secret trusted_proxies_03
+    - !secret trusted_proxies_04
+    - !secret trusted_proxies_05
+    - !secret trusted_proxies_06
+    - !secret trusted_proxies_07
+    - !secret trusted_proxies_08
+    - !secret trusted_proxies_09
+    - !secret trusted_proxies_10
+    - !secret trusted_proxies_11
 # ---------------------------------
 
 # ------------------------------------------------------------
@@ -3776,21 +3785,21 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-  # B4 Sensors...
-  # - platform: sql
-  #   db_url: !secret pkdr_sql_db_url
-  #   queries:
-  #     - name: B4 Temperature
-  #       query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-  #       column: 'temperature'
-  #       unit_of_measurement: 'F'
-  # - platform: sql
-  #   db_url: !secret pkdr_sql_db_url
-  #   queries:
-  #     - name: B4 Humidity
-  #       query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
-  #       column: 'humidity'
-  #       unit_of_measurement: '%'
+    # B4 Sensors...
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B4 Temperature
+        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: B4 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
 
   # Apt 01 Temperature & Humididy...
   - platform: sql

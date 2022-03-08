@@ -88,8 +88,8 @@ else:
     # ----- Calback Functions - Start -----------
     # -------------------------------------------
     def on_disconnect(client, userdata, rc):
-        global runtime_message
-        runtime_message = "def on_disconnect() result code = ({})".format(rc)
+        global runtime_messages
+        runtime_messages = "def on_disconnect() result code = ({})".format(rc)
         if variables_dict["verbosity"] > 2:
             print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
         # logging.debug("DisConnected result code " + str(rc))
@@ -97,9 +97,9 @@ else:
 
     # Note the message parameter is a message class with members: topic, qos, payload, retain.
     def on_message(client, userdata, message):
-        global runtime_message, runtime_error_message
-        runtime_messages = "{} INFO: on_message() - Topic: {} | Payload: {}\n".format(action_current_datetime, message.topic, str(message.payload.decode("utf-8")))
+        global runtime_messages, runtime_error_message
         action_current_datetime = datetime.datetime.now()
+        runtime_messages = "{} INFO: on_message() - Topic: {} | Payload: {}\n".format(action_current_datetime, message.topic, str(message.payload.decode("utf-8")))
 
         # check the volume first...
         if message.topic == variables_dict["mqtt_subscribe_volume"]:
@@ -167,7 +167,7 @@ else:
             pkdr_utils.db_generic_insert()
         else:
             if variables_dict["verbosity"] > 2:
-                print(runtime_message)
+                print(runtime_messages)
 
     def on_log(client, userdata, level, buf):
         paho_log_level_name = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))

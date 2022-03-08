@@ -35,6 +35,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 5df09d42cb09485ea0f6277100818d3b # Apt01
     path: k-01
     cards:
@@ -57,11 +58,23 @@ views:
                 cards:
                   - type: button
                     entity: switch.apt01_doorbell
+                    show_state: false
                     show_name: false
-                    tap_action:
-                      action: toggle
-                    icon: 'hass:bell'
+                    show_icon: true
                     icon_height: 130px
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt01_doorbell
+                  # - type: button
+                  #   entity: switch.apt01_doorbell
+                  #   show_name: false
+                  #   tap_action:
+                  #     action: toggle
+                  #   icon: 'hass:bell'
+                  #   icon_height: 130px
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt01_volume
                     full_row: true
@@ -282,6 +295,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 3c21d53e7f154dce80e8f1bcdc2f9f87 # Apt02
     path: k-02 # apt_02_tab
     cards:
@@ -391,6 +405,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 17733214666a413299bf272786a683a9 # Apt03
     path: k-03 # apt_03_tab
     cards:
@@ -501,6 +516,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: e8bff05bc1cd4be1af36e288468d85fd # Apt04
     path: k-04 # apt_04_tab
     cards:
@@ -602,6 +618,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: cc40a29c034a474e86a023289734e9b8 # Apt05
     path: k-05 # apt_05_tab
     cards:
@@ -689,6 +706,7 @@ views:
     panel: true
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 1bc46a652c8741af8e57191f74240bc0 # Apt06
     path: k-06 # apt_06_tab
     cards:
@@ -781,6 +799,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 4d97cb0348bd48518140f50edf98a814 # Apt07
     path: k-07 # apt_07_tab
     cards:
@@ -868,6 +887,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: e0b9fe90ad1e4d69abbaeca67189298d # Apt08
     path: k-08
 
@@ -880,6 +900,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 48cc2d3934f44031b37c9239e9b509c9 # Apt09
     path: k-09 # apt_09_tab
     cards:
@@ -970,6 +991,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 4182c149a4254639b3e790ddeb2f7354 # Apt10
     path: k-10
 
@@ -983,6 +1005,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 1440f67a25e64605b2857539796b1d31 # Apt11
     path: k-11
 
@@ -995,6 +1018,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 8ee5d466e69e42358894f13ff2d516a7 # Apt12
     path: k-12 # apt_12_tab
     cards:
@@ -1084,6 +1108,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: d2f307cf2d5244149308528f48fcc521 # Apt13
     path: k-13
 
@@ -1096,6 +1121,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: ee4612b7248046f792fc13bd87285418 # Apt14
     path: k-14 # apt_14_tab
     cards:
@@ -1203,6 +1229,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 868518213280450e8003bd6dcf407987 # Apt15
     path: k-15
 
@@ -1216,6 +1243,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 9edc0125b8aa422e82a5956ebefbe73b # Apt16
     path: k-16
 
@@ -1228,6 +1256,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 92789052ad71465f99761e12c5af5bc9 # B1
     path: k-b1 # Lovelace Tab - B1 Kiosk
     cards:
@@ -1365,6 +1394,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: 9245a47b7d334dd59b792a4a00113d09 # B2
     path: k-b2 # Lovelace Tab - B2 Kiosk
 
@@ -1377,6 +1407,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: aa6d5fc87def4e1dbea489ffa5788ee1 # B3
     path: k-b3 # Lovelace Tab - B3 Kiosk
 
@@ -1389,6 +1420,7 @@ views:
     # theme: M3-04-Magenta
     visible:
       - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
+      - user: 67e2b3bb50b9423cba24d36dcb70f3dd # KJB
       - user: bc39d5b5450c4061b4e391dc9c6f1545 # B4
     path: k-b4 # Lovelace Tab - B4 Kiosk
 
