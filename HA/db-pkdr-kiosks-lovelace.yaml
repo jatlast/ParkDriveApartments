@@ -62,6 +62,7 @@ views:
                     show_name: false
                     show_icon: true
                     icon_height: 130px
+                    icon: mdi:doorbell
                     tap_action:
                       action: call-service
                       service: switch.turn_on
@@ -315,11 +316,17 @@ views:
                 cards:
                   - type: button
                     entity: switch.apt02_doorbell
+                    show_state: false
                     show_name: false
-                    tap_action:
-                      action: toggle
-                    icon: 'hass:bell'
+                    show_icon: true
                     icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt02_doorbell
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt02_volume
                     full_row: true
@@ -434,11 +441,17 @@ views:
                 cards:
                   - type: button
                     entity: switch.apt03_doorbell
+                    show_state: false
                     show_name: false
-                    tap_action:
-                      action: toggle
-                    icon: 'hass:bell'
+                    show_icon: true
                     icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt03_doorbell
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt03_volume
                     full_row: true
@@ -532,11 +545,17 @@ views:
                 cards:
                   - type: button
                     entity: switch.apt04_doorbell
+                    show_state: false
                     show_name: false
-                    tap_action:
-                      action: toggle
-                    icon: 'hass:bell'
+                    show_icon: true
                     icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt04_doorbell
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt04_volume
                     full_row: true
@@ -1137,11 +1156,17 @@ views:
                 cards:
                   - type: button
                     entity: switch.apt14_doorbell
+                    show_state: false
                     show_name: false
-                    tap_action:
-                      action: toggle
-                    icon: 'hass:bell'
+                    show_icon: true
                     icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt14_doorbell
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt14_volume
                     full_row: true
