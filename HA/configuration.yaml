@@ -377,222 +377,222 @@ input_text:
 #- Building 1 --- 
 #----------------
 # Apt 01
-  pkdr_01_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_01_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_01_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_01_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 02
-  pkdr_02_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_02_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_02_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_02_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 03
-  pkdr_03_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_03_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_03_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_03_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 04
-  pkdr_04_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_04_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_04_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_04_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-#----------------
-#- Building 2 --- 
-#----------------
-# Apt 05
-  pkdr_05_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_05_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_05_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_05_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 06
-  pkdr_06_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_06_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_06_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_06_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 07
-  pkdr_07_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_07_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_07_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_07_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 08
-  pkdr_08_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_08_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_08_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_08_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-#----------------
-#- Building 3 --- 
-#----------------
-# Apt 09
-  pkdr_09_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_09_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_09_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_09_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 10
-  pkdr_10_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_10_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_10_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_10_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 11
-  pkdr_11_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_11_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_11_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_11_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 12
-  pkdr_12_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_12_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_12_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_12_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-#----------------
-#- Building 4 --- 
-#----------------
-# Apt 13
-  pkdr_13_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_13_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_13_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_13_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 14
-  pkdr_14_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_14_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_14_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_14_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 15
-  pkdr_15_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_15_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_15_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_15_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
-# Apt 16
-  pkdr_16_vdb_1:
-    name: 'On Ring: Line 1'
-    max: 20
-  pkdr_16_vdb_2:
-    name: 'On Ring: Line 2'
-    max: 20
-  pkdr_16_vdb_3:
-    name: 'On Ring: Line 3'
-    max: 20
-  pkdr_16_vdb_4:
-    name: 'On Ring: Line 4'
-    max: 20
+#   pkdr_01_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_01_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_01_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_01_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 02
+#   pkdr_02_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_02_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_02_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_02_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 03
+#   pkdr_03_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_03_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_03_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_03_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 04
+#   pkdr_04_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_04_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_04_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_04_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# #----------------
+# #- Building 2 --- 
+# #----------------
+# # Apt 05
+#   pkdr_05_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_05_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_05_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_05_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 06
+#   pkdr_06_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_06_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_06_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_06_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 07
+#   pkdr_07_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_07_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_07_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_07_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 08
+#   pkdr_08_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_08_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_08_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_08_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# #----------------
+# #- Building 3 --- 
+# #----------------
+# # Apt 09
+#   pkdr_09_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_09_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_09_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_09_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 10
+#   pkdr_10_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_10_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_10_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_10_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 11
+#   pkdr_11_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_11_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_11_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_11_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 12
+#   pkdr_12_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_12_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_12_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_12_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# #----------------
+# #- Building 4 --- 
+# #----------------
+# # Apt 13
+#   pkdr_13_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_13_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_13_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_13_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 14
+#   pkdr_14_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_14_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_14_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_14_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 15
+#   pkdr_15_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_15_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_15_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_15_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
+# # Apt 16
+#   pkdr_16_vdb_1:
+#     name: 'On Ring Line 1'
+#     max: 20
+#   pkdr_16_vdb_2:
+#     name: 'On Ring Line 2'
+#     max: 20
+#   pkdr_16_vdb_3:
+#     name: 'On Ring Line 3'
+#     max: 20
+#   pkdr_16_vdb_4:
+#     name: 'On Ring Line 4'
+#     max: 20
 
 #################
 # Building VDBs #
@@ -635,6 +635,45 @@ input_text:
     name: Line 3
     max: 20
   apt01_vdb_line4:
+    name: Line 4
+    max: 20
+# apt02-vdb
+  apt02_vdb_line1:
+    name: Line 1
+    max: 20
+  apt02_vdb_line2:
+    name: Line 2
+    max: 20
+  apt02_vdb_line3:
+    name: Line 3
+    max: 20
+  apt02_vdb_line4:
+    name: Line 4
+    max: 20
+# apt03-vdb
+  apt03_vdb_line1:
+    name: Line 1
+    max: 20
+  apt03_vdb_line2:
+    name: Line 2
+    max: 20
+  apt03_vdb_line3:
+    name: Line 3
+    max: 20
+  apt03_vdb_line4:
+    name: Line 4
+    max: 20
+# apt04-vdb
+  apt04_vdb_line1:
+    name: Line 1
+    max: 20
+  apt04_vdb_line2:
+    name: Line 2
+    max: 20
+  apt04_vdb_line3:
+    name: Line 3
+    max: 20
+  apt04_vdb_line4:
     name: Line 4
     max: 20
   

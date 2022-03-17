@@ -47,11 +47,11 @@ views:
           - cards:
             # Building Entrance Lock
               - entity: switch.b1_entrance_lock
-                name: Building Lock
+                name: B1 Lock
                 type: entity-button
             # Entrance
-              - entity: switch.01_lock
-                name: Apartment Lock
+              - entity: switch.apt01_vdb_door_lock
+                name: A1 Lock
                 type: entity-button
             # Entrance Doorbell
               - type: vertical-stack
@@ -153,7 +153,7 @@ views:
           - cards:
             - type: picture-glance
               title: Apt01 Video Doorbell
-              camera_image: camera.apt01_video_doorbell_camera
+              camera_image: camera.apt01_vdb_camera
               image: '/local/Apt01_VDB.jpg'
               entities: []
               aspect_ratio: 0%
@@ -164,13 +164,20 @@ views:
               aspect_ratio: 0%
             # - type: picture-glance
             #   title: Apt01 Video Doorbell
-            #   camera_image: camera.apt01_video_doorbell_camera
+            #   camera_image: camera.apt01_vdb_camera
             #   image: '/local/Apt01_VDB.jpg'
             #   entities:
-            #     - entity: camera.apt01_video_doorbell_camera
+            #     - entity: camera.apt01_vdb_camera
             #   aspect_ratio: 0%
             type: horizontal-stack
-        # Row 5 - Tenant Portal
+        # Row 9 - Locks
+          - cards:
+            - type: entities
+              entities:
+                - binary_sensor.apt01_vdb_door_sensor
+                - switch.apt01_vdb_door_lock
+              title: Lock
+            type: horizontal-stack
           - cards:
             - entities:
                 - entity: input_text.apt01_vdb_line1
@@ -278,14 +285,6 @@ views:
               entity: switch.apt01_bedroom_ender3
               name: Ender 3
             type: horizontal-stack
-        # Row 9 - Locks
-          # - cards:
-          #   - type: entities
-          #     entities:
-          #       - binary_sensor.apartment_1_open
-          #       - lock.apartment_1
-          #     title: Lock
-          #   type: horizontal-stack
         type: vertical-stack
   #####################
   # Apt 02
@@ -514,10 +513,27 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
-              camera_image: camera.b1_stairs
-              image: '/local/PkDr_B1_Stairs.jpg'
+              title: Apt03 Video Doorbell
+              camera_image: camera.apt03_vdb_camera
               entities: []
               aspect_ratio: 0%
+            - type: picture-glance
+              camera_image: camera.b1_stairs
+              entities: []
+              aspect_ratio: 0%
+            type: horizontal-stack
+        # Row 5 - Tenant Portal
+          - cards:
+            - entities:
+                - entity: input_text.apt03_vdb_line1
+                  name: Line 1
+                - entity: input_text.apt03_vdb_line2
+                  name: Line 2
+                - entity: input_text.apt03_vdb_line3
+                  name: Line 3
+                - entity: input_text.apt03_vdb_line4
+                  name: Line 4
+              type: entities
             type: horizontal-stack
         type: vertical-stack
   #####################
@@ -1348,7 +1364,7 @@ views:
               state_color: true
             - type: entities
               entities:
-                - entity: switch.01_lock
+                - entity: switch.apt01_vdb_door_lock
                 - entity: switch.02_lock
                 - entity: switch.03_lock
                 - entity: switch.04_lock
