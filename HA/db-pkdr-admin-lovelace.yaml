@@ -1,30 +1,5 @@
 # Disable Custom Header | ?disable_ch |...
 #   http://10.16.0.29:8123/lovelace/default_view?disable_ch
-# ID's
-# Administrator
-#   PkDrApts - f5868b87d9ad4d1e82dd7a686f31b84b - PDA0
-# Buildings
-#   B1 - c47e7c80446e46719c53801946b90a2e - B1:ParkDrive
-#   B2 - 
-#   B2 - 
-#   B2 - 
-# Apartments
-#   01 - fbf7359a12d74b07aea2e3f7ebb8da89 - Apt01:05046379
-#   02 - b869b20517ca4418a64b54401a693085 - Apt02:19241951
-#   03 - 611a6997f68f4953b5a16da3d5cdbd34 - Apt03:15267979
-#   04 -  - 
-#   05 - 3ace11b19baa481f995062fd4b6ccaaa - Apt05:07431241
-#   06 - c9f5d2f3a46a405096d43bdab619f94a - Apt06:74945061
-#   07 - eadb5429f7fb4308acc3150facdf3bf9 - Apt07:85008441
-#   08 -  - 
-#   09 - 09d1067b816443f0a2a3f45c7a3553a2 - 09:54985674
-#   10 -  - 
-#   11 -  - 
-#   12 - 93fd9511bcad475b8687924284c79ff2 - Apt12:86508865
-#   13 -  - 
-#   14 - 59c12eeea78f4725872702ed42fe0a7c - Apt14:03989272
-#   15 -  - 
-#   16 -  - 
 
 # ToDo 2020-01-16
 # Amcrest
@@ -33,11 +8,11 @@
 # Notifications
 # Temperature Presets
 
-# 20220218 - Finally back to working on HA OS so I am tring to get kiosk mode working...
+# 20220218 - Finally, back to working on HA OS so I am trying to get kiosk mode working...
 #   https://github.com/maykar/kiosk-mode
 # kiosk: -- Hides both the header and sidebar.
 #     ?kiosk           to hide both header and sidebar
-#     ?kiosk&cache     to makes all views & dashboards both header and sidebar.
+#     ?kiosk&cache     to make all views & dashboards both header and sidebar.
 #        - This works for all query strings except for the utility strings listed below.
 # Utility Query Strings
 #   ?clear_km_cache   will clear all cached preferences
@@ -120,13 +95,15 @@ views:
           - entity: light.apt01_bulb_kitchen
           - entity: light.apt01_bulb_hall
           - entity: light.apt01_bulb_bedroom
+          - entity: light.apt01_bulb_bedroom2
           - entity: light.apt01_light_bedroom
           - entity: switch.apt01_livingroom_iptv
           - entity: switch.apt01_ac
           - entity: switch.01_heat
-          - entity: switch.01_lock
+          - entity: switch.apt01_vdb_door_lock
           - entity: switch.apt01_doorbell
           - entity: input_number.apt01_volume
+          - entity: switch.apt01_bedroom_ender3
         show_header_toggle: true
         state_color: true
         title: Apt 1
@@ -142,7 +119,7 @@ views:
           - entity: switch.apt02_livingroom_iptv
           - entity: switch.apt02_ac
           - entity: switch.02_heat
-          - entity: switch.02_lock
+          - entity: switch.apt02_vdb_door_lock
           - entity: switch.apt02_doorbell
           - entity: input_number.apt02_volume
         show_header_toggle: true
@@ -160,7 +137,7 @@ views:
           - entity: switch.apt03_livingroom_iptv
           - entity: switch.apt03_ac
           - entity: switch.03_heat
-          - entity: switch.03_lock
+          - entity: switch.apt03_vdb_door_lock
           - entity: switch.apt03_doorbell
           - entity: input_number.apt03_volume
         show_header_toggle: true
@@ -178,7 +155,7 @@ views:
           - entity: switch.apt05_livingroom_iptv
           - entity: switch.apt05_ac
           - entity: switch.05_heat
-          - entity: switch.05_lock
+          - entity: switch.apt05_vdb_door_lock
           - entity: switch.apt05_doorbell
           - entity: input_number.apt05_volume
         show_header_toggle: true
@@ -196,7 +173,7 @@ views:
           - entity: switch.apt06_livingroom_iptv
           - entity: switch.apt06_ac
           - entity: switch.06_heat
-          - entity: switch.05_lock
+          - entity: switch.apt06_vdb_door_lock
           - entity: switch.apt05_doorbell
           - entity: input_number.apt05_volume
         show_header_toggle: true
@@ -216,12 +193,32 @@ views:
           - entity: switch.apt07_livingroom_iptv
           - entity: switch.apt07_ac
           - entity: switch.07_heat
-          - entity: switch.07_lock
+          - entity: switch.apt07_vdb_door_lock
           - entity: switch.apt07_doorbell
           - entity: input_number.apt07_volume
         show_header_toggle: true
         state_color: true
         title: Apt 7
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt08_bulb_entrance
+          - entity: light.apt08_bulb_livingroom
+          - entity: light.apt08_bulb_kitchen
+          - entity: light.apt08_bulb_hall
+          - entity: light.apt08_bulb_bedroom
+          - entity: light.apt08_bulb_bedroom2
+          - entity: light.apt08_light_bedroom
+          - entity: light.apt08_light_bedroom2
+          - entity: switch.apt08_livingroom_iptv
+          - entity: switch.apt08_ac
+          - entity: switch.08_heat
+          - entity: switch.apt08_vdb_door_lock
+          - entity: switch.apt08_doorbell
+          - entity: input_number.apt08_volume
+        show_header_toggle: true
+        state_color: true
+        title: Apt 8
         type: entities
       # 1-BDR
       - entities:
@@ -233,12 +230,32 @@ views:
           - entity: switch.apt09_livingroom_iptv
           - entity: switch.apt09_ac
           - entity: switch.09_heat
-          - entity: switch.09_lock
+          - entity: switch.apt09_vdb_door_lock
           - entity: switch.apt09_doorbell
           - entity: input_number.apt09_volume
         show_header_toggle: true
         state_color: true
         title: Apt 9
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt11_bulb_entrance
+          - entity: light.apt11_bulb_livingroom
+          - entity: light.apt11_bulb_kitchen
+          - entity: light.apt11_bulb_hall
+          - entity: light.apt11_bulb_bedroom
+          - entity: light.apt11_bulb_bedroom2
+          - entity: light.apt11_light_bedroom
+          - entity: light.apt11_light_bedroom2
+          - entity: switch.apt11_livingroom_iptv
+          - entity: switch.apt11_ac
+          - entity: switch.11_heat
+          - entity: switch.apt11_vdb_door_lock
+          - entity: switch.apt11_doorbell
+          - entity: input_number.apt11_volume
+        show_header_toggle: true
+        state_color: true
+        title: Apt 11
         type: entities
       # 2-BDR
       - entities:
@@ -253,12 +270,29 @@ views:
           - entity: switch.apt12_livingroom_iptv
           - entity: switch.apt12_ac
           - entity: switch.12_heat
-          - entity: switch.12_lock
+          - entity: switch.apt12_vdb_door_lock
           - entity: switch.apt12_doorbell
           - entity: input_number.apt12_volume
         show_header_toggle: true
         state_color: true
         title: Apt 12
+        type: entities
+      # 1-BDR
+      - entities:
+          - entity: light.apt13_bulb_entrance
+          - entity: light.apt13_bulb_livingroom
+          - entity: light.apt13_bulb_kitchen
+          - entity: light.apt13_bulb_hall
+          - entity: light.apt13_bulb_bedroom
+          - entity: switch.apt13_livingroom_iptv
+          - entity: switch.apt13_ac
+          - entity: switch.13_heat
+          - entity: switch.apt13_vdb_door_lock
+          - entity: switch.apt13_doorbell
+          - entity: input_number.apt13_volume
+        show_header_toggle: true
+        state_color: true
+        title: Apt 13
         type: entities
       # 1-BDR
       - entities:
@@ -271,13 +305,34 @@ views:
           - entity: switch.apt14_livingroom_iptv
           - entity: switch.apt14_ac
           - entity: switch.apt14_heat
-          - entity: switch.14_lock
+          - entity: switch.apt14_vdb_door_lock
           - entity: switch.apt14_doorbell
           - entity: input_number.apt14_volume
         show_header_toggle: true
         state_color: true
         title: Apt 14
         type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt12_bulb_entrance
+          - entity: light.apt12_bulb_livingroom
+          - entity: light.apt12_bulb_kitchen
+          - entity: light.apt12_bulb_hall
+          - entity: light.apt12_bulb_bedroom
+          - entity: light.apt12_bulb_bedroom2
+          - entity: light.apt12_light_bedroom
+          - entity: light.apt12_light_bedroom2
+          - entity: switch.apt12_livingroom_iptv
+          - entity: switch.apt12_ac
+          - entity: switch.12_heat
+          - entity: switch.apt12_vdb_door_lock
+          - entity: switch.apt12_doorbell
+          - entity: input_number.apt12_volume
+        show_header_toggle: true
+        state_color: true
+        title: Apt 12
+        type: entities
+      # Test - Kodi Notifications
       - type: entity-button
         tap_action:
           action: toggle
@@ -288,6 +343,7 @@ views:
         entity: script.kodi_notification
         name: Apt01 Notify
         icon_height: 150px
+      # Apartment-Wide Temperature Readings
       - type: entities
         entities:
         # Buildings
@@ -325,18 +381,18 @@ views:
           - entity: sensor.apt07_temperature
             name: '07'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt08_temperature
-          #   name: '08'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt08_temperature
+            name: '08'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.apt09_temperature
             name: '09'
             icon: mdi:temperature-fahrenheit
           # - entity: sensor.apt10_temperature
           #   name: '10'
           #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt11_temperature
-          #   name: '11'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt11_temperature
+            name: '11'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.apt12_temperature
             name: '12'
             icon: mdi:temperature-fahrenheit
@@ -349,9 +405,9 @@ views:
           # - entity: sensor.apt15_temperature
           #   name: '15'
           #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt16_temperature
-          #   name: '16'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt16_temperature
+            name: '16'
+            icon: mdi:temperature-fahrenheit
         show_header_toggle: false
         state_color: false
         title: PkDr Temperatures
@@ -383,22 +439,22 @@ views:
         state_color: true
       - type: entities
         entities:
-          - switch.01_lock
+          - switch.apt01_vdb_door_lock
           - switch.02_lock
-          - switch.03_lock
+          - switch.apt03_vdb_door_lock
           - switch.04_lock
           - switch.05_lock
-          - switch.06_lock
+          - switch.apt06_vdb_door_lock
           - switch.07_lock
-          - switch.08_lock
+          - switch.apt08_vdb_door_lock
           - switch.09_lock
           - switch.10_lock
-          - switch.11_lock
+          - switch.apt11_vdb_door_lock
           - switch.12_lock
-          - switch.13_lock
-          - switch.14_lock
+          - switch.apt13_vdb_door_lock
+          - switch.apt14_vdb_door_lock
           - switch.15_lock
-          - switch.16_lock
+          - switch.apt16_vdb_door_lock
         show_header_toggle: true
         state_color: true
         title: PkDr Locks
@@ -438,7 +494,11 @@ views:
         title: PkDr Video Doorbells
       - type: entities
         entities:
-          - switch.b1_entrance_lock
+          - switch.b1_entrance_vdb
+          - switch.b2_entrance_vdb
+          - switch.b3_entrance_vdb
+          - switch.b4_entrance_vdb
+          - switch.b1_vdb_door_lock
           - switch.b1_entrance_buttons
           - switch.b1_entrance_video
           - switch.b2_entrance_lock

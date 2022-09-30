@@ -625,14 +625,44 @@
           - climate.apt14_ac
         away_mode: 'off'
 
-- id: apt01_doorbell_button
-  alias: Apt01 Doorbel Button
+# Old built-in button config...
+# - id: apt01_doorbell_button
+#   alias: Apt01 Doorbel Button
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.apt01_video_doorbell_button
+#       from: 'off'
+#       to: 'on'
+#   action:
+#     - service: notify.mobile_app_pixel_4_xl
+#       data:
+#         title: Knock Knock
+#         message: Someone is at the door.
+#         data:
+#           attachment:
+#             content-type: jpeg
+#           push:
+#             category: camera
+#           entity_id: camera.apt01_video_doorbell_camera
+
+# New VDB mounted LED button config...
+# Apt 01
+- id: apt01_vdb_button
+  alias: Apt01 VDB Button
   trigger:
-    - platform: state
-      entity_id: binary_sensor.apt01_video_doorbell_button
-      from: 'off'
-      to: 'on'
+    - type: turned_on
+      platform: device
+      # device_id: 71ad2357154ee1b1a5f65591fb781f53
+      device_id: apt01-vdb
+      entity_id: binary_sensor.apt01_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
   action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt01/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
     - service: notify.mobile_app_pixel_4_xl
       data:
         title: Knock Knock
@@ -642,5 +672,102 @@
             content-type: jpeg
           push:
             category: camera
-          entity_id: camera.apt01_video_doorbell_camera
+          entity_id: camera.apt01_vdb_camera
 
+# Apt 03
+- id: apt03_vdb_button
+  alias: Apt03 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt03-vdb
+      entity_id: binary_sensor.apt03_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt03/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
+
+# Apt 06
+- id: apt06_vdb_button
+  alias: Apt06 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt06-vdb
+      entity_id: binary_sensor.apt06_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt06/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
+# Apt 08
+- id: apt08_vdb_button
+  alias: Apt08 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt08-vdb
+      entity_id: binary_sensor.apt08_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt08/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
+# Apt 11
+- id: apt11_vdb_button
+  alias: Apt11 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt11-vdb
+      entity_id: binary_sensor.apt11_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt11/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
+# Apt 13
+- id: apt13_vdb_button
+  alias: Apt13 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt13-vdb
+      entity_id: binary_sensor.apt13_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt13/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
+# Apt 16
+- id: apt16_vdb_button
+  alias: Apt16 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt16-vdb
+      entity_id: binary_sensor.apt16_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt16/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
