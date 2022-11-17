@@ -459,7 +459,7 @@ else:
                 count += 1
 
         if(mqtt_config_error_flag and pkdr_utils.config_dict['verbosity'] > 0):
-            print('{}: ERROR: get_mqtt_state_topics() failed | count = {}'.format(pkdr_utils.config_dict['datestamp']), count)
+            print('{}: ERROR: get_mqtt_state_topics() failed | count = {}'.format(pkdr_utils.config_dict['datestamp'], count))
 
         return state_topics_dict
 

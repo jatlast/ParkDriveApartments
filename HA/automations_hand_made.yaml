@@ -755,6 +755,22 @@
         topic: PkDr/Apt13/Entrance/cmnd/Doorbell/POWER
         payload: CHIME
         qos: "2"
+# Apt 14
+- id: apt14_vdb_button
+  alias: Apt14 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt14-vdb
+      entity_id: binary_sensor.apt14_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt14/Entrance/cmnd/Doorbell/POWER
+        payload: CHIME
+        qos: "2"
 # Apt 16
 - id: apt16_vdb_button
   alias: Apt16 VDB Button
@@ -771,3 +787,470 @@
         topic: PkDr/Apt16/Entrance/cmnd/Doorbell/POWER
         payload: CHIME
         qos: "2"
+
+# Relock VDB Connected Doors...
+- id: apt01_vdb_door_relock
+  alias: Apt01 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt01_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt01_vdb_door_lock
+
+- id: apt02_vdb_door_relock
+  alias: Apt02 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt02_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt02_vdb_door_lock
+
+- id: apt03_vdb_door_relock
+  alias: Apt03 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt03_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt03_vdb_door_lock
+
+- id: apt04_vdb_door_relock
+  alias: Apt04 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt04_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt04_vdb_door_lock
+
+- id: apt05_vdb_door_relock
+  alias: Apt05 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt05_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt05_vdb_door_lock
+
+- id: apt06_vdb_door_relock
+  alias: Apt06 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt06_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt06_vdb_door_lock
+
+- id: apt07_vdb_door_relock
+  alias: Apt07 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt07_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt07_vdb_door_lock
+
+- id: apt08_vdb_door_relock
+  alias: Apt08 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt08_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt08_vdb_door_lock
+
+- id: apt09_vdb_door_relock
+  alias: Apt09 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt09_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt09_vdb_door_lock
+
+- id: apt10_vdb_door_relock
+  alias: Apt10 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt10_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt10_vdb_door_lock
+
+- id: apt11_vdb_door_relock
+  alias: Apt11 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt11_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt11_vdb_door_lock
+
+- id: apt12_vdb_door_relock
+  alias: Apt12 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt12_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt12_vdb_door_lock
+
+- id: apt13_vdb_door_relock
+  alias: Apt13 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt13_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt13_vdb_door_lock
+
+- id: apt14_vdb_door_relock
+  alias: Apt14 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt14_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt14_vdb_door_lock
+
+- id: apt15_vdb_door_relock
+  alias: Apt15 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt15_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt15_vdb_door_lock
+
+- id: apt16_vdb_door_relock
+  alias: Apt16 Door Relock
+  trigger:
+    platform: state
+    entity_id: switch.apt16_vdb_door_lock
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.apt16_vdb_door_lock
+
+# Repurposed Living Room Wall Switches
+#  Toggle Automations...
+- id: apt01_livingroom_switch_toggle
+  alias: Apt01 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt01_livingroom_switch
+      entity_id: switch.apt01_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt02_livingroom_switch_toggle
+  alias: Apt02 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt02_livingroom_switch
+      entity_id: switch.apt02_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt02/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt03_livingroom_switch_toggle
+  alias: Apt03 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt03_livingroom_switch
+      entity_id: switch.apt03_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt04_livingroom_switch_toggle
+  alias: Apt04 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt04_livingroom_switch
+      entity_id: switch.apt04_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt04/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt05_livingroom_switch_toggle
+  alias: Apt05 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt05_livingroom_switch
+      entity_id: switch.apt05_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt06_livingroom_switch_toggle
+  alias: Apt06 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt06_livingroom_switch
+      entity_id: switch.apt06_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt07_livingroom_switch_toggle
+  alias: Apt07 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt07_livingroom_switch
+      entity_id: switch.apt07_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt07/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt08_livingroom_switch_toggle
+  alias: Apt08 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt08_livingroom_switch
+      entity_id: switch.apt08_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt08/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt09_livingroom_switch_toggle
+  alias: Apt09 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt09_livingroom_switch
+      entity_id: switch.apt09_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt10_livingroom_switch_toggle
+  alias: Apt10 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt10_livingroom_switch
+      entity_id: switch.apt10_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt10/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt11_livingroom_switch_toggle
+  alias: Apt11 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt11_livingroom_switch
+      entity_id: switch.apt11_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt12_livingroom_switch_toggle
+  alias: Apt12 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt12_livingroom_switch
+      entity_id: switch.apt12_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt12/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt13_livingroom_switch_toggle
+  alias: Apt13 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt13_livingroom_switch
+      entity_id: switch.apt13_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt14_livingroom_switch_toggle
+  alias: Apt14 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt14_livingroom_switch
+      entity_id: switch.apt14_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt15_livingroom_switch_toggle
+  alias: Apt15 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt15_livingroom_switch
+      entity_id: switch.apt15_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt15/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single
+
+- id: apt16_livingroom_switch_toggle
+  alias: Apt16 Living Room Switch Toggle
+  trigger:
+    - platform: device
+      type: changed_states
+      device_id: apt16_livingroom_switch
+      entity_id: switch.apt16_livingroom_switch
+      domain: switch
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
+        payload: TOGGLE
+        qos: "1"
+  mode: single

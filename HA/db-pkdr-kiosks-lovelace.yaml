@@ -1456,30 +1456,30 @@ views:
             type: horizontal-stack
         # Row 6.1 - IPTV Living Room
         # Row 6.2 - IPTV Living Room (Buttons)
-          - cards:
-              - entity: script.apt08_clean_iptv_livingroom
-                tap_action:
-                  action: toggle
-                hold_action:
-                  action: more-info
-                show_icon: true
-                show_name: true
-                name: Clean IPTV Living Room
-                icon: 'mdi:television-clean'
-                type: entity-button
-                icon_height: 170px
-              - entity: switch.apt08_livingroom_iptv
-                hold_action:
-                  action: more-info
-                icon: 'mdi:restart'
-                name: Off/On IPTV
-                show_icon: true
-                show_name: true
-                tap_action:
-                  action: toggle
-                type: entity-button
-                icon_height: 170px
-            type: horizontal-stack
+          # - cards:
+          #     - entity: script.apt11_clean_iptv_livingroom
+          #       tap_action:
+          #         action: toggle
+          #       hold_action:
+          #         action: more-info
+          #       show_icon: true
+          #       show_name: true
+          #       name: Clean IPTV Living Room
+          #       icon: 'mdi:television-clean'
+          #       type: entity-button
+          #       icon_height: 170px
+          #     - entity: switch.apt11_livingroom_iptv
+          #       hold_action:
+          #         action: more-info
+          #       icon: 'mdi:restart'
+          #       name: Off/On IPTV
+          #       show_icon: true
+          #       show_name: true
+          #       tap_action:
+          #         action: toggle
+          #       type: entity-button
+          #       icon_height: 170px
+          #   type: horizontal-stack
         # Row 7.1 - IPTV bedroom
         # Row 7.2 - IPTV Bedroom (Buttons)
         type: vertical-stack
@@ -1724,10 +1724,14 @@ views:
       - cards:
         # Row 1 - Lights
           - cards:
+            # Building Entrance Lock
+              - entity: switch.b4_entrance_lock
+                name: B4 Lock
+                type: entity-button
             # Entrance
-              - entity: light.apt14_bulb_entrance
-                name: Entrance
-                type: light
+              - entity: switch.apt14_vdb_door_lock
+                name: 14 Lock
+                type: entity-button
             # Entrance Doorbell
               - type: vertical-stack
                 cards:
@@ -1747,6 +1751,10 @@ views:
                   - type: 'custom:slider-entity-row'
                     entity: input_number.apt14_volume
                     full_row: true
+            # Entrance
+              - entity: light.apt14_bulb_entrance
+                name: Entrance
+                type: light
             # Kitchen
               - entity: light.apt14_bulb_kitchen
                 name: Kitchen
@@ -1815,10 +1823,40 @@ views:
         # Row 4 - Cameras
           - cards:
             - type: picture-glance
+              title: Apt14 Video Doorbell
+              camera_image: camera.apt14_vdb_camera
+              image: '/local/Apt14_VDB.jpg'
+              entities: []
+              aspect_ratio: 0%
+            - type: picture-glance
               camera_image: camera.b4_stairs
               image: '/local/PkDr_B4_Stairs.jpg'
               entities: []
               aspect_ratio: 0%
+            type: horizontal-stack
+        # Row 9 - Locks
+          - cards:
+            - type: entities
+              entities:
+                - binary_sensor.apt14_vdb_door_sensor
+                - switch.apt14_vdb_door_lock
+              title: Lock
+            type: horizontal-stack
+          - cards:
+            - entities:
+                - entity: input_text.apt14_vdb_line1
+                  name: Line 1
+                - entity: input_text.apt14_vdb_line2
+                  name: Line 2
+                - entity: input_text.apt14_vdb_line3
+                  name: Line 3
+                - entity: input_text.apt14_vdb_line4
+                  name: Line 4
+              type: entities
+          #   - type: iframe
+          #     url: 'https://parkdriveapartments.managebuilding.com/Resident/portal/'
+          #     title: Tenant Portal
+          #     aspect_ratio: 100%
             type: horizontal-stack
         type: vertical-stack
 

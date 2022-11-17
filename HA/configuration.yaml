@@ -831,13 +831,16 @@ input_text:
 #   The discovery topic need to follow a specific format:
 #   <discovery_prefix>/<component>/[<node_id>/]<object_id>/config
 mqtt:
-  discovery: true
-  discovery_prefix: PkDr # string (optional, default: homeassistant)
   broker: !secret mqtt_broker_ip
-  port: !secret mqtt_broker_port
   client_id: !secret mqtt_client_id
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+# ---------------------
+# Depricated 2022/11/16
+  # discovery: true
+  # discovery_prefix: PkDr # string (optional, default: homeassistant)
+  # port: !secret mqtt_broker_port
+  # username: !secret mqtt_username
+  # password: !secret mqtt_password
+# ---------------------
 
   # Tasmota WiFi Light Bulbs
   # Flashing
