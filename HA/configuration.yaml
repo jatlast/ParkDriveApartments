@@ -3,6 +3,7 @@ homeassistant:
   latitude: 42.957181
   longitude: -83.644644
   elevation: 240 # 787 feet / 240 meters
+  country: US
   unit_system: imperial
   time_zone: America/Detroit
   # Customization file (contents of file inserted wherever "!include filename" appears)
@@ -46,6 +47,8 @@ http: # https://www.home-assistant.io/integrations/http/
 
 #  Includes all of the follwoing (comment out the unwanted)
 
+schedule: # https://www.home-assistant.io/integrations/schedule/
+
 #automation: !include automations.yaml
 
 # Split configuration example from https://www.home-assistant.io/docs/configuration/splitting_configuration/
@@ -78,7 +81,7 @@ frontend:
   themes: !include_dir_merge_named themes
 # ------
 history: # Enables support for tracking state changes over time
-image:
+# image: # (20230105 - commented out because updating to Home Assistant 2023.1.0 caused the following error:  "Setup failed for image: Integration not found.")
 input_boolean:
 input_button:
 input_datetime:
@@ -111,6 +114,9 @@ timer:
 webhook:
 zeroconf: # Zero-configuration networking
 zone:
+# 20230125 - Added bluetooth support to enable Xiaomi which is supposed to communicate with Xiaomi Mijia Bluetooth Thermometers of which I just received 20 from China today ($90.01 / 20 = $4.50 each - including tax & shipping)
+#   Link to AliExpress Thermometers - https://www.aliexpress.us/item/3256801440661227.html?spm=a2g0o.order_detail.order_detail_item.3.6a8df19cWIbxiO&gatewayAdapt=glo2usa&_randl_shipto=US
+bluetooth:
 # ------------------------------------------------------------
 #          -----          Emd           -----
 # ------------------------------------------------------------
@@ -826,13 +832,22 @@ input_text:
     name: Line 4
     max: 20
 
+light:
+  - platform: group
+    name: Apt01 LivingRoom Lamps
+    unique_id: apt01_livingroom_lamps
+    entities:
+      - light.apt01_livingroom_lamp1
+      - light.apt01_livingroom_lamp2
+
+
 # MQTT is an ISO standard publish-subscribe-based messaging protocol (Wikipedia)
 # DISCOVERY TOPIC
 #   The discovery topic need to follow a specific format:
 #   <discovery_prefix>/<component>/[<node_id>/]<object_id>/config
 mqtt:
-  broker: !secret mqtt_broker_ip
-  client_id: !secret mqtt_client_id
+  # broker: !secret mqtt_broker_ip  # Depricated from configuration.yaml 2023/04/17
+  # client_id: !secret mqtt_client_id
 # ---------------------
 # Depricated 2022/11/16
   # discovery: true
@@ -842,25 +857,133 @@ mqtt:
   # password: !secret mqtt_password
 # ---------------------
 
+# -------------------------
+#   MQTT QoS Levels:
+# -------------------------
+  # 0 = At most once
+  #   - fire and forget
+  #   - no guarantee of delivery. The recipient does not acknowledge receipt of the message and the message is not stored and re-transmitted by the sender. QoS level 0 is often called "fire and forget" and provides the same guarantee as the underlying TCP protocol.
+  # 1 = At least once
+  #   - guarantees message is delivered at least once. The sender stores the message until it gets a PUBACK packet from the receiver that acknowledges receipt of the message. It is possible for a message to be sent or delivered multiple times.
+  # 2 = Exactly once
+  #   - guarantees that each message is received only once by the intended recipients. QoS 2 is the safest and slowest quality of service level. The guarantee is provided by at least two request/response flows (a four-part handshake) between the sender and the receiver.
+# -------------------------
+#   Wildcards
+  # + - matches a single level of hierarchy
+  # # - matches any number of levels of hierarchy
+# -------------------------
+
+# How to get Home Assistant to re-discover Tasmota device
+# reboot the device, or send SetOption30 again
+
+  # Tasmota Switches as Binary Sensors
+  # switches with SwitchMode 15 or 16 are configured as binary sensors
+  # Apartment Switches: (8 total)
+  #  1 Entrance
+  #  2 Kitchen
+  #  2 Hall
+  #  1 Living Room
+  #  1 Bedroom
+  #  1 Bedroom2 (Two-Bedroom Apartments Only)
+  binary_sensor:
+  # Apt 01...
+    # Kitchen Light Switches
+    - name: "Apt01 Kitchen Light1"
+      unique_id: "apt01_kitchen_light1"
+      state_topic: "PkDr/Apt01/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt01 Kitchen Light2"
+      unique_id: "apt01_kitchen_light2"
+      state_topic: "PkDr/Apt01/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switches
+    - name: "Apt01 Hall Light1"
+      unique_id: "apt01_hall_light1"
+      state_topic: "PkDr/Apt01/Hall/tele/Switch1/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt01 Hall Light0"
+      unique_id: "apt01_hall_light0"
+      state_topic: "PkDr/Apt01/Hall/tele/Switch0/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Entrance Light Switch
+    - name: "Apt01 Entrance Light1"
+      unique_id: "apt01_entrance_light1"
+      state_topic: "PkDr/Apt01/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch
+    - name: "Apt01 LivingRoom Light1"
+      unique_id: "apt01_livingRoom_light1"
+      state_topic: "PkDr/Apt01/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch
+    - name: "Apt01 Bedroom Light"
+      unique_id: "apt01_bedroom_light"
+      state_topic: "PkDr/Apt01/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 16)
+      payload_on: "ON"
+      payload_off: "OFF"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom2 Light Switch
+    - name: "Apt01 Bedroom2 Light"
+      unique_id: "apt01_bedroom2_light"
+      state_topic: "PkDr/Apt01/Bedroom2/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
   # Tasmota WiFi Light Bulbs
   # Flashing
   #   https://github.com/arendst/Tasmota/wiki/MagicHome-with-ESP8285
   #   Old Module - MagicHome (34)
   #   New Module - Arilux LC11 (38)
+  #   New Bulbs  - Vont ESP32-C3 A19 RGBCT (20230329)
+  #     https://digiblur.com/wiki/devices/bulbs/vont_color_pro_slb04/
+  #       Tasmota Template: 
+  #         {"NAME":"Vont ESP32-C3 A19 RGBCT","GPIO":[0,0,0,452,419,418,416,417,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"FLAG":0,"BASE":1,"CMND":"so92 1"}
+  #       Quick Setup via Tasmota Console Command
+  #         backlog template {"NAME":"Vont ESP32-C3 A19 RGBCT","GPIO":[0,0,0,452,419,418,416,417,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"FLAG":0,"BASE":1,"CMND":"so92 1"}; module 0; so92 1; so59 1
   # Tasmota Console Commands
   #   PowerRetain 1 - persistant power states - instead of using 'retain: true'
   #   SetOption17 1 - Enable decimal colors
   #   SetOption59 1 - Enable tele topic reporting after a light state change
   #  Check if 37 is the correct color configuration before resetting
   #   ...because the new 20200322 bulbs work with default 0 setting.
-  # SetOption 37 ...
+  # SetOption37 (https://tasmota.github.io/docs/#/SetOption37)
   #  Really Old (MagicHome (34)) - No white adjustment...
   #   SetOption37 25 - Re-mapping the RGBWcWw channels (G,R,B,Ww,Wc)
   #  Old (Arilux LC11 (38)) - Only yellowish white works...
   #   SetOption37 13 - Re-mapping the RGBWcWw channels (R,Wc,G,Ww,B)
   #  New (Arilux LC11 (38)) Both cool & yellow white works...
-  #   SetOption37 0 - Re-mapping the RGBWcWw channels (R,G,B,Wc,Ww)
-  #     https://tasmota.github.io/docs/#/SetOption37
+  #   SetOption37 0 - No Re-mapping Necessary
+  #  New Bulbs  - Vont ESP32-C3 A19 RGBCT
+  #   SetOption37 0 - No Re-mapping Necessary
 
   light:
   ### Tasmota Bulb Testing
@@ -905,200 +1028,229 @@ mqtt:
   #    white_value_scale: 100
   #    white_value_template: "{{ value_json.Channel[3] }}"
 
-  ### Apt 01
-    # Entrance
-    - name: "Apt01 Bulb Entrance"
-      unique_id: apt01_bulb_entrance
-      command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt01 Bulb LivingRoom"
-      unique_id: apt01_bulb_livingroom
-      command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0
-        - 2
-        - 3
-        - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt01 Bulb StorageRoom"
-      unique_id: apt01_bulb_Storageroom
-      command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0
-        - 2
-        - 3
-        - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt01 Bulb Hall"
-      unique_id: apt01_bulb_hall
-      command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    - name: "Apt01 Bulb Kitchen"
-      unique_id: apt01_bulb_kitchen
-      command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt01 Bulb Bedroom"
-      unique_id: apt01_bulb_bedroom
-      command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt01/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt01/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: "Apt01 Light Bedroom"
-      unique_id: apt01_light_bedroom
-      state_topic: "PkDr/Apt01/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt01/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-  #    retain: true
+# JTB 20230430 -- Removing Tasmota devices from MQTT config.
+#  Testing Apt01 before removing the rest.
+  # ### Apt 01
+  #   # Entrance
+  #   - name: "Apt01 Bulb Entrance"
+  #     unique_id: "apt01_bulb_entrance"
+  #     # device: 
+  #     #   # -- Arilux LC11 (38) --
+  #     #   # -- MagicHome (34) --
+  #     #   # -- Vont ESP32-C3 A19 RGBCT -- (Vont Model # SLB04-RCWV1)
+  #     #   configuration_url: "https://digiblur.com/wiki/devices/bulbs/vont_color_pro_slb04/"
+  #     #   connections: [["mac", "A0:76:4E:63:88:24"]]
+  #     #   manufacturer: "Vont / Tasmota"
+  #     #   model: "ESP32-C3 A19 RGBCT | SLB04-RCWV1"
+  #     #   name: "RGBCW Smart Bulbs"
+  #     #   suggested_area: "A01"
+  #     #   sw_version: "12.4.0(tasmota)"
+  #     command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/Entrance/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt01/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/Entrance/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt01/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/Entrance/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
+
+  #     # SetOption17 1 = HEX = "Color":"8700440000"
+  #     # rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     # SetOption17 0 = CSV = "Color":"244,0,122,0,0"
+  #     # "HSBColor":"240,100,100"
+  #     # rgb_value_template: "{{value_json.Color | join(',')}}"
+
+  #   # Living Room
+  #   - name: "Apt01 Bulb LivingRoom"
+  #     unique_id: apt01_bulb_livingroom
+  #     command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt01/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/LivingRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+
+  #   # Living Room
+  #   - name: "Apt01 Bulb StorageRoom"
+  #     unique_id: apt01_bulb_Storageroom
+  #     command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt01/StorageRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/StorageRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+
+  #   # Hall
+  #   - name: "Apt01 Bulb Hall"
+  #     unique_id: apt01_bulb_hall
+  #     command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt01/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt01/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt01/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+
+  #   # Kitchen
+  #   - name: "Apt01 Bulb Kitchen"
+  #     unique_id: apt01_bulb_kitchen
+  #     command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt01/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt01/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+
+  #   # Bulb Bedroom
+  #   # Tasmota Module (MagicHome (34)) - No white adjustment...
+  #   # RGB+W Light (white not working)
+  #   - name: "Apt01 Bulb Bedroom"
+  #     unique_id: "apt01_bulb_bedroom"
+  #     command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt01/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     # white_value_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+  #     white_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/White"
+  #     white_scale: 100
+  #     # white_value_template: "{{ value_json.White }}"
+  #     rgb_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt01/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt01/Bedroom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+
+  #   # Bedroom Switch
+  #   - name: "Apt01 Light Bedroom"
+  #     unique_id: apt01_light_bedroom
+  #     state_topic: "PkDr/Apt01/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt01/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
 
   ### Apt 02
     # Entrance
@@ -2822,14 +2974,44 @@ mqtt:
       qos: 1
   #    retain: false
     # Living Room
+    # Older WiFi Bulbs...
+    # - name: "Apt14 Bulb LivingRoom"
+    #   unique_id: apt14_bulb_livingroom
+    #   command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
+    #   state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    #   state_value_template: "{{value_json.POWER}}"
+    #   availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
+    #   brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
+    #   brightness_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    #   brightness_scale: 100
+    #   on_command_type: "brightness"
+    #   brightness_value_template: "{{value_json.Dimmer}}"
+    #   color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
+    #   color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+    #   color_temp_value_template: "{{value_json.CT}}"
+    #   rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
+    #   rgb_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+    #   rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    #   effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
+    #   effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/RESULT"
+    #   effect_value_template: "{{value_json.Scheme}}"
+    #   effect_list:
+    #     - 0 none
+    #     - 2 color cycle
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   payload_available: 'Online'
+    #   payload_not_available: 'Offline'
+    #   qos: 1
+    # Newer WiFi Bulbs
     - name: "Apt14 Bulb LivingRoom"
       unique_id: apt14_bulb_livingroom
       command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+      state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
       state_value_template: "{{value_json.POWER}}"
       availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+      brightness_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
       brightness_scale: 100
       on_command_type: "brightness"
       brightness_value_template: "{{value_json.Dimmer}}"
@@ -2837,14 +3019,16 @@ mqtt:
       color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
       color_temp_value_template: "{{value_json.CT}}"
       rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+      rgb_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
       rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
       effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/RESULT"
+      effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
       effect_value_template: "{{value_json.Scheme}}"
       effect_list:
-        - 0 none
-        - 2 color cycle
+        - 0
+        - 2
+        - 3
+        - 4
       payload_on: 'ON'
       payload_off: 'OFF'
       payload_available: 'Online'
@@ -2852,6 +3036,7 @@ mqtt:
       qos: 1
   #    retain: false
     # Hall
+    # Older WiFi Bulbs...
     - name: "Apt14 Bulb Hall"
       unique_id: apt14_bulb_hall
       command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/POWER"
@@ -2882,6 +3067,7 @@ mqtt:
       qos: 1
   #    retain: false
     # Kitchen
+    # Older WiFi Bulbs...
     - name: "Apt14 Bulb Kitchen"
       unique_id: apt14_bulb_kitchen
       command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/POWER"
@@ -2913,6 +3099,7 @@ mqtt:
   #    retain: false
     # Bulb Bedroom
     - name: "Apt14 Bulb Bedroom"
+    # Older WiFi Bulbs...
       unique_id: apt14_bulb_bedroom
       command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/POWER"
       state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
@@ -2956,154 +3143,218 @@ mqtt:
     - name: "Apt16 Bulb Entrance"
       unique_id: apt16_bulb_entrance
       command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
+      state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
       availability_topic: "PkDr/Apt16/Entrance/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
+      brightness_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
       color_temp_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/CT"
       color_temp_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
       rgb_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+      rgb_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
       effect_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
+      effect_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
+      effect_value_template: "{{ value_json.Scheme }}"
       effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
       qos: 1
-  #    retain: false
+
     # Living Room
     - name: "Apt16 Bulb LivingRoom"
       unique_id: apt16_bulb_livingroom
       command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
+      state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
       availability_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
+      brightness_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
       color_temp_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/CT"
       color_temp_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
       rgb_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+      rgb_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
       effect_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Scheme"
       effect_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
+      effect_value_template: "{{ value_json.Scheme }}"
       effect_list:
         - 0
+        - 1
         - 2
         - 3
         - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
       qos: 1
-  #    retain: false
+
     # Hall
     - name: "Apt16 Bulb Hall"
       unique_id: apt16_bulb_hall
       command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
+      state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
       availability_topic: "PkDr/Apt16/Hall/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
+      brightness_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
       color_temp_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/CT"
       color_temp_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
       rgb_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+      rgb_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
       effect_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
+      effect_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
+      effect_value_template: "{{ value_json.Scheme }}"
       effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
       qos: 1
-  #    retain: false
+
     # Kitchen
     - name: "Apt16 Bulb Kitchen"
       unique_id: apt16_bulb_kitchen
       command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
+      state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
       availability_topic: "PkDr/Apt16/Kitchen/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
+      brightness_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
       color_temp_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/CT"
       color_temp_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
       rgb_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+      rgb_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
       effect_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
+      effect_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
+      effect_value_template: "{{ value_json.Scheme }}"
       effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
       qos: 1
-  #    retain: false
+
     # Bulb Bedroom
     - name: "Apt16 Bulb Bedroom"
       unique_id: apt16_bulb_bedroom
       command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
+      state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
       availability_topic: "PkDr/Apt16/Bedroom/tele/Bulb/LWT"
       brightness_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
+      brightness_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
       color_temp_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/CT"
       color_temp_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
       rgb_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+      rgb_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
       effect_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
+      effect_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
+      effect_value_template: "{{ value_json.Scheme }}"
       effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
       qos: 1
-  #    retain: false
+
+      # Bulb Bedroom2
+    - name: "Apt16 Bulb Bedroom2"
+      unique_id: apt16_bulb_bedroom2
+      command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/POWER"
+      state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+      state_value_template: "{{ value_json.POWER }}"
+      availability_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/LWT"
+      brightness_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Dimmer"
+      brightness_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+      # brightness_scale: 100
+      on_command_type: "first"
+      # on_command_type: "brightness"
+      brightness_value_template: "{{ value_json.Dimmer }}"
+      color_temp_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/CT"
+      color_temp_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
+      color_temp_value_template: "{{ value_json.CT }}"
+      min_mireds: 153
+      max_mireds: 500
+      rgb_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Color2"
+      rgb_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+      effect_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Scheme"
+      effect_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
+      effect_value_template: "{{ value_json.Scheme }}"
+      effect_list:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      qos: 1
+
     # Bedroom Switch
     - name: "Apt16 Light Bedroom"
       unique_id: apt16_light_bedroom
@@ -4188,13 +4439,13 @@ mqtt:
       payload_off: 'OFF'
       retain: true
   # Apt 13 Switches...
-    - name: Apt13 Heat
-      state_topic: PkDr/Apt13/output/Heat
-      command_topic: PkDr/Apt13/output/Heat/set
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+    # - name: Apt13 Heat
+    #   state_topic: PkDr/Apt13/output/Heat
+    #   command_topic: PkDr/Apt13/output/Heat/set
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
     - name: Apt13 AC
       state_topic: PkDr/Apt13/LivingRoom/stat/AC/POWER
       command_topic: PkDr/Apt13/LivingRoom/cmnd/AC/POWER
@@ -4217,13 +4468,13 @@ mqtt:
       payload_off: 'OFF'
       retain: true
   # Apt 14 Switches...
-    - name: Apt14 Heat
-      state_topic: PkDr/Apt14/output/Heat
-      command_topic: PkDr/Apt14/output/Heat/set
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+    # - name: Apt14 Heat
+    #   state_topic: PkDr/Apt14/output/Heat
+    #   command_topic: PkDr/Apt14/output/Heat/set
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
     - name: Apt14 AC
       state_topic: PkDr/Apt14/LivingRoom/stat/AC/POWER
       command_topic: PkDr/Apt14/LivingRoom/cmnd/AC/POWER
@@ -4322,6 +4573,17 @@ mqtt:
   #   invert_logic: true
 
 switch:
+### Groups ### https://www.home-assistant.io/integrations/group/
+
+  # Apt 01 Switches...
+  # - platform: group
+  #   name: Apt01 Hall Switches
+  #   unique_id: apt01_hall_switches
+  #   entities:
+  #     - switch.apt01_hall_switch1
+  #     - switch.apt01_hall_switch0
+##############
+
   - platform: command_line
     switches:
       apt01_1_reboot_iptv:
@@ -4775,7 +5037,7 @@ climate:
     heater: switch.01_heat
     target_sensor: sensor.apt01_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4798,7 +5060,7 @@ climate:
     heater: switch.apt01_ac
     target_sensor: sensor.apt01_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4845,7 +5107,7 @@ climate:
     heater: switch.02_heat
     target_sensor: sensor.apt02_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4867,7 +5129,7 @@ climate:
     heater: switch.apt02_ac
     target_sensor: sensor.apt02_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4914,7 +5176,7 @@ climate:
     heater: switch.03_heat
     target_sensor: sensor.apt03_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4936,7 +5198,7 @@ climate:
     heater: switch.apt03_ac
     target_sensor: sensor.apt03_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -4983,7 +5245,7 @@ climate:
     heater: switch.04_heat
     target_sensor: sensor.apt04_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5005,7 +5267,7 @@ climate:
     heater: switch.apt04_ac
     target_sensor: sensor.apt04_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5053,7 +5315,7 @@ climate:
     heater: switch.05_heat
     target_sensor: sensor.apt05_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5075,7 +5337,7 @@ climate:
     heater: switch.apt05_ac
     target_sensor: sensor.apt05_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5122,7 +5384,7 @@ climate:
     heater: switch.06_heat
     target_sensor: sensor.apt06_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5144,7 +5406,7 @@ climate:
     heater: switch.apt06_ac
     target_sensor: sensor.apt06_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5191,7 +5453,7 @@ climate:
     heater: switch.07_heat
     target_sensor: sensor.apt07_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5213,7 +5475,7 @@ climate:
     heater: switch.apt07_ac
     target_sensor: sensor.apt07_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5260,7 +5522,7 @@ climate:
     heater: switch.08_heat
     target_sensor: sensor.apt08_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5282,7 +5544,7 @@ climate:
     heater: switch.apt08_ac
     target_sensor: sensor.apt08_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5329,7 +5591,7 @@ climate:
     heater: switch.09_heat
     target_sensor: sensor.apt09_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5351,7 +5613,7 @@ climate:
     heater: switch.apt09_ac
     target_sensor: sensor.apt09_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5427,7 +5689,7 @@ climate:
     heater: switch.11_heat
     target_sensor: sensor.apt11_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5449,7 +5711,7 @@ climate:
     heater: switch.apt11_ac
     target_sensor: sensor.apt11_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5497,7 +5759,7 @@ climate:
     heater: switch.12_heat
     target_sensor: sensor.apt12_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5519,7 +5781,7 @@ climate:
     heater: switch.apt12_ac
     target_sensor: sensor.apt12_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5567,7 +5829,7 @@ climate:
     heater: switch.13_heat
     target_sensor: sensor.apt13_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5589,7 +5851,7 @@ climate:
     heater: switch.apt13_ac
     target_sensor: sensor.apt13_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5634,11 +5896,11 @@ climate:
   ### Heat ###
   - platform: generic_thermostat
     name: Apt14 Heat
-    heater: switch.apt14_heat
+    heater: switch.14_heat
     target_sensor: sensor.apt14_temperature
     min_temp: 45
-    target_temp: 71
-    max_temp: 79
+    # target_temp: 71
+    max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
     precision: 0.5
@@ -5659,7 +5921,7 @@ climate:
     heater: switch.apt14_ac
     target_sensor: sensor.apt14_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5735,7 +5997,7 @@ climate:
     heater: switch.16_heat
     target_sensor: sensor.apt16_temperature
     min_temp: 45
-    target_temp: 71
+    # target_temp: 71
     max_temp: 79
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5757,7 +6019,7 @@ climate:
     heater: switch.apt16_ac
     target_sensor: sensor.apt16_temperature
     min_temp: 65
-    target_temp: 73
+    # target_temp: 73
     max_temp: 90
     cold_tolerance: 0.5
     hot_tolerance: 0.5
@@ -5892,107 +6154,132 @@ media_player:
 ##########################
 
 # Amcrest Surveillance Cameras
-amcrest:
-  # Stairs
-  - host: !secret Cam_IP_Stair_B1_LAN
-    name: B1 Stairs
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-#    port: 37777
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  - host: !secret Cam_IP_Stair_B2_LAN
-    name: B2 Stairs
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  - host: !secret Cam_IP_Stair_B3_LAN
-    name: B3 Stairs
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  - host: !secret Cam_IP_Stair_B4_LAN
-    name: B4 Stairs
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  # Utility Closets (20220219 - need to make these use LAN instead of WiFi)
-  - host: !secret Cam_IP_Utility_B1_WiFi
-    name: B1 Utility
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
-  - host: !secret Cam_IP_Utility_B2_WiFi
-    name: B2 Utility
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
-    resolution: high
-    scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
-    binary_sensors:
-      - audio_detected  # Return on when audio is detected, off when not.
-      - motion_detected # Return on when audio is detected, off when not.
-      - online          # Return on when camera is available (i.e., responding to commands), off when not.
-    sensors:
-      - sdcard # Return the SD card usage by reporting the total and used space.
-      - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+# amcrest:
+#   # Stairs
+#   - host: !secret Cam_IP_Stair_B1_LAN
+#     name: B1 Stairs
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+#   - host: !secret Cam_IP_Stair_B2_WiFi
+#     name: B2 Stairs
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+#   - host: !secret Cam_IP_Stair_B3_WiFi
+#     name: B3 Stairs
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+#   - host: !secret Cam_IP_Stair_B4_LAN
+#     name: B4 Stairs
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+#   # Utility Closets (20220219 - need to make these use LAN instead of WiFi)
+#   - host: !secret Cam_IP_Utility_B1_WiFi
+#     name: B1 Utility
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
+#   - host: !secret Cam_IP_Utility_B2_WiFi
+#     name: B2 Utility
+#     username: !secret amcrest_un
+#     password: !secret amcrest_pw
+#     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
+#     resolution: low # (high = 1080/720p, low = 640x480p)
+#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     binary_sensors:
+#       - audio_detected  # Return on when audio is detected, off when not.
+#       - motion_detected # Return on when audio is detected, off when not.
+#       - online          # Return on when camera is available (i.e., responding to commands), off when not.
+#     sensors:
+#       - sdcard # Return the SD card usage by reporting the total and used space.
+#       - ptz_preset # Return the number of PTZ preset positions configured for the given camera.
 
 ##########################
 
 ########## Non-IP Cams ##########
 # Cameras that require non-IP configuration...
 camera:
+# Amcrest NVR_Stairs_B1_Closet
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b1_stairs
+    name: B1 Stairs
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b2_stairs
+    name: B2 Stairs
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b3_stairs
+    name: B3 Stairs
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b4_stairs
+    name: B4 Stairs
+# Utility Closet Cameras
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b1_utility
+    name: B1 Utility
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b2_utility
+    name: B2 Utility
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b3_utility
+    name: B3 Utility
+  - platform: ffmpeg
+    input: !secret amcrest_nvr_b1_cam_b4_utility
+    name: B4 Utility
 # Amcrest DVR_B1-2_B2_Closet
   - platform: ffmpeg
     input: !secret amcrest_dvr_b2_cam_b1b2_court
     name: B1-2 Court
-  # - platform: ffmpeg
-  #   input: !secret amcrest_dvr_b2_cam_b1_laundry
-  #   name: B1 Laundry
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b2_cam_b1_laundry
+    name: B1 Laundry
   - platform: ffmpeg
     input: !secret amcrest_dvr_b2_cam_b2_laundry
     name: B2 Laundry
@@ -6009,24 +6296,25 @@ camera:
   - platform: ffmpeg
     input: !secret amcrest_dvr_b3_cam_b3_laundry
     name: B3 Laundry
-  # - platform: ffmpeg
-  #   input: !secret amcrest_dvr_b3_cam_b4_laundry
-  #   name: B4 Laundry
-
-  - platform: generic
-    still_image_url: !secret amcrest_dvr_b2_cam_b1_laundry_img
-    stream_source: !secret amcrest_dvr_b2_cam_b1_laundry
-    name: B1 Laundry
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    verify_ssl: false
-  - platform: generic
-    still_image_url: !secret amcrest_dvr_b3_cam_b4_laundry_img
-    stream_source: !secret amcrest_dvr_b3_cam_b4_laundry
+  - platform: ffmpeg
+    input: !secret amcrest_dvr_b3_cam_b4_laundry
     name: B4 Laundry
-    username: !secret amcrest_un
-    password: !secret amcrest_pw
-    verify_ssl: false
+
+# NOTE: "generic" camera is depricated by Home Assistant (Noted 20221209)
+  # - platform: generic
+  #   still_image_url: !secret amcrest_dvr_b2_cam_b1_laundry_img
+  #   stream_source: !secret amcrest_dvr_b2_cam_b1_laundry
+  #   name: B1 Laundry
+  #   username: !secret amcrest_un
+  #   password: !secret amcrest_pw
+  #   verify_ssl: false
+  # - platform: generic
+  #   still_image_url: !secret amcrest_dvr_b3_cam_b4_laundry_img
+  #   stream_source: !secret amcrest_dvr_b3_cam_b4_laundry
+  #   name: B4 Laundry
+  #   username: !secret amcrest_un
+  #   password: !secret amcrest_pw
+  #   verify_ssl: false
 
 #################################
 

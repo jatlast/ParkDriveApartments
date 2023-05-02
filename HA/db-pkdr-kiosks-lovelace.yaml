@@ -53,6 +53,17 @@ views:
               - entity: switch.apt01_vdb_door_lock
                 name: 01 Lock
                 type: entity-button
+              # - entity: switch.01_heat
+              #   type: button
+              #   icon: mdi:radiator
+              #   tap_action:
+              #     action: toggle
+              #   hold_action:
+              #     action: more-info
+              #   show_icon: true
+              #   show_name: true
+              #   show_state: false
+              #   name: Heat
             # Entrance Doorbell
               - type: vertical-stack
                 cards:
@@ -80,50 +91,75 @@ views:
                     entity: input_number.apt01_volume
                     full_row: true
             # Entrance
-              - entity: light.apt01_bulb_entrance
+              - entity: light.apt01_entrance_bulb
                 name: Entrance
                 type: light
             # Living Room
-              - entity: light.apt01_bulb_livingroom
+              - entity: light.apt01_livingroom_lamps
                 name: Living Room
                 type: light
             # Storage Room
-              - entity: light.apt01_bulb_storageroom
+              - entity: light.apt01_storageroom_lamp
                 name: Storage Room
                 type: light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
               - entity: climate.apt01_heat
-              #- entity: climate.apt01_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.01_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt01_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt01_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt01_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt01_humidity
                     name: ' '
@@ -146,26 +182,46 @@ views:
         # Row 3 - More Lights
           - cards:
             # Hall
-            - entity: light.apt01_bulb_hall
+            - entity: light.apt01_hall_bulb
               name: Hall
               type: light
-            # Bedroom Bulb
-            - entity: light.apt01_bulb_bedroom
+            # Bedroom Lamp
+            - entity: light.apt01_bedroom_lamp
               name: Bdr Lamp
               type: light
             # Bedroom Switch
-            - entity: light.apt01_light_bedroom
-              name: Bdr Switch
-              type: entity-button
-              icon_height: 200px
-            # office Bulb
-            - entity: light.apt01_bulb_bedroom2
-              name: Bdr2 Lamp
-              type: light
+            - type: entities
+              entities:
+                - switch.apt01_bedroom_switch
+              show_header_toggle: false
+              state_color: true
+            # Office Switch
+            - type: entities
+              entities:
+                - switch.apt01_bedroom2_switch
+              show_header_toggle: false
+              state_color: true
+            # Office Desk Light
+            - type: entities
+              title: Bench Light
+              entities:
+                - switch.apt01_office_light1
+              show_header_toggle: false
+              state_color: true
+            # Office Bench Light
+            - type: entities
+              title: Desk Light
+              entities:
+                - switch.apt01_office_light2
+              show_header_toggle: false
+              state_color: true
             # Kitchen
-            - entity: light.apt01_bulb_kitchen
-              name: Kitchen
-              type: light
+            - type: entities
+              title: Kitchen Lights
+              entities:
+                - group.apt01_kitchen_lights
+              state_color: true
+              show_header_toggle: false
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
@@ -320,9 +376,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b1_entrance_lock
-                name: Building Lock
-                type: entity-button
+              # - entity: switch.b1_entrance_lock
+              #   name: Building Lock
+              #   type: entity-button
             # Entrance
               - entity: light.apt02_bulb_entrance
                 name: Entrance
@@ -358,35 +414,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt02_heat
-              #- entity: climate.apt02_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.02_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt02_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt02_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt02_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt02_humidity
                     name: ' '
@@ -439,9 +520,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b1_entrance_lock
-                name: B1 Lock
-                type: entity-button
+              # - entity: switch.b1_entrance_lock
+              #   name: B1 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt03_vdb_door_lock
                 name: 03 Lock
@@ -489,35 +570,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt03_heat
-              #- entity: climate.apt03_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.03_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt03_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt03_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt03_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt03_humidity
                     name: ' '
@@ -614,36 +720,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt04_heat
-              #- entity: climate.apt04_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.04_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt04_humidity
-                    name: ' '
-              #- entity: climate.apt04_heat
+                    name: 'Humidity'
               - entity: climate.apt04_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt04_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt04_humidity
                     name: ' '
@@ -703,35 +833,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt05_heat
-              #- entity: climate.apt05_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.05_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt05_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt05_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt05_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt05_humidity
                     name: ' '
@@ -776,9 +931,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b2_entrance_lock
-                name: B2 Lock
-                type: entity-button
+              # - entity: switch.b2_entrance_lock
+              #   name: B2 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt06_vdb_door_lock
                 name: 06 Lock
@@ -826,35 +981,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt06_heat
-              #- entity: climate.apt06_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.06_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt06_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt06_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt06_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt06_humidity
                     name: ' '
@@ -932,35 +1112,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt07_heat
-              #- entity: climate.apt07_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.07_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt07_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt07_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt07_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt07_humidity
                     name: ' '
@@ -1006,9 +1211,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b2_entrance_lock
-                name: B2 Lock
-                type: entity-button
+              # - entity: switch.b2_entrance_lock
+              #   name: B2 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt08_vdb_door_lock
                 name: 08 Lock
@@ -1051,36 +1256,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt08_heat
-              #- entity: climate.apt08_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.08_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt08_humidity
-                    name: ' '
-              # - entity: climate.apt08_heat
+                    name: 'Humidity'
               - entity: climate.apt08_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt08_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt08_humidity
                     name: ' '
@@ -1220,36 +1449,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt09_heat
-              #- entity: climate.apt09_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.09_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt09_humidity
-                    name: ' '
-              #- entity: climate.apt09_heat
+                    name: 'Humidity'
               - entity: climate.apt09_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt09_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt09_humidity
                     name: ' '
@@ -1306,9 +1559,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b3_entrance_lock
-                name: B3 Lock
-                type: entity-button
+              # - entity: switch.b3_entrance_lock
+              #   name: B3 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt11_vdb_door_lock
                 name: 11 Lock
@@ -1351,36 +1604,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt11_heat
-              #- entity: climate.apt11_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.11_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt11_humidity
-                    name: ' '
-              # - entity: climate.apt11_heat
+                    name: 'Humidity'
               - entity: climate.apt11_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt11_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt11_humidity
                     name: ' '
@@ -1520,36 +1797,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt12_heat
-              #- entity: climate.apt12_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.12_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt12_humidity
-                    name: ' '
-              #- entity: climate.apt12_heat
+                    name: 'Humidity'
               - entity: climate.apt12_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt12_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt12_humidity
                     name: ' '
@@ -1594,13 +1895,13 @@ views:
       - cards:
           # - type: entities
           #   entities:
-          #     - input_number.apt01_kiosk
+          #     - input_number.apt13_kiosk
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b4_entrance_lock
-                name: B4 Lock
-                type: entity-button
+              # - entity: switch.b4_entrance_lock
+              #   name: B4 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt13_vdb_door_lock
                 name: 13 Lock
@@ -1636,35 +1937,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt13_heat
-              #- entity: climate.apt13_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.13_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt13_humidity
-                    name: ' '
+                    name: 'Humidity'
               - entity: climate.apt13_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt13_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt13_humidity
                     name: ' '
@@ -1725,9 +2051,9 @@ views:
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b4_entrance_lock
-                name: B4 Lock
-                type: entity-button
+              # - entity: switch.b4_entrance_lock
+              #   name: B4 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt14_vdb_door_lock
                 name: 14 Lock
@@ -1767,36 +2093,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt14_heat
-              #- entity: climate.apt14_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.14_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt14_humidity
-                    name: ' '
-              #- entity: climate.apt14_heat
+                    name: 'Humidity'
               - entity: climate.apt14_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt14_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt14_humidity
                     name: ' '
@@ -1890,13 +2240,13 @@ views:
       - cards:
           # - type: entities
           #   entities:
-          #     - input_number.apt01_kiosk
+          #     - input_number.apt16_kiosk
         # Row 1 - Lights
           - cards:
             # Building Entrance Lock
-              - entity: switch.b4_entrance_lock
-                name: B4 Lock
-                type: entity-button
+              # - entity: switch.b4_entrance_lock
+              #   name: B4 Lock
+              #   type: entity-button
             # Entrance
               - entity: switch.apt16_vdb_door_lock
                 name: 16 Lock
@@ -1939,36 +2289,60 @@ views:
         # Row 2 - Climate
           - cards:
               - entity: climate.apt16_heat
-              #- entity: climate.apt16_ac
+                type: custom:simple-thermostat
                 name: Heat
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.16_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
                 label:
-                  temperature: ' '
-                  state: ' '
+                  temperature: 'Current'
+                  state: 'State'
                 control:
                   preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
                     away: true
-                    none:
-                      name: Home
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
                 sensors:
                   - entity: sensor.apt16_humidity
-                    name: ' '
-              # - entity: climate.apt16_heat
+                    name: 'Humidity'
               - entity: climate.apt16_ac
+                type: custom:simple-thermostat
                 name: AC
-                type: 'custom:simple-thermostat'
                 decimals: 1
                 step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt16_ac
+                    name: ' '
                 label:
                   temperature: ' '
                   state: ' '
                 control:
                   preset:
-                    away: true
+                    _hide_when_off: true
                     none:
-                      name: Home
+                      name: false
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                  # hvac: true
                 sensors:
                   - entity: sensor.apt16_humidity
                     name: ' '

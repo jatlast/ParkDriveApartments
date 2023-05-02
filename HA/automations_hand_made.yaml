@@ -1,3 +1,11 @@
+
+# automation modes: (https://www.home-assistant.io/docs/automation/modes/)
+# JTB - mode is a root level switch for automations
+#  - single:      (default) Run the automation once when triggered.
+#  - restart:     If the automation is already running, it will be restarted.
+#  - queued:      If the automation is already running, the action will be queued until the automation is finished.
+#  - parallel:    If the automation is already running, the action will be run in parallel with the already running automation.
+
 - id: pkdr_lights_on
   alias: Building Lights On
   description: Turn ON all the common area lights before sunset
@@ -16,8 +24,7 @@
       - switch.b2_lights
       - switch.b3_lights
       - switch.b4_lights
-  mode: single
-
+  
 - id: pkdr_lights_off
   alias: Building Lights Off
   description: Turn OFF all the common area lights before sunset
@@ -36,7 +43,7 @@
       - switch.b2_lights
       - switch.b3_lights
       - switch.b4_lights
-  mode: single
+  
 
 - id: pkdr_lights_on_revert
   alias: Building Lights Back On
@@ -58,7 +65,7 @@
       - switch.b2_lights
       - switch.b3_lights
       - switch.b4_lights
-  mode: single
+  
 
 - id: pkdr_lights_off_revert
   alias: Building Lights Back Off
@@ -80,7 +87,7 @@
       - switch.b2_lights
       - switch.b3_lights
       - switch.b4_lights
-  mode: single
+  
 
 - id: apt01_volume_changed
   alias: Apt01 Volume Changed
@@ -92,6 +99,7 @@
     data:
       topic: PkDr/Apt01/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt01_volume') | int }}"
 
 - id: apt02_volume_changed
@@ -104,6 +112,7 @@
     data:
       topic: PkDr/Apt02/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 1
       payload: "{{ states('input_number.apt02_volume') | int }}"
 
 - id: apt03_volume_changed
@@ -116,6 +125,7 @@
     data:
       topic: PkDr/Apt03/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt03_volume') | int }}"
 
 - id: apt04_volume_changed
@@ -128,6 +138,7 @@
     data:
       topic: PkDr/Apt04/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt04_volume') | int }}"
 
 - id: apt05_volume_changed
@@ -140,6 +151,7 @@
     data:
       topic: PkDr/Apt05/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt05_volume') | int }}"
 
 - id: apt06_volume_changed
@@ -152,6 +164,7 @@
     data:
       topic: PkDr/Apt06/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt06_volume') | int }}"
 
 - id: apt07_volume_changed
@@ -164,6 +177,7 @@
     data:
       topic: PkDr/Apt07/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt07_volume') | int }}"
 
 - id: apt08_volume_changed
@@ -176,6 +190,7 @@
     data:
       topic: PkDr/Apt08/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt08_volume') | int }}"
 
 - id: apt09_volume_changed
@@ -188,6 +203,7 @@
     data:
       topic: PkDr/Apt09/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt09_volume') | int }}"
 
 - id: apt10_volume_changed
@@ -200,6 +216,7 @@
     data:
       topic: PkDr/Apt10/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt10_volume') | int }}"
 
 - id: apt11_volume_changed
@@ -212,6 +229,7 @@
     data:
       topic: PkDr/Apt11/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt11_volume') | int }}"
 
 - id: apt12_volume_changed
@@ -224,6 +242,7 @@
     data:
       topic: PkDr/Apt12/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt12_volume') | int }}"
 
 - id: apt13_volume_changed
@@ -236,6 +255,7 @@
     data:
       topic: PkDr/Apt13/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt13_volume') | int }}"
 
 - id: apt14_volume_changed
@@ -248,6 +268,7 @@
     data:
       topic: PkDr/Apt14/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt14_volume') | int }}"
 
 - id: apt15_volume_changed
@@ -260,6 +281,7 @@
     data:
       topic: PkDr/Apt15/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt15_volume') | int }}"
 
 - id: apt16_volume_changed
@@ -272,6 +294,7 @@
     data:
       topic: PkDr/Apt16/Doorbell/stat/Volume/setVolume
       retain: true
+      qos: 2
       payload: "{{ states('input_number.apt16_volume') | int }}"
 
 - id: apt01_no_ac_with_heat
@@ -658,21 +681,23 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt01/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  - service: notify.mobile_app_pixel_4_xl
+    data:
+      title: Knock Knock
+      message: Someone is at the door.
       data:
-        topic: PkDr/Apt01/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
-    - service: notify.mobile_app_pixel_4_xl
-      data:
-        title: Knock Knock
-        message: Someone is at the door.
-        data:
-          attachment:
-            content-type: jpeg
-          push:
-            category: camera
-          entity_id: camera.apt01_vdb_camera
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera
+        entity_id: camera.apt01_vdb_camera
+  
 
 # Apt 03
 - id: apt03_vdb_button
@@ -685,11 +710,13 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt03/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt03/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
 
 # Apt 06
 - id: apt06_vdb_button
@@ -702,11 +729,14 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt06/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt06/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
+
 # Apt 08
 - id: apt08_vdb_button
   alias: Apt08 VDB Button
@@ -718,11 +748,14 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt08/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt08/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
+
 # Apt 11
 - id: apt11_vdb_button
   alias: Apt11 VDB Button
@@ -734,11 +767,14 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt11/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt11/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
+
 # Apt 13
 - id: apt13_vdb_button
   alias: Apt13 VDB Button
@@ -750,11 +786,14 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt13/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt13/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
+
 # Apt 14
 - id: apt14_vdb_button
   alias: Apt14 VDB Button
@@ -766,11 +805,14 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt14/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt14/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
+
 # Apt 16
 - id: apt16_vdb_button
   alias: Apt16 VDB Button
@@ -782,11 +824,13 @@
       domain: binary_sensor
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt16/Entrance/cmnd/Doorbell/POWER
-        payload: CHIME
-        qos: "2"
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt16/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
 
 # Relock VDB Connected Doors...
 - id: apt01_vdb_door_relock
@@ -981,24 +1025,483 @@
   - service: switch.turn_off
     entity_id: switch.apt16_vdb_door_lock
 
-# Repurposed Living Room Wall Switches
-#  Toggle Automations...
-- id: apt01_livingroom_switch_toggle
-  alias: Apt01 Living Room Switch Toggle
+# Tasmota Switches as Binary Sensors
+# Apartment Switches: (7 or 8)
+#  1 Entrance
+#  2 Kitchen
+#  1 Living Room
+#  2 Hall
+#  1 Bedroom
+#  1 Bedroom2 (Two-Bedroom Apartments Only)
+
+##########
+# Apt01 
+##########
+
+# Entrance
+- id: apt01_entrance_switch_toggled_on
+  alias: Apt01 Entrance Switch Toggled On
+  description: Switch Toggled On
   trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt01_livingroom_switch
-      entity_id: switch.apt01_livingroom_switch
-      domain: switch
-  condition: []
+    - platform: state
+      entity_id: binary_sensor.apt01_entrance_light
+      to: "on"
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt01_entrance_bulb
+
+- id: apt01_entrance_switch_toggled_off
+  alias: Apt01 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt01_entrance_bulb
+
+# Kitchen
+- id: apt01_kitchen_switch_toggled_on
+  alias: Apt01 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt01_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: group.apt01_kitchen_lights
+
+- id: apt01_kitchen_switch_toggled_off
+  alias: Apt01 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt01_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.apt01_kitchen_lights
+
+# Living Room
+- id: apt01_livingroom_switch_toggled_on
+  alias: Apt01 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt01_livingroom_lamps
+
+- id: apt01_livingroom_switch_toggled_off
+  alias: Apt01 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt01_livingroom_lamps
+
+# Hall
+- id: apt01_hall_switch_toggled_on
+  alias: Apt01 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt01_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt01_hall_bulb
+
+- id: apt01_hall_switch_toggled_off
+  alias: Apt01 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt01_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt01_hall_bulb
+
+# Bedroom
+- id: apt01_bedroom_switch_toggled_on
+  alias: Apt01 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt01_bedroom_switch
+
+- id: apt01_bedroom_switch_toggled_off
+  alias: Apt01 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt01_bedroom_switch
+
+# Bedroom2
+- id: apt01_bedroom2_switch_toggled_on
+  alias: Apt01 Bedroom2 Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_bedroom2_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt01_bedroom2_switch
+
+- id: apt01_bedroom2_switch_toggled_off
+  alias: Apt01 Bedroom2 Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_bedroom2_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt01_bedroom2_switch
+
+
+# - id: apt01_entrance_switch_on
+#   alias: Apt01 Entrance Switch On
+#   description: Apt01 Entrance Switch On
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Entrance/tele/Switch/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "ON"
+#         topic: PkDr/Apt01/Entrance/cmnd/Bulb/POWER
+  
+# - id: apt01_entrance_switch_off
+#   alias: Apt01 Entrance Switch Off
+#   description: Apt01 Entrance Switch Off
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Entrance/tele/Switch/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "OFF"
+#         topic: PkDr/Apt01/Entrance/cmnd/Bulb/POWER
+  
+
+# - id: apt01_hall_switch_on_catchall
+#   alias: Apt01 Hall Switch On
+#   description: Apt01 Hall Switch 1 or 0 On
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Hall/tele/Switch1/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Hall/tele/Switch0/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "ON"
+#         topic: PkDr/Apt01/Hall/cmnd/Bulb/POWER
+  
+
+# - id: apt01_hall_switch_off_catchall
+#   alias: Apt01 Hall Switch Off
+#   description: Apt01 Hall Switch 1 or 2 Off
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Hall/tele/Switch1/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Hall/tele/Switch0/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "OFF"
+#         topic: PkDr/Apt01/Hall/cmnd/Bulb/POWER
+  
+
+# When SwitchMode = 15 switch payloads are inverted.  Thus, "ON" catches "OFF" and sends "ON"
+# - id: apt01_livingroom_switch_on
+#   alias: Apt01 LivingRoom Switch On
+#   description: Apt01 LivingRoom Switch On
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/LivingRoom/tele/Switch/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "ON"
+#         topic: PkDr/Apt01/LivingRoom/cmnd/Lamp1/POWER
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "ON"
+#         topic: PkDr/Apt01/LivingRoom/cmnd/Lamp2/POWER
+  
+
+# - id: apt01_livingroom_switch_off
+#   alias: Apt01 LivingRoom Switch Off
+#   description: Apt01 LivingRoom Switch Off
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/LivingRoom/tele/Switch/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "OFF"
+#         topic: PkDr/Apt01/LivingRoom/cmnd/Lamp1/POWER
+#     - service: mqtt.publish
+#       data:
+#         qos: 1
+#         retain: true
+#         payload: "OFF"
+#         topic: PkDr/Apt01/LivingRoom/cmnd/Lamp2/POWER
+
+
+# - id: apt01_kitchen_switch_catch_ons
+#   alias: Apt01 Kitchen Switch Catch Ons
+#   description: Apt01 Kitchen Switch 1 or 0 On
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch1/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR
+#       payload: "OFF"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     service: homeassistant.turn_on
+#     data: {}
+#     target:
+#       entity_id: group.apt01_kitchen_lights
+#   # action:
+#   #   - service: mqtt.publish
+#   #     data:
+#   #       qos: 1
+#   #       retain: true
+#   #       payload: "ON"
+#   #       topic: PkDr/Apt01/Kitchen/cmnd/Switch1/POWER
+#   #   - service: mqtt.publish
+#   #     data:
+#   #       qos: 1
+#   #       retain: true
+#   #       payload: "ON"
+#   #       topic: PkDr/Apt01/Kitchen/cmnd/Switch2/POWER
+  
+
+# - id: apt01_kitchen_switch_catch_offs
+#   alias: Apt01 Kitchen Switch Catch Offs
+#   description: Apt01 Kitchen Switch 1 or 0 Offs
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch1/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR
+#       payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     service: homeassistant.turn_off
+#     data: {}
+#     target:
+#       entity_id: group.apt01_kitchen_lights
+#   # action:
+#   #   - service: mqtt.publish
+#   #     data:
+#   #       qos: 1
+#   #       retain: true
+#   #       payload: "OFF"
+#   #       topic: PkDr/Apt01/Kitchen/cmnd/Switch1/POWER
+#   #   - service: mqtt.publish
+#   #     data:
+#   #       qos: 1
+#   #       retain: true
+#   #       payload: "OFF"
+#   #       topic: PkDr/Apt01/Kitchen/cmnd/Switch2/POWER
+  
+
+# - id: apt01_kitchen_switches_catchall
+#   alias: Apt01 Kitchen Switches Catchall
+#   description: Apt01 Kitchen Switch 1 or 2 On or Off
+#   trigger:
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch1/SENSOR
+#       # payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#     - platform: mqtt
+#       topic: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR
+#       # payload: "ON"
+#       value_template: "{{ value_json.Switch1 }}"
+#     # - platform: mqtt
+#     #   topic: PkDr/Apt01/Kitchen/tele/Switch1/SENSOR
+#     #   payload: "OFF"
+#     #   value_template: "{{ value_json.Switch1 }}"
+#     # - platform: mqtt
+#     #   topic: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR
+#     #   payload: "OFF"
+#     #   value_template: "{{ value_json.Switch1 }}"
+#   condition: []
+#   action:
+#     choose:
+#       - conditions:
+#           - condition: template
+#             value_template: "{{ trigger.payload.value_json.Switch1 }}"
+#         sequence:
+#           - service: mqtt.publish
+#             data:
+#               qos: 1
+#               retain: true
+#               payload: "ON"
+#               topic: PkDr/Apt01/Kitchen/cmnd/Switch1/POWER
+#           - service: mqtt.publish
+#             data:
+#               qos: 1
+#               retain: true
+#               payload: "ON"
+#               topic: PkDr/Apt01/Kitchen/cmnd/Switch2/POWER
+#     default:
+#       - choose:
+#           - conditions:
+#               - condition: template
+#                 value_template: "{{ trigger.payload.value_json.Switch1 == 'OFF' }}"
+#             sequence:
+#               - service: mqtt.publish
+#                 data:
+#                   qos: 1
+#                   retain: true
+#                   payload: "OFF"
+#                   topic: PkDr/Apt01/Kitchen/cmnd/Switch1/POWER
+#               - service: mqtt.publish
+#                 data:
+#                   qos: 1
+#                   retain: true
+#                   payload: "OFF"
+#                   topic: PkDr/Apt01/Kitchen/cmnd/Switch2/POWER
+#         default:
+#           - service: mqtt.publish
+#             data:
+#               qos: 1
+#               retain: true
+#               payload: 
+#                 - Time: "2000-01-01T00:00:00"
+#                 - Switch1: "OFF"
+#               # topic: PkDr/Apt01/Kitchen/cmnd/Switch1/POWER
+#               topic: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR
+#   
+
+# 13:30:36.332 MQT: PkDr/Apt01/Kitchen/tele/Switch2/SENSOR = {"Time":"2023-04-30T13:30:36","Switch1":"ON"}
+# {## Imitate available variables: ##}
+# {% {
+#   "Time": "2023-04-30T13:30:36",
+#   "Switch1": "OFF"
+# } %}
+
+# Repurposed Living Room Wall Switches
+
+#  Toggle Automations...
+# - id: apt01_livingroom_switch_toggle
+#   alias: Apt01 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt01_livingroom_switch
+#       entity_id: switch.apt01_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt01/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       qos: 1
+#   
 
 - id: apt02_livingroom_switch_toggle
   alias: Apt02 Living Room Switch Toggle
@@ -1010,12 +1513,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt02/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt02/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt03_livingroom_switch_toggle
   alias: Apt03 Living Room Switch Toggle
@@ -1027,12 +1531,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt04_livingroom_switch_toggle
   alias: Apt04 Living Room Switch Toggle
@@ -1044,12 +1549,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt04/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt04/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt05_livingroom_switch_toggle
   alias: Apt05 Living Room Switch Toggle
@@ -1061,12 +1567,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt06_livingroom_switch_toggle
   alias: Apt06 Living Room Switch Toggle
@@ -1078,12 +1585,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt07_livingroom_switch_toggle
   alias: Apt07 Living Room Switch Toggle
@@ -1095,12 +1603,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt07/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt07/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt08_livingroom_switch_toggle
   alias: Apt08 Living Room Switch Toggle
@@ -1112,12 +1621,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt08/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt08/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt09_livingroom_switch_toggle
   alias: Apt09 Living Room Switch Toggle
@@ -1129,12 +1639,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt10_livingroom_switch_toggle
   alias: Apt10 Living Room Switch Toggle
@@ -1146,12 +1657,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt10/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt10/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt11_livingroom_switch_toggle
   alias: Apt11 Living Room Switch Toggle
@@ -1163,12 +1675,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt12_livingroom_switch_toggle
   alias: Apt12 Living Room Switch Toggle
@@ -1180,12 +1693,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt12/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt12/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt13_livingroom_switch_toggle
   alias: Apt13 Living Room Switch Toggle
@@ -1197,12 +1711,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt14_livingroom_switch_toggle
   alias: Apt14 Living Room Switch Toggle
@@ -1214,12 +1729,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt15_livingroom_switch_toggle
   alias: Apt15 Living Room Switch Toggle
@@ -1231,12 +1747,13 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt15/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt15/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
 
 - id: apt16_livingroom_switch_toggle
   alias: Apt16 Living Room Switch Toggle
@@ -1248,9 +1765,63 @@
       domain: switch
   condition: []
   action:
-    - service: mqtt.publish
-      data:
-        topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
-        payload: TOGGLE
-        qos: "1"
-  mode: single
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
+      payload: TOGGLE
+      retain: true
+      qos: 1
+  
+- id: b1_lights_on_pir_vdb_01
+  alias: B1 Lights On PIR VDB 01
+  description: B1 lights turned on when VDB 01 motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt01_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt03_vdb_pir
+      to: 'on'
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.b1_lights
+
+# - id: b1_lights_off_pir_vdb_01
+#   alias: B1 Lights Off PIR VDB 01
+#   description: B1 lights turned off when VDB 01 motion NOT detected 5 min
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.apt01_vdb_pir
+#     to: 'off'
+#     for:
+#       minutes: 5
+#   action:
+#     service: homeassistant.turn_off
+#     data: {}
+#     target:
+#       entity_id: switch.b1_lights
+
+
+
+#   use_blueprint:
+#     path: homeassistant/motion_light.yaml
+#     input:
+#       motion_entity: binary_sensor.apt01_vdb_pir
+#       light_target:
+#         entity_id:
+#         - switch.b1_lights
+#       no_motion_wait: 300
+
+# - id: b1_lights_on_pir_vdb_03
+#   alias: B1 Lights On PIR VDB 03
+#   description: B1 lights turned on after VDB 03 motion detected
+#   use_blueprint:
+#     path: homeassistant/motion_light.yaml
+#     input:
+#       motion_entity: binary_sensor.apt03_vdb_pir
+#       light_target:
+#         entity_id:
+#         - switch.b1_lights
+#       no_motion_wait: 300

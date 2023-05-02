@@ -84,15 +84,22 @@ building_lights:
     - switch.b4_lights
 
 ####  Apt 01 - g  #####
-apt_01_switches:
-  name: Apt 1 Switches
+
+# apt_01_switches:
+#   name: Apt 1 Switches
+#   entities:
+#     - switch.apt01_bedroom_light
+#     - switch.apt01_entrance_light
+#     - switch.apt01_outlet_1
+#     - switch.apt01_outlet_2
+#     - switch.apt01_heat
+#     - switch.apt01_ac
+
+apt01_kitchen_lights:
+  name: Apt01 Kitchen Lights
   entities:
-    - switch.apt01_bedroom_light
-    - switch.apt01_entrance_light
-    - switch.apt01_outlet_1
-    - switch.apt01_outlet_2
-    - switch.apt01_heat
-    - switch.apt01_ac
+    - switch.apt01_kitchen_switch1
+    - switch.apt01_kitchen_switch2
 
 ####  Apt 02 - g  #####
 apt_02_switches:
