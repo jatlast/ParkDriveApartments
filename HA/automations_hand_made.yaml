@@ -2901,27 +2901,9 @@
       retain: true
       qos: 1
   
-
-# - id: apt16_livingroom_switch_toggle
-#   alias: Apt16 Living Room Switch Toggle
-#   trigger:
-#     - platform: device
-#       type: changed_states
-#       device_id: apt16_livingroom_switch
-#       entity_id: switch.apt16_livingroom_switch
-#       domain: switch
-#   condition: []
-#   action:
-#   - service: mqtt.publish
-#     data:
-#       topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
-#       payload: TOGGLE
-#       retain: true
-#       qos: 1
-  
-- id: b1_lights_on_pir_vdb_01
-  alias: B1 Lights On PIR VDB 01
-  description: B1 lights turned on when VDB 01 motion detected
+- id: b1_lights_on_motion
+  alias: B1 Lights On Motion
+  description: B1 lights turned on when motion detected
   trigger:
     - platform: state
       entity_id: binary_sensor.apt01_vdb_pir
@@ -2935,40 +2917,51 @@
     target:
       entity_id: switch.b1_lights
 
-# - id: b1_lights_off_pir_vdb_01
-#   alias: B1 Lights Off PIR VDB 01
-#   description: B1 lights turned off when VDB 01 motion NOT detected 5 min
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.apt01_vdb_pir
-#     to: 'off'
-#     for:
-#       minutes: 5
-#   action:
-#     service: homeassistant.turn_off
-#     data: {}
-#     target:
-#       entity_id: switch.b1_lights
+- id: b2_lights_on_motion
+  alias: B2 Lights On Motion
+  description: B2 lights turned on when motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt08_vdb_pir
+      to: 'on'
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.b2_lights
 
+- id: b3_lights_on_motion
+  alias: B3 Lights On Motion
+  description: B3 lights turned on when motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_vdb_pir
+      to: 'on'
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.b3_lights
 
+- id: b4_lights_on_motion
+  alias: B4 Lights On Motion
+  description: B4 lights turned on when motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt14_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt16_vdb_pir
+      to: 'on'
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.b4_lights
 
-#   use_blueprint:
-#     path: homeassistant/motion_light.yaml
-#     input:
-#       motion_entity: binary_sensor.apt01_vdb_pir
-#       light_target:
-#         entity_id:
-#         - switch.b1_lights
-#       no_motion_wait: 300
-
-# - id: b1_lights_on_pir_vdb_03
-#   alias: B1 Lights On PIR VDB 03
-#   description: B1 lights turned on after VDB 03 motion detected
-#   use_blueprint:
-#     path: homeassistant/motion_light.yaml
-#     input:
-#       motion_entity: binary_sensor.apt03_vdb_pir
-#       light_target:
-#         entity_id:
-#         - switch.b1_lights
-#       no_motion_wait: 300
