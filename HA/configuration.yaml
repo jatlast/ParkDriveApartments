@@ -126,7 +126,7 @@ discovery: # discover and automatically configure zeroconf/mDNS and UPnP devices
   #   - yamaha
   #   - logitech_mediaserver
 
-group: !include groups.yaml
+# group: !include groups.yaml
 
 # Enable advanced notifications like actionable notifications and categories
 ios:
@@ -833,12 +833,119 @@ input_text:
     max: 20
 
 light:
+# LivingRoom Lamp Groups
+  # Apt01 
   - platform: group
     name: Apt01 LivingRoom Lamps
     unique_id: apt01_livingroom_lamps
     entities:
       - light.apt01_livingroom_lamp1
       - light.apt01_livingroom_lamp2
+  # Apt02 
+  - platform: group
+    name: Apt02 LivingRoom Lamps
+    unique_id: apt02_livingroom_lamps
+    entities:
+      - light.apt02_livingroom_lamp1
+      - light.apt02_livingroom_lamp2
+  # Apt03 
+  - platform: group
+    name: Apt03 LivingRoom Lamps
+    unique_id: apt03_livingroom_lamps
+    entities:
+      - light.apt03_livingroom_lamp1
+      - light.apt03_livingroom_lamp2
+  # Apt04 
+  - platform: group
+    name: Apt04 LivingRoom Lamps
+    unique_id: apt04_livingroom_lamps
+    entities:
+      - light.apt04_livingroom_lamp1
+      - light.apt04_livingroom_lamp2
+  # Apt05 
+  - platform: group
+    name: Apt05 LivingRoom Lamps
+    unique_id: apt05_livingroom_lamps
+    entities:
+      - light.apt05_livingroom_lamp1
+      - light.apt05_livingroom_lamp2
+  # Apt06 
+  - platform: group
+    name: Apt06 LivingRoom Lamps
+    unique_id: apt06_livingroom_lamps
+    entities:
+      - light.apt06_livingroom_lamp1
+      - light.apt06_livingroom_lamp2
+  # Apt07 
+  - platform: group
+    name: Apt07 LivingRoom Lamps
+    unique_id: apt07_livingroom_lamps
+    entities:
+      - light.apt07_livingroom_lamp1
+      - light.apt07_livingroom_lamp2
+  # Apt08 
+  - platform: group
+    name: Apt08 LivingRoom Lamps
+    unique_id: apt08_livingroom_lamps
+    entities:
+      - light.apt08_livingroom_lamp1
+      - light.apt08_livingroom_lamp2
+  # Apt09 
+  - platform: group
+    name: Apt09 LivingRoom Lamps
+    unique_id: apt09_livingroom_lamps
+    entities:
+      - light.apt09_livingroom_lamp1
+      - light.apt09_livingroom_lamp2
+  # Apt10 
+  - platform: group
+    name: Apt10 LivingRoom Lamps
+    unique_id: apt10_livingroom_lamps
+    entities:
+      - light.apt10_livingroom_lamp1
+      - light.apt10_livingroom_lamp2
+  # Apt11 
+  - platform: group
+    name: Apt11 LivingRoom Lamps
+    unique_id: apt11_livingroom_lamps
+    entities:
+      - light.apt11_livingroom_lamp1
+      - light.apt11_livingroom_lamp2
+  # Apt12 
+  - platform: group
+    name: Apt12 LivingRoom Lamps
+    unique_id: apt12_livingroom_lamps
+    entities:
+      - light.apt12_livingroom_lamp1
+      - light.apt12_livingroom_lamp2
+  # Apt13 
+  - platform: group
+    name: Apt13 LivingRoom Lamps
+    unique_id: apt13_livingroom_lamps
+    entities:
+      - light.apt13_livingroom_lamp1
+      - light.apt13_livingroom_lamp2
+  # Apt14 
+  - platform: group
+    name: Apt14 LivingRoom Lamps
+    unique_id: apt14_livingroom_lamps
+    entities:
+      - light.apt14_livingroom_lamp1
+      - light.apt14_livingroom_lamp2
+  # Apt15 
+  - platform: group
+    name: Apt15 LivingRoom Lamps
+    unique_id: apt15_livingroom_lamps
+    entities:
+      - light.apt15_livingroom_lamp1
+      - light.apt15_livingroom_lamp2
+  # Apt16 
+  - platform: group
+    name: Apt16 LivingRoom Lamps
+    unique_id: apt16_livingroom_lamps
+    entities:
+      - light.apt16_livingroom_lamp1
+      - light.apt16_livingroom_lamp2
 
 
 # MQTT is an ISO standard publish-subscribe-based messaging protocol (Wikipedia)
@@ -873,8 +980,32 @@ mqtt:
   # # - matches any number of levels of hierarchy
 # -------------------------
 
-# How to get Home Assistant to re-discover Tasmota device
-# reboot the device, or send SetOption30 again
+# Tasmota Upgrade Path
+# Upgrade Flow~
+# v1.0.11 -> v3.9.22 -> v4.2.0 
+#-> v5.14.0
+# https://github.com/arendst/Tasmota/releases/download/v5.14.0/sonoff-classic.bin
+#-> v6.7.1 
+# http://ota.tasmota.com/tasmota/release-6.7.1/sonoff.bin
+#-> v7.2.0 
+# http://ota.tasmota.com/tasmota/release-7.2.0/tasmota-lite.bin
+#-> v8.5.1 
+# 1 - http://ota.tasmota.com/tasmota/release-8.5.1/tasmota-lite.bin
+#-> v9.1
+# 2 - http://ota.tasmota.com/tasmota/release-9.1.0/tasmota-lite.bin.gz
+#-> Current release
+# 3 - http://ota.tasmota.com/tasmota/release/tasmota.bin.gz
+
+# Tasmota Recovery Access Point
+# Default IP:       192.168.4.1
+# default password: configme
+
+# Tasmota Sonoff Mini Template
+#  8.1.0
+#   {"NAME":"Sonoff Mini","GPIO":[17,0,0,0,  9,0,0,0, 21, 56,0,0,255],"FLAG":0,"BASE":1}
+#  12.x.x
+#   {"NAME":"Sonoff Mini","GPIO":[32,0,0,0,160,0,0,0,224,320,0,0,  1,0],"FLAG":0,"BASE":1}
+
 
   # Tasmota Switches as Binary Sensors
   # switches with SwitchMode 15 or 16 are configured as binary sensors
@@ -886,8 +1017,106 @@ mqtt:
   #  1 Bedroom
   #  1 Bedroom2 (Two-Bedroom Apartments Only)
   binary_sensor:
+  # Apartments with switches configured as binary sensors...
+  # 01 - Yes
+  #  1 Entrance     | 10.16.244.12
+  #  2 Kitchen      | 10.16.244.25/1 | 10.16.244.29/2
+  #  2 Hall         | 10.16.244.18/1 | 10.16.244.23/0
+  #  1 Living Room  | 10.16.244.27
+  #  1 Bedroom (16) | 10.16.244.19
+  #  1 Bedroom2     | 10.16.244.24
+  # 02 - No
+
+  # 03 - Yes
+  #  1 Entrance     | 10.16.244.52
+  #  2 Kitchen      | 10.16.244.65/1 | 10.16.244.69/2
+  #  1 Hall         | 10.16.244.58
+  #  1 Living Room  | 10.16.244.67
+  #  1 Bedroom      | 10.16.244.59 (lost connection)
+
+  # 04 - No
+
+  # 05 - No
+
+  # 06 - Not yet
+  #  1 Entrance     | ##-##-##-##
+  #  2 Kitchen      | ##-##-##-##/1 | ##-##-##-##/2
+  #  2 Hall         | ##-##-##-##/1 | ##-##-##-##/0
+  #  1 Living Room  | ##-##-##-##
+  #  1 Bedroom      | ##-##-##-##
+
+  # 07 - No
+
+  # 08 - Yes
+
+# Apt08_Entrance_Bulb 10.16.244.153
+# Apt08_Hall_Bulb     10.16.244.157
+# Apt08_Bedroom2_Light  10.16.244.164
+
+  #  1 Entrance     To-Do: | 10.16.244.152
+  #  2 Kitchen      To-Do: | 10.16.244.165/1 | 10.16.244.169/2
+  #  2 Hall         To-Do: | 10.16.244.158/1 | 10.16.244.163/0
+  #  1 Living Room  To-Do: | 10.16.244.167
+  #  1 Bedroom      To-Do: | 10.16.244.159
+  #  1 Bedroom2     To-Do: | 10.16.244.164
+  
+  # 09 - No
+
+  # 10 - Not yet
+  #  1 Entrance     | ##-##-##-##
+  #  2 Kitchen      | ##-##-##-##/1 | ##-##-##-##/2
+  #  2 Hall         | ##-##-##-##/1 | ##-##-##-##/0
+  #  1 Living Room  | ##-##-##-##
+  #  1 Bedroom      | ##-##-##-##
+
+  # 11 - Yes
+  #  1 Entrance     | 10.16.244.212
+  #  2 Kitchen      | 10.16.244.225/1 | 10.16.244.229/2
+  #  2 Hall         | 10.16.244.218/1 | 10.16.244.223/0
+  #  1 Living Room  |> 10.16.244.227
+  #  1 Bedroom      |> 10.16.244.219
+  #  1 Bedroom2     | 10.16.244.224
+
+  # 12 - No
+
+  # 13 - Yes
+  #    All but SwitchMode 15 ???
+  #  1 Entrance     | 10.16.245.12
+  #  2 Kitchen      | 10.16.245.25/1 | 10.16.245.29/2
+  #  2 Hall         | 10.16.245.18/1
+  #  1 Living Room  | 10.16.245.27
+  #  1 Bedroom      | 10.16.245.19
+
+  # 14 - Yes
+  #    All but SwitchMode 15
+  #  1 Entrance     | 10.16.245.32
+  #  2 Kitchen      | 10.16.245.45/1 | 10.16.245.49/2
+  #  1 Hall         | 10.16.245.38
+  #  1 Living Room  | 10.16.245.47
+  #  1 Bedroom      | 10.16.245.39
+
+  # 15 - No
+
+  # 16 - Yes
+  #    All but SwitchMode 15
+  #  1 Entrance     | 10.16.245.72
+  #  2 Kitchen      | 10.16.245.85/1 | 10.16.245.89/2
+  #  2 Hall         | 10.16.245.78/1 | 10.16.245.83/0
+  #  1 Living Room  | 10.16.245.87
+  #  1 Bedroom      | 10.16.245.79
+  #  1 Bedroom2     | 10.16.245.84
+
   # Apt 01...
-    # Kitchen Light Switches
+    # Entrance Light Switch (1)
+    - name: "Apt01 Entrance Light"
+      unique_id: "apt01_entrance_light"
+      state_topic: "PkDr/Apt01/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
     - name: "Apt01 Kitchen Light1"
       unique_id: "apt01_kitchen_light1"
       state_topic: "PkDr/Apt01/Kitchen/tele/Switch1/SENSOR"
@@ -904,7 +1133,7 @@ mqtt:
       payload_off: "ON"
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
-    # Hall Light Switches
+    # Hall Light Switches (2)
     - name: "Apt01 Hall Light1"
       unique_id: "apt01_hall_light1"
       state_topic: "PkDr/Apt01/Hall/tele/Switch1/SENSOR"
@@ -921,37 +1150,389 @@ mqtt:
       payload_off: "ON"
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
-    # Entrance Light Switch
-    - name: "Apt01 Entrance Light1"
-      unique_id: "apt01_entrance_light1"
-      state_topic: "PkDr/Apt01/Entrance/tele/Switch/SENSOR"
-      # Tasmota (SwitchMode 15) - Inverted
-      payload_on: "OFF"
-      payload_off: "ON"
-      device_class: light
-      value_template: "{{ value_json.Switch1 }}"
-    # LivingRoom Light Switch
-    - name: "Apt01 LivingRoom Light1"
-      unique_id: "apt01_livingRoom_light1"
+    # LivingRoom Light Switch (1)
+    - name: "Apt01 LivingRoom Light"
+      unique_id: "apt01_livingRoom_light"
       state_topic: "PkDr/Apt01/LivingRoom/tele/Switch/SENSOR"
       # Tasmota (SwitchMode 15) - Inverted
       payload_on: "OFF"
       payload_off: "ON"
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
-    # Bedroom Light Switch
+    # Bedroom Light Switch (1)
     - name: "Apt01 Bedroom Light"
       unique_id: "apt01_bedroom_light"
       state_topic: "PkDr/Apt01/Bedroom/tele/Switch/SENSOR"
-      # Tasmota (SwitchMode 16)
-      payload_on: "ON"
-      payload_off: "OFF"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
-    # Bedroom2 Light Switch
+    # Bedroom2 Light Switch (1)
     - name: "Apt01 Bedroom2 Light"
       unique_id: "apt01_bedroom2_light"
       state_topic: "PkDr/Apt01/Bedroom2/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+# Apt 03...
+    # Entrance Light Switch (1)
+    - name: "Apt03 Entrance Light"
+      unique_id: "apt03_entrance_light"
+      state_topic: "PkDr/Apt03/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt03 Kitchen Light1"
+      unique_id: "apt03_kitchen_light1"
+      state_topic: "PkDr/Apt03/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt03 Kitchen Light2"
+      unique_id: "apt03_kitchen_light2"
+      state_topic: "PkDr/Apt03/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switch
+    - name: "Apt03 Hall Light"
+      unique_id: "apt03_hall_light"
+      state_topic: "PkDr/Apt03/Hall/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt03 LivingRoom Light"
+      unique_id: "apt03_livingRoom_light"
+      state_topic: "PkDr/Apt03/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt03 Bedroom Light"
+      unique_id: "apt03_bedroom_light"
+      state_topic: "PkDr/Apt03/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+# Apt 08...
+    # Entrance Light Switch (1)
+    - name: "Apt08 Entrance Light"
+      unique_id: "apt08_entrance_light"
+      state_topic: "PkDr/Apt08/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt08 Kitchen Light1"
+      unique_id: "apt08_kitchen_light1"
+      state_topic: "PkDr/Apt08/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt08 Kitchen Light2"
+      unique_id: "apt08_kitchen_light2"
+      state_topic: "PkDr/Apt08/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switch
+    - name: "Apt08 Hall Light1"
+      unique_id: "apt08_hall_light1"
+      state_topic: "PkDr/Apt08/Hall/tele/Switch1/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt08 Hall Light0"
+      unique_id: "apt08_hall_light0"
+      state_topic: "PkDr/Apt08/Hall/tele/Switch0/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt08 LivingRoom Light"
+      unique_id: "apt08_livingRoom_light"
+      state_topic: "PkDr/Apt08/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt08 Bedroom Light"
+      unique_id: "apt08_bedroom_light"
+      state_topic: "PkDr/Apt08/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+# Apt 11...
+    # Entrance Light Switch (1)
+    - name: "Apt11 Entrance Light"
+      unique_id: "apt11_entrance_light"
+      state_topic: "PkDr/Apt11/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt11 Kitchen Light1"
+      unique_id: "apt11_kitchen_light1"
+      state_topic: "PkDr/Apt11/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt11 Kitchen Light2"
+      unique_id: "apt11_kitchen_light2"
+      state_topic: "PkDr/Apt11/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt11 Hall Light1"
+      unique_id: "apt11_hall_light1"
+      state_topic: "PkDr/Apt11/Hall/tele/Switch1/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt11 Hall Light0"
+      unique_id: "apt11_hall_light0"
+      state_topic: "PkDr/Apt11/Hall/tele/Switch0/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt11 LivingRoom Light"
+      unique_id: "apt11_livingRoom_light"
+      state_topic: "PkDr/Apt11/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt11 Bedroom Light"
+      unique_id: "apt11_bedroom_light"
+      state_topic: "PkDr/Apt11/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+# Apt 13...
+    # Entrance Light Switch (1)
+    - name: "Apt13 Entrance Light"
+      unique_id: "apt13_entrance_light"
+      state_topic: "PkDr/Apt13/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt13 Kitchen Light1"
+      unique_id: "apt13_kitchen_light1"
+      state_topic: "PkDr/Apt13/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt13 Kitchen Light2"
+      unique_id: "apt13_kitchen_light2"
+      state_topic: "PkDr/Apt13/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switch
+    - name: "Apt13 Hall Light"
+      unique_id: "apt13_hall_light"
+      state_topic: "PkDr/Apt13/Hall/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt13 LivingRoom Light"
+      unique_id: "apt13_livingRoom_light"
+      state_topic: "PkDr/Apt13/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt13 Bedroom Light"
+      unique_id: "apt13_bedroom_light"
+      state_topic: "PkDr/Apt13/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+# Apt 14...
+    # Entrance Light Switch (1)
+    - name: "Apt14 Entrance Light"
+      unique_id: "apt14_entrance_light"
+      state_topic: "PkDr/Apt14/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt14 Kitchen Light1"
+      unique_id: "apt14_kitchen_light1"
+      state_topic: "PkDr/Apt14/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt14 Kitchen Light2"
+      unique_id: "apt14_kitchen_light2"
+      state_topic: "PkDr/Apt14/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switch
+    - name: "Apt14 Hall Light"
+      unique_id: "apt14_hall_light"
+      state_topic: "PkDr/Apt14/Hall/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt14 LivingRoom Light"
+      unique_id: "apt14_livingRoom_light"
+      state_topic: "PkDr/Apt14/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt14 Bedroom Light"
+      unique_id: "apt14_bedroom_light"
+      state_topic: "PkDr/Apt14/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+
+    # Entrance Light Switch (1)
+    - name: "Apt16 Entrance Light"
+      unique_id: "apt16_entrance_light"
+      state_topic: "PkDr/Apt16/Entrance/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Kitchen Light Switches (2)
+    - name: "Apt16 Kitchen Light1"
+      unique_id: "apt16_kitchen_light1"
+      state_topic: "PkDr/Apt16/Kitchen/tele/Switch1/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt16 Kitchen Light2"
+      unique_id: "apt16_kitchen_light2"
+      state_topic: "PkDr/Apt16/Kitchen/tele/Switch2/SENSOR"
+      # Inverted by Tasmota (SwitchMode 15)
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Hall Light Switches (2)
+    - name: "Apt16 Hall Light1"
+      unique_id: "apt16_hall_light1"
+      state_topic: "PkDr/Apt16/Hall/tele/Switch1/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    - name: "Apt16 Hall Light0"
+      unique_id: "apt16_hall_light0"
+      state_topic: "PkDr/Apt16/Hall/tele/Switch0/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # LivingRoom Light Switch (1)
+    - name: "Apt16 LivingRoom Light"
+      unique_id: "apt16_livingRoom_light"
+      state_topic: "PkDr/Apt16/LivingRoom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom Light Switch (1)
+    - name: "Apt16 Bedroom Light"
+      unique_id: "apt16_bedroom_light"
+      state_topic: "PkDr/Apt16/Bedroom/tele/Switch/SENSOR"
+      # Tasmota (SwitchMode 15) - Inverted
+      payload_on: "OFF"
+      payload_off: "ON"
+      device_class: light
+      value_template: "{{ value_json.Switch1 }}"
+    # Bedroom2 Light Switch (1)
+    - name: "Apt16 Bedroom2 Light"
+      unique_id: "apt16_bedroom2_light"
+      state_topic: "PkDr/Apt16/Bedroom2/tele/Switch/SENSOR"
       # Tasmota (SwitchMode 15) - Inverted
       payload_on: "OFF"
       payload_off: "ON"
@@ -1414,167 +1995,167 @@ mqtt:
       retain: true
 
   ### Apt 03
-    # Entrance
-    - name: "Apt03 Bulb Entrance"
-      unique_id: apt03_bulb_entrance
-      command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt03/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt03 Bulb LivingRoom"
-      unique_id: apt03_bulb_livingroom
-      command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0
-        - 2
-        - 3
-        - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt03 Bulb Hall"
-      unique_id: apt03_bulb_hall
-      command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt03/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt03/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt03/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    - name: "Apt03 Bulb Kitchen"
-      unique_id: apt03_bulb_kitchen
-      command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt03/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt03 Bulb Bedroom"
-      unique_id: apt03_bulb_bedroom
-      command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt03/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: "Apt03 Light Bedroom"
-      unique_id: apt03_light_bedroom
-      state_topic: "PkDr/Apt03/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt03/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-  #    retain: true
+  #   # Entrance
+  #   - name: "Apt03 Bulb Entrance"
+  #     unique_id: apt03_bulb_entrance
+  #     command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt03/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt03/Entrance/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt03/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt03/Entrance/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Living Room
+  #   - name: "Apt03 Bulb LivingRoom"
+  #     unique_id: apt03_bulb_livingroom
+  #     command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt03/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt03/LivingRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   - name: "Apt03 Bulb Hall"
+  #     unique_id: apt03_bulb_hall
+  #     command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt03/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt03/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt03/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt03/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt03/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Kitchen
+  #   - name: "Apt03 Bulb Kitchen"
+  #     unique_id: apt03_bulb_kitchen
+  #     command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt03/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt03/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt03/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt03/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt03 Bulb Bedroom"
+  #     unique_id: apt03_bulb_bedroom
+  #     command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt03/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt03/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt03/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt03/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bedroom Switch
+  #   - name: "Apt03 Light Bedroom"
+  #     unique_id: apt03_light_bedroom
+  #     state_topic: "PkDr/Apt03/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt03/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  # #    retain: true
   ### Apt 05
     # Entrance
     - name: "Apt05 Bulb Entrance"
@@ -1735,165 +2316,165 @@ mqtt:
       payload_off: 'OFF'
       retain: true
   ### Apt 06
-    # Entrance
-    - name: "Apt06 Bulb Entrance"
-      unique_id: apt06_bulb_entrance
-      command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt06/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt06 Bulb LivingRoom"
-      unique_id: apt06_bulb_livingroom
-      command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    - name: "Apt06 Bulb Kitchen"
-      unique_id: apt06_bulb_kitchen
-      command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt06/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt06 Bulb Hall"
-      unique_id: apt06_bulb_hall
-      command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt06/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt06/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt06/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt06 Bulb Bedroom"
-      unique_id: apt06_bulb_bedroom
-      command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt06/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: "Apt06 Light Bedroom"
-      unique_id: apt06_light_bedroom
-      state_topic: "PkDr/Apt06/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt06/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+  #   # Entrance
+  #   - name: "Apt06 Bulb Entrance"
+  #     unique_id: apt06_bulb_entrance
+  #     command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt06/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt06/Entrance/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt06/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt06/Entrance/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Living Room
+  #   - name: "Apt06 Bulb LivingRoom"
+  #     unique_id: apt06_bulb_livingroom
+  #     command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt06/LivingRoom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt06/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt06/LivingRoom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Kitchen
+  #   - name: "Apt06 Bulb Kitchen"
+  #     unique_id: apt06_bulb_kitchen
+  #     command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt06/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt06/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt06/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt06/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   - name: "Apt06 Bulb Hall"
+  #     unique_id: apt06_bulb_hall
+  #     command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt06/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt06/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt06/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt06/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt06/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt06 Bulb Bedroom"
+  #     unique_id: apt06_bulb_bedroom
+  #     command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt06/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt06/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt06/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt06/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bedroom Switch
+  #   - name: "Apt06 Light Bedroom"
+  #     unique_id: apt06_light_bedroom
+  #     state_topic: "PkDr/Apt06/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt06/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     retain: true
 
   ### Apt 07
     # Entrance
@@ -2419,167 +3000,167 @@ mqtt:
       retain: true
 
   ### Apt 11
-    # Entrance
-    - name: "Apt11 Bulb Entrance"
-      unique_id: apt11_bulb_entrance
-      command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt11/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt11/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt11/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt11 Bulb LivingRoom"
-      unique_id: apt11_bulb_livingroom
-      command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0
-        - 2
-        - 3
-        - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt11 Bulb Hall"
-      unique_id: apt11_bulb_hall
-      command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt11/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt11/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt11/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    - name: "Apt11 Bulb Kitchen"
-      unique_id: apt11_bulb_kitchen
-      command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt11/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt11/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt11/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt11 Bulb Bedroom"
-      unique_id: apt11_bulb_bedroom
-      command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt11/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt11/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt11/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: "Apt11 Light Bedroom"
-      unique_id: apt11_light_bedroom
-      state_topic: "PkDr/Apt11/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt11/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-  #    retain: true
+  #   # Entrance
+  #   - name: "Apt11 Bulb Entrance"
+  #     unique_id: apt11_bulb_entrance
+  #     command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt11/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt11/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt11/Entrance/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt11/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt11/Entrance/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Living Room
+  #   - name: "Apt11 Bulb LivingRoom"
+  #     unique_id: apt11_bulb_livingroom
+  #     command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt11/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt11/LivingRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   - name: "Apt11 Bulb Hall"
+  #     unique_id: apt11_bulb_hall
+  #     command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt11/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt11/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt11/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt11/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt11/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Kitchen
+  #   - name: "Apt11 Bulb Kitchen"
+  #     unique_id: apt11_bulb_kitchen
+  #     command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt11/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt11/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt11/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt11/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt11/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt11 Bulb Bedroom"
+  #     unique_id: apt11_bulb_bedroom
+  #     command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt11/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt11/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt11/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt11/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt11/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bedroom Switch
+  #   - name: "Apt11 Light Bedroom"
+  #     unique_id: apt11_light_bedroom
+  #     state_topic: "PkDr/Apt11/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt11/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  # #    retain: true
 
   ### Apt 12
     # Entrance
@@ -2782,588 +3363,588 @@ mqtt:
       retain: true
 
   ### Apt 13
-    # Entrance
-    - name: "Apt13 Bulb Entrance"
-      unique_id: apt13_bulb_entrance
-      command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt13/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    - name: "Apt13 Bulb LivingRoom"
-      unique_id: apt13_bulb_livingroom
-      command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt13 Bulb Hall"
-      unique_id: apt13_bulb_hall
-      command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt13/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt13/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt13/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    - name: "Apt13 Bulb Kitchen"
-      unique_id: apt13_bulb_kitchen
-      command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt13/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt13 Bulb Bedroom"
-      unique_id: apt13_bulb_bedroom
-      command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt13/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: "Apt13 Light Bedroom"
-      unique_id: apt13_light_bedroom
-      state_topic: "PkDr/Apt13/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt13/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+  #   # Entrance
+  #   - name: "Apt13 Bulb Entrance"
+  #     unique_id: apt13_bulb_entrance
+  #     command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt13/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt13/Entrance/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt13/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt13/Entrance/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Living Room
+  #   - name: "Apt13 Bulb LivingRoom"
+  #     unique_id: apt13_bulb_livingroom
+  #     command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt13/LivingRoom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt13/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt13/LivingRoom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   - name: "Apt13 Bulb Hall"
+  #     unique_id: apt13_bulb_hall
+  #     command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt13/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt13/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt13/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt13/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt13/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Kitchen
+  #   - name: "Apt13 Bulb Kitchen"
+  #     unique_id: apt13_bulb_kitchen
+  #     command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt13/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt13/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt13/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt13/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt13 Bulb Bedroom"
+  #     unique_id: apt13_bulb_bedroom
+  #     command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt13/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt13/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt13/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt13/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bedroom Switch
+  #   - name: "Apt13 Light Bedroom"
+  #     unique_id: apt13_light_bedroom
+  #     state_topic: "PkDr/Apt13/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt13/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     retain: true
 
-  ### Apt 14
-    # Entrance
-    - name: "Apt14 Bulb Entrance"
-      unique_id: apt14_bulb_entrance
-      command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt14/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Living Room
-    # Older WiFi Bulbs...
-    # - name: "Apt14 Bulb LivingRoom"
-    #   unique_id: apt14_bulb_livingroom
-    #   command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
-    #   state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
-    #   state_value_template: "{{value_json.POWER}}"
-    #   availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
-    #   brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
-    #   brightness_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
-    #   brightness_scale: 100
-    #   on_command_type: "brightness"
-    #   brightness_value_template: "{{value_json.Dimmer}}"
-    #   color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
-    #   color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-    #   color_temp_value_template: "{{value_json.CT}}"
-    #   rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
-    #   rgb_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
-    #   rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-    #   effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
-    #   effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/RESULT"
-    #   effect_value_template: "{{value_json.Scheme}}"
-    #   effect_list:
-    #     - 0 none
-    #     - 2 color cycle
-    #   payload_on: 'ON'
-    #   payload_off: 'OFF'
-    #   payload_available: 'Online'
-    #   payload_not_available: 'Offline'
-    #   qos: 1
-    # Newer WiFi Bulbs
-    - name: "Apt14 Bulb LivingRoom"
-      unique_id: apt14_bulb_livingroom
-      command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0
-        - 2
-        - 3
-        - 4
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    # Older WiFi Bulbs...
-    - name: "Apt14 Bulb Hall"
-      unique_id: apt14_bulb_hall
-      command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt14/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt14/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Kitchen
-    # Older WiFi Bulbs...
-    - name: "Apt14 Bulb Kitchen"
-      unique_id: apt14_bulb_kitchen
-      command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt14/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt14 Bulb Bedroom"
-    # Older WiFi Bulbs...
-      unique_id: apt14_bulb_bedroom
-      command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt14/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bedroom Switch
-    - name: Apt14 Light Bedroom
-      unique_id: apt14_light_bedroom
-      state_topic: PkDr/Apt14/Bedroom/stat/Light/POWER
-      command_topic: PkDr/Apt14/Bedroom/cmnd/Light/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+  # ### Apt 14
+  #   # Entrance
+  #   - name: "Apt14 Bulb Entrance"
+  #     unique_id: apt14_bulb_entrance
+  #     command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt14/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt14/Entrance/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt14/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt14/Entrance/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Living Room
+  #   # Older WiFi Bulbs...
+  #   # - name: "Apt14 Bulb LivingRoom"
+  #   #   unique_id: apt14_bulb_livingroom
+  #   #   command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
+  #   #   state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+  #   #   state_value_template: "{{value_json.POWER}}"
+  #   #   availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
+  #   #   brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
+  #   #   brightness_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+  #   #   brightness_scale: 100
+  #   #   on_command_type: "brightness"
+  #   #   brightness_value_template: "{{value_json.Dimmer}}"
+  #   #   color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
+  #   #   color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #   #   color_temp_value_template: "{{value_json.CT}}"
+  #   #   rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
+  #   #   rgb_state_topic: "PkDr/Apt14/LivingRoom/stat/Bulb/RESULT"
+  #   #   rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #   #   effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
+  #   #   effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/RESULT"
+  #   #   effect_value_template: "{{value_json.Scheme}}"
+  #   #   effect_list:
+  #   #     - 0 none
+  #   #     - 2 color cycle
+  #   #   payload_on: 'ON'
+  #   #   payload_off: 'OFF'
+  #   #   payload_available: 'Online'
+  #   #   payload_not_available: 'Offline'
+  #   #   qos: 1
+  #   # Newer WiFi Bulbs
+  #   - name: "Apt14 Bulb LivingRoom"
+  #     unique_id: apt14_bulb_livingroom
+  #     command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt14/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt14/LivingRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   # Older WiFi Bulbs...
+  #   - name: "Apt14 Bulb Hall"
+  #     unique_id: apt14_bulb_hall
+  #     command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt14/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt14/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt14/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt14/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt14/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Kitchen
+  #   # Older WiFi Bulbs...
+  #   - name: "Apt14 Bulb Kitchen"
+  #     unique_id: apt14_bulb_kitchen
+  #     command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt14/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt14/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt14/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt14/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt14 Bulb Bedroom"
+  #   # Older WiFi Bulbs...
+  #     unique_id: apt14_bulb_bedroom
+  #     command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt14/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt14/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt14/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt14/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bedroom Switch
+  #   - name: Apt14 Light Bedroom
+  #     unique_id: apt14_light_bedroom
+  #     state_topic: PkDr/Apt14/Bedroom/stat/Light/POWER
+  #     command_topic: PkDr/Apt14/Bedroom/cmnd/Light/POWER
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     retain: true
 
   ### Apt 16
-    # Entrance
-    - name: "Apt16 Bulb Entrance"
-      unique_id: apt16_bulb_entrance
-      command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #   # Entrance
+  #   - name: "Apt16 Bulb Entrance"
+  #     unique_id: apt16_bulb_entrance
+  #     command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/Entrance/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/Entrance/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/Entrance/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/Entrance/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-    # Living Room
-    - name: "Apt16 Bulb LivingRoom"
-      unique_id: apt16_bulb_livingroom
-      command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #   # Living Room
+  #   - name: "Apt16 Bulb LivingRoom"
+  #     unique_id: apt16_bulb_livingroom
+  #     command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/LivingRoom/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/LivingRoom/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-    # Hall
-    - name: "Apt16 Bulb Hall"
-      unique_id: apt16_bulb_hall
-      command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #   # Hall
+  #   - name: "Apt16 Bulb Hall"
+  #     unique_id: apt16_bulb_hall
+  #     command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/Hall/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/Hall/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-    # Kitchen
-    - name: "Apt16 Bulb Kitchen"
-      unique_id: apt16_bulb_kitchen
-      command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #   # Kitchen
+  #   - name: "Apt16 Bulb Kitchen"
+  #     unique_id: apt16_bulb_kitchen
+  #     command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/Kitchen/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/Kitchen/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-    # Bulb Bedroom
-    - name: "Apt16 Bulb Bedroom"
-      unique_id: apt16_bulb_bedroom
-      command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #   # Bulb Bedroom
+  #   - name: "Apt16 Bulb Bedroom"
+  #     unique_id: apt16_bulb_bedroom
+  #     command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/Bedroom/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/Bedroom/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-      # Bulb Bedroom2
-    - name: "Apt16 Bulb Bedroom2"
-      unique_id: apt16_bulb_bedroom2
-      command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
-      state_value_template: "{{ value_json.POWER }}"
-      availability_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
-      # brightness_scale: 100
-      on_command_type: "first"
-      # on_command_type: "brightness"
-      brightness_value_template: "{{ value_json.Dimmer }}"
-      color_temp_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
-      color_temp_value_template: "{{ value_json.CT }}"
-      min_mireds: 153
-      max_mireds: 500
-      rgb_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
-      rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
-      effect_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
-      effect_value_template: "{{ value_json.Scheme }}"
-      effect_list:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      qos: 1
+  #     # Bulb Bedroom2
+  #   - name: "Apt16 Bulb Bedroom2"
+  #     unique_id: apt16_bulb_bedroom2
+  #     command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+  #     state_value_template: "{{ value_json.POWER }}"
+  #     availability_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+  #     # brightness_scale: 100
+  #     on_command_type: "first"
+  #     # on_command_type: "brightness"
+  #     brightness_value_template: "{{ value_json.Dimmer }}"
+  #     color_temp_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{ value_json.CT }}"
+  #     min_mireds: 153
+  #     max_mireds: 500
+  #     rgb_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt16/Bedroom2/stat/Bulb/STATE"
+  #     rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+  #     effect_command_topic: "PkDr/Apt16/Bedroom2/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt16/Bedroom2/tele/Bulb/STATE"
+  #     effect_value_template: "{{ value_json.Scheme }}"
+  #     effect_list:
+  #       - 0
+  #       - 1
+  #       - 2
+  #       - 3
+  #       - 4
+  #     payload_on: "ON"
+  #     payload_off: "OFF"
+  #     payload_available: "Online"
+  #     payload_not_available: "Offline"
+  #     qos: 1
 
-    # Bedroom Switch
-    - name: "Apt16 Light Bedroom"
-      unique_id: apt16_light_bedroom
-      state_topic: "PkDr/Apt16/Bedroom/stat/Light/POWER"
-      command_topic: "PkDr/Apt16/Bedroom/cmnd/Light/POWER"
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-  #    retain: true
+  #   # Bedroom Switch
+  #   - name: "Apt16 Light Bedroom"
+  #     unique_id: apt16_light_bedroom
+  #     state_topic: "PkDr/Apt16/Bedroom/stat/Light/POWER"
+  #     command_topic: "PkDr/Apt16/Bedroom/cmnd/Light/POWER"
+  #     qos: 1
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  # #    retain: true
 
   switch:
     # Entrance Door State Sensor
@@ -4203,34 +4784,34 @@ mqtt:
     #   payload_on: 'ON'
     #   payload_off: 'OFF'
     #   retain: true
-    - name: Apt01 AC
-      state_topic: PkDr/Apt01/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt01/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
-    - name: Apt01 LivingRoom IPTV
-      state_topic: PkDr/Apt01/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt01/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
-    - name: Apt01 Bedroom IPTV
-      state_topic: PkDr/Apt01/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt01/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
-    - name: Apt01 Bedroom Ender3
-      state_topic: PkDr/Apt01/Bedroom/stat/Ender3/POWER
-      command_topic: PkDr/Apt01/Bedroom/cmnd/Ender3/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+    # - name: Apt01 AC
+    #   state_topic: PkDr/Apt01/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt01/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
+    # - name: Apt01 LivingRoom IPTV
+    #   state_topic: PkDr/Apt01/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt01/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
+    # - name: Apt01 Bedroom IPTV
+    #   state_topic: PkDr/Apt01/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt01/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
+    # - name: Apt01 Bedroom Ender3
+    #   state_topic: PkDr/Apt01/Bedroom/stat/Ender3/POWER
+    #   command_topic: PkDr/Apt01/Bedroom/cmnd/Ender3/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
   # Apt 02 Switches...
     - name: Apt02 AC
       state_topic: PkDr/Apt02/LivingRoom/stat/AC/POWER
@@ -4254,27 +4835,27 @@ mqtt:
       payload_off: 'OFF'
       retain: true
   # Apt 03 Switches...
-    - name: Apt03 AC
-      state_topic: PkDr/Apt03/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt03/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
-    - name: Apt03 LivingRoom IPTV
-      state_topic: PkDr/Apt03/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt03/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
-    - name: Apt03 Bedroom IPTV
-      state_topic: PkDr/Apt03/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt03/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: true
+    # - name: Apt03 AC
+    #   state_topic: PkDr/Apt03/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt03/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
+    # - name: Apt03 LivingRoom IPTV
+    #   state_topic: PkDr/Apt03/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt03/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
+    # - name: Apt03 Bedroom IPTV
+    #   state_topic: PkDr/Apt03/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt03/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: true
   # Apt 04 Switches...
   # Apt 05 Switches...
     - name: Apt05 AC
@@ -4575,13 +5156,129 @@ mqtt:
 switch:
 ### Groups ### https://www.home-assistant.io/integrations/group/
 
-  # Apt 01 Switches...
-  # - platform: group
-  #   name: Apt01 Hall Switches
-  #   unique_id: apt01_hall_switches
-  #   entities:
-  #     - switch.apt01_hall_switch1
-  #     - switch.apt01_hall_switch0
+# Building Light Groups
+  - platform: group
+    unique_id: building_lights
+    name: Building Lights
+    entities:
+      - switch.b1_lights
+      - switch.b2_lights
+      - switch.b3_lights
+      - switch.b4_lights
+
+# Kitchen Light Groups
+# Apt 01
+  - platform: group
+    name: Apt01 Kitchen Lights
+    unique_id: apt01_kitchen_lights
+    entities:
+      - switch.apt01_kitchen_switch1
+      - switch.apt01_kitchen_switch2
+# Apt 02
+  - platform: group
+    name: Apt02 Kitchen Lights
+    unique_id: apt02_kitchen_lights
+    entities:
+      - switch.apt02_kitchen_switch1
+      - switch.apt02_kitchen_switch2
+# Apt 03
+  - platform: group
+    name: Apt03 Kitchen Lights
+    unique_id: apt03_kitchen_lights
+    entities:
+      - switch.apt03_kitchen_switch1
+      - switch.apt03_kitchen_switch2
+# Apt 04
+  - platform: group
+    name: Apt04 Kitchen Lights
+    unique_id: apt04_kitchen_lights
+    entities:
+      - switch.apt04_kitchen_switch1
+      - switch.apt04_kitchen_switch2
+# Apt 05
+  - platform: group
+    name: Apt05 Kitchen Lights
+    unique_id: apt05_kitchen_lights
+    entities:
+      - switch.apt05_kitchen_switch1
+      - switch.apt05_kitchen_switch2
+# Apt 06
+  - platform: group
+    name: Apt06 Kitchen Lights
+    unique_id: apt06_kitchen_lights
+    entities:
+      - switch.apt06_kitchen_switch1
+      - switch.apt06_kitchen_switch2
+# Apt 07
+  - platform: group
+    name: Apt07 Kitchen Lights
+    unique_id: apt07_kitchen_lights
+    entities:
+      - switch.apt07_kitchen_switch1
+      - switch.apt07_kitchen_switch2
+# Apt 08
+  - platform: group
+    name: Apt08 Kitchen Lights
+    unique_id: apt08_kitchen_lights
+    entities:
+      - switch.apt08_kitchen_switch1
+      - switch.apt08_kitchen_switch2
+# Apt 09
+  - platform: group
+    name: Apt09 Kitchen Lights
+    unique_id: apt09_kitchen_lights
+    entities:
+      - switch.apt09_kitchen_switch1
+      - switch.apt09_kitchen_switch2
+# Apt 10
+  - platform: group
+    name: Apt10 Kitchen Lights
+    unique_id: apt10_kitchen_lights
+    entities:
+      - switch.apt10_kitchen_switch1
+      - switch.apt10_kitchen_switch2
+# Apt 11
+  - platform: group
+    name: Apt11 Kitchen Lights
+    unique_id: apt11_kitchen_lights
+    entities:
+      - switch.apt11_kitchen_switch1
+      - switch.apt11_kitchen_switch2
+# Apt 12
+  - platform: group
+    name: Apt12 Kitchen Lights
+    unique_id: apt12_kitchen_lights
+    entities:
+      - switch.apt12_kitchen_switch1
+      - switch.apt12_kitchen_switch2
+# Apt 13
+  - platform: group
+    name: Apt13 Kitchen Lights
+    unique_id: apt13_kitchen_lights
+    entities:
+      - switch.apt13_kitchen_switch1
+      - switch.apt13_kitchen_switch2
+# Apt 14
+  - platform: group
+    name: Apt14 Kitchen Lights
+    unique_id: apt14_kitchen_lights
+    entities:
+      - switch.apt14_kitchen_switch1
+      - switch.apt14_kitchen_switch2
+# Apt 15
+  - platform: group
+    name: Apt15 Kitchen Lights
+    unique_id: apt15_kitchen_lights
+    entities:
+      - switch.apt15_kitchen_switch1
+      - switch.apt15_kitchen_switch2
+# Apt 16
+  - platform: group
+    name: Apt16 Kitchen Lights
+    unique_id: apt16_kitchen_lights
+    entities:
+      - switch.apt16_kitchen_switch1
+      - switch.apt16_kitchen_switch2
 ##############
 
   - platform: command_line

@@ -45,124 +45,123 @@ views:
           #     - input_number.apt01_kiosk
         # Row 1 - Lights
           - cards:
-            # Building Entrance Lock
-              - entity: switch.b1_entrance_lock
-                name: B1 Lock
-                type: entity-button
             # Entrance
-              - entity: switch.apt01_vdb_door_lock
-                name: 01 Lock
-                type: entity-button
-              # - entity: switch.01_heat
-              #   type: button
-              #   icon: mdi:radiator
-              #   tap_action:
-              #     action: toggle
-              #   hold_action:
-              #     action: more-info
-              #   show_icon: true
-              #   show_name: true
-              #   show_state: false
-              #   name: Heat
-            # Entrance Doorbell
-              - type: vertical-stack
-                cards:
-                  - type: button
-                    entity: switch.apt01_doorbell
-                    show_state: false
-                    show_name: false
-                    show_icon: true
-                    icon_height: 130px
-                    icon: mdi:doorbell
-                    tap_action:
-                      action: call-service
-                      service: switch.turn_on
-                      service_data: {}
-                      target:
-                        entity_id: switch.apt01_doorbell
-                  # - type: button
-                  #   entity: switch.apt01_doorbell
-                  #   show_name: false
-                  #   tap_action:
-                  #     action: toggle
-                  #   icon: 'hass:bell'
-                  #   icon_height: 130px
-                  - type: 'custom:slider-entity-row'
-                    entity: input_number.apt01_volume
-                    full_row: true
-            # Entrance
-              - entity: light.apt01_entrance_bulb
-                name: Entrance
-                type: light
+            - entity: light.apt01_entrance_bulb
+              name: Entrance
+              type: light
+            # Kitchen
+            - entity: switch.apt01_kitchen_lights
+              name: Kitchen
+              icon: mdi:ceiling-light-multiple
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             # Living Room
-              - entity: light.apt01_livingroom_lamps
-                name: Living Room
-                type: light
-            # Storage Room
-              - entity: light.apt01_storageroom_lamp
-                name: Storage Room
-                type: light
+            - entity: light.apt01_livingroom_lamps
+              name: Living Room
+              type: light
+            # Hall
+            - entity: light.apt01_hall_bulb
+              name: Hall
+              type: light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
-              - entity: climate.apt01_heat
-                type: custom:simple-thermostat
+            - entity: climate.apt01_heat
+              type: custom:simple-thermostat
+              name: Heat
+              decimals: 1
+              step_size: 0.5
+              header:
+                toggle:
+                  entity: switch.01_heat
+                  name: 'On/Off'
                 name: Heat
-                decimals: 1
-                step_size: 0.5
-                header:
-                  toggle:
-                    entity: switch.01_heat
-                    name: 'On/Off'
-                  name: Heat
-                fallback: '??? '
-                unit: °F
-                label:
-                  temperature: 'Current'
-                  state: 'State'
-                control:
-                  preset:
-                    _hide_when_off: true
-                    none: true
-                    home: true
-                    away: true
-                    sleep: true
-                    activity: false
-                    comfort: false
-                layout:
-                  mode:
-                    names: true
-                    icons: false
-                    headings: false
-                sensors:
-                  - entity: sensor.apt01_humidity
-                    name: 'Humidity'
-              - entity: climate.apt01_ac
-                type: custom:simple-thermostat
-                name: AC
-                decimals: 1
-                step_size: 0.5
-                header:
-                  toggle:
-                    entity: switch.apt01_ac
-                    name: ' '
-                label:
-                  temperature: ' '
-                  state: ' '
-                control:
-                  preset:
-                    _hide_when_off: true
-                    none:
-                      name: false
-                    home: true
-                    away: true
-                    sleep: true
-                    activity: false
-                    comfort: false
-                  # hvac: true
-                sensors:
-                  - entity: sensor.apt01_humidity
-                    name: ' '
+              fallback: '??? '
+              unit: °F
+              label:
+                temperature: 'Current'
+                state: 'State'
+              control:
+                preset:
+                  _hide_when_off: true
+                  none: true
+                  home: true
+                  away: true
+                  sleep: true
+                  activity: false
+                  comfort: false
+              layout:
+                mode:
+                  names: true
+                  icons: false
+                  headings: false
+              sensors:
+                - entity: sensor.apt01_humidity
+                  name: 'Humidity'
+
+            # Bedroom Left
+            - type: entities
+              title: Bedroom Left
+              entities:
+                - entity: switch.apt01_bedroom_switch
+                  name: Ceiling
+                  secondary_info: none
+                  icon: mdi:ceiling-light-outline
+                - entity: light.apt01_bedroom_lamp
+                  name: Lamp
+                  icon: mdi:lamp-outline
+                  secondary_info: none
+              state_color: true
+              theme: minimalist-desktop
+            # Bedroom Right
+            - type: entities
+              title: Office
+              entities:
+                - entity: switch.apt01_bedroom2_switch
+                  icon: mdi:ceiling-light-outline
+                  name: 3d
+                - entity: switch.apt01_office_light2
+                  icon: mdi:desktop-classic
+                  name: IT
+                - entity: switch.apt01_office_light1
+                  icon: mdi:hammer-wrench
+                  secondary_info: none
+                  name: Clocks
+              theme: minimalist-desktop
+              state_color: true
+
+              # - entity: climate.apt01_ac
+              #   type: custom:simple-thermostat
+              #   name: AC
+              #   decimals: 1
+              #   step_size: 0.5
+              #   header:
+              #     toggle:
+              #       entity: switch.apt01_ac
+              #       name: ' '
+              #   label:
+              #     temperature: ' '
+              #     state: ' '
+              #   control:
+              #     preset:
+              #       _hide_when_off: true
+              #       none:
+              #         name: false
+              #       home: true
+              #       away: true
+              #       sleep: true
+              #       activity: false
+              #       comfort: false
+              #     # hvac: true
+              #   sensors:
+              #     - entity: sensor.apt01_humidity
+              #       name: ' '
               # - entity: weather.openweathermap
               #   type: weather-forecast
               #   name: Park Drive Apt 3 Forecast
@@ -181,47 +180,88 @@ views:
             type: horizontal-stack
         # Row 3 - More Lights
           - cards:
-            # Hall
-            - entity: light.apt01_hall_bulb
-              name: Hall
+            # Storage Room
+            - entity: light.apt01_storageroom_lamp
+              name: Storage Room
               type: light
-            # Bedroom Lamp
-            - entity: light.apt01_bedroom_lamp
-              name: Bdr Lamp
-              type: light
-            # Bedroom Switch
-            - type: entities
-              entities:
-                - switch.apt01_bedroom_switch
-              show_header_toggle: false
-              state_color: true
+            # # Bedroom Lamp
+            # - entity: light.apt01_bedroom_lamp
+            #   name: Bdr Lamp
+            #   type: light
+            # # Bedroom Switch
+            # - entity: switch.apt01_bedroom_switch
+            #   name: Bedroom
+            #   show_name: true
+            #   show_icon: true
+            #   type: button
+            #   tap_action:
+            #     action: toggle
+            #   show_state: false
+            #   hold_action:
+            #     action: more-info
             # Office Switch
-            - type: entities
-              entities:
-                - switch.apt01_bedroom2_switch
-              show_header_toggle: false
-              state_color: true
-            # Office Desk Light
-            - type: entities
-              title: Bench Light
-              entities:
-                - switch.apt01_office_light1
-              show_header_toggle: false
-              state_color: true
+            - entity: switch.apt01_bedroom2_switch
+              name: Bedroom2
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             # Office Bench Light
+            - entity: switch.apt01_office_light1
+              name: Bench
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
+            # Office Desk Light
+            - entity: switch.apt01_office_light2
+              name: Desk
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             - type: entities
-              title: Desk Light
+              title: Office
               entities:
-                - switch.apt01_office_light2
-              show_header_toggle: false
+                - entity: switch.apt01_bedroom2_switch
+                  icon: mdi:ceiling-light-outline
+                  name: 3d
+                - entity: switch.apt01_office_light2
+                  icon: mdi:desktop-classic
+                  name: IT
+                - entity: switch.apt01_office_light1
+                  icon: mdi:hammer-wrench
+                  secondary_info: none
+                  name: Clocks
+              theme: minimalist-desktop
               state_color: true
-            # Kitchen
-            - type: entities
-              title: Kitchen Lights
-              entities:
-                - group.apt01_kitchen_lights
-              state_color: true
-              show_header_toggle: false
+
+            # # Bedroom Right
+            # - type: entities
+            #   title: Office
+            #   entities:
+            #     - entity: switch.apt01_bedroom2_switch
+            #       name: Ceiling
+            #       secondary_info: none
+            #       icon: mdi:ceiling-light-outline
+            #     - entity: light.apt02_bedroom_lamp
+            #       name: Lamp
+            #       icon: mdi:lamp-outline
+            #       secondary_info: none
+            #   state_color: true
+            #   theme: minimalist-desktop
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
@@ -281,14 +321,15 @@ views:
           - cards:
           # JTB Only - Ender 3 - 3D Printer
               - entity: switch.apt01_bedroom_ender3
-                type: entity-button
+                name: Ender 3
+                show_name: true
+                show_icon: true
+                type: button
                 tap_action:
                   action: toggle
+                show_state: false
                 hold_action:
                   action: more-info
-                show_icon: true
-                show_name: true
-                name: Ender 3
               # - entity: switch.apt01_1_reboot_iptv
               #   hold_action:
               #     action: more-info
@@ -308,55 +349,101 @@ views:
                 show_icon: true
                 show_name: true
                 name: Clean IPTV Living Room
-                icon: 'mdi:television-clean'
+                icon: 'mdi:database-sync-outline'
                 type: entity-button
                 icon_height: 170px
               - entity: switch.apt01_livingroom_iptv
-                hold_action:
-                  action: more-info
-                icon: 'mdi:restart'
-                name: Off/On IPTV
-                show_icon: true
+                name: IPTV
                 show_name: true
+                show_icon: true
+                type: button
                 tap_action:
                   action: toggle
+                show_state: false
+                hold_action:
+                  action: more-info
+            type: horizontal-stack
+            # Building Entrance Lock
+          - cards:
+              - entity: switch.b1_entrance_lock
+                name: B1 Lock
                 type: entity-button
-                icon_height: 170px
+            # Entrance
+              - entity: switch.apt01_vdb_door_lock
+                name: 01 Lock
+                type: entity-button
+              # - entity: switch.01_heat
+              #   type: button
+              #   icon: mdi:radiator
+              #   tap_action:
+              #     action: toggle
+              #   hold_action:
+              #     action: more-info
+              #   show_icon: true
+              #   show_name: true
+              #   show_state: false
+              #   name: Heat
+            # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt01_doorbell
+                    show_state: false
+                    show_name: false
+                    show_icon: true
+                    icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt01_doorbell
+                  # - type: button
+                  #   entity: switch.apt01_doorbell
+                  #   show_name: false
+                  #   tap_action:
+                  #     action: toggle
+                  #   icon: 'hass:bell'
+                  #   icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt01_volume
+                    full_row: true
             type: horizontal-stack
         # Row 7.1 - IPTV bedroom
-        #   - cards:
-        #       # - entity: media_player.iptv_1_1
-        #       #   type: media-control
-        #       - type: iframe
-        #         url: 'http://10.16.101.15:8080'
-        #         title: IPTV - Bedroom
-        #         aspect_ratio: 100%
-        #     type: horizontal-stack
-        # # Row 7.2 - IPTV Bedroom (Buttons)
-        #   - cards:
-        #       # - entity: switch.apt01_2_reboot_iptv
-        #       #   hold_action:
-        #       #     action: more-info
-        #       #   icon: 'mdi:restart'
-        #       #   name: Try Restart IPTV Bedroom
-        #       #   show_icon: true
-        #       #   show_name: true
-        #       #   tap_action:
-        #       #     action: toggle
-        #       #   type: entity-button
-        #       #   icon_height: 170px
-        #       - entity: script.apt01_clean_iptv_bedroom
-        #         tap_action:
-        #           action: toggle
-        #         hold_action:
-        #           action: more-info
-        #         show_icon: true
-        #         show_name: true
-        #         name: Clean IPTV Bedroom
-        #         icon: 'mdi:television-clean'
-        #         type: entity-button
-        #         icon_height: 170px
-        #     type: horizontal-stack
+          # - cards:
+          #     # - entity: media_player.iptv_1_1
+          #     #   type: media-control
+          #     - type: iframe
+          #       url: 'http://10.16.102.11:8080'
+          #       title: IPTV - Bedroom
+          #       aspect_ratio: 100%
+          #   type: horizontal-stack
+        # Row 7.2 - IPTV Bedroom (Buttons)
+          # - cards:
+              # - entity: switch.apt01_2_reboot_iptv
+              #   hold_action:
+              #     action: more-info
+              #   icon: 'mdi:restart'
+              #   name: Try Restart IPTV Bedroom
+              #   show_icon: true
+              #   show_name: true
+              #   tap_action:
+              #     action: toggle
+              #   type: entity-button
+              #   icon_height: 170px
+              # - entity: script.apt01_clean_iptv_bedroom
+              #   tap_action:
+              #     action: toggle
+              #   hold_action:
+              #     action: more-info
+              #   show_icon: true
+              #   show_name: true
+              #   name: Clean IPTV Bedroom
+              #   icon: 'mdi:database-sync-outline'
+              #   type: entity-button
+              #   icon_height: 170px
+            # type: horizontal-stack
         # Row 8 - Switches
         type: vertical-stack
   #####################
@@ -554,7 +641,7 @@ views:
                     entity: input_number.apt03_volume
                     full_row: true
             # Entrance
-              - entity: light.apt03_bulb_entrance
+              - entity: light.apt03_entrance_bulb
                 name: Entrance
                 type: light
 #                icon: 'mdi:restart'
@@ -563,7 +650,7 @@ views:
               #   type: entity-button
               #   state_color: true
             # Living Room
-              - entity: light.apt03_bulb_livingroom
+              - entity: light.apt03_livingroom_lamps
                 name: Living Room
                 type: light
             type: horizontal-stack
@@ -634,11 +721,11 @@ views:
         # Row 3 - More Lights
           - cards:
             # Bedroom Bulb
-              - entity: light.apt03_bulb_bedroom
+              - entity: light.apt03_bedroom_lamp
                 name: Bdr Lamp
                 type: light
             # Bedroom Switch
-              - entity: light.apt03_light_bedroom
+              - entity: switch.apt03_bedroom_switch
                 name: Bdr Switch
                 type: entity-button
                 icon_height: 200px
@@ -1394,7 +1481,7 @@ views:
                 show_icon: true
                 show_name: true
                 name: Clean IPTV Living Room
-                icon: 'mdi:television-clean'
+                icon: 'mdi:database-sync-outline'
                 type: entity-button
                 icon_height: 170px
               - entity: switch.apt08_livingroom_iptv
@@ -1742,7 +1829,7 @@ views:
           #       show_icon: true
           #       show_name: true
           #       name: Clean IPTV Living Room
-          #       icon: 'mdi:television-clean'
+          #       icon: 'mdi:database-sync-outline'
           #       type: entity-button
           #       icon_height: 170px
           #     - entity: switch.apt11_livingroom_iptv
@@ -1898,41 +1985,30 @@ views:
           #     - input_number.apt13_kiosk
         # Row 1 - Lights
           - cards:
-            # Building Entrance Lock
-              # - entity: switch.b4_entrance_lock
-              #   name: B4 Lock
-              #   type: entity-button
             # Entrance
-              - entity: switch.apt13_vdb_door_lock
-                name: 13 Lock
-                type: entity-button
-            # Entrance Doorbell
-              - type: vertical-stack
-                cards:
-                  - type: button
-                    entity: switch.apt13_doorbell
-                    show_state: false
-                    show_name: false
-                    show_icon: true
-                    icon_height: 130px
-                    icon: mdi:doorbell
-                    tap_action:
-                      action: call-service
-                      service: switch.turn_on
-                      service_data: {}
-                      target:
-                        entity_id: switch.apt13_doorbell
-                  - type: 'custom:slider-entity-row'
-                    entity: input_number.apt13_volume
-                    full_row: true
-            # Entrance
-              - entity: light.apt13_bulb_entrance
-                name: Entrance
-                type: light
+            - entity: light.apt13_entrance_bulb
+              name: Entrance
+              type: light
+            # Kitchen
+            - entity: switch.apt13_kitchen_lights
+              name: Kitchen
+              icon: mdi:ceiling-light-multiple
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             # Living Room
-              - entity: light.apt13_bulb_livingroom
-                name: Living Room
-                type: light
+            - entity: light.apt13_livingroom_lamps
+              name: Living Room
+              type: light
+            # Hall
+            - entity: light.apt13_hall_bulb
+              name: Hall
+              type: light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
@@ -1997,15 +2073,19 @@ views:
             type: horizontal-stack
         # Row 3 - More Lights
           - cards:
-            # Bedroom Bulb
-              - entity: light.apt13_bulb_bedroom
-                name: Bdr Lamp
-                type: light
-            # Bedroom Switch
-              - entity: light.apt13_light_bedroom
-                name: Bdr Switch
-                type: entity-button
-                icon_height: 200px
+            - type: entities
+              title: Bedroom
+              entities:
+                - entity: switch.apt13_bedroom_switch
+                  name: Ceiling
+                  secondary_info: none
+                  icon: mdi:ceiling-light-outline
+                - entity: light.apt13_bedroom_lamp
+                  name: Lamp
+                  icon: mdi:lamp-outline
+                  secondary_info: none
+              state_color: true
+              theme: minimalist-desktop
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
@@ -2021,6 +2101,38 @@ views:
             type: horizontal-stack
         # Row 5 - Tenant Portal
           - cards:
+            # Building Entrance Lock
+              # - entity: switch.b4_entrance_lock
+              #   name: B4 Lock
+              #   type: entity-button
+            # Entrance
+            - entity: switch.apt13_vdb_door_lock
+              name: 13 Lock
+              type: entity-button
+            - type: entities
+              entities:
+                - binary_sensor.apt13_vdb_door_sensor
+                - switch.apt13_vdb_door_lock
+              title: Lock
+          # Entrance Doorbell
+            - type: vertical-stack
+              cards:
+                - type: button
+                  entity: switch.apt13_doorbell
+                  show_state: false
+                  show_name: false
+                  show_icon: true
+                  icon_height: 130px
+                  icon: mdi:doorbell
+                  tap_action:
+                    action: call-service
+                    service: switch.turn_on
+                    service_data: {}
+                    target:
+                      entity_id: switch.apt13_doorbell
+                - type: 'custom:slider-entity-row'
+                  entity: input_number.apt13_volume
+                  full_row: true
             - entities:
                 - entity: input_text.apt13_vdb_line1
                   name: Line 1
@@ -2050,45 +2162,30 @@ views:
       - cards:
         # Row 1 - Lights
           - cards:
-            # Building Entrance Lock
-              # - entity: switch.b4_entrance_lock
-              #   name: B4 Lock
-              #   type: entity-button
             # Entrance
-              - entity: switch.apt14_vdb_door_lock
-                name: 14 Lock
-                type: entity-button
-            # Entrance Doorbell
-              - type: vertical-stack
-                cards:
-                  - type: button
-                    entity: switch.apt14_doorbell
-                    show_state: false
-                    show_name: false
-                    show_icon: true
-                    icon_height: 130px
-                    icon: mdi:doorbell
-                    tap_action:
-                      action: call-service
-                      service: switch.turn_on
-                      service_data: {}
-                      target:
-                        entity_id: switch.apt14_doorbell
-                  - type: 'custom:slider-entity-row'
-                    entity: input_number.apt14_volume
-                    full_row: true
-            # Entrance
-              - entity: light.apt14_bulb_entrance
-                name: Entrance
-                type: light
+            - entity: light.apt14_entrance_bulb
+              name: Entrance
+              type: light
             # Kitchen
-              - entity: light.apt14_bulb_kitchen
-                name: Kitchen
-                type: light
+            - entity: switch.apt14_kitchen_lights
+              name: Kitchen
+              icon: mdi:ceiling-light-multiple
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             # Living Room
-              - entity: light.apt14_bulb_livingroom
-                name: Living Room
-                type: light
+            - entity: light.apt14_livingroom_lamps
+              name: Living Room
+              type: light
+            # Hall
+            - entity: light.apt14_hall_bulb
+              name: Hall
+              type: light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
@@ -2156,19 +2253,19 @@ views:
             type: horizontal-stack
         # Row 3 - More Lights
           - cards:
-            # Hall
-              - entity: light.apt14_bulb_hall
-                name: Hall
-                type: light
-            # Bedroom Bulb
-              - entity: light.apt14_bulb_bedroom
-                name: Bdr Lamp
-                type: light
-            # Bedroom Switch
-              - entity: light.apt14_light_bedroom
-                name: Bdr Switch
-                type: entity-button
-                icon_height: 200px
+            - type: entities
+              title: Bedroom
+              entities:
+                - entity: switch.apt14_bedroom_switch
+                  name: Ceiling
+                  secondary_info: none
+                  icon: mdi:ceiling-light-outline
+                - entity: light.apt14_bedroom_lamp
+                  name: Lamp
+                  icon: mdi:lamp-outline
+                  secondary_info: none
+              state_color: true
+              theme: minimalist-desktop
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
@@ -2186,6 +2283,33 @@ views:
             type: horizontal-stack
         # Row 9 - Locks
           - cards:
+          # Building Entrance Lock
+            # - entity: switch.b4_entrance_lock
+            #   name: B4 Lock
+            #   type: entity-button
+          # Entrance
+            - entity: switch.apt14_vdb_door_lock
+              name: 14 Lock
+              type: entity-button
+          # Entrance Doorbell
+            - type: vertical-stack
+              cards:
+                - type: button
+                  entity: switch.apt14_doorbell
+                  show_state: false
+                  show_name: false
+                  show_icon: true
+                  icon_height: 130px
+                  icon: mdi:doorbell
+                  tap_action:
+                    action: call-service
+                    service: switch.turn_on
+                    service_data: {}
+                    target:
+                      entity_id: switch.apt14_doorbell
+                - type: 'custom:slider-entity-row'
+                  entity: input_number.apt14_volume
+                  full_row: true
             - type: entities
               entities:
                 - binary_sensor.apt14_vdb_door_sensor
@@ -2248,128 +2372,121 @@ views:
               #   name: B4 Lock
               #   type: entity-button
             # Entrance
-              - entity: switch.apt16_vdb_door_lock
-                name: 16 Lock
-                type: entity-button
-            # Entrance Doorbell
-              - type: vertical-stack
-                cards:
-                  - type: button
-                    entity: switch.apt16_doorbell
-                    show_state: false
-                    show_name: false
-                    show_icon: true
-                    icon_height: 130px
-                    icon: mdi:doorbell
-                    tap_action:
-                      action: call-service
-                      service: switch.turn_on
-                      service_data: {}
-                      target:
-                        entity_id: switch.apt16_doorbell
-                  # - type: button
-                  #   entity: switch.apt16_doorbell
-                  #   show_name: false
-                  #   tap_action:
-                  #     action: toggle
-                  #   icon: 'hass:bell'
-                  #   icon_height: 130px
-                  - type: 'custom:slider-entity-row'
-                    entity: input_number.apt16_volume
-                    full_row: true
-            # Entrance
-              - entity: light.apt16_bulb_entrance
-                name: Entrance
-                type: light
+            - entity: light.apt16_entrance_bulb
+              name: Entrance
+              type: light
+            # Kitchen
+            - entity: switch.apt16_kitchen_lights
+              name: Kitchen
+              icon: mdi:ceiling-light-multiple
+              show_name: true
+              show_icon: true
+              type: button
+              tap_action:
+                action: toggle
+              show_state: false
+              hold_action:
+                action: more-info
             # Living Room
-              - entity: light.apt16_bulb_livingroom
-                name: Living Room
-                type: light
+            - entity: light.apt16_livingroom_lamps
+              name: Living Room
+              type: light
+            # Hall
+            - entity: light.apt16_hall_bulb
+              name: Hall
+              type: light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
-              - entity: climate.apt16_heat
-                type: custom:simple-thermostat
+            - entity: climate.apt16_heat
+              type: custom:simple-thermostat
+              name: Heat
+              decimals: 1
+              step_size: 0.5
+              header:
+                toggle:
+                  entity: switch.16_heat
+                  name: 'On/Off'
                 name: Heat
-                decimals: 1
-                step_size: 0.5
-                header:
-                  toggle:
-                    entity: switch.16_heat
-                    name: 'On/Off'
-                  name: Heat
-                fallback: '??? '
-                unit: °F
-                label:
-                  temperature: 'Current'
-                  state: 'State'
-                control:
-                  preset:
-                    _hide_when_off: true
-                    none: true
-                    home: true
-                    away: true
-                    sleep: true
-                    activity: false
-                    comfort: false
-                layout:
-                  mode:
-                    names: true
-                    icons: false
-                    headings: false
-                sensors:
-                  - entity: sensor.apt16_humidity
-                    name: 'Humidity'
-              - entity: climate.apt16_ac
-                type: custom:simple-thermostat
-                name: AC
-                decimals: 1
-                step_size: 0.5
-                header:
-                  toggle:
-                    entity: switch.apt16_ac
-                    name: ' '
-                label:
-                  temperature: ' '
-                  state: ' '
-                control:
-                  preset:
-                    _hide_when_off: true
-                    none:
-                      name: false
-                    home: true
-                    away: true
-                    sleep: true
-                    activity: false
-                    comfort: false
-                  # hvac: true
-                sensors:
-                  - entity: sensor.apt16_humidity
-                    name: ' '
+              fallback: '??? '
+              unit: °F
+              label:
+                temperature: 'Current'
+                state: 'State'
+              control:
+                preset:
+                  _hide_when_off: true
+                  none: true
+                  home: true
+                  away: true
+                  sleep: true
+                  activity: false
+                  comfort: false
+              layout:
+                mode:
+                  names: true
+                  icons: false
+                  headings: false
+              sensors:
+                - entity: sensor.apt16_humidity
+                  name: 'Humidity'
+            # Bedroom Left
+            - type: entities
+              title: Bedroom Left
+              entities:
+                - entity: switch.apt16_bedroom_switch
+                  name: Ceiling
+                  secondary_info: none
+                  icon: mdi:ceiling-light-outline
+                - entity: light.apt16_bedroom_lamp
+                  name: Lamp
+                  icon: mdi:lamp-outline
+                  secondary_info: none
+              state_color: true
+              theme: minimalist-desktop
+              # - entity: climate.apt16_ac
+              #   type: custom:simple-thermostat
+              #   name: AC
+              #   decimals: 1
+              #   step_size: 0.5
+              #   header:
+              #     toggle:
+              #       entity: switch.apt16_ac
+              #       name: ' '
+              #   label:
+              #     temperature: ' '
+              #     state: ' '
+              #   control:
+              #     preset:
+              #       _hide_when_off: true
+              #       none:
+              #         name: false
+              #       home: true
+              #       away: true
+              #       sleep: true
+              #       activity: false
+              #       comfort: false
+              #     # hvac: true
+              #   sensors:
+              #     - entity: sensor.apt16_humidity
+              #       name: ' '
             type: horizontal-stack
         # Row 3 - More Lights
           - cards:
-            # Hall
-            - entity: light.apt16_bulb_hall
-              name: Hall
-              type: light
-            # Bedroom Bulb
-            - entity: light.apt16_bulb_bedroom
-              name: Bdr Lamp
-              type: light
-            # Bedroom Switch
-            - entity: light.apt16_light_bedroom
-              name: Bdr Switch
-              type: entity-button
-              icon_height: 200px
-            # office Bulb
-            - entity: light.apt16_bulb_bedroom2
-              name: Bdr2 Lamp
-              type: light
-            # Kitchen
-            - entity: light.apt16_bulb_kitchen
-              name: Kitchen
-              type: light
+            # Bedroom Right
+            - type: entities
+              title: Bedroom Right
+              entities:
+                - entity: switch.apt16_bedroom2_switch
+                  name: Ceiling
+                  secondary_info: none
+                  icon: mdi:ceiling-light-outline
+                - entity: light.apt16_bedroom_lamp
+                  name: Lamp
+                  icon: mdi:lamp-outline
+                  secondary_info: none
+              state_color: true
+              theme: minimalist-desktop
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
@@ -2427,7 +2544,7 @@ views:
                 show_icon: true
                 show_name: true
                 name: Clean IPTV Living Room
-                icon: 'mdi:television-clean'
+                icon: 'mdi:database-sync-outline'
                 type: entity-button
                 icon_height: 170px
               - entity: switch.apt16_livingroom_iptv
@@ -2441,6 +2558,35 @@ views:
                   action: toggle
                 type: entity-button
                 icon_height: 170px
+              - entity: switch.apt16_vdb_door_lock
+                name: 16 Lock
+                type: entity-button
+              # Entrance Doorbell
+              - type: vertical-stack
+                cards:
+                  - type: button
+                    entity: switch.apt16_doorbell
+                    show_state: false
+                    show_name: false
+                    show_icon: true
+                    icon_height: 130px
+                    icon: mdi:doorbell
+                    tap_action:
+                      action: call-service
+                      service: switch.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: switch.apt16_doorbell
+                  # - type: button
+                  #   entity: switch.apt16_doorbell
+                  #   show_name: false
+                  #   tap_action:
+                  #     action: toggle
+                  #   icon: 'hass:bell'
+                  #   icon_height: 130px
+                  - type: 'custom:slider-entity-row'
+                    entity: input_number.apt16_volume
+                    full_row: true
             type: horizontal-stack
         # Row 7.1 - IPTV bedroom
         # Row 7.2 - IPTV Bedroom (Buttons)

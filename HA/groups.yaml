@@ -75,13 +75,13 @@
 ####  Weather   #####
 
 ####  Main - v   #####
-building_lights:
-  name: Building Lights
-  entities:
-    - switch.b1_lights
-    - switch.b2_lights
-    - switch.b3_lights
-    - switch.b4_lights
+# building_lights:
+#   name: Building Lights
+#   entities:
+#     - switch.b1_lights
+#     - switch.b2_lights
+#     - switch.b3_lights
+#     - switch.b4_lights
 
 ####  Apt 01 - g  #####
 
@@ -95,22 +95,114 @@ building_lights:
 #     - switch.apt01_heat
 #     - switch.apt01_ac
 
-apt01_kitchen_lights:
-  name: Apt01 Kitchen Lights
-  entities:
-    - switch.apt01_kitchen_switch1
-    - switch.apt01_kitchen_switch2
+# # Kitchen Light Groups
+# # Apt 01
+# apt01_kitchen_lights:
+#   name: Apt01 Kitchen Lights
+#   entities:
+#     - switch.apt01_kitchen_switch1
+#     - switch.apt01_kitchen_switch2
+# # Apt 02
+# apt02_kitchen_lights:
+#   name: Apt02 Kitchen Lights
+#   entities:
+#     - switch.apt02_kitchen_switch1
+#     - switch.apt02_kitchen_switch2
+# # Apt 03
+# apt03_kitchen_lights:
+#   name: Apt03 Kitchen Lights
+#   entities:
+#     - switch.apt03_kitchen_switch1
+#     - switch.apt03_kitchen_switch2
+# # Apt 04
+# apt04_kitchen_lights:
+#   name: Apt04 Kitchen Lights
+#   entities:
+#     - switch.apt04_kitchen_switch1
+#     - switch.apt04_kitchen_switch2
+# # Apt 05
+# apt05_kitchen_lights:
+#   name: Apt05 Kitchen Lights
+#   entities:
+#     - switch.apt05_kitchen_switch1
+#     - switch.apt05_kitchen_switch2
+# # Apt 06
+# apt06_kitchen_lights:
+#   name: Apt06 Kitchen Lights
+#   entities:
+#     - switch.apt06_kitchen_switch1
+#     - switch.apt06_kitchen_switch2
+# # Apt 07
+# apt07_kitchen_lights:
+#   name: Apt07 Kitchen Lights
+#   entities:
+#     - switch.apt07_kitchen_switch1
+#     - switch.apt07_kitchen_switch2
+# # Apt 08
+# apt08_kitchen_lights:
+#   name: Apt08 Kitchen Lights
+#   entities:
+#     - switch.apt08_kitchen_switch1
+#     - switch.apt08_kitchen_switch2
+# # Apt 09
+# apt09_kitchen_lights:
+#   name: Apt09 Kitchen Lights
+#   entities:
+#     - switch.apt09_kitchen_switch1
+#     - switch.apt09_kitchen_switch2
+# # Apt 10
+# apt10_kitchen_lights:
+#   name: Apt10 Kitchen Lights
+#   entities:
+#     - switch.apt10_kitchen_switch1
+#     - switch.apt10_kitchen_switch2
+# # Apt 11
+# apt11_kitchen_lights:
+#   name: Apt11 Kitchen Lights
+#   entities:
+#     - switch.apt11_kitchen_switch1
+#     - switch.apt11_kitchen_switch2
+# # Apt 12
+# apt12_kitchen_lights:
+#   name: Apt12 Kitchen Lights
+#   entities:
+#     - switch.apt12_kitchen_switch1
+#     - switch.apt12_kitchen_switch2
+# # Apt 13
+# apt13_kitchen_lights:
+#   name: Apt13 Kitchen Lights
+#   entities:
+#     - switch.apt13_kitchen_switch1
+#     - switch.apt13_kitchen_switch2
+# # Apt 14
+# apt14_kitchen_lights:
+#   name: Apt14 Kitchen Lights
+#   entities:
+#     - switch.apt14_kitchen_switch1
+#     - switch.apt14_kitchen_switch2
+# # Apt 15
+# apt15_kitchen_lights:
+#   name: Apt15 Kitchen Lights
+#   entities:
+#     - switch.apt15_kitchen_switch1
+#     - switch.apt15_kitchen_switch2
+# # Apt 16
+# apt16_kitchen_lights:
+#   name: Apt16 Kitchen Lights
+#   entities:
+#     - switch.apt16_kitchen_switch1
+#     - switch.apt16_kitchen_switch2
 
 ####  Apt 02 - g  #####
-apt_02_switches:
-  name: Apt 2 Switches
-  entities:
-    - switch.apt02_bedroom_light
-    - switch.apt02_entrance_light
-    - switch.apt02_outlet_1
-    - switch.apt02_outlet_2
-    - switch.apt02_heat
-    - switch.apt02_ac
+# apt_02_switches:
+#   name: Apt02 Switches
+#   entities:
+#     - switch.apt02_bedroom_light
+#     - switch.apt02_entrance_light
+#     - switch.apt02_outlet_1
+#     - switch.apt02_outlet_2
+#     - switch.apt02_heat
+#     - switch.apt02_ac
 
 ####  Apt 03 - g  #####
 

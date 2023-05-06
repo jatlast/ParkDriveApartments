@@ -1,30 +1,32 @@
-- platform: group
-  name: Building Lights
-  uniqut_id: building_lights
-  entities:
-    - switch.b1_lights
-    - switch.b2_lights
-    - switch.b3_lights
-    - switch.b4_lights
+# JTB - 20230503 - This file is not use by Home Assistant.
 
-- platform: group
-  uniqut_id: apt_01_lights
-  name: Apt 1 Lights
-  entities:
-    - switch.apt01_bedroom_light
-    - switch.apt01_entrance_light
+# - platform: group
+#   name: Building Lights
+#   uniqut_id: building_lights
+#   entities:
+#     - switch.b1_lights
+#     - switch.b2_lights
+#     - switch.b3_lights
+#     - switch.b4_lights
 
-####  Apt 02 - g  #####
-- platform: group
-  uniqut_id: apt_02_lights
-  name: Apt 2 Lights
-  entities:
-    - switch.apt02_bedroom_light
-    - switch.apt02_entrance_light
-    - switch.apt02_outlet_1
-    - switch.apt02_outlet_2
-    - switch.apt02_heat
-    - switch.apt02_ac
+# - platform: group
+#   uniqut_id: apt_01_lights
+#   name: Apt 1 Lights
+#   entities:
+#     - switch.apt01_bedroom_light
+#     - switch.apt01_entrance_light
+
+# ####  Apt 02 - g  #####
+# - platform: group
+#   uniqut_id: apt_02_lights
+#   name: Apt 2 Lights
+#   entities:
+#     - switch.apt02_bedroom_light
+#     - switch.apt02_entrance_light
+#     - switch.apt02_outlet_1
+#     - switch.apt02_outlet_2
+#     - switch.apt02_heat
+#     - switch.apt02_ac
 
 ####  Apt 03 - g  #####
 

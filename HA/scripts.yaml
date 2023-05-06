@@ -17,7 +17,6 @@ apt01_clean_iptv_bedroom:
 apt02_clean_iptv_livingroom:
   alias: Apt02 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt02 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_2_1
@@ -33,7 +32,6 @@ apt02_clean_iptv_bedroom:
 apt05_clean_iptv_livingroom:
   alias: Apt05 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt05 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_5_1
@@ -49,7 +47,6 @@ apt05_clean_iptv_bedroom:
 apt06_clean_iptv_livingroom:
   alias: Apt06 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt06 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_6_1
@@ -65,7 +62,6 @@ apt06_clean_iptv_bedroom:
 apt07_clean_iptv_livingroom:
   alias: Apt07 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt07 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_7_1
@@ -81,7 +77,6 @@ apt07_clean_iptv_bedroom:
 apt09_clean_iptv_livingroom:
   alias: Apt09 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt09 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_9_1
@@ -97,7 +92,6 @@ apt09_clean_iptv_bedroom:
 apt12_clean_iptv_livingroom:
   alias: Apt12 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt12 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_12_1
@@ -120,7 +114,6 @@ apt12_clean_iptv_bedroom2:
 apt14_clean_iptv_livingroom:
   alias: Apt14 Clean IPTV LivingRoom
   sequence:
-#    - alias: Apt14 IPTV Clean
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_14_1
@@ -132,6 +125,36 @@ apt14_clean_iptv_bedroom:
       data:
         entity_id: media_player.iptv_14_2
         method: VideoLibrary.Clean
+
+apt15_clean_iptv_livingroom:
+  alias: Apt15 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_15_1
+        method: VideoLibrary.Clean
+# apt15_clean_iptv_bedroom:
+#   alias: Apt15 Clean IPTV Bedroom
+#   sequence:
+#       service: kodi.call_method
+#       data:
+#         entity_id: media_player.iptv_15_2
+#         method: VideoLibrary.Clean
+
+apt16_clean_iptv_livingroom:
+  alias: Apt16 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_16_1
+        method: VideoLibrary.Clean
+# apt16_clean_iptv_bedroom:
+#   alias: Apt16 Clean IPTV Bedroom
+#   sequence:
+#       service: kodi.call_method
+#       data:
+#         entity_id: media_player.iptv_16_2
+#         method: VideoLibrary.Clean
 
 
 kodi_notification:

@@ -1038,7 +1038,7 @@
 # Apt01 
 ##########
 
-# Entrance
+# 01 Entrance
 - id: apt01_entrance_switch_toggled_on
   alias: Apt01 Entrance Switch Toggled On
   description: Switch Toggled On
@@ -1065,7 +1065,7 @@
     target:
       entity_id: light.apt01_entrance_bulb
 
-# Kitchen
+# 01 Kitchen
 - id: apt01_kitchen_switch_toggled_on
   alias: Apt01 Kitchen Switch Toggled On
   description: Switch Toggled On
@@ -1080,7 +1080,7 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: group.apt01_kitchen_lights
+      entity_id: switch.apt01_kitchen_lights
 
 - id: apt01_kitchen_switch_toggled_off
   alias: Apt01 Kitchen Switch Toggled Off
@@ -1096,9 +1096,9 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: group.apt01_kitchen_lights
+      entity_id: switch.apt01_kitchen_lights
 
-# Living Room
+# 01 Living Room
 - id: apt01_livingroom_switch_toggled_on
   alias: Apt01 livingroom Switch Toggled On
   description: Switch Toggled On
@@ -1125,7 +1125,7 @@
     target:
       entity_id: light.apt01_livingroom_lamps
 
-# Hall
+# 01 Hall
 - id: apt01_hall_switch_toggled_on
   alias: Apt01 hall Switch Toggled On
   description: Switch Toggled On
@@ -1158,7 +1158,7 @@
     target:
       entity_id: light.apt01_hall_bulb
 
-# Bedroom
+# 01 Bedroom
 - id: apt01_bedroom_switch_toggled_on
   alias: Apt01 Bedroom Switch Toggled On
   description: Switch Toggled On
@@ -1185,7 +1185,7 @@
     target:
       entity_id: switch.apt01_bedroom_switch
 
-# Bedroom2
+# 01 Bedroom2
 - id: apt01_bedroom2_switch_toggled_on
   alias: Apt01 Bedroom2 Switch Toggled On
   description: Switch Toggled On
@@ -1211,6 +1211,1153 @@
     data: {}
     target:
       entity_id: switch.apt01_bedroom2_switch
+
+##########
+# Apt02
+##########
+
+##########
+# Apt03
+##########
+
+# 03 Entrance
+- id: apt03_entrance_switch_toggled_on
+  alias: Apt03 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt03_entrance_bulb
+
+- id: apt03_entrance_switch_toggled_off
+  alias: Apt03 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt03_entrance_bulb
+
+# 03 Kitchen
+- id: apt03_kitchen_switch_toggled_on
+  alias: Apt03 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt03_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt03_kitchen_lights
+
+- id: apt03_kitchen_switch_toggled_off
+  alias: Apt03 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt03_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt03_kitchen_lights
+
+# 03 Living Room
+- id: apt03_livingroom_switch_toggled_on
+  alias: Apt03 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt03_livingroom_lamps
+
+- id: apt03_livingroom_switch_toggled_off
+  alias: Apt03 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt03_livingroom_lamps
+
+# 03 Hall
+- id: apt03_hall_switch_toggled_on
+  alias: Apt03 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_hall_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt03_hall_bulb
+
+- id: apt03_hall_switch_toggled_off
+  alias: Apt03 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_hall_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt03_hall_bulb
+
+# 03 Bedroom
+- id: apt03_bedroom_switch_toggled_on
+  alias: Apt03 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt03_bedroom_switch
+
+- id: apt03_bedroom_switch_toggled_off
+  alias: Apt03 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt03_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt03_bedroom_switch
+
+##########
+# Apt04
+##########
+
+##########
+# Apt05
+##########
+
+##########
+# Apt06
+##########
+
+# 06 Entrance
+- id: apt06_entrance_switch_toggled_on
+  alias: Apt06 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt06_entrance_bulb
+
+- id: apt06_entrance_switch_toggled_off
+  alias: Apt06 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt06_entrance_bulb
+
+# 06 Kitchen
+- id: apt06_kitchen_switch_toggled_on
+  alias: Apt06 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt06_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt06_kitchen_lights
+
+- id: apt06_kitchen_switch_toggled_off
+  alias: Apt06 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt06_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt06_kitchen_lights
+
+# 06 Living Room
+- id: apt06_livingroom_switch_toggled_on
+  alias: Apt06 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt06_livingroom_lamps
+
+- id: apt06_livingroom_switch_toggled_off
+  alias: Apt06 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt06_livingroom_lamps
+
+# 06 Hall
+- id: apt06_hall_switch_toggled_on
+  alias: Apt06 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_hall_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt06_hall_bulb
+
+- id: apt06_hall_switch_toggled_off
+  alias: Apt06 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_hall_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt06_hall_bulb
+
+# 06 Bedroom
+- id: apt06_bedroom_switch_toggled_on
+  alias: Apt06 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt06_bedroom_switch
+
+- id: apt06_bedroom_switch_toggled_off
+  alias: Apt06 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt06_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt06_bedroom_switch
+
+
+##########
+# Apt07
+##########
+
+##########
+# Apt08
+##########
+
+# 08 Entrance
+- id: apt08_entrance_switch_toggled_on
+  alias: Apt08 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt08_entrance_bulb
+
+- id: apt08_entrance_switch_toggled_off
+  alias: Apt08 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt08_entrance_bulb
+
+# 08 Kitchen
+- id: apt08_kitchen_switch_toggled_on
+  alias: Apt08 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt08_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt08_kitchen_lights
+
+- id: apt08_kitchen_switch_toggled_off
+  alias: Apt08 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt08_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt08_kitchen_lights
+
+# 08 Living Room
+- id: apt08_livingroom_switch_toggled_on
+  alias: Apt08 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt08_livingroom_lamps
+
+- id: apt08_livingroom_switch_toggled_off
+  alias: Apt08 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt08_livingroom_lamps
+
+# 08 Hall
+- id: apt08_hall_switch_toggled_on
+  alias: Apt08 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt08_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt08_hall_bulb
+
+- id: apt08_hall_switch_toggled_off
+  alias: Apt08 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt08_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt08_hall_bulb
+
+# 08 Bedroom
+- id: apt08_bedroom_switch_toggled_on
+  alias: Apt08 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt08_bedroom_switch
+
+- id: apt08_bedroom_switch_toggled_off
+  alias: Apt08 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt08_bedroom_switch
+
+# 08 Bedroom2
+- id: apt08_bedroom2_switch_toggled_on
+  alias: Apt08 Bedroom2 Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_bedroom2_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt08_bedroom2_switch
+
+- id: apt08_bedroom2_switch_toggled_off
+  alias: Apt08 Bedroom2 Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt08_bedroom2_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt08_bedroom2_switch
+
+##########
+# Apt09
+##########
+
+##########
+# Apt10
+##########
+
+##########
+# Apt11
+##########
+
+# 11 Entrance
+- id: apt11_entrance_switch_toggled_on
+  alias: Apt11 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt11_entrance_bulb
+
+- id: apt11_entrance_switch_toggled_off
+  alias: Apt11 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt11_entrance_bulb
+
+# 11 Kitchen
+- id: apt11_kitchen_switch_toggled_on
+  alias: Apt11 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt11_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt11_kitchen_lights
+
+- id: apt11_kitchen_switch_toggled_off
+  alias: Apt11 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt11_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt11_kitchen_lights
+
+# 11 Living Room
+- id: apt11_livingroom_switch_toggled_on
+  alias: Apt11 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt11_livingroom_lamps
+
+- id: apt11_livingroom_switch_toggled_off
+  alias: Apt11 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt11_livingroom_lamps
+
+# 11 Hall
+- id: apt11_hall_switch_toggled_on
+  alias: Apt11 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt11_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt11_hall_bulb
+
+- id: apt11_hall_switch_toggled_off
+  alias: Apt11 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt11_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt11_hall_bulb
+
+# 11 Bedroom
+- id: apt11_bedroom_switch_toggled_on
+  alias: Apt11 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt11_bedroom_switch
+
+- id: apt11_bedroom_switch_toggled_off
+  alias: Apt11 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt11_bedroom_switch
+
+# 11 Bedroom2
+- id: apt11_bedroom2_switch_toggled_on
+  alias: Apt11 Bedroom2 Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_bedroom2_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt11_bedroom2_switch
+
+- id: apt11_bedroom2_switch_toggled_off
+  alias: Apt11 Bedroom2 Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt11_bedroom2_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt11_bedroom2_switch
+
+##########
+# Apt12
+##########
+
+##########
+# Apt13
+##########
+
+# 13 Entrance
+- id: apt13_entrance_switch_toggled_on
+  alias: Apt13 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt13_entrance_bulb
+
+- id: apt13_entrance_switch_toggled_off
+  alias: Apt13 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt13_entrance_bulb
+
+# 13 Kitchen
+- id: apt13_kitchen_switch_toggled_on
+  alias: Apt13 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt13_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt13_kitchen_lights
+
+- id: apt13_kitchen_switch_toggled_off
+  alias: Apt13 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt13_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt13_kitchen_lights
+
+# 13 Living Room
+- id: apt13_livingroom_switch_toggled_on
+  alias: Apt13 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt13_livingroom_lamps
+
+- id: apt13_livingroom_switch_toggled_off
+  alias: Apt13 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt13_livingroom_lamps
+
+# 13 Hall
+- id: apt13_hall_switch_toggled_on
+  alias: Apt13 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_hall_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt13_hall_bulb
+
+- id: apt13_hall_switch_toggled_off
+  alias: Apt13 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_hall_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt13_hall_bulb
+
+# 13 Bedroom
+- id: apt13_bedroom_switch_toggled_on
+  alias: Apt13 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt13_bedroom_switch
+
+- id: apt13_bedroom_switch_toggled_off
+  alias: Apt13 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt13_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt13_bedroom_switch
+
+##########
+# Apt14
+##########
+
+# 14 Entrance
+- id: apt14_entrance_switch_toggled_on
+  alias: Apt14 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt14_entrance_bulb
+
+- id: apt14_entrance_switch_toggled_off
+  alias: Apt14 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt14_entrance_bulb
+
+# 14 Kitchen
+- id: apt14_kitchen_switch_toggled_on
+  alias: Apt14 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt14_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt14_kitchen_lights
+
+- id: apt14_kitchen_switch_toggled_off
+  alias: Apt14 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt14_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt14_kitchen_lights
+
+# 14 Living Room
+- id: apt14_livingroom_switch_toggled_on
+  alias: Apt14 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt14_livingroom_lamps
+
+- id: apt14_livingroom_switch_toggled_off
+  alias: Apt14 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt14_livingroom_lamps
+
+# 14 Hall
+- id: apt14_hall_switch_toggled_on
+  alias: Apt14 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_hall_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt14_hall_bulb
+
+- id: apt14_hall_switch_toggled_off
+  alias: Apt14 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_hall_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt14_hall_bulb
+
+# 14 Bedroom
+- id: apt14_bedroom_switch_toggled_on
+  alias: Apt14 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt14_bedroom_switch
+
+- id: apt14_bedroom_switch_toggled_off
+  alias: Apt14 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt14_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt14_bedroom_switch
+
+##########
+# Apt15
+##########
+
+##########
+# Apt16
+##########
+
+# 16 Entrance
+- id: apt16_entrance_switch_toggled_on
+  alias: Apt16 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt16_entrance_bulb
+
+- id: apt16_entrance_switch_toggled_off
+  alias: Apt16 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt16_entrance_bulb
+
+# 16 Kitchen
+- id: apt16_kitchen_switch_toggled_on
+  alias: Apt16 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt16_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt16_kitchen_lights
+
+- id: apt16_kitchen_switch_toggled_off
+  alias: Apt16 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt16_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt16_kitchen_lights
+
+# 16 Living Room
+- id: apt16_livingroom_switch_toggled_on
+  alias: Apt16 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt16_livingroom_lamps
+
+- id: apt16_livingroom_switch_toggled_off
+  alias: Apt16 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt16_livingroom_lamps
+
+# 16 Hall
+- id: apt16_hall_switch_toggled_on
+  alias: Apt16 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt16_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt16_hall_bulb
+
+- id: apt16_hall_switch_toggled_off
+  alias: Apt16 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt16_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt16_hall_bulb
+
+# 16 Bedroom
+- id: apt16_bedroom_switch_toggled_on
+  alias: Apt16 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt16_bedroom_switch
+
+- id: apt16_bedroom_switch_toggled_off
+  alias: Apt16 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt16_bedroom_switch
+
+# 16 Bedroom2
+- id: apt16_bedroom2_switch_toggled_on
+  alias: Apt16 Bedroom2 Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_bedroom2_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt16_bedroom2_switch
+
+- id: apt16_bedroom2_switch_toggled_off
+  alias: Apt16 Bedroom2 Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt16_bedroom2_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt16_bedroom2_switch
 
 
 # - id: apt01_entrance_switch_on
@@ -1358,7 +2505,7 @@
 #     service: homeassistant.turn_on
 #     data: {}
 #     target:
-#       entity_id: group.apt01_kitchen_lights
+#       entity_id: switch.apt01_kitchen_lights
 #   # action:
 #   #   - service: mqtt.publish
 #   #     data:
@@ -1391,7 +2538,7 @@
 #     service: homeassistant.turn_off
 #     data: {}
 #     target:
-#       entity_id: group.apt01_kitchen_lights
+#       entity_id: switch.apt01_kitchen_lights
 #   # action:
 #   #   - service: mqtt.publish
 #   #     data:
@@ -1521,22 +2668,22 @@
       qos: 1
   
 
-- id: apt03_livingroom_switch_toggle
-  alias: Apt03 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt03_livingroom_switch
-      entity_id: switch.apt03_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt03_livingroom_switch_toggle
+#   alias: Apt03 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt03_livingroom_switch
+#       entity_id: switch.apt03_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt03/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
 - id: apt04_livingroom_switch_toggle
@@ -1611,22 +2758,22 @@
       qos: 1
   
 
-- id: apt08_livingroom_switch_toggle
-  alias: Apt08 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt08_livingroom_switch
-      entity_id: switch.apt08_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt08/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt08_livingroom_switch_toggle
+#   alias: Apt08 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt08_livingroom_switch
+#       entity_id: switch.apt08_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt08/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
 - id: apt09_livingroom_switch_toggle
@@ -1665,22 +2812,22 @@
       qos: 1
   
 
-- id: apt11_livingroom_switch_toggle
-  alias: Apt11 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt11_livingroom_switch
-      entity_id: switch.apt11_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt11_livingroom_switch_toggle
+#   alias: Apt11 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt11_livingroom_switch
+#       entity_id: switch.apt11_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt11/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
 - id: apt12_livingroom_switch_toggle
@@ -1701,40 +2848,40 @@
       qos: 1
   
 
-- id: apt13_livingroom_switch_toggle
-  alias: Apt13 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt13_livingroom_switch
-      entity_id: switch.apt13_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt13_livingroom_switch_toggle
+#   alias: Apt13 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt13_livingroom_switch
+#       entity_id: switch.apt13_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt13/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
-- id: apt14_livingroom_switch_toggle
-  alias: Apt14 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt14_livingroom_switch
-      entity_id: switch.apt14_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt14_livingroom_switch_toggle
+#   alias: Apt14 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt14_livingroom_switch
+#       entity_id: switch.apt14_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt14/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
 - id: apt15_livingroom_switch_toggle
@@ -1755,22 +2902,22 @@
       qos: 1
   
 
-- id: apt16_livingroom_switch_toggle
-  alias: Apt16 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt16_livingroom_switch
-      entity_id: switch.apt16_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt16_livingroom_switch_toggle
+#   alias: Apt16 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt16_livingroom_switch
+#       entity_id: switch.apt16_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt16/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 - id: b1_lights_on_pir_vdb_01
   alias: B1 Lights On PIR VDB 01
