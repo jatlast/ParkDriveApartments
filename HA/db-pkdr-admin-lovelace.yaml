@@ -28,12 +28,12 @@ views:
   - title: PkDr Controls
     theme: M3-04-Magenta
     visible:
-      - user: f2a7bc7c54114ae18850444b825ccc30
+      - user: f2a7bc7c54114ae18850444b825ccc30 # PkDrApts
     path: pkdr-admin?disable_km
     require_admin: true
     cards:
       - type: light
-        entity: light.rgbw_bulb_test
+        entity: light.rgbw_test_bulb
         name: RGBW Bulb Test
       - type: entity-button
         tap_action:
@@ -45,6 +45,7 @@ views:
         entity: switch.switch_test
         name: Switch Test
       - entities:
+          - entity: switch.building_lights
           - entity: switch.b1_lights
           - entity: switch.b2_lights
           - entity: switch.b3_lights
@@ -234,34 +235,67 @@ views:
         show_header_toggle: true
         state_color: true
         title: PkDr Entrance
+      - type: entities
+        entities:
+          - switch.apt01_livingroom_iptv
+          - switch.apt02_livingroom_iptv
+          - switch.apt03_livingroom_iptv
+          - switch.apt04_livingroom_iptv
+          - switch.apt05_livingroom_iptv
+          - switch.apt06_livingroom_iptv
+          - switch.apt07_livingroom_iptv
+          - switch.apt08_livingroom_iptv
+          - switch.apt09_livingroom_iptv
+          - switch.apt10_livingroom_iptv
+          - switch.apt11_livingroom_iptv
+          - switch.apt12_livingroom_iptv
+          - switch.apt13_livingroom_iptv
+          - switch.apt14_livingroom_iptv
+          - switch.apt15_livingroom_iptv
+          - switch.apt16_livingroom_iptv
+        show_header_toggle: true
+        state_color: true
+        title: IPTV Switches
       # 2-BDR
       - entities:
-          - entity: light.apt01_bulb_entrance
-          - entity: light.apt01_bulb_livingroom
-          - entity: light.apt01_bulb_kitchen
-          - entity: light.apt01_bulb_hall
-          - entity: light.apt01_bulb_bedroom
-          - entity: light.apt01_bulb_bedroom2
-          - entity: light.apt01_light_bedroom
-          - entity: switch.apt01_livingroom_iptv
+          - entity: light.apt01_entrance_bulb
+          - entity: switch.apt01_kitchen_lights
+          - entity: switch.apt01_kitchen_switch1
+          - entity: switch.apt01_kitchen_switch2
+          - entity: light.apt01_livingroom_lamps
+          - entity: light.apt01_livingroom_lamp1
+          - entity: light.apt01_livingroom_lamp2
+          - entity: light.apt01_hall_bulb
+          - entity: light.apt01_bedroom_lamp
+          - entity: light.apt01_bedroom2_lamp
+          - entity: switch.apt01_bedroom_switch
+          - entity: switch.apt01_bedroom2_switch
           - entity: switch.apt01_ac
           - entity: switch.01_heat
+          - entity: switch.apt01_livingroom_iptv
           - entity: switch.apt01_vdb_door_lock
           - entity: switch.apt01_doorbell
           - entity: input_number.apt01_volume
+          - entity: input_text.apt01_vdb_line1
+          - entity: input_text.apt01_vdb_line2
+          - entity: input_text.apt01_vdb_line3
+          - entity: input_text.apt01_vdb_line4
+          # Apt 01 Only
           - entity: switch.apt01_bedroom_ender3
+          - entity: switch.apt01_office_light1
+          - entity: switch.apt01_office_light2
         show_header_toggle: true
         state_color: true
-        title: Apt 1
+        title: Apt 01
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt02_bulb_entrance
-          - entity: light.apt02_bulb_livingroom
-          - entity: light.apt02_bulb_kitchen
-          - entity: light.apt02_bulb_hall
-          - entity: light.apt02_bulb_bedroom
-          - entity: light.apt02_light_bedroom
+          - entity: light.apt02_entrance_bulb
+          - entity: light.apt02_livingroom_bulb
+          - entity: light.apt02_kitchen_bulb
+          - entity: light.apt02_hall_bulb
+          - entity: light.apt02_bedroom_lamp
+          - entity: switch.apt02_bedroom_switch
           - entity: switch.apt02_livingroom_iptv
           - entity: switch.apt02_ac
           - entity: switch.02_heat
@@ -274,30 +308,40 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt03_bulb_entrance
-          - entity: light.apt03_bulb_livingroom
-          - entity: light.apt03_bulb_kitchen
-          - entity: light.apt03_bulb_hall
-          - entity: light.apt03_bulb_bedroom
-          - entity: light.apt03_light_bedroom
-          - entity: switch.apt03_livingroom_iptv
+          - entity: light.apt03_entrance_bulb
+          - entity: switch.apt03_kitchen_lights
+          - entity: switch.apt03_kitchen_switch1
+          - entity: switch.apt03_kitchen_switch2
+          - entity: light.apt03_livingroom_lamps
+          - entity: light.apt03_livingroom_lamp1
+          - entity: light.apt03_livingroom_lamp2
+          - entity: light.apt03_hall_bulb
+          - entity: light.apt03_bedroom_lamp
+          # - entity: light.apt03_bedroom2_lamp
+          - entity: switch.apt03_bedroom_switch
+          # - entity: switch.apt03_bedroom2_switch
           - entity: switch.apt03_ac
           - entity: switch.03_heat
+          - entity: switch.apt03_livingroom_iptv
           - entity: switch.apt03_vdb_door_lock
           - entity: switch.apt03_doorbell
           - entity: input_number.apt03_volume
+          - entity: input_text.apt03_vdb_line1
+          - entity: input_text.apt03_vdb_line2
+          - entity: input_text.apt03_vdb_line3
+          - entity: input_text.apt03_vdb_line4
         show_header_toggle: true
         state_color: true
-        title: Apt 3
+        title: Apt 03
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt05_bulb_entrance
-          - entity: light.apt05_bulb_livingroom
-          - entity: light.apt05_bulb_kitchen
-          - entity: light.apt05_bulb_hall
-          - entity: light.apt05_bulb_bedroom
-          - entity: light.apt05_light_bedroom
+          - entity: light.apt05_entrance_bulb
+          - entity: light.apt05_livingroom_bulb
+          - entity: light.apt05_kitchen_bulb
+          - entity: light.apt05_hall_bulb
+          - entity: light.apt05_bedroom_lamp
+          - entity: switch.apt05_bedroom_switch
           - entity: switch.apt05_livingroom_iptv
           - entity: switch.apt05_ac
           - entity: switch.05_heat
@@ -310,32 +354,32 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt06_bulb_entrance
-          - entity: light.apt06_bulb_livingroom
-          - entity: light.apt06_bulb_kitchen
-          - entity: light.apt06_bulb_hall
-          - entity: light.apt06_bulb_bedroom
-          - entity: light.apt06_light_bedroom
+          - entity: light.apt06_entrance_bulb
+          - entity: light.apt06_livingroom_bulb
+          - entity: light.apt06_kitchen_bulb
+          - entity: light.apt06_hall_bulb
+          - entity: light.apt06_bedroom_lamp
+          - entity: switch.apt06_bedroom_switch
           - entity: switch.apt06_livingroom_iptv
           - entity: switch.apt06_ac
           - entity: switch.06_heat
           - entity: switch.apt06_vdb_door_lock
-          - entity: switch.apt05_doorbell
-          - entity: input_number.apt05_volume
+          - entity: switch.apt06_doorbell
+          - entity: input_number.apt06_volume
         show_header_toggle: true
         state_color: true
         title: Apt 6
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt07_bulb_entrance
-          - entity: light.apt07_bulb_livingroom
-          - entity: light.apt07_bulb_kitchen
-          - entity: light.apt07_bulb_hall
-          - entity: light.apt07_bulb_bedroom
-          - entity: light.apt07_bulb_bedroom2
-          - entity: light.apt07_light_bedroom
-          - entity: light.apt07_light_bedroom2
+          - entity: light.apt07_entrance_bulb
+          - entity: light.apt07_livingroom_bulb
+          - entity: light.apt07_kitchen_bulb
+          - entity: light.apt07_hall_bulb
+          - entity: light.apt07_bedroom_lamp
+          - entity: light.apt07_bedroom2_lamp
+          - entity: switch.apt07_bedroom_switch
+          - entity: switch.apt07_bedroom2_switch
           - entity: switch.apt07_livingroom_iptv
           - entity: switch.apt07_ac
           - entity: switch.07_heat
@@ -348,31 +392,39 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt08_bulb_entrance
-          - entity: light.apt08_bulb_livingroom
-          - entity: light.apt08_bulb_kitchen
-          - entity: light.apt08_bulb_hall
-          - entity: light.apt08_bulb_bedroom
-          - entity: light.apt08_bulb_bedroom2
-          - entity: light.apt08_light_bedroom
-          - entity: light.apt08_light_bedroom2
-          - entity: switch.apt08_livingroom_iptv
+          - entity: light.apt08_entrance_bulb
+          - entity: switch.apt08_kitchen_lights
+          - entity: switch.apt08_kitchen_switch1
+          - entity: switch.apt08_kitchen_switch2
+          - entity: light.apt08_livingroom_lamps
+          - entity: light.apt08_livingroom_lamp1
+          - entity: light.apt08_livingroom_lamp2
+          - entity: light.apt08_hall_bulb
+          - entity: light.apt08_bedroom_lamp
+          - entity: light.apt08_bedroom2_lamp
+          - entity: switch.apt08_bedroom_switch
+          - entity: switch.apt08_bedroom2_switch
           - entity: switch.apt08_ac
           - entity: switch.08_heat
+          - entity: switch.apt08_livingroom_iptv
           - entity: switch.apt08_vdb_door_lock
           - entity: switch.apt08_doorbell
           - entity: input_number.apt08_volume
+          - entity: input_text.apt08_vdb_line1
+          - entity: input_text.apt08_vdb_line2
+          - entity: input_text.apt08_vdb_line3
+          - entity: input_text.apt08_vdb_line4
         show_header_toggle: true
         state_color: true
-        title: Apt 8
+        title: Apt 08
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt09_bulb_entrance
-          - entity: light.apt09_bulb_livingroom
-          - entity: light.apt09_bulb_kitchen
-          - entity: light.apt09_bulb_hall
-          - entity: light.apt09_bulb_bedroom
+          - entity: light.apt09_entrance_bulb
+          - entity: light.apt09_livingroom_bulb
+          - entity: light.apt09_kitchen_bulb
+          - entity: light.apt09_hall_bulb
+          - entity: light.apt09_bedroom_lamp
           - entity: switch.apt09_livingroom_iptv
           - entity: switch.apt09_ac
           - entity: switch.09_heat
@@ -385,34 +437,42 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt11_bulb_entrance
-          - entity: light.apt11_bulb_livingroom
-          - entity: light.apt11_bulb_kitchen
-          - entity: light.apt11_bulb_hall
-          - entity: light.apt11_bulb_bedroom
-          - entity: light.apt11_bulb_bedroom2
-          - entity: light.apt11_light_bedroom
-          - entity: light.apt11_light_bedroom2
-          - entity: switch.apt11_livingroom_iptv
+          - entity: light.apt11_entrance_bulb
+          - entity: switch.apt11_kitchen_lights
+          - entity: switch.apt11_kitchen_switch1
+          - entity: switch.apt11_kitchen_switch2
+          - entity: light.apt11_livingroom_lamps
+          - entity: light.apt11_livingroom_lamp1
+          - entity: light.apt11_livingroom_lamp2
+          - entity: light.apt11_hall_bulb
+          - entity: light.apt11_bedroom_lamp
+          - entity: light.apt11_bedroom2_lamp
+          - entity: switch.apt11_bedroom_switch
+          - entity: switch.apt11_bedroom2_switch
           - entity: switch.apt11_ac
           - entity: switch.11_heat
+          - entity: switch.apt11_livingroom_iptv
           - entity: switch.apt11_vdb_door_lock
           - entity: switch.apt11_doorbell
           - entity: input_number.apt11_volume
+          - entity: input_text.apt11_vdb_line1
+          - entity: input_text.apt11_vdb_line2
+          - entity: input_text.apt11_vdb_line3
+          - entity: input_text.apt11_vdb_line4
         show_header_toggle: true
         state_color: true
         title: Apt 11
         type: entities
       # 2-BDR
       - entities:
-          - entity: light.apt12_bulb_entrance
-          - entity: light.apt12_bulb_livingroom
-          - entity: light.apt12_bulb_kitchen
-          - entity: light.apt12_bulb_hall
-          - entity: light.apt12_bulb_bedroom
-          - entity: light.apt12_bulb_bedroom2
-          - entity: light.apt12_light_bedroom
-          - entity: light.apt12_light_bedroom2
+          - entity: light.apt12_entrance_bulb
+          - entity: light.apt12_livingroom_bulb
+          - entity: light.apt12_kitchen_bulb
+          - entity: light.apt12_hall_bulb
+          - entity: light.apt12_bedroom_lamp
+          - entity: light.apt12_bedroom2_lamp
+          - entity: switch.apt12_bedroom_switch
+          - entity: switch.apt12_bedroom2_switch
           - entity: switch.apt12_livingroom_iptv
           - entity: switch.apt12_ac
           - entity: switch.12_heat
@@ -425,38 +485,87 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt13_bulb_entrance
-          - entity: light.apt13_bulb_livingroom
-          - entity: light.apt13_bulb_kitchen
-          - entity: light.apt13_bulb_hall
-          - entity: light.apt13_bulb_bedroom
-          - entity: switch.apt13_livingroom_iptv
+          - entity: light.apt13_entrance_bulb
+          - entity: switch.apt13_kitchen_lights
+          - entity: switch.apt13_kitchen_switch1
+          - entity: switch.apt13_kitchen_switch2
+          - entity: light.apt13_livingroom_lamps
+          - entity: light.apt13_livingroom_lamp1
+          - entity: light.apt13_livingroom_lamp2
+          - entity: light.apt13_hall_bulb
+          - entity: light.apt13_bedroom_lamp
+          # - entity: light.apt13_bedroom2_lamp
+          - entity: switch.apt13_bedroom_switch
+          # - entity: switch.apt13_bedroom2_switch
           - entity: switch.apt13_ac
           - entity: switch.13_heat
+          - entity: switch.apt13_livingroom_iptv
           - entity: switch.apt13_vdb_door_lock
           - entity: switch.apt13_doorbell
           - entity: input_number.apt13_volume
+          - entity: input_text.apt13_vdb_line1
+          - entity: input_text.apt13_vdb_line2
+          - entity: input_text.apt13_vdb_line3
+          - entity: input_text.apt13_vdb_line4
         show_header_toggle: true
         state_color: true
         title: Apt 13
         type: entities
       # 1-BDR
       - entities:
-          - entity: light.apt14_bulb_entrance
-          - entity: light.apt14_bulb_livingroom
-          - entity: light.apt14_bulb_kitchen
-          - entity: light.apt14_bulb_hall
-          - entity: light.apt14_bulb_bedroom
-          - entity: light.apt14_light_bedroom
-          - entity: switch.apt14_livingroom_iptv
+          - entity: light.apt14_entrance_bulb
+          - entity: switch.apt14_kitchen_lights
+          - entity: switch.apt14_kitchen_switch1
+          - entity: switch.apt14_kitchen_switch2
+          - entity: light.apt14_livingroom_lamps
+          - entity: light.apt14_livingroom_lamp1
+          - entity: light.apt14_livingroom_lamp2
+          - entity: light.apt14_hall_bulb
+          - entity: light.apt14_bedroom_lamp
+          # - entity: light.apt14_bedroom2_lamp
+          - entity: switch.apt14_bedroom_switch
+          # - entity: switch.apt14_bedroom2_switch
           - entity: switch.apt14_ac
-          - entity: switch.apt14_heat
+          - entity: switch.14_heat
+          - entity: switch.apt14_livingroom_iptv
           - entity: switch.apt14_vdb_door_lock
           - entity: switch.apt14_doorbell
           - entity: input_number.apt14_volume
+          - entity: input_text.apt14_vdb_line1
+          - entity: input_text.apt14_vdb_line2
+          - entity: input_text.apt14_vdb_line3
+          - entity: input_text.apt14_vdb_line4
         show_header_toggle: true
         state_color: true
         title: Apt 14
+        type: entities
+      # 2-BDR
+      - entities:
+          - entity: light.apt16_entrance_bulb
+          - entity: switch.apt16_kitchen_lights
+          - entity: switch.apt16_kitchen_switch1
+          - entity: switch.apt16_kitchen_switch2
+          - entity: light.apt16_livingroom_lamps
+          - entity: light.apt16_livingroom_lamp1
+          - entity: light.apt16_livingroom_lamp2
+          - entity: light.apt16_hall_bulb
+          - entity: light.apt16_bedroom_lamp
+          - entity: light.apt16_bedroom2_lamp
+          - entity: switch.apt16_bedroom_switch
+          - entity: switch.apt16_bedroom2_switch
+          - entity: switch.apt16_ac
+          - entity: switch.16_heat
+          - entity: switch.apt16_livingroom_iptv
+          - entity: switch.apt16_vdb_door_lock
+          - entity: switch.apt16_doorbell
+          - entity: input_number.apt16_volume
+          - entity: input_text.apt16_vdb_line1
+          - entity: input_text.apt16_vdb_line2
+          - entity: input_text.apt16_vdb_line3
+          - entity: input_text.apt16_vdb_line4
+        show_header_toggle: true
+        state_color: true
+        title: Apt 16
         type: entities
       - entities:
           - entity: automation.building_lights_on

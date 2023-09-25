@@ -1185,7 +1185,7 @@
     target:
       entity_id: switch.apt01_bedroom_switch
 
-# 01 Bedroom2
+# 01 Bedroom2 (Tied to Office Light - Computer Desk)
 - id: apt01_bedroom2_switch_toggled_on
   alias: Apt01 Bedroom2 Switch Toggled On
   description: Switch Toggled On
@@ -1197,7 +1197,7 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt01_bedroom2_switch
+      entity_id: switch.apt01_office_light2
 
 - id: apt01_bedroom2_switch_toggled_off
   alias: Apt01 Bedroom2 Switch Toggled Off
@@ -1210,7 +1210,7 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt01_bedroom2_switch
+      entity_id: switch.apt01_office_light2
 
 ##########
 # Apt02
