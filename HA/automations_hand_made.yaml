@@ -755,6 +755,24 @@
       retain: false
       qos: 2
   
+# Apt 09
+- id: apt09_vdb_button
+  alias: Apt09 VDB Button
+  trigger:
+    - type: turned_on
+      platform: device
+      device_id: apt09-vdb
+      entity_id: binary_sensor.apt09_vdb_doorbell_button
+      domain: binary_sensor
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: PkDr/Apt09/Entrance/cmnd/Doorbell/POWER
+      payload: CHIME
+      retain: false
+      qos: 2
+  
 
 # Apt 11
 - id: apt11_vdb_button
@@ -1655,7 +1673,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt08_bedroom_switch
+      entity_id: light.apt08_bedroom_bulb
+      # entity_id: switch.apt08_bedroom_switch
 
 - id: apt08_bedroom_switch_toggled_off
   alias: Apt08 Bedroom Switch Toggled Off
@@ -1668,7 +1687,8 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt08_bedroom_switch
+      entity_id: light.apt08_bedroom_bulb
+      # entity_id: switch.apt08_bedroom_switch
 
 # 08 Bedroom2
 - id: apt08_bedroom2_switch_toggled_on
@@ -1682,7 +1702,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt08_bedroom2_switch
+      entity_id: light.apt08_bedroom2_bulb
+      # entity_id: switch.apt08_bedroom2_switch
 
 - id: apt08_bedroom2_switch_toggled_off
   alias: Apt08 Bedroom2 Switch Toggled Off
@@ -1695,11 +1716,223 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt08_bedroom2_switch
+      # entity_id: switch.apt08_bedroom2_switch
+      entity_id: light.apt08_bedroom2_bulb
 
 ##########
 # Apt09
 ##########
+
+# 09 Entrance
+- id: apt09_entrance_switch_toggled_on
+  alias: Apt09 Entrance Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_entrance_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_entrance_bulb
+
+- id: apt09_entrance_switch_toggled_off
+  alias: Apt09 Entrance Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_entrance_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt09_entrance_bulb
+
+# 09 Kitchen
+- id: apt09_kitchen_switch_toggled_on
+  alias: Apt09 Kitchen Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_kitchen_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt09_kitchen_light2
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: switch.apt09_kitchen_lights
+
+- id: apt09_kitchen_switch_toggled_off
+  alias: Apt09 Kitchen Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_kitchen_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt09_kitchen_light2
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: switch.apt09_kitchen_lights
+
+# 09 Hall
+- id: apt09_hall_switch_toggled_on
+  alias: Apt09 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_hall_bulb
+
+- id: apt09_hall_switch_toggled_off
+  alias: Apt09 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt09_hall_bulb
+
+# 09 Living Room
+- id: apt09_livingroom_switch_toggled_on
+  alias: Apt09 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_livingroom_lamps
+
+- id: apt09_livingroom_switch_toggled_off
+  alias: Apt09 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt09_livingroom_lamps
+
+# 09 Hall
+- id: apt09_hall_switch_toggled_on
+  alias: Apt09 hall Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light1
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light0
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_hall_bulb
+
+- id: apt09_hall_switch_toggled_off
+  alias: Apt09 hall Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light1
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.apt09_hall_light0
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt09_hall_bulb
+
+# 09 Bedroom
+- id: apt09_bedroom_switch_toggled_on
+  alias: Apt09 Bedroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_bedroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_bedroom_bulb
+      # entity_id: switch.apt09_bedroom_switch
+
+- id: apt09_bedroom_switch_toggled_off
+  alias: Apt09 Bedroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_bedroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt09_bedroom_bulb
+      # entity_id: switch.apt09_bedroom_switch
+
+# 09 Bedroom2
+- id: apt09_bedroom2_switch_toggled_on
+  alias: Apt09 Bedroom2 Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_bedroom2_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt09_bedroom2_bulb
+      # entity_id: switch.apt09_bedroom2_switch
+
+- id: apt09_bedroom2_switch_toggled_off
+  alias: Apt09 Bedroom2 Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt09_bedroom2_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      # entity_id: switch.apt09_bedroom2_switch
+      entity_id: light.apt09_bedroom2_bulb
 
 ##########
 # Apt10
@@ -2776,22 +3009,22 @@
 #       qos: 1
   
 
-- id: apt09_livingroom_switch_toggle
-  alias: Apt09 Living Room Switch Toggle
-  trigger:
-    - platform: device
-      type: changed_states
-      device_id: apt09_livingroom_switch
-      entity_id: switch.apt09_livingroom_switch
-      domain: switch
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER
-      payload: TOGGLE
-      retain: true
-      qos: 1
+# - id: apt09_livingroom_switch_toggle
+#   alias: Apt09 Living Room Switch Toggle
+#   trigger:
+#     - platform: device
+#       type: changed_states
+#       device_id: apt09_livingroom_switch
+#       entity_id: switch.apt09_livingroom_switch
+#       domain: switch
+#   condition: []
+#   action:
+#   - service: mqtt.publish
+#     data:
+#       topic: PkDr/Apt09/LivingRoom/cmnd/Bulb/POWER
+#       payload: TOGGLE
+#       retain: true
+#       qos: 1
   
 
 - id: apt10_livingroom_switch_toggle
