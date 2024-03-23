@@ -89,6 +89,24 @@ apt09_clean_iptv_bedroom:
         entity_id: media_player.iptv_9_2
         method: VideoLibrary.Clean
 
+apt10_clean_iptv_livingroom:
+  alias: Apt10 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_9_1
+        method: VideoLibrary.Clean
+apt10_clean_iptv_bedroom:
+  alias: Apt10 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_9_2
+        method: VideoLibrary.Clean
+
+
+
+
 apt12_clean_iptv_livingroom:
   alias: Apt12 Clean IPTV LivingRoom
   sequence:
