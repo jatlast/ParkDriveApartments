@@ -89,7 +89,7 @@ input_datetime:
 input_select:
 # input_text: # ----- Enabled but moved below for adding PkDr users -----
 logbook: # View all events in a logbook
-map: # Enables a map showing the location of tracked devices
+# map: # (depricated 20240403) Enables a map showing the location of tracked devices
 media_source:
 mobile_app: # Mobile App Support
 my: # My Home Assistant
