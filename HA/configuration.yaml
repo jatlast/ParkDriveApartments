@@ -91,6 +91,12 @@ input_select:
 logbook: # View all events in a logbook
 # map: # (depricated 20240403) Enables a map showing the location of tracked devices
 media_source:
+media_dirs:
+  music_pre_2010: /home/PkDr/Music/MP3
+  tv_series: /home/PkDr/TV
+  movies: /home/PkDr/Movies
+  # recording: /mnt/recordings
+
 mobile_app: # Mobile App Support
 my: # My Home Assistant
 # person: # ----- Enabled but moved below for adding PkDr users -----
@@ -4864,14 +4870,14 @@ mqtt:
       payload_on: 'ON'
       payload_off: 'OFF'
       retain: false
-    - name: B4 Kiosks
-      unique_id: b4_kiosks
-      state_topic: PkDr/B4/Utility/B4_Kiosks
-      command_topic: PkDr/B4/Utility/B4_Kiosks/set
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
+    # - name: B4 Kiosks
+    #   unique_id: b4_kiosks
+    #   state_topic: PkDr/B4/Utility/B4_Kiosks
+    #   command_topic: PkDr/B4/Utility/B4_Kiosks/set
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
   # End Old Way
 
     # B1
@@ -5551,27 +5557,28 @@ mqtt:
       payload_off: 'OFF'
       retain: false
   # Apt 06 Switches...
-    - name: Apt06 AC
-      state_topic: PkDr/Apt06/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt06/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt06 LivingRoom IPTV
-      state_topic: PkDr/Apt06/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt06/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt06 Bedroom IPTV
-      state_topic: PkDr/Apt06/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt06/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
+  # Commented out 2024-04-26
+    # - name: Apt06 AC
+    #   state_topic: PkDr/Apt06/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt06/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt06 LivingRoom IPTV
+    #   state_topic: PkDr/Apt06/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt06/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt06 Bedroom IPTV
+    #   state_topic: PkDr/Apt06/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt06/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
   # Apt 07 Switches...
     - name: Apt07 AC
       state_topic: PkDr/Apt07/LivingRoom/stat/AC/POWER
@@ -5595,27 +5602,28 @@ mqtt:
       payload_off: 'OFF'
       retain: false
   # Apt 08 Switches...
-    - name: Apt08 AC
-      state_topic: PkDr/Apt08/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt08/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt08 LivingRoom IPTV
-      state_topic: PkDr/Apt08/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt08/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt08 Bedroom IPTV
-      state_topic: PkDr/Apt08/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt08/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
+  # Commented out 2024-04-26
+    # - name: Apt08 AC
+    #   state_topic: PkDr/Apt08/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt08/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt08 LivingRoom IPTV
+    #   state_topic: PkDr/Apt08/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt08/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt08 Bedroom IPTV
+    #   state_topic: PkDr/Apt08/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt08/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
   # Apt 09 Switches...
     - name: Apt09 AC
       state_topic: PkDr/Apt09/LivingRoom/stat/AC/POWER
@@ -5639,78 +5647,59 @@ mqtt:
       payload_off: 'OFF'
       retain: false
   # Apt 10 Switches...
-    - name: Apt09 AC
-      state_topic: PkDr/Apt09/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt09/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt09 LivingRoom IPTV
-      state_topic: PkDr/Apt09/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt09/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt09 Bedroom IPTV
-      state_topic: PkDr/Apt09/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt09/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
   # Apt 11 Switches...
-    - name: Apt11 AC
-      state_topic: PkDr/Apt11/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt11/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt11 LivingRoom IPTV
-      state_topic: PkDr/Apt11/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt11/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt11 Bedroom IPTV
-      state_topic: PkDr/Apt11/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt11/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
+  # Commented out 2024-04-26
+    # - name: Apt11 AC
+    #   state_topic: PkDr/Apt11/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt11/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt11 LivingRoom IPTV
+    #   state_topic: PkDr/Apt11/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt11/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt11 Bedroom IPTV
+    #   state_topic: PkDr/Apt11/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt11/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
   # Apt 12 Switches...
-    - name: Apt12 AC
-      state_topic: PkDr/Apt12/LivingRoom/stat/AC/POWER
-      command_topic: PkDr/Apt12/LivingRoom/cmnd/AC/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt12 LivingRoom IPTV
-      state_topic: PkDr/Apt12/LivingRoom/stat/IPTV/POWER
-      command_topic: PkDr/Apt12/LivingRoom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt12 Bedroom IPTV
-      state_topic: PkDr/Apt12/Bedroom/stat/IPTV/POWER
-      command_topic: PkDr/Apt12/Bedroom/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
-    - name: Apt12 Bedroom2 IPTV
-      state_topic: PkDr/Apt12/Bedroom2/stat/IPTV/POWER
-      command_topic: PkDr/Apt12/Bedroom2/cmnd/IPTV/POWER
-      qos: 1
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      retain: false
+  # Commented out 2024-04-26
+    # - name: Apt12 AC
+    #   state_topic: PkDr/Apt12/LivingRoom/stat/AC/POWER
+    #   command_topic: PkDr/Apt12/LivingRoom/cmnd/AC/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt12 LivingRoom IPTV
+    #   state_topic: PkDr/Apt12/LivingRoom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt12/LivingRoom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt12 Bedroom IPTV
+    #   state_topic: PkDr/Apt12/Bedroom/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt12/Bedroom/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
+    # - name: Apt12 Bedroom2 IPTV
+    #   state_topic: PkDr/Apt12/Bedroom2/stat/IPTV/POWER
+    #   command_topic: PkDr/Apt12/Bedroom2/cmnd/IPTV/POWER
+    #   qos: 1
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   retain: false
   # Apt 13 Switches...
     # - name: Apt13 Heat
     #   state_topic: PkDr/Apt13/output/Heat
@@ -5972,7 +5961,9 @@ switch:
       - switch.apt16_kitchen_switch1
       - switch.apt16_kitchen_switch2
 ##############
-
+# Documentation Recommends:  It’s highly recommended to enclose the command in single quotes ' as it ensures all characters can be used in the command and 
+#  reduces the risk of unintentional escaping. To include a single quote in a command enclosed in single quotes, double it: ''.
+# https://www.home-assistant.io/integrations/command_line/
   - platform: command_line
     switches:
       apt01_1_reboot_iptv:
@@ -6410,29 +6401,29 @@ sensor:
 climate:
 # Apt 01 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt01 HVAC
-    unique_id: 01_thermostat_hvac
-    heater: switch.01_heat
-    cooler: switch.apt01_ac
-    target_sensor: sensor.apt01_temperature
-    openings:
-      - binary_sensor.apt01_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt01 HVAC
+  #   unique_id: 01_thermostat_hvac
+  #   heater: switch.01_heat
+  #   cooler: switch.apt01_ac
+  #   target_sensor: sensor.apt01_temperature
+  #   openings:
+  #     - binary_sensor.apt01_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   # keep_alive:
+  #   #   minutes: 2
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
  ### Heat ###
   - platform: generic_thermostat
     name: Apt01 Heat
@@ -6448,7 +6439,7 @@ climate:
     min_cycle_duration:
       seconds: 5
     # keep_alive:
-    #   minutes: 3
+    #   minutes: 2
     initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
@@ -6587,7 +6578,7 @@ climate:
     min_cycle_duration:
       seconds: 5
     # keep_alive:
-    #   minutes: 3
+    #   minutes: 2
     initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
@@ -6619,29 +6610,29 @@ climate:
     activity_temp: 70
 # Apt 04 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt04 HVAC
-    unique_id: 04_thermostat_hvac
-    heater: switch.04_heat
-    cooler: switch.apt04_ac
-    target_sensor: sensor.apt04_temperature
-    openings:
-      - binary_sensor.apt04_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt04 HVAC
+  #   unique_id: 04_thermostat_hvac
+  #   heater: switch.04_heat
+  #   cooler: switch.apt04_ac
+  #   target_sensor: sensor.apt04_temperature
+  #   openings:
+  #     - binary_sensor.apt04_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   # keep_alive:
+  #   #   minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt04 Heat
@@ -6689,29 +6680,29 @@ climate:
 
 # Apt 05 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt05 HVAC
-    unique_id: 05_thermostat_hvac
-    heater: switch.05_heat
-    cooler: switch.apt05_ac
-    target_sensor: sensor.apt05_temperature
-    # openings:
-    #   - binary_sensor.apt05_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt05 HVAC
+  #   unique_id: 05_thermostat_hvac
+  #   heater: switch.05_heat
+  #   cooler: switch.apt05_ac
+  #   target_sensor: sensor.apt05_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt05_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   # min_cycle_duration:
+  #   #   seconds: 5
+  #   keep_alive:
+  #     minutes: 2
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt05 Heat
@@ -6726,7 +6717,7 @@ climate:
     min_cycle_duration:
       seconds: 5
     # keep_alive:
-    #   minutes: 3
+    #   minutes: 2
     initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
@@ -6758,29 +6749,29 @@ climate:
     activity_temp: 70
 # Apt 06 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt06 HVAC
-    unique_id: 06_thermostat_hvac
-    heater: switch.06_heat
-    cooler: switch.apt06_ac
-    target_sensor: sensor.apt06_temperature
-    openings:
-      - binary_sensor.apt06_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt06 HVAC
+  #   unique_id: 06_thermostat_hvac
+  #   heater: switch.06_heat
+  #   cooler: switch.apt06_ac
+  #   target_sensor: sensor.apt06_temperature
+  #   openings:
+  #     - binary_sensor.apt06_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   # keep_alive:
+  #   #   minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt06 Heat
@@ -6827,29 +6818,29 @@ climate:
     activity_temp: 70
 # Apt 07 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt07 HVAC
-    unique_id: 07_thermostat_hvac
-    heater: switch.07_heat
-    cooler: switch.apt07_ac
-    target_sensor: sensor.apt07_temperature
-    # openings:
-    #   - binary_sensor.apt07_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt07 HVAC
+  #   unique_id: 07_thermostat_hvac
+  #   heater: switch.07_heat
+  #   cooler: switch.apt07_ac
+  #   target_sensor: sensor.apt07_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt07_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt07 Heat
@@ -6896,29 +6887,29 @@ climate:
     activity_temp: 70
 # Apt 08 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt08 HVAC
-    unique_id: 08_thermostat_hvac
-    heater: switch.08_heat
-    cooler: switch.apt08_ac
-    target_sensor: sensor.apt08_temperature
-    openings:
-      - binary_sensor.apt08_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt08 HVAC
+  #   unique_id: 08_thermostat_hvac
+  #   heater: switch.08_heat
+  #   cooler: switch.apt08_ac
+  #   target_sensor: sensor.apt08_temperature
+  #   openings:
+  #     - binary_sensor.apt08_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt08 Heat
@@ -6966,29 +6957,29 @@ climate:
 
 # Apt 09 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt09 HVAC
-    unique_id: 09_thermostat_hvac
-    heater: switch.09_heat
-    cooler: switch.apt09_ac
-    target_sensor: sensor.apt09_temperature
-    # openings:
-    #   - binary_sensor.apt09_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt09 HVAC
+  #   unique_id: 09_thermostat_hvac
+  #   heater: switch.09_heat
+  #   cooler: switch.apt09_ac
+  #   target_sensor: sensor.apt09_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt09_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt09 Heat
@@ -7036,29 +7027,29 @@ climate:
 
 # Apt 10 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt10 HVAC
-    unique_id: 10_thermostat_hvac
-    heater: switch.10_heat
-    cooler: switch.apt10_ac
-    target_sensor: sensor.apt10_temperature
-    # openings:
-    #   - binary_sensor.apt10_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt10 HVAC
+  #   unique_id: 10_thermostat_hvac
+  #   heater: switch.10_heat
+  #   cooler: switch.apt10_ac
+  #   target_sensor: sensor.apt10_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt10_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt10 Heat
@@ -7107,29 +7098,29 @@ climate:
 
 # Apt 11 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt11 HVAC
-    unique_id: 11_thermostat_hvac
-    heater: switch.11_heat
-    cooler: switch.apt11_ac
-    target_sensor: sensor.apt11_temperature
-    openings:
-      - binary_sensor.apt11_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt11 HVAC
+  #   unique_id: 11_thermostat_hvac
+  #   heater: switch.11_heat
+  #   cooler: switch.apt11_ac
+  #   target_sensor: sensor.apt11_temperature
+  #   openings:
+  #     - binary_sensor.apt11_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt11 Heat
@@ -7177,29 +7168,29 @@ climate:
 
 # Apt 12 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt12 HVAC
-    unique_id: 12_thermostat_hvac
-    heater: switch.12_heat
-    cooler: switch.apt12_ac
-    target_sensor: sensor.apt12_temperature
-    # openings:
-    #   - binary_sensor.apt12_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt12 HVAC
+  #   unique_id: 12_thermostat_hvac
+  #   heater: switch.12_heat
+  #   cooler: switch.apt12_ac
+  #   target_sensor: sensor.apt12_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt12_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt12 Heat
@@ -7247,29 +7238,29 @@ climate:
 
 # Apt 13 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt13 HVAC
-    unique_id: 13_thermostat_hvac
-    heater: switch.13_heat
-    cooler: switch.apt13_ac
-    target_sensor: sensor.apt13_temperature
-    openings:
-      - binary_sensor.apt13_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt13 HVAC
+  #   unique_id: 13_thermostat_hvac
+  #   heater: switch.13_heat
+  #   cooler: switch.apt13_ac
+  #   target_sensor: sensor.apt13_temperature
+  #   openings:
+  #     - binary_sensor.apt13_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt13 Heat
@@ -7317,29 +7308,29 @@ climate:
 
 # Apt 14 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt14 HVAC
-    unique_id: 14_thermostat_hvac
-    heater: switch.14_heat
-    cooler: switch.apt14_ac
-    target_sensor: sensor.apt14_temperature
-    # openings:
-    #   - binary_sensor.apt14_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt14 HVAC
+  #   unique_id: 14_thermostat_hvac
+  #   heater: switch.14_heat
+  #   cooler: switch.apt14_ac
+  #   target_sensor: sensor.apt14_temperature
+  #   # openings:
+  #   #   - binary_sensor.apt14_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt14 Heat
@@ -7405,8 +7396,8 @@ climate:
     hot_tolerance: 0.5
     min_cycle_duration:
       seconds: 5
-    keep_alive:
-      minutes: 3
+    # keep_alive:
+    #   minutes: 3
     # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
     # away_temp: 65
     precision: 0.5
@@ -7415,29 +7406,29 @@ climate:
 
 # Apt 16 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt16 HVAC
-    unique_id: 16_thermostat_hvac
-    heater: switch.16_heat
-    cooler: switch.apt16_ac
-    target_sensor: sensor.apt16_temperature
-    openings:
-      - binary_sensor.apt16_vdb_door_sensor
-    min_temp: 65
-    max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
-    cold_tolerance: 0.5
-    hot_tolerance: 0.5
-    min_cycle_duration:
-      seconds: 5
-    keep_alive:
-      minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    away_temp: 65
-    precision: 0.5
+  # - platform: dual_smart_thermostat
+  #   name: Apt16 HVAC
+  #   unique_id: 16_thermostat_hvac
+  #   heater: switch.16_heat
+  #   cooler: switch.apt16_ac
+  #   target_sensor: sensor.apt16_temperature
+  #   openings:
+  #     - binary_sensor.apt16_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   keep_alive:
+  #     minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   away_temp: 65
+  #   precision: 0.5
   ### Heat ###
   - platform: generic_thermostat
     name: Apt16 Heat
@@ -7484,98 +7475,99 @@ climate:
     activity_temp: 70
 
 # IPTVs (media players)
-media_player:
-  # 01
-  - platform: kodi
-    name: IPTV 1.1
-    host: !secret Apt_01_IPTV_BR_1_LAN
-  - platform: kodi
-    name: IPTV 1.2
-    host: !secret Apt_01_IPTV_BR_1_WiFi
-  # 02
-  - platform: kodi
-    name: IPTV 2.1
-    host: !secret Apt_02_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 2.2
-    host: !secret Apt_02_IPTV_BR_1_WiFi
-  # 03
-  - platform: kodi
-    name: IPTV 3.1
-    host: !secret Apt_03_IPTV_LR_LAN
-  # 04
-  - platform: kodi
-    name: IPTV 4.1
-    host: !secret Apt_04_IPTV_LR_LAN
-  # 05
-  - platform: kodi
-    name: IPTV 5.1
-    host: !secret Apt_05_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 5.2
-    host: !secret Apt_05_IPTV_BR_1_WiFi
-  # 06
-  - platform: kodi
-    name: IPTV 6.1
-    host: !secret Apt_06_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 6.2
-    host: !secret Apt_06_IPTV_BR_1_WiFi
-  # 07
-  - platform: kodi
-    name: IPTV 7.1
-    host: !secret Apt_07_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 7.2
-    host: !secret Apt_07_IPTV_BR_1_WiFi
-  # 08
-  - platform: kodi
-    name: IPTV 8.1
-    host: !secret Apt_08_IPTV_LR_LAN
-  # 09
-  - platform: kodi
-    name: IPTV 9.1
-    host: !secret Apt_09_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 9.2
-    host: !secret Apt_09_IPTV_BR_1_WiFi
-  # 10
-  - platform: kodi
-    name: IPTV 10.1
-    host: !secret Apt_10_IPTV_LR_LAN
-  # 11
-  - platform: kodi
-    name: IPTV 11.1
-    host: !secret Apt_11_IPTV_LR_LAN
-  # 12
-  - platform: kodi
-    name: IPTV 12.1
-    host: !secret Apt_12_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 12.2
-    host: !secret Apt_12_IPTV_BR_1_WiFi
-  - platform: kodi
-    name: IPTV 12.3
-    host: !secret Apt_12_IPTV_BR_2_WiFi
-  # 13
-  - platform: kodi
-    name: IPTV 13.1
-    host: !secret Apt_13_IPTV_LR_LAN
-  # 14
-  - platform: kodi
-    name: IPTV 14.1
-    host: !secret Apt_14_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 14.2
-    host: !secret Apt_14_IPTV_BR_1_WiFi
-  # 15
-  - platform: kodi
-    name: IPTV 15.1
-    host: !secret Apt_15_IPTV_LR_LAN
-  # 16
-  - platform: kodi
-    name: IPTV 16.1
-    host: !secret Apt_16_IPTV_LR_LAN
+# Commented out 2024-04-26
+# media_player:
+#   # 01
+#   - platform: kodi
+#     name: IPTV 1.1
+#     host: !secret Apt_01_IPTV_BR_1_LAN
+#   - platform: kodi
+#     name: IPTV 1.2
+#     host: !secret Apt_01_IPTV_BR_1_WiFi
+#   # 02
+#   - platform: kodi
+#     name: IPTV 2.1
+#     host: !secret Apt_02_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 2.2
+#     host: !secret Apt_02_IPTV_BR_1_WiFi
+#   # 03
+#   - platform: kodi
+#     name: IPTV 3.1
+#     host: !secret Apt_03_IPTV_LR_LAN
+#   # 04
+#   - platform: kodi
+#     name: IPTV 4.1
+#     host: !secret Apt_04_IPTV_LR_LAN
+#   # 05
+#   - platform: kodi
+#     name: IPTV 5.1
+#     host: !secret Apt_05_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 5.2
+#     host: !secret Apt_05_IPTV_BR_1_WiFi
+#   # 06
+#   - platform: kodi
+#     name: IPTV 6.1
+#     host: !secret Apt_06_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 6.2
+#     host: !secret Apt_06_IPTV_BR_1_WiFi
+#   # 07
+#   - platform: kodi
+#     name: IPTV 7.1
+#     host: !secret Apt_07_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 7.2
+#     host: !secret Apt_07_IPTV_BR_1_WiFi
+#   # 08
+#   - platform: kodi
+#     name: IPTV 8.1
+#     host: !secret Apt_08_IPTV_LR_LAN
+#   # 09
+#   - platform: kodi
+#     name: IPTV 9.1
+#     host: !secret Apt_09_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 9.2
+#     host: !secret Apt_09_IPTV_BR_1_WiFi
+#   # 10
+#   - platform: kodi
+#     name: IPTV 10.1
+#     host: !secret Apt_10_IPTV_LR_LAN
+#   # 11
+#   - platform: kodi
+#     name: IPTV 11.1
+#     host: !secret Apt_11_IPTV_LR_LAN
+#   # 12
+#   - platform: kodi
+#     name: IPTV 12.1
+#     host: !secret Apt_12_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 12.2
+#     host: !secret Apt_12_IPTV_BR_1_WiFi
+#   - platform: kodi
+#     name: IPTV 12.3
+#     host: !secret Apt_12_IPTV_BR_2_WiFi
+#   # 13
+#   - platform: kodi
+#     name: IPTV 13.1
+#     host: !secret Apt_13_IPTV_LR_LAN
+#   # 14
+#   - platform: kodi
+#     name: IPTV 14.1
+#     host: !secret Apt_14_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 14.2
+#     host: !secret Apt_14_IPTV_BR_1_WiFi
+#   # 15
+#   - platform: kodi
+#     name: IPTV 15.1
+#     host: !secret Apt_15_IPTV_LR_LAN
+#   # 16
+#   - platform: kodi
+#     name: IPTV 16.1
+#     host: !secret Apt_16_IPTV_LR_LAN
 
 #######################################################
 ######### Features It's not ready for yet  ############

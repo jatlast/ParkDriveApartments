@@ -933,193 +933,193 @@
   alias: Apt01 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt01_vdb_door_lock
+    entity_id: switch.apt01_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt01_vdb_door_lock
+    entity_id: switch.apt01_vdb_door_unlock_switch
 
 - id: apt02_vdb_door_relock
   alias: Apt02 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt02_vdb_door_lock
+    entity_id: switch.apt02_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt02_vdb_door_lock
+    entity_id: switch.apt02_vdb_door_unlock_switch
 
 - id: apt03_vdb_door_relock
   alias: Apt03 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt03_vdb_door_lock
+    entity_id: switch.apt03_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt03_vdb_door_lock
+    entity_id: switch.apt03_vdb_door_unlock_switch
 
 - id: apt04_vdb_door_relock
   alias: Apt04 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt04_vdb_door_lock
+    entity_id: switch.apt04_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt04_vdb_door_lock
+    entity_id: switch.apt04_vdb_door_unlock_switch
 
 - id: apt05_vdb_door_relock
   alias: Apt05 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt05_vdb_door_lock
+    entity_id: switch.apt05_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt05_vdb_door_lock
+    entity_id: switch.apt05_vdb_door_unlock_switch
 
 - id: apt06_vdb_door_relock
   alias: Apt06 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt06_vdb_door_lock
+    entity_id: switch.apt06_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt06_vdb_door_lock
+    entity_id: switch.apt06_vdb_door_unlock_switch
 
 - id: apt07_vdb_door_relock
   alias: Apt07 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt07_vdb_door_lock
+    entity_id: switch.apt07_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt07_vdb_door_lock
+    entity_id: switch.apt07_vdb_door_unlock_switch
 
 - id: apt08_vdb_door_relock
   alias: Apt08 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt08_vdb_door_lock
+    entity_id: switch.apt08_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt08_vdb_door_lock
+    entity_id: switch.apt08_vdb_door_unlock_switch
 
 - id: apt09_vdb_door_relock
   alias: Apt09 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt09_vdb_door_lock
+    entity_id: switch.apt09_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt09_vdb_door_lock
+    entity_id: switch.apt09_vdb_door_unlock_switch
 
 - id: apt10_vdb_door_relock
   alias: Apt10 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt10_vdb_door_lock
+    entity_id: switch.apt10_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt10_vdb_door_lock
+    entity_id: switch.apt10_vdb_door_unlock_switch
 
 - id: apt11_vdb_door_relock
   alias: Apt11 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt11_vdb_door_lock
+    entity_id: switch.apt11_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt11_vdb_door_lock
+    entity_id: switch.apt11_vdb_door_unlock_switch
 
 - id: apt12_vdb_door_relock
   alias: Apt12 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt12_vdb_door_lock
+    entity_id: switch.apt12_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt12_vdb_door_lock
+    entity_id: switch.apt12_vdb_door_unlock_switch
 
 - id: apt13_vdb_door_relock
   alias: Apt13 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt13_vdb_door_lock
+    entity_id: switch.apt13_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt13_vdb_door_lock
+    entity_id: switch.apt13_vdb_door_unlock_switch
 
 - id: apt14_vdb_door_relock
   alias: Apt14 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt14_vdb_door_lock
+    entity_id: switch.apt14_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt14_vdb_door_lock
+    entity_id: switch.apt14_vdb_door_unlock_switch
 
 - id: apt15_vdb_door_relock
   alias: Apt15 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt15_vdb_door_lock
+    entity_id: switch.apt15_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt15_vdb_door_lock
+    entity_id: switch.apt15_vdb_door_unlock_switch
 
 - id: apt16_vdb_door_relock
   alias: Apt16 Door Relock
   trigger:
     platform: state
-    entity_id: switch.apt16_vdb_door_lock
+    entity_id: switch.apt16_vdb_door_unlock_switch
     to: 'on'
     for:
       minutes: 5
   action:
   - service: switch.turn_off
-    entity_id: switch.apt16_vdb_door_lock
+    entity_id: switch.apt16_vdb_door_unlock_switch
 
 # Tasmota Switches as Binary Sensors
 # Apartment Switches: (7 or 8)

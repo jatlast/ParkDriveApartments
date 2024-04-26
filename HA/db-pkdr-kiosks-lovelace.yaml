@@ -350,15 +350,21 @@ views:
                     # icon_height: 130px
                     type: entity-button
                   # Entrance
-                  - entity: switch.apt01_vdb_door_lock
-                    name: 01 Lock
+                  - entity: lock.apt01_vdb_door_lock
+                    name: Apt Lock
+                    show_name: true
+                    show_icon: true
                     type: entity-button
-                    # icon_height: 130px
+                    tap_action:
+                      action: toggle
+                    show_state: false                    
               - type: entities
                 entities:
+                  - binary_sensor.apt01_vdb_pir
                   - binary_sensor.apt01_vdb_door_sensor
-                  - switch.apt01_vdb_door_lock
-                title: Lock
+                  - lock.apt01_vdb_door_lock
+                  - switch.apt01_vdb_door_unlock_switch
+                title: Apt Door
             - type: vertical-stack
               cards:
               - entity: script.apt01_clean_iptv_livingroom
@@ -764,15 +770,21 @@ views:
                     # icon_height: 030px
                     type: entity-button
                   # Entrance
-                  - entity: switch.apt03_vdb_door_lock
-                    name: 03 Lock
+                  - entity: lock.apt03_vdb_door_lock
+                    name: Apt Lock
+                    show_name: true
+                    show_icon: true
                     type: entity-button
-                    # icon_height: 030px
+                    tap_action:
+                      action: toggle
+                    show_state: false                    
               - type: entities
                 entities:
+                  - binary_sensor.apt03_vdb_pir
                   - binary_sensor.apt03_vdb_door_sensor
-                  - switch.apt03_vdb_door_lock
-                title: Lock
+                  - lock.apt03_vdb_door_lock
+                  - switch.apt03_vdb_door_unlock_switch
+                title: Apt Door
             - type: vertical-stack
               cards:
               - entity: script.apt03_clean_iptv_livingroom
@@ -1019,15 +1031,21 @@ views:
                     # icon_height: 130px
                     type: entity-button
                   # Entrance
-                  - entity: switch.apt04_vdb_door_lock
-                    name: 04 Lock
+                  - entity: lock.apt04_vdb_door_lock
+                    name: Apt Lock
+                    show_name: true
+                    show_icon: true
                     type: entity-button
-                    # icon_height: 130px
+                    tap_action:
+                      action: toggle
+                    show_state: false                    
               - type: entities
                 entities:
+                  - binary_sensor.apt04_vdb_pir
                   - binary_sensor.apt04_vdb_door_sensor
-                  - switch.apt04_vdb_door_lock
-                title: Lock
+                  - lock.apt04_vdb_door_lock
+                  - switch.apt04_vdb_door_unlock_switch
+                title: Apt Door
             - type: vertical-stack
               cards:
               - entity: script.apt04_clean_iptv_livingroom
@@ -1417,15 +1435,21 @@ views:
                     # icon_height: 060px
                     type: entity-button
                   # Entrance
-                  - entity: switch.apt06_vdb_door_lock
-                    name: 06 Lock
+                  - entity: lock.apt06_vdb_door_lock
+                    name: Apt Lock
+                    show_name: true
+                    show_icon: true
                     type: entity-button
-                    # icon_height: 060px
+                    tap_action:
+                      action: toggle
+                    show_state: false                    
               - type: entities
                 entities:
+                  - binary_sensor.apt06_vdb_pir
                   - binary_sensor.apt06_vdb_door_sensor
-                  - switch.apt06_vdb_door_lock
-                title: Lock
+                  - lock.apt06_vdb_door_lock
+                  - switch.apt06_vdb_door_unlock_switch
+                title: Apt Door
             - type: vertical-stack
               cards:
               - entity: script.apt06_clean_iptv_livingroom
@@ -2220,28 +2244,15 @@ views:
     path: k-10
     cards:
       - cards:
-          # - type: entities
-          #   entities:
-          #     - input_number.apt10_kiosk
-        # Row 1 - Lights
           - cards:
-            # Building Entrance Lock
-              # - entity: switch.b3_entrance_lock
-              #   name: B3 Lock
-              #   type: entity-button
-            # Entrance
             # Entrance
             - entity: light.apt10_entrance_bulb
               name: Entrance
               type: light
-              # icon: mdi:dome-light
-              icon: mdi:ceiling-light
-
             # Kitchen
             - entity: switch.apt10_kitchen_lights
               name: Kitchen
               icon: mdi:ceiling-light-multiple
-              # icon: mdi:light-switch
               show_name: true
               show_icon: true
               type: button
@@ -2254,177 +2265,121 @@ views:
             - entity: light.apt10_hall_bulb
               name: Hall
               type: light
-              # icon: mdi:dome-light
-              icon: mdi:ceiling-light
             # Living Room
             - entity: light.apt10_livingroom_lamps
               name: Living Room
               type: light
-              icon: mdi:lamps
+            # Bedroom Bulb
             - entity: light.apt10_bedroom_bulb
               name: Bedroom
               type: light
-              # icon: mdi:dome-light
-              icon: mdi:ceiling-light
             type: horizontal-stack
         # Row 2 - Climate
           - cards:
-            - entity: climate.apt10_heat
-              type: custom:simple-thermostat
-              name: Heat
-              decimals: 1
-              step_size: 0.5
-              header:
-                toggle:
-                  entity: switch.10_heat
-                  name: 'On/Off'
+              - entity: climate.apt10_heat
+                type: custom:simple-thermostat
                 name: Heat
-              fallback: '??? '
-              unit: °F
-              label:
-                temperature: 'Current'
-                state: 'State'
-              control:
-                preset:
-                  _hide_when_off: true
-                  none: true
-                  home: true
-                  away: true
-                  sleep: true
-                  activity: false
-                  comfort: false
-              layout:
-                mode:
-                  names: true
-                  icons: false
-                  headings: false
-              sensors:
-                - entity: sensor.apt10_humidity
-                  name: 'Humidity'
-            # Bedroom Left
-            # - type: entities
-            #   title: Bedroom Left
-            #   entities:
-            #     - entity: switch.apt10_bedroom_switch
-            #       name: Ceiling
-            #       secondary_info: none
-            #       icon: mdi:ceiling-light-outline
-            #     - entity: light.apt10_bedroom_lamp
-            #       name: Lamp
-            #       icon: mdi:lamp-outline
-            #       secondary_info: none
-            #   state_color: true
-            #   theme: minimalist-desktop
-              # - entity: climate.apt10_ac
-              #   type: custom:simple-thermostat
-              #   name: AC
-              #   decimals: 1
-              #   step_size: 0.5
-              #   header:
-              #     toggle:
-              #       entity: switch.apt10_ac
-              #       name: ' '
-              #   label:
-              #     temperature: ' '
-              #     state: ' '
-              # control:
-              #   preset:
-              #     _hide_when_off: true
-              #     none: true
-              #     home: true
-              #     away: true
-              #     sleep: true
-              #     activity: false
-              #     comfort: false
-              # layout:
-              #   mode:
-              #     names: true
-              #     icons: false
-              #     headings: false
-              #   sensors:
-              #     - entity: sensor.apt10_humidity
-              #       name: ' '
-            # Bedroom Left
-            # - type: entities
-            #   title: Bedroom Left
-            #   entities:
-            #     # - entity: switch.apt01_bedroom_switch
-            #     - entity: light.apt10_bedroom_bulb
-            #       name: Ceiling
-            #       secondary_info: none
-            #       icon: mdi:lamp-outline
-            #     - entity: light.apt10_bedroom_lamp
-            #       name: Lamp
-            #       icon: mdi:lamp-outline
-            #       secondary_info: none
-            #   state_color: true
-            #   theme: minimalist-desktop
-
-            # type: horizontal-stack
-        # Row 3 - More Lights
-          # - cards:
-          #   - entity: switch.apt10_bedroom2_switch
-          #     name: Bdr Right
-          #     show_name: true
-          #     show_icon: true
-          #     type: button
-          #     tap_action:
-          #       action: toggle
-          #     show_state: false
-          #     hold_action:
-          #       action: more-info
-          #   - type: entities
-          #     title: Office
-          #     entities:
-          #       - entity: switch.apt10_bedroom2_switch
-          #         icon: mdi:ceiling-light-outline
-          #         name: 3d
-          #     theme: minimalist-desktop
-          #     state_color: true
-
+                decimals: 1
+                step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.06_heat
+                    name: 'On/Off'
+                  name: Heat
+                fallback: '??? '
+                unit: °F
+                label:
+                  temperature: 'Current'
+                  state: 'State'
+                control:
+                  preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
+                sensors:
+                  - entity: sensor.apt10_humidity
+                    name: 'Humidity'
+              - entity: climate.apt10_ac
+                type: custom:simple-thermostat
+                name: AC
+                decimals: 1
+                step_size: 0.5
+                header:
+                  toggle:
+                    entity: switch.apt10_ac
+                    name: ' '
+                label:
+                  temperature: ' '
+                  state: ' '
+                control:
+                  preset:
+                    _hide_when_off: true
+                    none: true
+                    home: true
+                    away: true
+                    sleep: true
+                    activity: false
+                    comfort: false
+                layout:
+                  mode:
+                    names: true
+                    icons: false
+                    headings: false
+                sensors:
+                  - entity: sensor.apt10_humidity
+                    name: ' '
+              # - entity: weather.openweathermap
+              #   type: weather-forecast
+              #   name: Park Drive Apt 3 Forecast
             type: horizontal-stack
         # Row 4 - Cameras
           - cards:
-            # - type: picture-glance
-            #   title: Apt10 Video Doorbell
-            #   camera_image: camera.apt10_vdb_camera
-            #   image: '/local/Apt10_VDB.jpg'
-            #   entities: []
-            #   aspect_ratio: 0%
             - type: picture-glance
-              camera_image: camera.b3_stairs
-              image: '/local/PkDr_b3_Stairs.jpg'
+              title: apt10 Video Doorbell
+              camera_image: camera.apt10_vdb_camera
               entities: []
               aspect_ratio: 0%
-            # # - type: picture-glance
-            # #   title: Apt10 Video Doorbell
-            # #   camera_image: camera.apt10_vdb_camera
-            # #   image: '/local/Apt10_VDB.jpg'
-            # #   entities:
-            # #     - entity: camera.apt10_vdb_camera
-            # #   aspect_ratio: 0%
+            - type: picture-glance
+              camera_image: camera.b3_stairs
+              entities: []
+              aspect_ratio: 0%
             type: horizontal-stack
         # Row 5 - Tenant Portal
           - cards:
-            # - type: vertical-stack
-            #   cards:
-            #   - type: horizontal-stack
-            #     cards:
-            #       # Building Entrance Lock
-            #       - entity: switch.b3_entrance_lock
-            #         name: B3 Lock
-            #         # icon_height: 130px
-            #         type: entity-button
-            #       # Entrance
-            #       - entity: switch.apt10_vdb_door_lock
-            #         name: 10 Lock
-            #         type: entity-button
-            #         # icon_height: 130px
-            #   - type: entities
-            #     entities:
-            #       - binary_sensor.apt10_vdb_door_sensor
-            #       - switch.apt10_vdb_door_lock
-            #     title: Lock
+            - type: vertical-stack
+              cards:
+              - type: horizontal-stack
+                cards:
+                  # Building Entrance Lock
+                  - entity: switch.b3_entrance_lock
+                    name: B3 Lock
+                    # icon_height: 060px
+                    type: entity-button
+                  # Entrance
+                  - entity: lock.apt10_vdb_door_lock
+                    name: Apt Lock
+                    show_name: true
+                    show_icon: true
+                    type: entity-button
+                    tap_action:
+                      action: toggle
+                    show_state: false                    
+              - type: entities
+                entities:
+                  - binary_sensor.apt10_vdb_pir
+                  - binary_sensor.apt10_vdb_door_sensor
+                  - lock.apt10_vdb_door_lock
+                  - switch.apt10_vdb_door_unlock_switch
+                title: Apt Door
             - type: vertical-stack
               cards:
               - entity: script.apt10_clean_iptv_livingroom
@@ -2451,38 +2406,36 @@ views:
                 icon_height: 170px
             # type: horizontal-stack
           # Entrance Doorbell
-            # - type: vertical-stack
-            #   cards:
-            #     - type: button
-            #       entity: switch.apt10_doorbell
-            #       show_state: false
-            #       show_name: false
-            #       show_icon: true
-            #       icon_height: 130px
-            #       icon: mdi:doorbell
-            #       tap_action:
-            #         action: call-service
-            #         service: switch.turn_on
-            #         service_data: {}
-            #         target:
-            #           entity_id: switch.apt10_doorbell
-            #     - type: 'custom:slider-entity-row'
-            #       entity: input_number.apt10_volume
-            #       full_row: true
-            #     - entities:
-            #         - entity: input_text.apt10_vdb_line1
-            #           name: Line 1
-            #         - entity: input_text.apt10_vdb_line2
-            #           name: Line 2
-            #         - entity: input_text.apt10_vdb_line3
-            #           name: Line 3
-            #         - entity: input_text.apt10_vdb_line4
-            #           name: Line 4
-            #       type: entities
+            - type: vertical-stack
+              cards:
+                - type: button
+                  entity: switch.apt10_doorbell
+                  show_state: false
+                  show_name: false
+                  show_icon: true
+                  icon_height: 060px
+                  icon: mdi:doorbell
+                  tap_action:
+                    action: call-service
+                    service: switch.turn_on
+                    service_data: {}
+                    target:
+                      entity_id: switch.apt10_doorbell
+                - type: 'custom:slider-entity-row'
+                  entity: input_number.apt10_volume
+                  full_row: true
+                - entities:
+                    - entity: input_text.apt10_vdb_line1
+                      name: Line 1
+                    - entity: input_text.apt10_vdb_line2
+                      name: Line 2
+                    - entity: input_text.apt10_vdb_line3
+                      name: Line 3
+                    - entity: input_text.apt10_vdb_line4
+                      name: Line 4
+                  type: entities
             type: horizontal-stack
-        type: vertical-stack
-
-  
+        type: vertical-stack  
   #####################
   # Apt 11
   #####################
@@ -4002,7 +3955,7 @@ views:
               state_color: true
             - type: entities
               entities:
-                - entity: switch.apt01_vdb_door_lock
+                - entity: switch.apt01_vdb_door_unlock_switch
                 - entity: switch.apt02_vdb_door_lock
                 - entity: switch.apt03_vdb_door_lock
                 - entity: switch.apt04_vdb_door_lock
