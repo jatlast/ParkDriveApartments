@@ -161,22 +161,22 @@ views:
         state_color: true
       - type: entities
         entities:
-          - switch.apt01_vdb_door_lock
+          - switch.apt01_vdb_door_unlock_switch
           - switch.02_lock
-          - switch.apt03_vdb_door_lock
+          - switch.apt03_vdb_door_unlock_switch
           - switch.04_lock
           - switch.05_lock
-          - switch.apt06_vdb_door_lock
+          - switch.apt06_vdb_door_unlock_switch
           - switch.07_lock
-          - switch.apt08_vdb_door_lock
+          - switch.apt08_vdb_door_unlock_switch
           - switch.09_lock
-          - switch.10_lock
-          - switch.apt11_vdb_door_lock
-          - switch.12_lock
-          - switch.apt13_vdb_door_lock
-          - switch.apt14_vdb_door_lock
+          - switch.apt10_vdb_door_unlock_switch
+          - switch.apt11_vdb_door_unlock_switch
+          - switch.apt12_vdb_door_unlock_switch
+          - switch.apt13_vdb_door_unlock_switch
+          - switch.apt14_vdb_door_unlock_switch
           - switch.15_lock
-          - switch.apt16_vdb_door_lock
+          - switch.apt16_vdb_door_unlock_switch
         show_header_toggle: true
         state_color: true
         title: PkDr Locks
@@ -288,7 +288,7 @@ views:
           - entity: switch.apt01_ac
           - entity: switch.01_heat
           - entity: switch.apt01_livingroom_iptv
-          - entity: switch.apt01_vdb_door_lock
+          - entity: switch.apt01_vdb_door_unlock_switch
           - entity: switch.apt01_doorbell
           - entity: input_number.apt01_volume
           - entity: input_text.apt01_vdb_line1
@@ -332,17 +332,17 @@ views:
           - entity: light.apt03_livingroom_lamps
           - entity: light.apt03_livingroom_lamp1
           - entity: light.apt03_livingroom_lamp2
-          - entity: switch.apt03_hall_switch0  # configured as binary sensor
-          - entity: switch.apt03_hall_switch1  # configured as binary sensor | 1 = Load
+          # - entity: switch.apt03_hall_switch0  # configured as binary sensor
+          - entity: switch.apt03_hall_switch  # configured as binary sensor | 1 = Load
           - entity: light.apt03_hall_bulb
-          - entity: light.apt03_bedroom_lamp
+          # - entity: light.apt03_bedroom_lamp
           # - entity: light.apt03_bedroom2_lamp
           - entity: switch.apt03_bedroom_switch  # configured as binary sensor
-          - entity: light.apt03_bedroom_bulb
+          # - entity: light.apt03_bedroom_bulb
           - entity: switch.apt03_ac
           - entity: switch.03_heat
           - entity: switch.apt03_livingroom_iptv
-          - entity: switch.apt03_vdb_door_lock
+          - entity: switch.apt03_vdb_door_unlock_switch
           - entity: switch.apt03_doorbell
           - entity: input_number.apt03_volume
           - entity: input_text.apt03_vdb_line1
@@ -373,7 +373,7 @@ views:
           - entity: switch.apt04_ac
           - entity: switch.04_heat
           - entity: switch.apt04_livingroom_iptv
-          - entity: switch.apt04_vdb_door_lock
+          - entity: switch.apt04_vdb_door_unlock_switch
           - entity: switch.apt04_doorbell
           - entity: input_number.apt04_volume
           - entity: input_text.apt04_vdb_line1
@@ -413,8 +413,9 @@ views:
           - entity: light.apt06_livingroom_lamps
           - entity: light.apt06_livingroom_lamp1
           - entity: light.apt06_livingroom_lamp2
-          - entity: switch.apt06_hall_switch0  # configured as binary sensor
-          - entity: switch.apt06_hall_switch1  # configured as binary sensor | 1 = Load
+          # - entity: switch.apt06_hall_switch0  # configured as binary sensor
+          # - entity: switch.apt06_hall_switch1  # configured as binary sensor | 1 = Load
+          - entity: switch.apt06_hall_switch
           - entity: light.apt06_hall_bulb
           # - entity: light.apt06_bedroom_lamp
           - entity: switch.apt06_bedroom_switch  # configured as binary sensor
@@ -422,7 +423,7 @@ views:
           - entity: switch.apt06_ac
           - entity: switch.06_heat
           - entity: switch.apt06_livingroom_iptv
-          - entity: switch.apt06_vdb_door_lock
+          - entity: switch.apt06_vdb_door_unlock_switch
           - entity: switch.apt06_doorbell
           - entity: input_number.apt06_volume
           - entity: input_text.apt06_vdb_line1
@@ -474,7 +475,7 @@ views:
           - entity: switch.apt08_ac
           - entity: switch.08_heat
           - entity: switch.apt08_livingroom_iptv
-          - entity: switch.apt08_vdb_door_lock
+          - entity: switch.apt08_vdb_door_unlock_switch
           - entity: switch.apt08_doorbell
           - entity: input_number.apt08_volume
           - entity: input_text.apt08_vdb_line1
@@ -518,25 +519,37 @@ views:
         type: entities
       # 1-BDR
       - entities:
-          - entity: switch.apt10_entrance_switch  # configured as binary sensor
-          - entity: light.apt10_entrance_bulb
+      # Entrance
+          - entity: binary_sensor.apt10_entrance_switch # Wall Toggle Switch to Sonoff Mini R4 terminal S1 & S2 
+          - entity: switch.apt10_entrance_switch_relay  # Relay to 110V
+          - entity: light.apt10_entrance_bulb           # Bulb - Depends on the 110V from Relay
           - entity: switch.apt10_kitchen_lights
-          - entity: switch.apt10_kitchen_switch1  # configured as binary sensor
-          - entity: switch.apt10_kitchen_switch2  # configured as binary sensor
-          - entity: switch.apt10_livingroom_switch  # configured as binary sensor
+          - entity: binary_sensor.apt10_kitchen_switch1
+          - entity: switch.apt10_kitchen_switch1_relay
+          - entity: binary_sensor.apt10_kitchen_switch2
+          - entity: switch.apt10_kitchen_switch2_relay
+          - entity: binary_sensor.apt10_livingroom_switch
+          - entity: switch.apt10_livingroom_switch_relay
           - entity: light.apt10_livingroom_lamps
           - entity: light.apt10_livingroom_lamp1
           - entity: light.apt10_livingroom_lamp2
-          - entity: switch.apt10_hall_switch0  # configured as binary sensor
-          - entity: switch.apt10_hall_switch1  # configured as binary sensor | 1 = Load
+          - entity: binary_sensor.apt10_hall_switch
+          - entity: switch.apt10_hall_switch_relay
           - entity: light.apt10_hall_bulb
-          # - entity: light.apt10_bedroom_lamp
-          - entity: switch.apt10_bedroom_switch  # configured as binary sensor
+          - entity: binary_sensor.apt10_bedroom_switch
+          - entity: switch.apt10_bedroom_switch_relay
           - entity: light.apt10_bedroom_bulb
-          - entity: switch.apt10_ac
+          - entity: binary_sensor.apt10_bathroom_switch
+          - entity: switch.apt10_bathroom_switch_relay
+          - entity: light.apt10_bathroom_bulbs
+          - entity: light.apt10_bathroom_bulb1
+          - entity: light.apt10_bathroom_bulb2
+          - entity: light.apt10_bathroom_bulb3
+          - entity: light.apt10_bathroom_bulb4
+          # - entity: switch.apt10_ac
           - entity: switch.10_heat
           - entity: switch.apt10_livingroom_iptv
-          - entity: switch.apt10_vdb_door_lock
+          - entity: switch.apt10_vdb_door_unlock_switch
           - entity: switch.apt10_doorbell
           - entity: input_number.apt10_volume
           - entity: input_text.apt10_vdb_line1
@@ -549,26 +562,35 @@ views:
         type: entities
       # 2-BDR
       - entities:
-          - entity: switch.apt11_entrance_switch  # configured as binary sensor
-          - entity: light.apt11_entrance_bulb
+      # Entrance
+          - entity: binary_sensor.apt11_entrance_switch # Wall Toggle Switch to Sonoff Mini R4 terminal S1 & S2 
+          - entity: switch.apt11_entrance_switch_relay  # Relay to 110V
+          - entity: light.apt11_entrance_bulb           # Bulb - Depends on the 110V from Relay
           - entity: switch.apt11_kitchen_lights
-          - entity: switch.apt11_kitchen_switch1  # configured as binary sensor
-          - entity: switch.apt11_kitchen_switch2  # configured as binary sensor
-          - entity: switch.apt11_livingroom_switch  # configured as binary sensor
+          - entity: binary_sensor.apt11_kitchen_switch1
+          - entity: switch.apt11_kitchen_switch1_relay
+          - entity: binary_sensor.apt11_kitchen_switch2
+          - entity: switch.apt11_kitchen_switch2_relay
+          - entity: binary_sensor.apt11_livingroom_switch
+          - entity: switch.apt11_livingroom_switch_relay
           - entity: light.apt11_livingroom_lamps
           - entity: light.apt11_livingroom_lamp1
           - entity: light.apt11_livingroom_lamp2
-          - entity: switch.apt11_hall_switch0  # configured as binary sensor
-          - entity: switch.apt11_hall_switch1  # configured as binary sensor | 1 = Load
+          - entity: binary_sensor.apt11_hall_switch0
+          - entity: switch.apt11_hall_switch0_relay
+          - entity: binary_sensor.apt11_hall_switch1
+          - entity: switch.apt11_hall_switch1_relay
           - entity: light.apt11_hall_bulb
-          - entity: light.apt11_bedroom_lamp
-          - entity: light.apt11_bedroom2_lamp
-          - entity: switch.apt11_bedroom_switch  # configured as binary sensor
+          - entity: binary_sensor.apt11_bedroom_switch
+          - entity: switch.apt11_bedroom_switch_relay
           - entity: light.apt11_bedroom_bulb
-          - entity: switch.apt11_ac
+          - entity: binary_sensor.apt11_bedroom2_switch
+          - entity: switch.apt11_bedroom2_switch_relay
+          - entity: light.apt11_bedroom2_bulb
+          # - entity: switch.apt11_ac
           - entity: switch.11_heat
           - entity: switch.apt11_livingroom_iptv
-          - entity: switch.apt11_vdb_door_lock
+          - entity: switch.apt11_vdb_door_unlock_switch
           - entity: switch.apt11_doorbell
           - entity: input_number.apt11_volume
           - entity: input_text.apt11_vdb_line1
@@ -600,7 +622,7 @@ views:
           - entity: switch.apt12_ac
           - entity: switch.12_heat
           - entity: switch.apt12_livingroom_iptv
-          - entity: switch.apt12_vdb_door_lock
+          - entity: switch.apt12_vdb_door_unlock_switch
           - entity: switch.apt12_doorbell
           - entity: input_number.apt12_volume
           - entity: input_text.apt12_vdb_line1
@@ -631,7 +653,7 @@ views:
           - entity: switch.apt13_ac
           - entity: switch.13_heat
           - entity: switch.apt13_livingroom_iptv
-          - entity: switch.apt13_vdb_door_lock
+          - entity: switch.apt13_vdb_door_unlock_switch
           - entity: switch.apt13_doorbell
           - entity: input_number.apt13_volume
           - entity: input_text.apt13_vdb_line1
@@ -662,7 +684,7 @@ views:
           - entity: switch.apt14_ac
           - entity: switch.14_heat
           - entity: switch.apt14_livingroom_iptv
-          - entity: switch.apt14_vdb_door_lock
+          - entity: switch.apt14_vdb_door_unlock_switch
           - entity: switch.apt14_doorbell
           - entity: input_number.apt14_volume
           - entity: input_text.apt14_vdb_line1
@@ -694,7 +716,7 @@ views:
           - entity: switch.apt16_ac
           - entity: switch.16_heat
           - entity: switch.apt16_livingroom_iptv
-          - entity: switch.apt16_vdb_door_lock
+          - entity: switch.apt16_vdb_door_unlock_switch
           - entity: switch.apt16_doorbell
           - entity: input_number.apt16_volume
           - entity: input_text.apt16_vdb_line1

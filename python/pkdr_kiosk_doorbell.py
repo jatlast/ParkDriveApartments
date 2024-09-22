@@ -47,7 +47,7 @@ variables_dict = {
     "sleep_after_vlc": 10.00,  # allow time to play the full media file
     # The suscribe method accepts 2 parameters.  Note: can suscribe to more than one topic at a time.
     #    subscribe(topic, qos=0)
-    "doorbell_volume": 60,  # 60 is the default volume setting
+    "doorbell_volume": 100,  # 60 is the default volume setting
     "mqtt_subscribe_qos": 1,
     # The message payload that triggers the action of this program
     "actionable_payload": "CHIME",
@@ -138,7 +138,9 @@ else:
 
             vlc_player = vlc.MediaPlayer(variables_dict['sound_played'])
             # https://www.geeksforgeeks.org/python-vlc-mediaplayer-setting-volume/
-            vlc_player.audio_set_volume(variables_dict['doorbell_volume'])
+            # variables_dict['doorbell_volume'] = 100
+            # vlc_player.audio_set_volume(variables_dict['doorbell_volume'])
+            vlc_player.audio_set_volume(100)
             # vlc_player.audio_set_volume(80)
             vlc_player.play()
             time.sleep(variables_dict['sleep_after_vlc'])

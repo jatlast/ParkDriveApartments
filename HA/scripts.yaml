@@ -29,6 +29,36 @@ apt02_clean_iptv_bedroom:
         entity_id: media_player.iptv_2_2
         method: VideoLibrary.Clean
 
+apt03_clean_iptv_livingroom:
+  alias: Apt03 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_3_1
+        method: VideoLibrary.Clean
+apt03_clean_iptv_bedroom:
+  alias: Apt03 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_3_2
+        method: VideoLibrary.Clean
+
+apt04_clean_iptv_livingroom:
+  alias: Apt04 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_4_1
+        method: VideoLibrary.Clean
+apt04_clean_iptv_bedroom:
+  alias: Apt04 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_4_2
+        method: VideoLibrary.Clean
+
 apt05_clean_iptv_livingroom:
   alias: Apt05 Clean IPTV LivingRoom
   sequence:
@@ -58,7 +88,6 @@ apt06_clean_iptv_bedroom:
       data:
         entity_id: media_player.iptv_6_2
         method: VideoLibrary.Clean
-
 apt07_clean_iptv_livingroom:
   alias: Apt07 Clean IPTV LivingRoom
   sequence:
@@ -72,6 +101,21 @@ apt07_clean_iptv_bedroom:
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_7_2
+        method: VideoLibrary.Clean
+
+apt08_clean_iptv_livingroom:
+  alias: Apt08 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_8_1
+        method: VideoLibrary.Clean
+apt08_clean_iptv_bedroom:
+  alias: Apt08 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_8_2
         method: VideoLibrary.Clean
 
 apt09_clean_iptv_livingroom:
@@ -104,8 +148,20 @@ apt10_clean_iptv_bedroom:
         entity_id: media_player.iptv_9_2
         method: VideoLibrary.Clean
 
-
-
+apt11_clean_iptv_livingroom:
+  alias: Apt11 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_11_1
+        method: VideoLibrary.Clean
+apt11_clean_iptv_bedroom:
+  alias: Apt11 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_11_2
+        method: VideoLibrary.Clean
 
 apt12_clean_iptv_livingroom:
   alias: Apt12 Clean IPTV LivingRoom
@@ -127,6 +183,21 @@ apt12_clean_iptv_bedroom2:
       service: kodi.call_method
       data:
         entity_id: media_player.iptv_12_3
+        method: VideoLibrary.Clean
+
+apt13_clean_iptv_livingroom:
+  alias: Apt13 Clean IPTV LivingRoom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_13_1
+        method: VideoLibrary.Clean
+apt13_clean_iptv_bedroom:
+  alias: Apt13 Clean IPTV Bedroom
+  sequence:
+      service: kodi.call_method
+      data:
+        entity_id: media_player.iptv_13_2
         method: VideoLibrary.Clean
 
 apt14_clean_iptv_livingroom:
@@ -175,41 +246,41 @@ apt16_clean_iptv_livingroom:
 #         method: VideoLibrary.Clean
 
 
-kodi_notification:
-  sequence:
-    - service: notify.apt01_notify
-      data:
-        title: "Home Assistant"
-        message: "Message to KODI from Home Assistant!"
-        data:
-          displaytime: 20000
-          icon: "warning"
+# kodi_notification:
+#   sequence:
+#     - service: notify.apt01_notify
+#       data:
+#         title: "Home Assistant"
+#         message: "Message to KODI from Home Assistant!"
+#         data:
+#           displaytime: 20000
+#           icon: "warning"
 
-apt01_doorbell_flash_script:
-  alias: Apt01 Doorbell Flash
-  sequence:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: light.apt01_entrance_bulb
-    - delay:
-        seconds: 1
-    - service: homeassistant.turn_off
-      data:
-        entity_id: light.apt01_entrance_bulb
-    - service: script.turn_on
-      data:
-        entity_id: script.apt01_doorbell_flash_loop
-apt01_doorbell_flash_loop:
-  alias: Apt01 Doorbell Flash Loop
-  sequence:
-    - delay:
-        seconds: 1
-    - service: script.turn_on
-      data:
-        entity_id: script.apt01_doorbell_flash_script
-    - delay:
-        seconds: 10
-    - service: script.turn_off
-      data:
-        entity_id: script.apt01_doorbell_flash_loop
+# apt01_doorbell_flash_script:
+#   alias: Apt01 Doorbell Flash
+#   sequence:
+#     - service: homeassistant.turn_on
+#       data:
+#         entity_id: light.apt01_entrance_bulb
+#     - delay:
+#         seconds: 1
+#     - service: homeassistant.turn_off
+#       data:
+#         entity_id: light.apt01_entrance_bulb
+#     - service: script.turn_on
+#       data:
+#         entity_id: script.apt01_doorbell_flash_loop
+# apt01_doorbell_flash_loop:
+#   alias: Apt01 Doorbell Flash Loop
+#   sequence:
+#     - delay:
+#         seconds: 1
+#     - service: script.turn_on
+#       data:
+#         entity_id: script.apt01_doorbell_flash_script
+#     - delay:
+#         seconds: 10
+#     - service: script.turn_off
+#       data:
+#         entity_id: script.apt01_doorbell_flash_loop
 
