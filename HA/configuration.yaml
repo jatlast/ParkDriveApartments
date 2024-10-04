@@ -128,6 +128,9 @@ zone:
 # 20230125 - Added bluetooth support to enable Xiaomi which is supposed to communicate with Xiaomi Mijia Bluetooth Thermometers of which I just received 20 from China today ($90.01 / 20 = $4.50 each - including tax & shipping)
 #   Link to AliExpress Thermometers - https://www.aliexpress.us/item/3256801440661227.html?spm=a2g0o.order_detail.order_detail_item.3.6a8df19cWIbxiO&gatewayAdapt=glo2usa&_randl_shipto=US
 bluetooth:
+  # Other Bluetooth settings
+  bthome:
+    name_template: "{{ device.name }}" 
 
 # Tuya Info / Fingerbot
 #  User Code - Ban10Zv
@@ -4381,6 +4384,7 @@ sensor:
       - 'time_date'
       - 'time_utc'
       # - 'beat' # Depricated version 2024.7.0
+
 #  - platform: openweathermap
 #    api_key: !secret openweathermap_api_key
 #    monitored_conditions:
@@ -4448,7 +4452,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 01 - Temperature & Humididy...
+# Apt 01 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4466,7 +4470,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-# Apt 02 - Temperature & Humididy...
+# Apt 02 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4481,7 +4485,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-# Apt 03 - Temperature & Humididy...
+# Apt 03 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4496,7 +4500,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-  # Apt 04 Temperature & Humididy...
+  # Apt 04 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4511,7 +4515,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-# Apt 05 - Temperature & Humididy...
+# Apt 05 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4526,7 +4530,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-# Apt 06 - Temperature & Humididy...
+# Apt 06 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4541,7 +4545,7 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-# Apt 07 - Temperature & Humididy...
+# Apt 07 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4557,7 +4561,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 08 - Temperature & Humididy...
+# Apt 08 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4573,7 +4577,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 09 - Temperature & Humididy...
+# Apt 09 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4589,7 +4593,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 10 Temperature & Humididy...
+# Apt 10 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4605,7 +4609,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 11 Temperature & Humididy...
+# Apt 11 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4621,7 +4625,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 12 Temperature & Humididy...
+# Apt 12 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4637,7 +4641,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 13 - Temperature & Humididy...
+# Apt 13 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4653,7 +4657,7 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 14 - Temperature & Humididy...
+# Apt 14 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4669,9 +4673,9 @@ sensor:
         column: 'humidity'
         unit_of_measurement: '%'
 
-# Apt 15 - Temperature & Humididy...
+# Apt 15 - Temperature & Humidity...
 
-# Apt 16 - Temperature & Humididy...
+# Apt 16 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
@@ -4686,6 +4690,133 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 16 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
+
+template:
+############
+# Buildings
+############
+# B1 - Dynamic Temperature
+  - sensor:
+      - name: "B1 Temperature Dynamic"
+        unique_id: b1_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.b1_temperature') %}
+          {% set bt_temp = states('sensor.b1_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.b1_temperature') %}
+            {% set bt_temp = states('sensor.b1_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# B2 - Dynamic Temperature
+  - sensor:
+      - name: "B2 Temperature Dynamic"
+        unique_id: b2_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.b2_temperature') %}
+          {% set bt_temp = states('sensor.b2_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.b2_temperature') %}
+            {% set bt_temp = states('sensor.b2_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# B3 - Dynamic Temperature
+  - sensor:
+      - name: "B3 Temperature Dynamic"
+        unique_id: b3_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.b3_temperature') %}
+          {% set bt_temp = states('sensor.b3_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.b3_temperature') %}
+            {% set bt_temp = states('sensor.b3_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# B4 - Dynamic Temperature
+  - sensor:
+      - name: "B4 Temperature Dynamic"
+        unique_id: b4_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.b4_temperature') %}
+          {% set bt_temp = states('sensor.b4_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.b4_temperature') %}
+            {% set bt_temp = states('sensor.b4_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+############
+# Apartments
+############
+# Apt 01 - Dynamic Temperature
+  - sensor:
+      - name: "Apt01 Temperature Dynamic"
+        unique_id: apt01_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt01_temperature') %}
+          {% set bt_temp = states('sensor.01_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt01_temperature') %}
+            {% set bt_temp = states('sensor.01_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 09 - Dynamic Temperature
+  - sensor:
+      - name: "Apt09 Temperature Dynamic"
+        unique_id: apt09_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt09_temperature') %}
+          {% set bt_temp = states('sensor.09_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt09_temperature') %}
+            {% set bt_temp = states('sensor.09_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 11 - Dynamic Temperature
+  - sensor:
+      - name: "Apt11 Temperature Dynamic"
+        unique_id: apt11_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt11_temperature') %}
+          {% set bt_temp = states('sensor.11_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt11_temperature') %}
+            {% set bt_temp = states('sensor.11_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 16 - Dynamic Temperature
+  - sensor:
+      - name: "Apt16 Temperature Dynamic"
+        unique_id: apt16_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt16_temperature') %}
+          {% set bt_temp = states('sensor.16_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt16_temperature') %}
+            {% set bt_temp = states('sensor.16_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
 
 # Generic Thermostat...
 climate:
@@ -4719,7 +4850,9 @@ climate:
     name: Apt01 Heat
     unique_id: 01_thermostat_heat
     heater: switch.01_heat
-    target_sensor: sensor.apt01_temperature
+    # target_sensor: sensor.apt01_temperature
+    # target_sensor: sensor.01_temphumi_bt_1_1366_temperature
+    target_sensor: sensor.apt01_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -4742,7 +4875,9 @@ climate:
     name: Apt01 AC
     unique_id: 01_thermostat_ac
     heater: switch.apt01_ac
-    target_sensor: sensor.apt01_temperature
+    # target_sensor: sensor.apt01_temperature
+    # target_sensor: sensor.01_temphumi_bt_1_1366_temperature
+    target_sensor: sensor.apt01_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5274,7 +5409,7 @@ climate:
   - platform: generic_thermostat
     name: Apt09 Heat
     heater: switch.09_heat
-    target_sensor: sensor.apt09_temperature
+    target_sensor: sensor.apt09_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 89
@@ -5296,7 +5431,7 @@ climate:
   - platform: generic_thermostat
     name: Apt09 AC
     heater: switch.apt09_ac
-    target_sensor: sensor.apt09_temperature
+    target_sensor: sensor.apt09_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5415,7 +5550,7 @@ climate:
   - platform: generic_thermostat
     name: Apt11 Heat
     heater: switch.11_heat
-    target_sensor: sensor.apt11_temperature
+    target_sensor: sensor.apt11_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5437,7 +5572,7 @@ climate:
   - platform: generic_thermostat
     name: Apt11 AC
     heater: switch.apt11_ac
-    target_sensor: sensor.apt11_temperature
+    target_sensor: sensor.apt11_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5723,7 +5858,7 @@ climate:
   - platform: generic_thermostat
     name: Apt16 Heat
     heater: switch.16_heat
-    target_sensor: sensor.apt16_temperature
+    target_sensor: sensor.apt16_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5745,7 +5880,7 @@ climate:
   - platform: generic_thermostat
     name: Apt16 AC
     heater: switch.apt16_ac
-    target_sensor: sensor.apt16_temperature
+    target_sensor: sensor.apt16_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
