@@ -65,8 +65,79 @@ views:
         entity: script.kodi_notification
         name: Apt01 Notify
         icon_height: 150px
+
       # Apartment-Wide Temperature Readings
       - type: entities
+        title: PkDr Temperatures (Dynamic)
+        entities:
+        # Buildings
+          - entity: sensor.b1_temperature_dynamic
+            name: B1
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b2_temperature_dynamic
+            name: B2
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b3_temperature_dynamic
+            name: B3
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b4_temperature_dynamic
+            name: B4
+            icon: mdi:temperature-fahrenheit
+        # Apartments
+          - entity: sensor.apt01_temperature_dynamic
+            name: '01'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt02_temperature_dynamic
+          #   name: '02'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt03_temperature_dynamic
+          #   name: '03'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt04_temperature_dynamic
+          #   name: '04'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt05_temperature_dynamic
+          #   name: '05'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt06_temperature_dynamic
+          #   name: '06'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt07_temperature_dynamic
+          #   name: '07'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt08_temperature_dynamic
+          #   name: '08'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt09_temperature_dynamic
+            name: '09'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt10_temperature_dynamic
+          #   name: '10'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt11_temperature_dynamic
+            name: '11'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt12_temperature_dynamic
+          #   name: '12'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.apt13_temperature_dynamic
+          #   name: '13'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt14_temperature_dynamic
+            name: '14'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt15_temperature_dynamic
+            name: '15'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt16_temperature_dynamic
+            name: '16'
+            icon: mdi:temperature-fahrenheit
+        show_header_toggle: false
+        state_color: false
+
+      # Apartment-Wide Temperature Readings
+      - type: entities
+        title: PkDr Temperatures (DB)
         entities:
         # Buildings
           - entity: sensor.b1_temperature
@@ -132,7 +203,75 @@ views:
             icon: mdi:temperature-fahrenheit
         show_header_toggle: false
         state_color: false
-        title: PkDr Temperatures
+
+      # Apartment-Wide Temperature Readings
+      - type: entities
+        title: PkDr Temperatures (BTHome)
+        entities:
+        # Buildings
+          - entity: sensor.b1_temphumi_bt_1_temperature
+            name: B1
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b2_temphumi_bt_1_temperature
+            name: B2
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b3_temphumi_bt_1_temperature
+            name: B3
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.b4_temphumi_bt_1_temperature
+            name: B4
+            icon: mdi:temperature-fahrenheit
+        # Apartments
+          - entity: sensor.01_temphumi_bt_1_temperature
+            name: '01'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.02_temphumi_bt_1_temperature
+          #   name: '02'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.03_temphumi_bt_1_temperature
+          #   name: '03'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.04_temphumi_bt_1_temperature
+          #   name: '04'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.05_temphumi_bt_1_temperature
+          #   name: '05'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.06_temphumi_bt_1_temperature
+          #   name: '06'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.07_temphumi_bt_1_temperature
+          #   name: '07'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.08_temphumi_bt_1_temperature
+          #   name: '08'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.09_temphumi_bt_1_temperature
+            name: '09'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.10_temphumi_bt_1_temperature
+          #   name: '10'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.11_temphumi_bt_1_temperature
+            name: '11'
+            icon: mdi:temperature-fahrenheit
+          # - entity: sensor.12_temphumi_bt_1_temperature
+          #   name: '12'
+          #   icon: mdi:temperature-fahrenheit
+          # - entity: sensor.13_temphumi_bt_1_temperature
+          #   name: '13'
+          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.14_temphumi_bt_1_temperature
+            name: '14'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.15_temphumi_bt_1_temperature
+            name: '15'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.16_temphumi_bt_1_temperature
+            name: '16'
+            icon: mdi:temperature-fahrenheit
+        show_header_toggle: false
+        state_color: false
 
       - type: entities
         entities:

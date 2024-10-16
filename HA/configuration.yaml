@@ -4803,6 +4803,36 @@ template:
             {% set bt_temp = states('sensor.11_temphumi_bt_1_temperature') %}
             {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
 
+# Apt 14 - Dynamic Temperature
+  - sensor:
+      - name: "Apt14 Temperature Dynamic"
+        unique_id: apt14_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt14_temperature') %}
+          {% set bt_temp = states('sensor.14_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt14_temperature') %}
+            {% set bt_temp = states('sensor.14_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 15 - Dynamic Temperature
+  - sensor:
+      - name: "Apt15 Temperature Dynamic"
+        unique_id: apt15_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt15_temperature') %}
+          {% set bt_temp = states('sensor.15_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt15_temperature') %}
+            {% set bt_temp = states('sensor.15_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
 # Apt 16 - Dynamic Temperature
   - sensor:
       - name: "Apt16 Temperature Dynamic"
@@ -5760,7 +5790,7 @@ climate:
   - platform: generic_thermostat
     name: Apt14 Heat
     heater: switch.14_heat
-    target_sensor: sensor.apt14_temperature
+    target_sensor: sensor.apt14_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 90
@@ -5782,7 +5812,7 @@ climate:
   - platform: generic_thermostat
     name: Apt14 AC
     heater: switch.apt14_ac
-    target_sensor: sensor.apt14_temperature
+    target_sensor: sensor.apt14_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5803,30 +5833,73 @@ climate:
 
 # Apt 15 Thermostats...
  ### Heat & AC ###
-  - platform: dual_smart_thermostat
-    name: Apt15 HVAC
-    unique_id: 15_thermostat_hvac
+  # - platform: dual_smart_thermostat
+  #   name: Apt15 HVAC
+  #   unique_id: 15_thermostat_hvac
+  #   heater: switch.15_heat
+  #   cooler: switch.apt15_ac
+  #   target_sensor: sensor.apt15_temperature_dynamic
+  #   # openings:
+  #   #   - binary_sensor.apt15_vdb_door_sensor
+  #   min_temp: 65
+  #   max_temp: 90
+  #   # ac_mode: false
+  #   target_temp: 72
+  #   target_temp_high: 80
+  #   target_temp_low: 65
+  #   cold_tolerance: 0.5
+  #   hot_tolerance: 0.5
+  #   min_cycle_duration:
+  #     seconds: 5
+  #   # keep_alive:
+  #   #   minutes: 3
+  #   # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
+  #   # away_temp: 65
+  #   precision: 0.5
+  ### Heat ###
+  - platform: generic_thermostat
+    name: Apt15 Heat
     heater: switch.15_heat
-    cooler: switch.apt15_ac
-    target_sensor: sensor.apt15_temperature
-    # openings:
-    #   - binary_sensor.apt15_vdb_door_sensor
-    min_temp: 65
+    target_sensor: sensor.apt15_temperature_dynamic
+    min_temp: 45
+    # target_temp: 71
     max_temp: 90
-    # ac_mode: false
-    target_temp: 72
-    target_temp_high: 80
-    target_temp_low: 65
     cold_tolerance: 0.5
     hot_tolerance: 0.5
+    precision: 0.5
     min_cycle_duration:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    # initial_hvac_mode: "heat" # ("off", "heat", "cool", "heat_cool") NOTE! If this is set, the saved state will not be restored after HA retstarts.
-    # away_temp: 65
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    ac_mode: false
+    away_temp: 60
+    comfort_temp: 70
+    home_temp: 72
+    sleep_temp: 65
+    activity_temp: 68
+  ### AC ###
+  - platform: generic_thermostat
+    name: Apt15 AC
+    heater: switch.apt15_ac
+    target_sensor: sensor.apt15_temperature_dynamic
+    min_temp: 65
+    # target_temp: 73
+    max_temp: 90
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
     precision: 0.5
-  ### Heat ###
+    min_cycle_duration:
+      seconds: 5
+    # keep_alive:
+    #   minutes: 3
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    ac_mode: true
+    away_temp: 90
+    comfort_temp: 74
+    home_temp: 72
+    sleep_temp: 71
+    activity_temp: 70
   ### AC ###
 
 # Apt 16 Thermostats...
