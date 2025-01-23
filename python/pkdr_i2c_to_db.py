@@ -50,7 +50,8 @@ import adafruit_htu21d  # htu21d - Temperature & Humidity
 import adafruit_sht31d  # sht31d - Temperature & Humidity
 from adafruit_bus_device.i2c_device import I2CDevice # for specifying specific address for i2c device initialization
 import argparse
-import pkdr_utils
+# import pkdr_utils
+from pkdr_utils import utils as pkdr_utils
 
 max_duration_program = 2.0
 max_duration_block = 0.5

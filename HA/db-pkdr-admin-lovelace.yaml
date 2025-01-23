@@ -32,18 +32,18 @@ views:
     path: pkdr-admin?disable_km
     require_admin: true
     cards:
-      - type: light
-        entity: light.rgbw_test_bulb
-        name: RGBW Bulb Test
-      - type: entity-button
-        tap_action:
-          action: toggle
-        hold_action:
-          action: more-info
-        show_icon: true
-        show_name: true
-        entity: switch.switch_test
-        name: Switch Test
+      # - type: light
+      #   entity: light.rgbw_test_bulb
+      #   name: RGBW Bulb Test
+      # - type: entity-button
+      #   tap_action:
+      #     action: toggle
+      #   hold_action:
+      #     action: more-info
+      #   show_icon: true
+      #   show_name: true
+      #   entity: switch.switch_test
+      #   name: Switch Test
       - entities:
           - entity: switch.building_lights
           - entity: switch.b1_lights
@@ -55,16 +55,16 @@ views:
         title: Building Lights
         type: entities
       # Test - Kodi Notifications
-      - type: entity-button
-        tap_action:
-          action: toggle
-        hold_action:
-          action: more-info
-        show_icon: true
-        show_name: true
-        entity: script.kodi_notification
-        name: Apt01 Notify
-        icon_height: 150px
+      # - type: entity-button
+      #   tap_action:
+      #     action: toggle
+      #   hold_action:
+      #     action: more-info
+      #   show_icon: true
+      #   show_name: true
+      #   entity: script.kodi_notification
+      #   name: Apt01 Notify
+      #   icon_height: 150px
 
       # Apartment-Wide Temperature Readings
       - type: entities
@@ -87,42 +87,42 @@ views:
           - entity: sensor.apt01_temperature_dynamic
             name: '01'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt02_temperature_dynamic
-          #   name: '02'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt03_temperature_dynamic
-          #   name: '03'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt04_temperature_dynamic
-          #   name: '04'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt05_temperature_dynamic
-          #   name: '05'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt06_temperature_dynamic
-          #   name: '06'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt07_temperature_dynamic
-          #   name: '07'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt08_temperature_dynamic
-          #   name: '08'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt02_temperature_dynamic
+            name: '02'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt03_temperature_dynamic
+            name: '03'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt04_temperature_dynamic
+            name: '04'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt05_temperature_dynamic
+            name: '05'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt06_temperature_dynamic
+            name: '06'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt07_temperature_dynamic
+            name: '07'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt08_temperature_dynamic
+            name: '08'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.apt09_temperature_dynamic
             name: '09'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt10_temperature_dynamic
-          #   name: '10'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt10_temperature_dynamic
+            name: '10'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.apt11_temperature_dynamic
             name: '11'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt12_temperature_dynamic
-          #   name: '12'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.apt13_temperature_dynamic
-          #   name: '13'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt12_temperature_dynamic
+            name: '12'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.apt13_temperature_dynamic
+            name: '13'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.apt14_temperature_dynamic
             name: '14'
             icon: mdi:temperature-fahrenheit
@@ -225,42 +225,42 @@ views:
           - entity: sensor.01_temphumi_bt_1_temperature
             name: '01'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.02_temphumi_bt_1_temperature
-          #   name: '02'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.03_temphumi_bt_1_temperature
-          #   name: '03'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.04_temphumi_bt_1_temperature
-          #   name: '04'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.05_temphumi_bt_1_temperature
-          #   name: '05'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.06_temphumi_bt_1_temperature
-          #   name: '06'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.07_temphumi_bt_1_temperature
-          #   name: '07'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.08_temphumi_bt_1_temperature
-          #   name: '08'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.02_temphumi_bt_1_temperature
+            name: '02'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.03_temphumi_bt_1_temperature
+            name: '03'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.04_temphumi_bt_1_temperature
+            name: '04'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.05_temphumi_bt_1_temperature
+            name: '05'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.06_temphumi_bt_1_temperature
+            name: '06'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.07_temphumi_bt_1_temperature
+            name: '07'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.08_temphumi_bt_1_temperature
+            name: '08'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.09_temphumi_bt_1_temperature
             name: '09'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.10_temphumi_bt_1_temperature
-          #   name: '10'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.10_temphumi_bt_1_temperature
+            name: '10'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.11_temphumi_bt_1_temperature
             name: '11'
             icon: mdi:temperature-fahrenheit
-          # - entity: sensor.12_temphumi_bt_1_temperature
-          #   name: '12'
-          #   icon: mdi:temperature-fahrenheit
-          # - entity: sensor.13_temphumi_bt_1_temperature
-          #   name: '13'
-          #   icon: mdi:temperature-fahrenheit
+          - entity: sensor.12_temphumi_bt_1_temperature
+            name: '12'
+            icon: mdi:temperature-fahrenheit
+          - entity: sensor.13_temphumi_bt_1_temperature
+            name: '13'
+            icon: mdi:temperature-fahrenheit
           - entity: sensor.14_temphumi_bt_1_temperature
             name: '14'
             icon: mdi:temperature-fahrenheit
@@ -477,7 +477,7 @@ views:
           # - entity: light.apt03_bedroom_lamp
           # - entity: light.apt03_bedroom2_lamp
           - entity: switch.apt03_bedroom_switch  # configured as binary sensor
-          # - entity: light.apt03_bedroom_bulb
+          - entity: light.apt03_bedroom_bulb
           - entity: switch.apt03_ac
           - entity: switch.03_heat
           - entity: switch.apt03_livingroom_iptv
@@ -505,11 +505,13 @@ views:
           - entity: switch.apt04_hall_switch0  # configured as binary sensor
           - entity: switch.apt04_hall_switch1  # configured as binary sensor | 1 = Load
           - entity: light.apt04_hall_bulb
-          - entity: light.apt04_bedroom_lamp
-          - entity: light.apt04_bedroom2_lamp
+          # - entity: light.apt04_bedroom_lamp
+          # - entity: light.apt04_bedroom2_lamp
           - entity: switch.apt04_bedroom_switch  # configured as binary sensor
           - entity: light.apt04_bedroom_bulb
-          - entity: switch.apt04_ac
+          - entity: switch.apt04_bedroom2_switch  # configured as binary sensor
+          - entity: light.apt04_bedroom2_bulb
+          # - entity: switch.apt04_ac
           - entity: switch.04_heat
           - entity: switch.apt04_livingroom_iptv
           - entity: switch.apt04_vdb_door_unlock_switch
@@ -524,22 +526,58 @@ views:
         title: Apt 04
         type: entities
       # 1-BDR
+      # - entities:
+      #     - entity: light.apt05_entrance_bulb
+      #     - entity: light.apt05_livingroom_bulb
+      #     - entity: switch.apt05_livingroom_switch  # configured as binary sensor
+      #     - entity: light.apt05_livingroom_lamps
+      #     - entity: light.apt05_livingroom_lamp1
+      #     - entity: light.apt05_livingroom_lamp2
+      #     - entity: light.apt05_kitchen_bulb
+      #     - entity: light.apt05_hall_bulb
+      #     - entity: light.apt05_bedroom_lamp
+      #     - entity: switch.apt05_bedroom_switch
+      #     - entity: switch.apt05_livingroom_iptv
+      #     - entity: switch.apt05_ac
+      #     - entity: switch.05_heat
+      #     - entity: switch.apt05_vdb_door_lock
+      #     - entity: switch.apt05_doorbell
+      #     - entity: input_number.apt05_volume
+      #   show_header_toggle: true
+      #   state_color: true
+      #   title: Apt 5
+      #   type: entities
+      # 1-BDR
       - entities:
+          - entity: switch.apt05_entrance_switch  # configured as binary sensor
           - entity: light.apt05_entrance_bulb
-          - entity: light.apt05_livingroom_bulb
-          - entity: light.apt05_kitchen_bulb
+          - entity: switch.apt05_kitchen_lights
+          - entity: switch.apt05_kitchen_switch1  # configured as binary sensor
+          - entity: switch.apt05_kitchen_switch2  # configured as binary sensor
+          - entity: switch.apt05_livingroom_switch  # configured as binary sensor
+          - entity: light.apt05_livingroom_lamps
+          - entity: light.apt05_livingroom_lamp1
+          - entity: light.apt05_livingroom_lamp2
+          # - entity: switch.apt05_hall_switch0  # configured as binary sensor
+          - entity: switch.apt05_hall_switch  # configured as binary sensor | 1 = Load
           - entity: light.apt05_hall_bulb
-          - entity: light.apt05_bedroom_lamp
-          - entity: switch.apt05_bedroom_switch
-          - entity: switch.apt05_livingroom_iptv
+          # - entity: light.apt05_bedroom_lamp
+          # - entity: light.apt05_bedroom2_lamp
+          - entity: switch.apt05_bedroom_switch  # configured as binary sensor
+          # - entity: light.apt05_bedroom_bulb
           - entity: switch.apt05_ac
           - entity: switch.05_heat
-          - entity: switch.apt05_vdb_door_lock
+          - entity: switch.apt05_livingroom_iptv
+          - entity: switch.apt05_vdb_door_unlock_switch
           - entity: switch.apt05_doorbell
           - entity: input_number.apt05_volume
+          - entity: input_text.apt05_vdb_line1
+          - entity: input_text.apt05_vdb_line2
+          - entity: input_text.apt05_vdb_line3
+          - entity: input_text.apt05_vdb_line4
         show_header_toggle: true
         state_color: true
-        title: Apt 5
+        title: Apt 05
         type: entities
       # 1-BDR
       - entities:
@@ -833,6 +871,47 @@ views:
         show_header_toggle: true
         state_color: true
         title: Apt 14
+        type: entities
+      # 2-BDR
+      - entities:
+      # Entrance
+          - entity: binary_sensor.apt15_entrance_switch # Wall Toggle Switch to Sonoff Mini R4 terminal S1 & S2 
+          - entity: switch.apt15_entrance_switch_relay  # Relay to 110V
+          - entity: light.apt15_entrance_bulb           # Bulb - Depends on the 110V from Relay
+          - entity: switch.apt15_kitchen_lights
+          - entity: binary_sensor.apt15_kitchen_switch1
+          - entity: switch.apt15_kitchen_switch1_relay
+          - entity: binary_sensor.apt15_kitchen_switch2
+          - entity: switch.apt15_kitchen_switch2_relay
+          - entity: binary_sensor.apt15_livingroom_switch
+          - entity: switch.apt15_livingroom_switch_relay
+          - entity: light.apt15_livingroom_lamps
+          - entity: light.apt15_livingroom_lamp1
+          - entity: light.apt15_livingroom_lamp2
+          - entity: binary_sensor.apt15_hall_switch0
+          - entity: switch.apt15_hall_switch0_relay
+          - entity: binary_sensor.apt15_hall_switch1
+          - entity: switch.apt15_hall_switch1_relay
+          - entity: light.apt15_hall_bulb
+          - entity: binary_sensor.apt15_bedroom_switch
+          - entity: switch.apt15_bedroom_switch_relay
+          - entity: light.apt15_bedroom_bulb
+          - entity: binary_sensor.apt15_bedroom2_switch
+          - entity: switch.apt15_bedroom2_switch_relay
+          - entity: light.apt15_bedroom2_bulb
+          # - entity: switch.apt15_ac
+          - entity: switch.15_heat
+          - entity: switch.apt15_livingroom_iptv
+          - entity: switch.apt15_vdb_door_unlock_switch
+          - entity: switch.apt15_doorbell
+          - entity: input_number.apt15_volume
+          - entity: input_text.apt15_vdb_line1
+          - entity: input_text.apt15_vdb_line2
+          - entity: input_text.apt15_vdb_line3
+          - entity: input_text.apt15_vdb_line4
+        show_header_toggle: true
+        state_color: true
+        title: Apt 15
         type: entities
       # 2-BDR
       - entities:

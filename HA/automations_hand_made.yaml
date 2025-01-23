@@ -1495,7 +1495,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt03_bedroom_switch
+      # entity_id: switch.apt03_bedroom_switch
+      entity_id: light.apt03_bedroom_bulb
 
 - id: apt03_bedroom_switch_toggled_off
   alias: Apt03 Bedroom Switch Toggled Off
@@ -1508,7 +1509,8 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt03_bedroom_switch
+      # entity_id: switch.apt03_bedroom_switch
+      entity_id: light.apt03_bedroom_bulb
 
 ##########
 # Apt04
@@ -1697,6 +1699,33 @@
 ##########
 # Apt05
 ##########
+# 05 Living Room
+- id: apt05_livingroom_switch_toggled_on
+  alias: Apt05 livingroom Switch Toggled On
+  description: Switch Toggled On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt05_livingroom_light
+      to: "on"
+  action:
+    service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.apt05_livingroom_lamps
+
+- id: apt05_livingroom_switch_toggled_off
+  alias: Apt05 livingroom Switch Toggled Off
+  description: Switch Toggled Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.apt05_livingroom_light
+      to: "off"
+  action:
+    service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: light.apt05_livingroom_lamps
+
 
 ##########
 # Apt06
@@ -2884,7 +2913,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt13_bedroom_switch
+      # entity_id: switch.apt13_bedroom_switch
+      entity_id: light.apt13_bedroom_bulb
 
 - id: apt13_bedroom_switch_toggled_off
   alias: Apt13 Bedroom Switch Toggled Off
@@ -2897,7 +2927,8 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt13_bedroom_switch
+      # entity_id: switch.apt13_bedroom_switch
+      entity_id: light.apt13_bedroom_bulb
 
 ##########
 # Apt14

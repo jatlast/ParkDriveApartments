@@ -3,12 +3,13 @@ homeassistant:
   latitude: 42.957181
   longitude: -83.644644
   # 42.9572041560617, -83.64423808709735 - Middle of Park Drive Apartments' parking lot
+  # (42.9572041560617, -83.64423808709735)
   # 42.957204, -83.644238                - Rounded by Google Maps 
   # 42°57'25.9"N 83°38'39.3"W            - Translated by Google Maps
   # X944+V8J Grand Blanc Twp, Michigan   - Google Maps Plus Code
   elevation: 240 # 787 feet / 240 meters
   country: US
-  unit_system: imperial
+  unit_system: us_customary # imperial was depricated 2025-01-01
   time_zone: America/Detroit
   # Customization file (contents of file inserted wherever "!include filename" appears)
   # customize: !include customize.yaml
@@ -1480,23 +1481,23 @@ mqtt:
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
     # Bedroom Light Switch (1)
-    - name: "Apt05 Bedroom Light"
-      unique_id: "apt05_bedroom_light"
-      state_topic: "PkDr/Apt05/Bedroom/tele/Switch/SENSOR"
-      # Tasmota (SwitchMode 15) - Inverted
-      payload_on: "OFF"
-      payload_off: "ON"
-      device_class: light
-      value_template: "{{ value_json.Switch1 }}"
+    # - name: "Apt05 Bedroom Light"
+    #   unique_id: "apt05_bedroom_light"
+    #   state_topic: "PkDr/Apt05/Bedroom/tele/Switch/SENSOR"
+    #   # Tasmota (SwitchMode 15) - Inverted
+    #   payload_on: "OFF"
+    #   payload_off: "ON"
+    #   device_class: light
+    #   value_template: "{{ value_json.Switch1 }}"
     # Bedroom2 Light Switch (1)
-    - name: "Apt05 Bedroom2 Light"
-      unique_id: "apt05_bedroom2_light"
-      state_topic: "PkDr/Apt05/Bedroom2/tele/Switch/SENSOR"
-      # Tasmota (SwitchMode 15) - Inverted
-      payload_on: "OFF"
-      payload_off: "ON"
-      device_class: light
-      value_template: "{{ value_json.Switch1 }}"
+    # - name: "Apt05 Bedroom2 Light"
+    #   unique_id: "apt05_bedroom2_light"
+    #   state_topic: "PkDr/Apt05/Bedroom2/tele/Switch/SENSOR"
+    #   # Tasmota (SwitchMode 15) - Inverted
+    #   payload_on: "OFF"
+    #   payload_off: "ON"
+    #   device_class: light
+    #   value_template: "{{ value_json.Switch1 }}"
 
   # Apt 06...
     # Entrance Light Switch (1)
@@ -2434,164 +2435,173 @@ mqtt:
   # Removed the commented out lines for Apt 03.
 
   ### Apt 05
-    # Entrance
-    - name: "Apt05 Bulb Entrance"
-      unique_id: apt05_bulb_entrance
-      command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt05/Entrance/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
+    # # Entrance
+    # - name: "Apt05 Bulb Entrance"
+    #   unique_id: apt05_bulb_entrance
+    #   command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/POWER"
+    #   state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    #   state_value_template: "{{value_json.POWER}}"
+    #   availability_topic: "PkDr/Apt05/Entrance/tele/Bulb/LWT"
+    #   brightness_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Dimmer"
+    #   brightness_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    #   brightness_scale: 100
+    #   on_command_type: "brightness"
+    #   brightness_value_template: "{{value_json.Dimmer}}"
+    #   color_temp_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/CT"
+    #   color_temp_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/STATE"
+    #   color_temp_value_template: "{{value_json.CT}}"
+    #   rgb_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Color2"
+    #   rgb_state_topic: "PkDr/Apt05/Entrance/stat/Bulb/RESULT"
+    #   rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    #   effect_command_topic: "PkDr/Apt05/Entrance/cmnd/Bulb/Scheme"
+    #   effect_state_topic: "PkDr/Apt05/Entrance/tele/Bulb/RESULT"
+    #   effect_value_template: "{{value_json.Scheme}}"
+    #   effect_list:
+    #     - 0 none
+    #     - 2 color cycle
+    #   payload_on: 'ON'
+    #   payload_off: 'OFF'
+    #   payload_available: 'Online'
+    #   payload_not_available: 'Offline'
+    #   qos: 1
   #    retain: false
     # Living Room
-    - name: "Apt05 Bulb LivingRoom"
-      unique_id: apt05_bulb_livingroom
-      command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-    # Kitchen
-    - name: "Apt05 Bulb Kitchen"
-      unique_id: apt05_bulb_kitchen
-      command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt05/Kitchen/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Hall
-    - name: "Apt05 Bulb Hall"
-      unique_id: apt05_bulb_hall
-      command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt05/Hall/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt05/Hall/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt05/Hall/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
-    # Bulb Bedroom
-    - name: "Apt05 Bulb Bedroom"
-      unique_id: apt05_bulb_bedroom
-      command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/POWER"
-      state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
-      state_value_template: "{{value_json.POWER}}"
-      availability_topic: "PkDr/Apt05/Bedroom/tele/Bulb/LWT"
-      brightness_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Dimmer"
-      brightness_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
-      brightness_scale: 100
-      on_command_type: "brightness"
-      brightness_value_template: "{{value_json.Dimmer}}"
-      color_temp_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/CT"
-      color_temp_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/STATE"
-      color_temp_value_template: "{{value_json.CT}}"
-      rgb_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Color2"
-      rgb_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
-      rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
-      effect_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Scheme"
-      effect_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/RESULT"
-      effect_value_template: "{{value_json.Scheme}}"
-      effect_list:
-        - 0 none
-        - 2 color cycle
-      payload_on: 'ON'
-      payload_off: 'OFF'
-      payload_available: 'Online'
-      payload_not_available: 'Offline'
-      qos: 1
-  #    retain: false
+  #   - name: "Apt05 Bulb LivingRoom"
+  #     unique_id: apt05_bulb_livingroom
+  #     command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt05/LivingRoom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt05/LivingRoom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt05/LivingRoom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  #   # Kitchen
+  #   - name: "Apt05 Bulb Kitchen"
+  #     unique_id: apt05_bulb_kitchen
+  #     command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt05/Kitchen/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt05/Kitchen/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt05/Kitchen/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt05/Kitchen/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Hall
+  #   - name: "Apt05 Bulb Hall"
+  #     unique_id: apt05_bulb_hall
+  #     command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt05/Hall/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt05/Hall/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt05/Hall/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt05/Hall/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt05/Hall/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
+  #   # Bulb Bedroom
+  #   - name: "Apt05 Bulb Bedroom"
+  #     unique_id: apt05_bulb_bedroom
+  #     command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/POWER"
+  #     state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+  #     state_value_template: "{{value_json.POWER}}"
+  #     availability_topic: "PkDr/Apt05/Bedroom/tele/Bulb/LWT"
+  #     brightness_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Dimmer"
+  #     brightness_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+  #     brightness_scale: 100
+  #     on_command_type: "brightness"
+  #     brightness_value_template: "{{value_json.Dimmer}}"
+  #     color_temp_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/CT"
+  #     color_temp_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/STATE"
+  #     color_temp_value_template: "{{value_json.CT}}"
+  #     rgb_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Color2"
+  #     rgb_state_topic: "PkDr/Apt05/Bedroom/stat/Bulb/RESULT"
+  #     rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  #     effect_command_topic: "PkDr/Apt05/Bedroom/cmnd/Bulb/Scheme"
+  #     effect_state_topic: "PkDr/Apt05/Bedroom/tele/Bulb/RESULT"
+  #     effect_value_template: "{{value_json.Scheme}}"
+  #     effect_list:
+  #       - 0 none
+  #       - 2 color cycle
+  #     payload_on: 'ON'
+  #     payload_off: 'OFF'
+  #     payload_available: 'Online'
+  #     payload_not_available: 'Offline'
+  #     qos: 1
+  # #    retain: false
     # Bedroom Switch
-    - name: "Apt05 Light Bedroom"
-      unique_id: apt05_light_bedroom
+    - name: "Apt05 Bedroom Light"
+      unique_id: apt05_bedroom_light
       state_topic: "PkDr/Apt05/Bedroom/stat/Light/POWER"
       command_topic: "PkDr/Apt05/Bedroom/cmnd/Light/POWER"
       qos: 1
       payload_on: 'ON'
       payload_off: 'OFF'
       retain: false
+  # Bedroom Switch
+    # - platform: mqtt
+    #   name: "Apt05 Bedroom Light"
+    #   state_topic: "PkDr/Apt05/Bedroom/stat/Light/POWER"
+    #   command_topic: "PkDr/Apt05/Bedroom/cmnd/Light/POWER"
+    #   qos: 1
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: true
 
   ### Apt 06
   # Removed the commented out lines for Apt 06.
@@ -4396,7 +4406,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: B1 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4411,7 +4421,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: B2 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 42 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 42 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4426,7 +4436,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: B3 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 43 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 43 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4441,7 +4451,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: B4 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4460,7 +4470,7 @@ sensor:
       # I forgot HA does not support Stored Procedure calls in query: param of sql sensor
       # Invalid config for [sensor.sql]: Only SELECT queries allowed for dictionary value @ data['queries'][0]['query']. Got 'CALL sp_get_kiosk_temp_fahrenheit(1);'. (See ?, line ?).
         # query: CALL sp_get_kiosk_temp_fahrenheit(1);
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 1 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 1 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4475,7 +4485,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt02 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 2 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 2 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4490,7 +4500,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt03 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 3 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 3 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4505,7 +4515,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt04 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 4 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 4 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4520,7 +4530,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt05 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 5 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 5 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4535,7 +4545,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt06 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 6 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 6 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4550,7 +4560,7 @@ sensor:
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt07 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 7 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 7 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4560,13 +4570,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 08 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt08 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 8 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 8 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4576,13 +4585,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 8 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 09 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt09 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 9 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 9 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4592,13 +4600,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 10 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt10 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 10 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 10 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4608,13 +4615,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 10 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 11 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt11 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 11 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 11 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4624,13 +4630,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 11 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 12 Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt12 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 12 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 12 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4640,13 +4645,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 13 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt13 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 13 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 13 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4656,13 +4660,12 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 14 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt14 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 14 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 14 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4672,15 +4675,27 @@ sensor:
         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
         column: 'humidity'
         unit_of_measurement: '%'
-
 # Apt 15 - Temperature & Humidity...
-
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt15 Temperature
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 15 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        column: 'temperature'
+        unit_of_measurement: 'F'
+  - platform: sql
+    db_url: !secret pkdr_sql_db_url
+    queries:
+      - name: Apt15 Humidity
+        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 15 ORDER BY uid DESC LIMIT 1;"
+        column: 'humidity'
+        unit_of_measurement: '%'
 # Apt 16 - Temperature & Humidity...
   - platform: sql
     db_url: !secret pkdr_sql_db_url
     queries:
       - name: Apt16 Temperature
-        query: 'SELECT (temperature * 9/5) + 32 AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 16 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 16 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
         column: 'temperature'
         unit_of_measurement: 'F'
   - platform: sql
@@ -4773,6 +4788,111 @@ template:
             {% set bt_temp = states('sensor.01_temphumi_bt_1_temperature') %}
             {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
 
+# Apt 02 - Dynamic Temperature
+  - sensor:
+      - name: "Apt02 Temperature Dynamic"
+        unique_id: apt02_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt02_temperature') %}
+          {% set bt_temp = states('sensor.02_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt02_temperature') %}
+            {% set bt_temp = states('sensor.02_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 03 - Dynamic Temperature
+  - sensor:
+      - name: "Apt03 Temperature Dynamic"
+        unique_id: apt03_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt03_temperature') %}
+          {% set bt_temp = states('sensor.03_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt03_temperature') %}
+            {% set bt_temp = states('sensor.03_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 04 - Dynamic Temperature
+  - sensor:
+      - name: "Apt04 Temperature Dynamic"
+        unique_id: apt04_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt04_temperature') %}
+          {% set bt_temp = states('sensor.04_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt04_temperature') %}
+            {% set bt_temp = states('sensor.04_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 05 - Dynamic Temperature
+  - sensor:
+      - name: "Apt05 Temperature Dynamic"
+        unique_id: apt05_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt05_temperature') %}
+          {% set bt_temp = states('sensor.05_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt05_temperature') %}
+            {% set bt_temp = states('sensor.05_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 06 - Dynamic Temperature
+  - sensor:
+      - name: "Apt06 Temperature Dynamic"
+        unique_id: apt06_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt06_temperature') %}
+          {% set bt_temp = states('sensor.06_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt06_temperature') %}
+            {% set bt_temp = states('sensor.06_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 07 - Dynamic Temperature
+  - sensor:
+      - name: "Apt07 Temperature Dynamic"
+        unique_id: apt07_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt07_temperature') %}
+          {% set bt_temp = states('sensor.07_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt07_temperature') %}
+            {% set bt_temp = states('sensor.07_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 08 - Dynamic Temperature
+  - sensor:
+      - name: "Apt08 Temperature Dynamic"
+        unique_id: apt08_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt08_temperature') %}
+          {% set bt_temp = states('sensor.08_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt08_temperature') %}
+            {% set bt_temp = states('sensor.08_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
 # Apt 09 - Dynamic Temperature
   - sensor:
       - name: "Apt09 Temperature Dynamic"
@@ -4788,6 +4908,21 @@ template:
             {% set bt_temp = states('sensor.09_temphumi_bt_1_temperature') %}
             {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
 
+# Apt 10 - Dynamic Temperature
+  - sensor:
+      - name: "Apt10 Temperature Dynamic"
+        unique_id: apt10_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt10_temperature') %}
+          {% set bt_temp = states('sensor.10_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt10_temperature') %}
+            {% set bt_temp = states('sensor.10_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
 # Apt 11 - Dynamic Temperature
   - sensor:
       - name: "Apt11 Temperature Dynamic"
@@ -4801,6 +4936,36 @@ template:
           source: >
             {% set sql_temp = states('sensor.apt11_temperature') %}
             {% set bt_temp = states('sensor.11_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 12 - Dynamic Temperature
+  - sensor:
+      - name: "Apt12 Temperature Dynamic"
+        unique_id: apt12_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt12_temperature') %}
+          {% set bt_temp = states('sensor.12_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt12_temperature') %}
+            {% set bt_temp = states('sensor.12_temphumi_bt_1_temperature') %}
+            {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
+
+# Apt 13 - Dynamic Temperature
+  - sensor:
+      - name: "Apt13 Temperature Dynamic"
+        unique_id: apt13_temperature_dynamic
+        unit_of_measurement: "F"
+        state: >
+          {% set sql_temp = states('sensor.apt13_temperature') %}
+          {% set bt_temp = states('sensor.13_temphumi_bt_1_temperature') %}
+          {{ bt_temp if sql_temp == 'unknown' else sql_temp }}
+        attributes:
+          source: >
+            {% set sql_temp = states('sensor.apt13_temperature') %}
+            {% set bt_temp = states('sensor.13_temphumi_bt_1_temperature') %}
             {{ 'BT' if sql_temp == 'unknown' else 'SQL' }}
 
 # Apt 14 - Dynamic Temperature
@@ -4954,7 +5119,7 @@ climate:
   - platform: generic_thermostat
     name: Apt02 Heat
     heater: switch.02_heat
-    target_sensor: sensor.apt02_temperature
+    target_sensor: sensor.apt02_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -4976,7 +5141,7 @@ climate:
   - platform: generic_thermostat
     name: Apt02 AC
     heater: switch.apt02_ac
-    target_sensor: sensor.apt02_temperature
+    target_sensor: sensor.apt02_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5001,7 +5166,7 @@ climate:
   #   unique_id: 03_thermostat_hvac
   #   heater: switch.03_heat
   #   cooler: switch.apt03_ac
-  #   target_sensor: sensor.apt03_temperature
+  #   target_sensor: sensor.apt03_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt03_vdb_door_sensor
   #   min_temp: 65
@@ -5023,7 +5188,7 @@ climate:
   - platform: generic_thermostat
     name: Apt03 Heat
     heater: switch.03_heat
-    target_sensor: sensor.apt03_temperature
+    target_sensor: sensor.apt03_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5045,7 +5210,7 @@ climate:
   - platform: generic_thermostat
     name: Apt03 AC
     heater: switch.apt03_ac
-    target_sensor: sensor.apt03_temperature
+    target_sensor: sensor.apt03_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5070,7 +5235,7 @@ climate:
   #   unique_id: 04_thermostat_hvac
   #   heater: switch.04_heat
   #   cooler: switch.apt04_ac
-  #   target_sensor: sensor.apt04_temperature
+  #   target_sensor: sensor.apt04_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt04_vdb_door_sensor
   #   min_temp: 65
@@ -5092,7 +5257,7 @@ climate:
   - platform: generic_thermostat
     name: Apt04 Heat
     heater: switch.04_heat
-    target_sensor: sensor.apt04_temperature
+    target_sensor: sensor.apt04_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5114,7 +5279,7 @@ climate:
   - platform: generic_thermostat
     name: Apt04 AC
     heater: switch.apt04_ac
-    target_sensor: sensor.apt04_temperature
+    target_sensor: sensor.apt04_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5140,7 +5305,7 @@ climate:
   #   unique_id: 05_thermostat_hvac
   #   heater: switch.05_heat
   #   cooler: switch.apt05_ac
-  #   target_sensor: sensor.apt05_temperature
+  #   target_sensor: sensor.apt05_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt05_vdb_door_sensor
   #   min_temp: 65
@@ -5162,7 +5327,7 @@ climate:
   - platform: generic_thermostat
     name: Apt05 Heat
     heater: switch.05_heat
-    target_sensor: sensor.apt05_temperature
+    target_sensor: sensor.apt05_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5184,7 +5349,7 @@ climate:
   - platform: generic_thermostat
     name: Apt05 AC
     heater: switch.apt05_ac
-    target_sensor: sensor.apt05_temperature
+    target_sensor: sensor.apt05_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5209,7 +5374,7 @@ climate:
   #   unique_id: 06_thermostat_hvac
   #   heater: switch.06_heat
   #   cooler: switch.apt06_ac
-  #   target_sensor: sensor.apt06_temperature
+  #   target_sensor: sensor.apt06_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt06_vdb_door_sensor
   #   min_temp: 65
@@ -5231,7 +5396,7 @@ climate:
   - platform: generic_thermostat
     name: Apt06 Heat
     heater: switch.06_heat
-    target_sensor: sensor.apt06_temperature
+    target_sensor: sensor.apt06_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5253,7 +5418,7 @@ climate:
   - platform: generic_thermostat
     name: Apt06 AC
     heater: switch.apt06_ac
-    target_sensor: sensor.apt06_temperature
+    target_sensor: sensor.apt06_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5278,7 +5443,7 @@ climate:
   #   unique_id: 07_thermostat_hvac
   #   heater: switch.07_heat
   #   cooler: switch.apt07_ac
-  #   target_sensor: sensor.apt07_temperature
+  #   target_sensor: sensor.apt07_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt07_vdb_door_sensor
   #   min_temp: 65
@@ -5300,7 +5465,7 @@ climate:
   - platform: generic_thermostat
     name: Apt07 Heat
     heater: switch.07_heat
-    target_sensor: sensor.apt07_temperature
+    target_sensor: sensor.apt07_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5322,7 +5487,7 @@ climate:
   - platform: generic_thermostat
     name: Apt07 AC
     heater: switch.apt07_ac
-    target_sensor: sensor.apt07_temperature
+    target_sensor: sensor.apt07_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5347,7 +5512,7 @@ climate:
   #   unique_id: 08_thermostat_hvac
   #   heater: switch.08_heat
   #   cooler: switch.apt08_ac
-  #   target_sensor: sensor.apt08_temperature
+  #   target_sensor: sensor.apt08_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt08_vdb_door_sensor
   #   min_temp: 65
@@ -5369,7 +5534,7 @@ climate:
   - platform: generic_thermostat
     name: Apt08 Heat
     heater: switch.08_heat
-    target_sensor: sensor.apt08_temperature
+    target_sensor: sensor.apt08_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5391,7 +5556,7 @@ climate:
   - platform: generic_thermostat
     name: Apt08 AC
     heater: switch.apt08_ac
-    target_sensor: sensor.apt08_temperature
+    target_sensor: sensor.apt08_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5417,7 +5582,7 @@ climate:
   #   unique_id: 09_thermostat_hvac
   #   heater: switch.09_heat
   #   cooler: switch.apt09_ac
-  #   target_sensor: sensor.apt09_temperature
+  #   target_sensor: sensor.apt09_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt09_vdb_door_sensor
   #   min_temp: 65
@@ -5487,7 +5652,7 @@ climate:
   #   unique_id: 10_thermostat_hvac
   #   heater: switch.10_heat
   #   cooler: switch.apt10_ac
-  #   target_sensor: sensor.apt10_temperature
+  #   target_sensor: sensor.apt10_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt10_vdb_door_sensor
   #   min_temp: 65
@@ -5509,7 +5674,7 @@ climate:
   - platform: generic_thermostat
     name: Apt10 Heat
     heater: switch.10_heat
-    target_sensor: sensor.apt10_temperature
+    target_sensor: sensor.apt10_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 89
@@ -5531,7 +5696,7 @@ climate:
   - platform: generic_thermostat
     name: Apt10 AC
     heater: switch.apt10_ac
-    target_sensor: sensor.apt10_temperature
+    target_sensor: sensor.apt10_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5558,7 +5723,7 @@ climate:
   #   unique_id: 11_thermostat_hvac
   #   heater: switch.11_heat
   #   cooler: switch.apt11_ac
-  #   target_sensor: sensor.apt11_temperature
+  #   target_sensor: sensor.apt11_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt11_vdb_door_sensor
   #   min_temp: 65
@@ -5628,7 +5793,7 @@ climate:
   #   unique_id: 12_thermostat_hvac
   #   heater: switch.12_heat
   #   cooler: switch.apt12_ac
-  #   target_sensor: sensor.apt12_temperature
+  #   target_sensor: sensor.apt12_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt12_vdb_door_sensor
   #   min_temp: 65
@@ -5650,7 +5815,7 @@ climate:
   - platform: generic_thermostat
     name: Apt12 Heat
     heater: switch.12_heat
-    target_sensor: sensor.apt12_temperature
+    target_sensor: sensor.apt12_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5672,7 +5837,7 @@ climate:
   - platform: generic_thermostat
     name: Apt12 AC
     heater: switch.apt12_ac
-    target_sensor: sensor.apt12_temperature
+    target_sensor: sensor.apt12_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5698,7 +5863,7 @@ climate:
   #   unique_id: 13_thermostat_hvac
   #   heater: switch.13_heat
   #   cooler: switch.apt13_ac
-  #   target_sensor: sensor.apt13_temperature
+  #   target_sensor: sensor.apt13_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt13_vdb_door_sensor
   #   min_temp: 65
@@ -5720,7 +5885,7 @@ climate:
   - platform: generic_thermostat
     name: Apt13 Heat
     heater: switch.13_heat
-    target_sensor: sensor.apt13_temperature
+    target_sensor: sensor.apt13_temperature_dynamic
     min_temp: 45
     # target_temp: 71
     max_temp: 79
@@ -5742,7 +5907,7 @@ climate:
   - platform: generic_thermostat
     name: Apt13 AC
     heater: switch.apt13_ac
-    target_sensor: sensor.apt13_temperature
+    target_sensor: sensor.apt13_temperature_dynamic
     min_temp: 65
     # target_temp: 73
     max_temp: 90
@@ -5768,7 +5933,7 @@ climate:
   #   unique_id: 14_thermostat_hvac
   #   heater: switch.14_heat
   #   cooler: switch.apt14_ac
-  #   target_sensor: sensor.apt14_temperature
+  #   target_sensor: sensor.apt14_temperature_dynamic
   #   # openings:
   #   #   - binary_sensor.apt14_vdb_door_sensor
   #   min_temp: 65
@@ -5909,7 +6074,7 @@ climate:
   #   unique_id: 16_thermostat_hvac
   #   heater: switch.16_heat
   #   cooler: switch.apt16_ac
-  #   target_sensor: sensor.apt16_temperature
+  #   target_sensor: sensor.apt16_temperature_dynamic
   #   openings:
   #     - binary_sensor.apt16_vdb_door_sensor
   #   min_temp: 65
@@ -6098,7 +6263,7 @@ media_player:
 #     password: !secret amcrest_pw
 #     stream_source: rtsp # (mjpeg, snapshot, rtsp) The data source for the live stream. mjpeg will use the camera’s native MJPEG stream, whereas snapshot will use the camera’s snapshot API to create a stream from still images. You can also set the rtsp option to generate the streaming via RTSP protocol.
 #     resolution: low # (high = 1080/720p, low = 640x480p)
-#     scan_interval: 10 # (10 default) Defines the update interval of the sensor in seconds.
+#     scan_interval: 10 # (10 default) Defines the update interval f the sensor in seconds.
 #     binary_sensors:
 #       - audio_detected  # Return on when audio is detected, off when not.
 #       - motion_detected # Return on when audio is detected, off when not.

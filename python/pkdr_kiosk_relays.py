@@ -122,7 +122,8 @@ import paho.mqtt.client as mqtt # needed to listen for MQTT messages
     # https://www.eclipse.org/paho/index.php?page=clients/python/docs/index.php
 import datetime # needed for now()
 import argparse # allow command line options
-import pkdr_utils # (JTB Script as Util) loads the local configurations for all PkDr Scripts
+# import pkdr_utils # (JTB Script as Util) loads the local configurations for all PkDr Scripts
+from pkdr_utils import utils as pkdr_utils
 
 parser = argparse.ArgumentParser(description="Listen for MQTT message asking for the doorbell to ring then use VLC to play a dorbell sound")
 parser.add_argument(

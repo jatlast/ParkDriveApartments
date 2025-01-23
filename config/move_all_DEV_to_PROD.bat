@@ -23,7 +23,8 @@ robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_kiosk_
 @REM      pkdr_kiosk_relays.py
 robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_kiosk_relays.py" /z
 @REM      pkdr_utils.py
-robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_utils.py" /z
+@REM robocopy "Z:\PkDr\HA\code\DEV\python" "Z:\PkDr\HA\code\PROD\python" "pkdr_utils.py" /z
+@REM this script is now a python module named utils.py in the Z:\PkDr\HA\code\DEV\python\pkdr_utils directory
 
 exit /b
 
