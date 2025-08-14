@@ -35,6 +35,8 @@
 #       https://learn.adafruit.com/adafruit-htu21d-f-temperature-humidity-sensor/python-circuitpython
 #   sudo pip3 install adafruit-circuitpython-sht31d
 #       https://learn.adafruit.com/adafruit-sht31-d-temperature-and-humidity-sensor-breakout/python-circuitpython
+#   sudo pip3 install adafruit-circuitpython-sht4x
+#       https://learn.adafruit.com/adafruit-sht40-temperature-humidity-sensor/python-circuitpython
 
 # from cgitb import reset
 # from cmath import log
@@ -48,8 +50,10 @@ import board
 import busio
 import adafruit_htu21d  # htu21d - Temperature & Humidity
 import adafruit_sht31d  # sht31d - Temperature & Humidity
+import adafruit_sht4x   # sht4x  - Temperature & Humidity
 from adafruit_bus_device.i2c_device import I2CDevice # for specifying specific address for i2c device initialization
 import argparse
+import random
 # import pkdr_utils
 from pkdr_utils import utils as pkdr_utils
 
@@ -71,9 +75,9 @@ parser.add_argument(
     '-st',
     '--sensor_type',
     type=str,
-    choices=['HTU21D', 'SHT31D'],
+    choices=['HTU21D', 'SHT31D', 'SHT4xD'],
     default='HTU21D',
-    help='I2C sensor name: HTU21D or SHT31D',
+    help='I2C sensor name: HTU21D, SHT31D, or SHT4xD'
 )
 parser.add_argument(
     '-sta',
@@ -81,7 +85,7 @@ parser.add_argument(
     type=lambda x: int(x,16), # on the fly hex type
     choices=[0x40, 0x44],
     default=0x40,
-    help="I2C sensor address: for sensor type HTU21D use 0x40 or 64, for sensor type SHT31D use 0x44 or 68. FYI: CLI: 'i2cdetect -y 1' checks if any sensors are connected",
+    help="I2C sensor address: for sensor type HTU21D use 0x40 or 64, for sensor type SHT31D-SHT4xD use 0x44 or 68. FYI: CLI: 'i2cdetect -y 1' checks if any sensors are connected",
 )
 args = parser.parse_args()
 
@@ -155,6 +159,8 @@ else:
         sensor_address = 0x40
     elif sensor_type == 'SHT31D':
         sensor_address = 0x44
+    elif sensor_type == 'SHT4xD':
+        sensor_address = 0x44
     # use the cli option if the sensor type is not recognized
     else:
         sensor_address = variables_dict['sensor_type_address']
@@ -168,6 +174,9 @@ else:
                 sensor_type = pkdr_utils.config_dict['sensor_type']
                 sensor_address = pkdr_utils.config_dict['sensor_type_address']
             elif pkdr_utils.config_dict['sensor_type'] == 'SHT31D':
+                sensor_type = pkdr_utils.config_dict['sensor_type']
+                sensor_address = pkdr_utils.config_dict['sensor_type_address']
+            elif pkdr_utils.config_dict['sensor_type'] == 'SHT4xD':
                 sensor_type = pkdr_utils.config_dict['sensor_type']
                 sensor_address = pkdr_utils.config_dict['sensor_type_address']
             else:
@@ -247,6 +256,21 @@ else:
                     read_attempt_string_for_info += 'sht31d.SHT31D(i2c)'
                     no_sensor_tried_flag = False
                     sensor = adafruit_sht31d.SHT31D(i2c)
+                elif sensor_type == 'SHT4xD' and sensor_address == 0x44:
+                    read_attempt_string_for_info += 'sht4x.SHT4x(i2c)'
+                    no_sensor_tried_flag = False
+                    sensor = adafruit_sht4x.SHT4x(i2c)
+
+                    # if statement for a 50/50 chance...
+                    # if random.randint(0, 1) == 0:
+                    # if statement for a 90/10 chance of setting the mode to NOHEAT_HIGHPRECISION or LOWHEAT_100MS
+                    if random.random() < 0.9:
+                        sensor.mode = adafruit_sht4x.Mode.NOHEAT_HIGHPRECISION
+                    else:
+                        sensor.mode = adafruit_sht4x.Mode.LOWHEAT_100MS
+                    
+                    read_attempt_string_for_info += ' #:({})'.format(sensor.serial_number)
+                    read_attempt_string_for_info += ' mode:({})'.format(adafruit_sht4x.Mode.string[sensor.mode])
             # OSError: [Errno 121] Remote I/O error
             except OSError as err:
                 exception_type = '{}'.format(type(err))
@@ -288,11 +312,32 @@ else:
                 block_start_time = time.time()
 
                 # Try accessing the sensor for a temperature reading...
+                temperature = 0.0
+                humidity = 0.0
                 exception_msg = ''
                 exception_type = ''
                 exception_flag = False
                 try:
-                    temperature = sensor.temperature
+                    if sensor_type == 'HTU21D':
+                        temperature = sensor.temperature
+                    elif sensor_type == 'SHT31D':
+                        temperature = sensor.temperature
+                        # only set the heater 10% of the time...
+                        if random.random() < 0.1:
+                            sensor.heater = True
+                            # print("Sensor Heater status =", sensor.heater)
+                            log_text += "Sensor Heater status = {}".format(sensor.heater)
+                            time.sleep(1)
+                            sensor.heater = False
+                            # print("Sensor Heater status =", sensor.heater)                    
+                            log_text += " before sleep(1) {} after.".format(sensor.heater)
+                    elif sensor_type == 'SHT4xD':
+                        # print("Found SHT4x with serial number", hex(sensor.serial_number))
+                        # sensor.mode = adafruit_sht4x.Mode.NOHEAT_HIGHPRECISION
+                        # Can also set the mode to enable heater
+                        # sensor.mode = adafruit_sht4x.Mode.LOWHEAT_100MS
+                        # print("Current mode is: ", adafruit_sht4x.Mode.string[sensor.mode])
+                        temperature, humidity = sensor.measurements
                 # OSError: [Errno 121] Remote I/O error
                 except OSError as err:
                     exception_type = '{}'.format(type(err))
@@ -328,7 +373,14 @@ else:
                 else:
                     block_start_time = time.time()
 
-                    humidity = sensor.relative_humidity
+                    if sensor_type == 'HTU21D':
+                        humidity = sensor.relative_humidity
+                    elif sensor_type == 'SHT31D':
+                        humidity = sensor.relative_humidity
+                    elif sensor_type == 'SHT4xD':
+                        if humidity == 0.0:
+                            temperature, humidity = sensor.measurements
+
                     # pkdr_utils.config_dict['db_table_dict']['key5'] = 'humidity'
                     # pkdr_utils.config_dict['db_table_dict']['val5'] = humidity
                     pkdr_utils.db_variables_add_key_value('humidity', humidity)

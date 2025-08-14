@@ -3807,7 +3807,13 @@
       entity_id: binary_sensor.apt01_vdb_pir
       to: 'on'
     - platform: state
+      entity_id: binary_sensor.apt02_vdb_pir
+      to: 'on'
+    - platform: state
       entity_id: binary_sensor.apt03_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt04_vdb_pir
       to: 'on'
   action:
     service: homeassistant.turn_on
@@ -3819,9 +3825,15 @@
   alias: B2 Lights On Motion
   description: B2 lights turned on when motion detected
   trigger:
+    # - platform: state
+    #   entity_id: binary_sensor.apt05_vdb_pir
+    #   to: 'on'
     - platform: state
       entity_id: binary_sensor.apt06_vdb_pir
       to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.apt07_vdb_pir
+    #   to: 'on'
     - platform: state
       entity_id: binary_sensor.apt08_vdb_pir
       to: 'on'
@@ -3836,7 +3848,16 @@
   description: B3 lights turned on when motion detected
   trigger:
     - platform: state
+      entity_id: binary_sensor.apt09_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt10_vdb_pir
+      to: 'on'
+    - platform: state
       entity_id: binary_sensor.apt11_vdb_pir
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.apt12_vdb_pir
       to: 'on'
   action:
     service: homeassistant.turn_on
@@ -3854,6 +3875,9 @@
     - platform: state
       entity_id: binary_sensor.apt14_vdb_pir
       to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.apt15_vdb_pir
+    #   to: 'on'
     - platform: state
       entity_id: binary_sensor.apt16_vdb_pir
       to: 'on'

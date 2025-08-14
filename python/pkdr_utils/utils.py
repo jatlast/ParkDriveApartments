@@ -284,13 +284,13 @@ def add_pkdr_caller_info_to_config_dict():
                 caller_error_flag = True
                 caller_error_msg += "Configuration Error: ip_to_temperature_sensor_dict not in config file"
             else:
-                # (HTU21D or SHT31D)
+                # (HTU21D or SHT31D or SHT4xD)
                 sensor_type = config_dict['sensor_config']['i2c_temperature_config']['ip_to_temperature_sensor_dict'].get(config_dict['ip'], -1)
                 if sensor_type == -1:
                     config_dict['sensor_type_error_flag'] = True
                 else:
                     config_dict['sensor_type'] = sensor_type
-                    # (HTU21D:0x40 or SHT31D:0x44)
+                    # (HTU21D:0x40 or SHT31D:0x44 or SHT4xD:0x44)
                     sensor_type_address = config_dict['sensor_config']['i2c_temperature_config']['i2c_sensor_type_to_address'].get(config_dict['sensor_type'], -1)
                     if sensor_type_address == -1:
                         config_dict['sensor_type_error_flag'] = True

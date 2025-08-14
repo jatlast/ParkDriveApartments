@@ -140,8 +140,10 @@ else:
             vlc_player = vlc.MediaPlayer(variables_dict['sound_played'])
             # https://www.geeksforgeeks.org/python-vlc-mediaplayer-setting-volume/
             # variables_dict['doorbell_volume'] = 100
+            # pass in variables_dict['doorbell_volume'] as an int...
+            vlc_player.audio_set_volume(int(variables_dict['doorbell_volume']))
             # vlc_player.audio_set_volume(variables_dict['doorbell_volume'])
-            vlc_player.audio_set_volume(100)
+            # vlc_player.audio_set_volume(100)
             # vlc_player.audio_set_volume(80)
             vlc_player.play()
             time.sleep(variables_dict['sleep_after_vlc'])
@@ -173,8 +175,10 @@ else:
                 print(runtime_messages)
 
     def on_log(client, userdata, level, buf):
+        # print('{}: Quick Debug: level=({})'.format(datetime.datetime.now(), level))
         paho_log_level_name = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_dict'].get(level, 'Lookup failed for level=({})'.format(level))
         log_if = pkdr_utils.config_dict['pkdr_mqtt_config']['paho_client_dict']['log_levels_if_dict'].get(paho_log_level_name, False)
+        # print('{}: Quick Debug: {}->{} log->{}'.format(datetime.datetime.now(), level, paho_log_level_name, log_if))
 
         if log_if:
             log_level = 1 # 1 = INFO
@@ -217,6 +221,7 @@ else:
     variables_dict['sound_patience'] = pkdr_utils.config_dict['sound_config']['sound_path'] + pkdr_utils.config_dict['sound_config']['sound_files_dict']['system_start']
 
     variables_dict["mqtt_subscribe_topic"] = ("PkDr/" + pkdr_utils.config_dict['pkdr_location_id'] + "/Entrance/cmnd/Doorbell/POWER")
+    # PkDr/Apt01/Doorbell/stat/Volume/setVolume
     variables_dict["mqtt_subscribe_volume"] = ("PkDr/" + pkdr_utils.config_dict['pkdr_location_id'] + "/Doorbell/stat/Volume/setVolume")
     variables_dict["pkdr_mqtt_client"] = pkdr_utils.config_dict['pkdr_location_id']
 
@@ -227,7 +232,9 @@ else:
     if variables_dict["verbosity"] > 0:
         print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
 
-    pkdr_mqtt_client = mqtt.Client(variables_dict["pkdr_mqtt_client"])  # create client object
+    # pkdr_mqtt_client = mqtt.Client(variables_dict["pkdr_mqtt_client"])  # create client object
+    # pkdr_mqtt_client = mqtt.Client(variables_dict["pkdr_mqtt_client"], callback_api_version=5)
+    pkdr_mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 
     # bind to the on_message function because this is where this script logic lives
     pkdr_mqtt_client.on_message = on_message
@@ -281,6 +288,16 @@ else:
             )  # publish
             if variables_dict["verbosity"] > 1:
                 runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_topic"], ret)
+                # runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_volume"], ret)
+                print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
+
+            # Subscribe to Volume
+            ret = pkdr_mqtt_client.subscribe(
+                variables_dict["mqtt_subscribe_volume"],
+                qos=variables_dict["mqtt_subscribe_qos"],
+            )  # publish
+            if variables_dict["verbosity"] > 1:
+                # runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_topic"], ret)
                 runtime_messages += "INFO: Subscribe Topic: {} = ret({})\n".format(variables_dict["mqtt_subscribe_volume"], ret)
                 print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
 

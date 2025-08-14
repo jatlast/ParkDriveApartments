@@ -621,7 +621,9 @@ else:
     if variables_dict['verbosity'] > 0:
         print('{}: K-VDB-Runtime: {}'.format(datetime.datetime.now(), runtime_messages))
 
-    pkdr_mqtt_client = mqtt.Client(variables_dict['pkdr_mqtt_client'])  # create client object
+    # pkdr_mqtt_client = mqtt.Client(variables_dict['pkdr_mqtt_client'])  # create client object
+    pkdr_mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+
 
     # bind to the mqtt callback function...
     pkdr_mqtt_client.on_publish = on_subscribe

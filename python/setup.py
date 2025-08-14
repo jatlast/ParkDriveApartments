@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 #   If you make a backwards-compatible bug fix, increase the patch version number (e.g., 0.1.1).
 setup(
     name="pkdr_utils",
-    version="0.1.2",
+    version="0.2.0",
     description="Custom utilities for Park Drive Apartments projects",
     author="Jason Baumbach",
     author_email="jatlast@hotmail.com",
@@ -19,9 +19,23 @@ setup(
         # "mysql_connector_repackaged>=0.3.1",  # Ensure MySQL connector is installed
     ],
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3", 
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.6",
 )
+
+# Step 6: Build the Package
+#   Run the following command to build the package:
+#     On the Windows Dev Box...
+#	    python Z:\PkDr\HA\code\PROD\python\setup.py sdist bdist_wheel
+#     within the activated virtual environment...
+#	    python /home/PkDr/HA/code/DEV/python/setup.py sdist bdist_wheel
+
+# Step 8: Install the Package
+#   Run the following command to install the package:
+#     within the Windows Dev Box...
+#	    pip install Z:\PkDr\HA\code\PROD\python\dist\pkdr_utils-0.2.0-py3-none-any.whl
+#     within the activated virtual environment...
+#	    pip install /home/PkDr/HA/code/DEV/python/dist/pkdr_utils-0.2.0-py3-none-any.whl

@@ -1768,16 +1768,18 @@ mqtt:
       payload_off: "ON"
       device_class: light
       value_template: "{{ value_json.Switch1 }}"
-    - name: "Apt09 Bedroom2 Light"
-      unique_id: "apt09_bedroom2_light"
-      state_topic: "PkDr/Apt09/Bedroom2/tele/Switch/SENSOR"
-      # Tasmota (SwitchMode 15) - Inverted
-      payload_on: "OFF"
-      payload_off: "ON"
-      device_class: light
-      value_template: "{{ value_json.Switch1 }}"
+    # - name: "Apt09 Bedroom2 Light"
+    #   unique_id: "apt09_bedroom2_light"
+    #   state_topic: "PkDr/Apt09/Bedroom2/tele/Switch/SENSOR"
+    #   # Tasmota (SwitchMode 15) - Inverted
+    #   payload_on: "OFF"
+    #   payload_off: "ON"
+    #   device_class: light
+    #   value_template: "{{ value_json.Switch1 }}"
 
+##########################################################################
 # These binary_sensors are not needed when the switches are ESPHome based.
+##########################################################################
 # Apt 10...
     # # Entrance Light Switch (1)
     # - name: "Apt10 Entrance Light"
@@ -4380,6 +4382,490 @@ switch:
 #      apt16_3_reboot_iptv:
 #        command_on: "python3 /home/PkDr/HA/code/python/pkdr_iptv_restart.py -host !secret Apt_16_IPTV_BR_2_WiFi -user pi"
 
+sql:
+  # Building 1
+  - name: B1 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 41
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: B1 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 41
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt01 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 1
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt01 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 1
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt02 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 2
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt02 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 2
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt03 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 3
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt03 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 3
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt04 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 4
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt04 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 4
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  # Building 2
+  - name: B2 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 42
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: B2 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 42
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt05 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 5
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt05 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 5
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt06 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 6
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt06 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 6
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt07 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 7
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt07 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 7
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt08 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 8
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt08 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 8
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  # Building 3
+  - name: B3 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 43
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: B3 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 43
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt09 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 9
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt09 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 9
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt10 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 10
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt10 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 10
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt11 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 11
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt11 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 11
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt12 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 12
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt12 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 12
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  # Building 4
+  - name: B4 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 44
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: B4 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 44
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt13 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 13
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt13 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 13
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt14 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 14
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt14 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 14
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt15 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 15
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt15 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 15
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt16 Temperature
+    query: >
+      SELECT ROUND((temperature * 9/5) + 32, 2) AS temperature
+      FROM PkDr.Thermostats
+      WHERE apt = 16
+        AND temperature BETWEEN 50 AND 122
+        AND taken >= NOW() - INTERVAL 30 MINUTE
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: temperature
+    unit_of_measurement: '�F'
+    db_url: !secret pkdr_sql_db_url
+
+  - name: Apt16 Humidity
+    query: >
+      SELECT ROUND(humidity, 1) AS humidity
+      FROM PkDr.Thermostats
+      WHERE apt = 16
+      ORDER BY taken DESC
+      LIMIT 1;
+    column: humidity
+    unit_of_measurement: '%'
+    db_url: !secret pkdr_sql_db_url
 
 # Example configuration.yaml entry
 sensor:
@@ -4402,309 +4888,341 @@ sensor:
 #      - temperature
 #      - humidity
 # B1 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B1 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B1 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 41 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# B2 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B2 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 42 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B2 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 42 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# B3 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B3 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 43 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B3 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# B4 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B4 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: B4 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
 
-# Apt 01 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt01 Temperature
-      # I forgot HA does not support Stored Procedure calls in query: param of sql sensor
-      # Invalid config for [sensor.sql]: Only SELECT queries allowed for dictionary value @ data['queries'][0]['query']. Got 'CALL sp_get_kiosk_temp_fahrenheit(1);'. (See ?, line ?).
-        # query: CALL sp_get_kiosk_temp_fahrenheit(1);
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 1 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt01 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 02 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt02 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 2 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt02 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 03 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt03 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 3 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt03 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-  # Apt 04 Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt04 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 4 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt04 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 05 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt05 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 5 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt05 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 06 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt06 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 6 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt06 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 07 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt07 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 7 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt07 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 08 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt08 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 8 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt08 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 8 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 09 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt09 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 9 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt09 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 10 Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt10 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 10 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt10 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 10 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 11 Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt11 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 11 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt11 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 11 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 12 Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt12 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 12 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt12 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 13 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt13 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 13 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt13 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 14 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt14 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 14 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt14 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 15 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt15 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 15 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt15 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 15 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
-# Apt 16 - Temperature & Humidity...
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt16 Temperature
-        query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 16 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
-        column: 'temperature'
-        unit_of_measurement: 'F'
-  - platform: sql
-    db_url: !secret pkdr_sql_db_url
-    queries:
-      - name: Apt16 Humidity
-        query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 16 ORDER BY uid DESC LIMIT 1;"
-        column: 'humidity'
-        unit_of_measurement: '%'
+# sensor:
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       # Temperature Queries for All Apartments
+#       {% for apt in range(1, 17) %}
+#       - name: Apt{{ apt }} Temperature
+#         query: >
+#           SELECT ROUND((temperature * 9/5) + 32,2) AS temperature
+#           FROM PkDr.Thermostats
+#           WHERE apt = {{ apt }} 
+#           AND temperature BETWEEN 50 AND 122
+#           AND taken >= NOW() - INTERVAL 30 MINUTE
+#           ORDER BY taken DESC 
+#           LIMIT 1;
+#         column: 'temperature'
+#         unit_of_measurement: '°F'
+#       {% endfor %}
+      
+#       # Humidity Queries for All Apartments
+#       {% for apt in range(1, 17) %}
+#       - name: Apt{{ apt }} Humidity
+#         query: >
+#           SELECT ROUND(humidity, 1) AS humidity
+#           FROM PkDr.Thermostats
+#           WHERE apt = {{ apt }}
+#           ORDER BY taken DESC 
+#           LIMIT 1;
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+#       {% endfor %}
+
+  # - platform: sql
+  #   db_url: !secret pkdr_sql_db_url
+  #   queries:
+  #     - name: B1 Temperature
+  #       query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 41 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+  #       column: 'temperature'
+  #       unit_of_measurement: 'F'#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B1 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 41 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # B2 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B2 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 42 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B2 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 42 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # B3 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B3 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 43 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B3 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 43 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # B4 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B4 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 44 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: B4 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 44 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+
+# # Apt 01 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt01 Temperature
+#       # I forgot HA does not support Stored Procedure calls in query: param of sql sensor
+#       # Invalid config for [sensor.sql]: Only SELECT queries allowed for dictionary value @ data['queries'][0]['query']. Got 'CALL sp_get_kiosk_temp_fahrenheit(1);'. (See ?, line ?).
+#         # query: CALL sp_get_kiosk_temp_fahrenheit(1);
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 1 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt01 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 1 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 02 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt02 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 2 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt02 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 2 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 03 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt03 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 3 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt03 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 3 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+#   # Apt 04 Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt04 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 4 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt04 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 4 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 05 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt05 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 5 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt05 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 5 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 06 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt06 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 6 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt06 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 6 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 07 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt07 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 7 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt07 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 7 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 08 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt08 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 8 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt08 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 8 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 09 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt09 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 9 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt09 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 9 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 10 Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt10 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 10 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt10 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 10 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 11 Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt11 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 11 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt11 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 11 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 12 Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt12 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 12 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt12 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 12 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 13 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt13 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 13 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt13 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 13 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 14 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt14 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 14 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt14 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 14 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 15 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt15 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 15 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt15 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 15 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
+# # Apt 16 - Temperature & Humidity...
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt16 Temperature
+#         query: 'SELECT round((temperature * 9/5) + 32,2) AS temperature FROM Thermostats WHERE uid > (SELECT MAX(uid)-200 FROM Thermostats) AND apt = 16 AND temperature BETWEEN 10 AND 50 AND TIMESTAMPDIFF(MINUTE,taken,NOW()) < 30 ORDER BY uid DESC LIMIT 1;'
+#         column: 'temperature'
+#         unit_of_measurement: 'F'
+#   - platform: sql
+#     db_url: !secret pkdr_sql_db_url
+#     queries:
+#       - name: Apt16 Humidity
+#         query: "SELECT ROUND(humidity, 1) AS humidity FROM PkDr.Thermostats WHERE apt = 16 ORDER BY uid DESC LIMIT 1;"
+#         column: 'humidity'
+#         unit_of_measurement: '%'
 
 template:
 ############
@@ -5058,7 +5576,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5130,7 +5648,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5199,7 +5717,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5268,7 +5786,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5338,7 +5856,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5407,7 +5925,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5476,7 +5994,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5545,7 +6063,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5615,7 +6133,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5685,7 +6203,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5756,7 +6274,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5826,7 +6344,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5896,7 +6414,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5966,7 +6484,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6036,7 +6554,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6107,7 +6625,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
