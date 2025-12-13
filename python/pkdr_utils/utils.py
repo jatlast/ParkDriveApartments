@@ -6,7 +6,7 @@ from sys import argv as my_argv, version_info as my_version_info, stderr as my_s
 import os # program name from full path
 import socket # needed for gethostname() & getsockname()
 import re
-from tkinter.tix import Tree # for regular expressions
+# from tkinter.tix import Tree # for regular expressions # JTB removed unnecessary import 20251213
 import yaml # 20220213 Breaking out and consolidating config information to pkdr.yaml (pip install pyyaml)
 import datetime # datestamps of program execution
 import mysql.connector # for DB PkDr.RuntimeLog inserts

@@ -3215,7 +3215,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt16_bedroom_switch
+      # entity_id: switch.apt16_bedroom_switch
+      entity_id: light.apt16_bedroom_bulb
 
 - id: apt16_bedroom_switch_toggled_off
   alias: Apt16 Bedroom Switch Toggled Off
@@ -3228,7 +3229,8 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt16_bedroom_switch
+      # entity_id: switch.apt16_bedroom_switch
+      entity_id: light.apt16_bedroom_bulb
 
 # 16 Bedroom2
 - id: apt16_bedroom2_switch_toggled_on
@@ -3242,7 +3244,8 @@
     service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: switch.apt16_bedroom2_switch
+      # entity_id: switch.apt16_bedroom2_switch
+      entity_id: light.apt16_bedroom2_bulb
 
 - id: apt16_bedroom2_switch_toggled_off
   alias: Apt16 Bedroom2 Switch Toggled Off
@@ -3255,7 +3258,8 @@
     service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: switch.apt16_bedroom2_switch
+      # entity_id: switch.apt16_bedroom2_switch
+      entity_id: light.apt16_bedroom2_bulb
 
 
 # - id: apt01_entrance_switch_on

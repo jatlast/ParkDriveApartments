@@ -927,10 +927,13 @@ views:
           - entity: switch.apt16_hall_switch0  # configured as binary sensor
           - entity: switch.apt16_hall_switch1  # configured as binary sensor | 1 = Load
           - entity: light.apt16_hall_bulb
-          - entity: light.apt16_bedroom_lamp
-          - entity: light.apt16_bedroom2_lamp
+          # - entity: light.apt16_bedroom_lamp
+          # - entity: light.apt16_bedroom2_lamp
           - entity: switch.apt16_bedroom_switch  # configured as binary sensor
+          - entity: switch.apt16_bedroom2_switch  # configured as binary sensor
+          
           - entity: light.apt16_bedroom_bulb
+          - entity: light.apt16_bedroom2_bulb
           - entity: switch.apt16_ac
           - entity: switch.16_heat
           - entity: switch.apt16_livingroom_iptv

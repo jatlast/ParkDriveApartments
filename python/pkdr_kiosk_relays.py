@@ -472,9 +472,9 @@ else:
         if variables_dict['verbosity'] > 2:
             print('{}: on_subscribe(client={}, userdata={}, mid={}, granted_qos={})'.format(datetime.datetime.now(), client, userdata, mid, granted_qos))
 
-    def on_publish(client, userdata, result):
+    def on_publish(client, userdata, result, reason_code, properties):
         if variables_dict['verbosity'] > 2:
-            print('{}: on_publish(client={}, userdata={}, result={})'.format(datetime.datetime.now(), client, userdata, result))
+            print('{}: on_publish(client={}, userdata={}, result={}, reason_code={}, properties={})'.format(datetime.datetime.now(), client, userdata, result, reason_code, properties))
 
     def on_disconnect(client, userdata, rc):
         if variables_dict['verbosity'] > 2:

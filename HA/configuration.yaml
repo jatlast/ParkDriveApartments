@@ -5576,7 +5576,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5601,7 +5601,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5648,7 +5648,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5670,7 +5670,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5717,7 +5717,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5739,7 +5739,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5786,7 +5786,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5808,7 +5808,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5856,7 +5856,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 2
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5878,7 +5878,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5925,7 +5925,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -5947,7 +5947,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -5994,7 +5994,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6016,7 +6016,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6063,7 +6063,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6085,7 +6085,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6133,7 +6133,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6155,7 +6155,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6203,7 +6203,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6225,7 +6225,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6274,7 +6274,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6296,7 +6296,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6344,7 +6344,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6366,7 +6366,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6414,7 +6414,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6436,7 +6436,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6484,7 +6484,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6506,7 +6506,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6554,7 +6554,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6576,7 +6576,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6625,7 +6625,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "heat" # "off" | "heat" | "cool"
     ac_mode: false
     away_temp: 60
     comfort_temp: 70
@@ -6647,7 +6647,7 @@ climate:
       seconds: 5
     # keep_alive:
     #   minutes: 3
-    initial_hvac_mode: "off" # "off" | "heat" | "cool"
+    initial_hvac_mode: "off" # "cool" | "heat" | "off"
     ac_mode: true
     away_temp: 90
     comfort_temp: 74
@@ -6656,98 +6656,99 @@ climate:
     activity_temp: 70
 
 # IPTVs (media players)
-media_player:
-  # 01
-  - platform: kodi
-    name: IPTV 1.1
-    host: !secret Apt_01_IPTV_BR_1_LAN
-  - platform: kodi
-    name: IPTV 1.2
-    host: !secret Apt_01_IPTV_BR_1_WiFi
-  # 02
-  - platform: kodi
-    name: IPTV 2.1
-    host: !secret Apt_02_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 2.2
-    host: !secret Apt_02_IPTV_BR_1_WiFi
-  # 03
-  - platform: kodi
-    name: IPTV 3.1
-    host: !secret Apt_03_IPTV_LR_LAN
-  # 04
-  - platform: kodi
-    name: IPTV 4.1
-    host: !secret Apt_04_IPTV_LR_LAN
-  # 05
-  - platform: kodi
-    name: IPTV 5.1
-    host: !secret Apt_05_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 5.2
-    host: !secret Apt_05_IPTV_BR_1_WiFi
-  # 06
-  - platform: kodi
-    name: IPTV 6.1
-    host: !secret Apt_06_IPTV_LR_LAN
-  # - platform: kodi
-  #   name: IPTV 6.2
-  #   host: !secret Apt_06_IPTV_BR_1_WiFi
-  # 07
-  - platform: kodi
-    name: IPTV 7.1
-    host: !secret Apt_07_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 7.2
-    host: !secret Apt_07_IPTV_BR_1_WiFi
-  # 08
-  - platform: kodi
-    name: IPTV 8.1
-    host: !secret Apt_08_IPTV_LR_LAN
-  # 09
-  - platform: kodi
-    name: IPTV 9.1
-    host: !secret Apt_09_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 9.2
-    host: !secret Apt_09_IPTV_BR_1_WiFi
-  # 10
-  - platform: kodi
-    name: IPTV 10.1
-    host: !secret Apt_10_IPTV_LR_LAN
-  # 11
-  - platform: kodi
-    name: IPTV 11.1
-    host: !secret Apt_11_IPTV_LR_LAN
-  # 12
-  - platform: kodi
-    name: IPTV 12.1
-    host: !secret Apt_12_IPTV_LR_LAN
-  # - platform: kodi
-  #   name: IPTV 12.2
-  #   host: !secret Apt_12_IPTV_BR_1_WiFi
-  # - platform: kodi
-  #   name: IPTV 12.3
-  #   host: !secret Apt_12_IPTV_BR_2_WiFi
-  # 13
-  - platform: kodi
-    name: IPTV 13.1
-    host: !secret Apt_13_IPTV_LR_LAN
-  # 14
-  - platform: kodi
-    name: IPTV 14.1
-    host: !secret Apt_14_IPTV_LR_LAN
-  - platform: kodi
-    name: IPTV 14.2
-    host: !secret Apt_14_IPTV_BR_1_WiFi
-  # 15
-  - platform: kodi
-    name: IPTV 15.1
-    host: !secret Apt_15_IPTV_LR_LAN
-  # 16
-  - platform: kodi
-    name: IPTV 16.1
-    host: !secret Apt_16_IPTV_LR_LAN
+# As of 2025-10-05 media_player - platform: kodi is deprecated.  Best practices is to use the integration via the UI and auto-discovery.
+# media_player:
+#   # 01
+#   - platform: kodi
+#     name: IPTV 1.1
+#     host: !secret Apt_01_IPTV_BR_1_LAN
+#   - platform: kodi
+#     name: IPTV 1.2
+#     host: !secret Apt_01_IPTV_BR_1_WiFi
+#   # 02
+#   - platform: kodi
+#     name: IPTV 2.1
+#     host: !secret Apt_02_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 2.2
+#     host: !secret Apt_02_IPTV_BR_1_WiFi
+#   # 03
+#   - platform: kodi
+#     name: IPTV 3.1
+#     host: !secret Apt_03_IPTV_LR_LAN
+#   # 04
+#   - platform: kodi
+#     name: IPTV 4.1
+#     host: !secret Apt_04_IPTV_LR_LAN
+#   # 05
+#   - platform: kodi
+#     name: IPTV 5.1
+#     host: !secret Apt_05_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 5.2
+#     host: !secret Apt_05_IPTV_BR_1_WiFi
+#   # 06
+#   - platform: kodi
+#     name: IPTV 6.1
+#     host: !secret Apt_06_IPTV_LR_LAN
+#   # - platform: kodi
+#   #   name: IPTV 6.2
+#   #   host: !secret Apt_06_IPTV_BR_1_WiFi
+#   # 07
+#   - platform: kodi
+#     name: IPTV 7.1
+#     host: !secret Apt_07_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 7.2
+#     host: !secret Apt_07_IPTV_BR_1_WiFi
+#   # 08
+#   - platform: kodi
+#     name: IPTV 8.1
+#     host: !secret Apt_08_IPTV_LR_LAN
+#   # 09
+#   - platform: kodi
+#     name: IPTV 9.1
+#     host: !secret Apt_09_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 9.2
+#     host: !secret Apt_09_IPTV_BR_1_WiFi
+#   # 10
+#   - platform: kodi
+#     name: IPTV 10.1
+#     host: !secret Apt_10_IPTV_LR_LAN
+#   # 11
+#   - platform: kodi
+#     name: IPTV 11.1
+#     host: !secret Apt_11_IPTV_LR_LAN
+#   # 12
+#   - platform: kodi
+#     name: IPTV 12.1
+#     host: !secret Apt_12_IPTV_LR_LAN
+#   # - platform: kodi
+#   #   name: IPTV 12.2
+#   #   host: !secret Apt_12_IPTV_BR_1_WiFi
+#   # - platform: kodi
+#   #   name: IPTV 12.3
+#   #   host: !secret Apt_12_IPTV_BR_2_WiFi
+#   # 13
+#   - platform: kodi
+#     name: IPTV 13.1
+#     host: !secret Apt_13_IPTV_LR_LAN
+#   # 14
+#   - platform: kodi
+#     name: IPTV 14.1
+#     host: !secret Apt_14_IPTV_LR_LAN
+#   - platform: kodi
+#     name: IPTV 14.2
+#     host: !secret Apt_14_IPTV_BR_1_WiFi
+#   # 15
+#   - platform: kodi
+#     name: IPTV 15.1
+#     host: !secret Apt_15_IPTV_LR_LAN
+#   # 16
+#   - platform: kodi
+#     name: IPTV 16.1
+#     host: !secret Apt_16_IPTV_LR_LAN
 
 #######################################################
 ######### Features It's not ready for yet  ############
