@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-# Step 7: Manage Versions
+# Step 5: Manage Versions
 #   When you update pkdr_utils, increase the version in setup.py (e.g., 0.1.1), rebuild the package, and reinstall it.
 #   This will allow other projects to use the new version of pkdr_utils.
 #   If you make a breaking change, increase the major version number (e.g., 1.0.0).
@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 #   If you make a backwards-compatible bug fix, increase the patch version number (e.g., 0.1.1).
 setup(
     name="pkdr_utils",
-    version="0.2.0",
+    version="0.2.1",
     description="Custom utilities for Park Drive Apartments projects",
     author="Jason Baumbach",
     author_email="jatlast@hotmail.com",
