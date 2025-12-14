@@ -29,13 +29,13 @@ setup(
 # Step 6: Build the Package
 #   Run the following command to build the package:
 #     On the Windows Dev Box...
-#	    python Z:\PkDr\HA\code\PROD\python\setup.py sdist bdist_wheel
+#	    python Z:\PkDr\HA\code\DEV\python\setup.py sdist bdist_wheel
 #     within the activated virtual environment...
 #	    python /home/PkDr/HA/code/DEV/python/setup.py sdist bdist_wheel
 
 # Step 8: Install the Package
 #   Run the following command to install the package:
 #     within the Windows Dev Box...
-#	    pip install Z:\PkDr\HA\code\PROD\python\dist\pkdr_utils-0.2.0-py3-none-any.whl
+#	    pip install Z:\PkDr\HA\code\DEV\python\dist\pkdr_utils-0.2.1-py3-none-any.whl
 #     within the activated virtual environment...
-#	    pip install /home/PkDr/HA/code/DEV/python/dist/pkdr_utils-0.2.0-py3-none-any.whl
+#	    pip install /home/PkDr/HA/code/DEV/python/dist/pkdr_utils-0.2.1-py3-none-any.whl
