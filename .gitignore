@@ -17,7 +17,9 @@
 # shell scripts created on Pi boxes using emacs to execute on Pi boxes
 #   Note: remove PkDr info before allowing them to be stored by git
 #       #kiosk*.sh could be used
-bash/
+bash/kiosk_*.sh
+# Exceptions in the bash/ folder
+!bash/pkdr-kiosk*
 # ignore "test" scripts
 *scratchpad*
 *_test*
